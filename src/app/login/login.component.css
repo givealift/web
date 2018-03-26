@@ -22,11 +22,14 @@
     transition-duration: 0.5s;
 }
 
+
 .loginSubmit:hover {
     background-color: white;
     border: 2px solid #008CBA;
     color: black;
 }
+
+
 
 input[type=text], select {
     width: 100%;
@@ -46,4 +49,8 @@ input[type=password], select {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
 }

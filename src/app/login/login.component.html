@@ -7,17 +7,19 @@
     <input 
     type="text" 
     ngModel
-    name="login"/>
+    name="login"
+    required/>
     <br/>
 
     Hasło: 
     <input 
     type="password" 
     ngModel
-    name="pass"/>
+    name="pass"
+    required/>
     <br/>
 
-    <input class="loginSubmit" type="submit" value="Zaloguj" />
+    <input class="btn btn-primary" style="width: 100%" type="submit" value="Zaloguj" [disabled]="!form.valid" />
   </form>
   </div>
   <br/>  
