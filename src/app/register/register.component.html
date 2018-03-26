@@ -1,26 +1,57 @@
 <div class="registerContainer">
-  
-    <div class="formContainer">
-    <form (ngSubmit)="onSubmit()" #form="ngForm">
-      Login: 
+  <h3></h3>
+
+  <div class="formContainer">
+  <form (ngSubmit)="onSubmit()" #form="ngForm">
+
+    <select>
+      <option>Mężczyzna</option>
+      <option>Kobieta</option>
+    </select>
+
+    <div class="form-box">
       <input 
       type="text" 
-      ngModel
-      name="login"/>
-      <br/>
-  
-      Hasło: 
+      [(ngModel)]="firstname"
+      name="firstname"
+      required
+      id="text1"/>
+
       <input 
-      type="password" 
-      ngModel
-      name="pass"/>
+      type="text" 
+      [(ngModel)]="surname"
+      name="surname"
+      required
+      id="text1"/>
       <br/>
-  
-      <input class="registerSubmit" type="submit" value="Zarejestruj" />
-    </form>
     </div>
-    <br/>  
-    <h4><em>PLACEHOLDER (fejs)</em></h4>
-  
-    
+
+    <input 
+    type="password" 
+    [(ngModel)]="mail"
+    name="mail"
+    required/>
+    <br/>
+
+    <input 
+    type="password" 
+    [(ngModel)]="pass"
+    name="pass"
+    required/>
+    <br/>
+
+    <input 
+    type="password" 
+    [(ngModel)]="passConfirm"
+    required/>
+    <br/>
+
+    <input class="btn btn-primary" style="width: 100%" type="submit" value="Zarejestruj" [disabled]="!form.valid" />
+  </form>
   </div>
+  <br/>
+  <h4><em>PLACEHOLDER (fejs)</em></h4>
+  <h4>Nie masz jeszcze konta? <strong><a href="register">Zarejestruj się</a></strong></h4>
+
+  
+</div>

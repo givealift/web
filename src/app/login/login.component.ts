@@ -10,8 +10,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 export class LoginComponent {
 
   @ViewChild('form') loginForm: NgForm;
-  login = "";
-  pass = "";
+  login = '';
+  pass = '';
 
   constructor(private http: HttpClient) {
   }
