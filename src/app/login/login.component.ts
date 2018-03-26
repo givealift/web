@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -10,13 +11,15 @@ export class LoginComponent {
 
   @ViewChild('form') loginForm: NgForm;
 
-  constructor() { }
+  constructor(private http: HttpClient) {
+
+   }
 
   ngOnInit() {
   }
 
   onSubmit(){
-    console.log(this.loginForm.value);
-  }
+    console.log(this.loginForm);
+    }
 
 }

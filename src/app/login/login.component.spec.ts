@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ViewChild } from '@angular/core'; 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 
 import { LoginComponent } from './login.component';
 
@@ -10,8 +12,11 @@ describe('LoginComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginComponent ],
-      imports: [ FormsModule ],
+      declarations: [ 
+        LoginComponent, 
+       ],
+      imports: [ FormsModule,
+      HttpClientModule ],
     })
     .compileComponents();
   }));
