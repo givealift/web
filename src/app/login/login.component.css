@@ -9,28 +9,6 @@
     width: 15%;
 }
 
-.loginSubmit {
-    width: 100%;
-    background-color: #008CBA;
-    border: 2px solid white;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    transition-duration: 0.5s;
-}
-
-
-.loginSubmit:hover {
-    background-color: white;
-    border: 2px solid #008CBA;
-    color: black;
-}
-
-
-
 input[type=text], select {
     width: 100%;
     padding: 12px 20px;
