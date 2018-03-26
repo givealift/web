@@ -1,3 +1,26 @@
-<p>
-  register works!
-</p>
+<div class="registerContainer">
+  
+    <div class="formContainer">
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
+      Login: 
+      <input 
+      type="text" 
+      ngModel
+      name="login"/>
+      <br/>
+  
+      Hasło: 
+      <input 
+      type="password" 
+      ngModel
+      name="pass"/>
+      <br/>
+  
+      <input class="registerSubmit" type="submit" value="Zarejestruj" />
+    </form>
+    </div>
+    <br/>  
+    <h4><em>PLACEHOLDER (fejs)</em></h4>
+  
+    
+  </div>
