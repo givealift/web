@@ -6,7 +6,7 @@
     Login: 
     <input 
     type="text" 
-    ngModel
+    [(ngModel)]="login"
     name="login"
     required/>
     <br/>
@@ -14,7 +14,7 @@
     Hasło: 
     <input 
     type="password" 
-    ngModel
+    [(ngModel)]="pass"
     name="pass"
     required/>
     <br/>
@@ -22,7 +22,7 @@
     <input class="btn btn-primary" style="width: 100%" type="submit" value="Zaloguj" [disabled]="!form.valid" />
   </form>
   </div>
-  <br/>  
+  <br/>
   <h4><em>PLACEHOLDER (fejs)</em></h4>
   <h4>Nie masz jeszcze konta? <strong><a href="register">Zarejestruj się</a></strong></h4>
 

@@ -10,16 +10,24 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 export class LoginComponent {
 
   @ViewChild('form') loginForm: NgForm;
+  login = "";
+  pass = "";
 
   constructor(private http: HttpClient) {
-
-   }
+  }
 
   ngOnInit() {
   }
 
   onSubmit(){
-    console.log(this.loginForm);
-    }
+      const loginServiceUrl = '/';
 
+      this.http.post(loginServiceUrl, {
+        login: this.login,
+        password: this.pass
+      }).subscribe(
+        response => {
+          console.log(response);
+        });
+    }
 }
