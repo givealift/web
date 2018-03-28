@@ -10,6 +10,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 export class LoginComponent {
 
   @ViewChild('form') loginForm: NgForm;
+  
+  //TODO: find a better way to retrieve form values
   login = '';
   pass = '';
 
@@ -19,6 +21,8 @@ export class LoginComponent {
   ngOnInit() {
   }
 
+
+  //TODO: add some validation and test the post method
   onSubmit(){
       const loginServiceUrl = '/';
 

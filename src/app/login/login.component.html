@@ -1,8 +1,18 @@
 <div class="loginContainer">
   <h3></h3>
 
+  
+
   <div class="formContainer">
   <form (ngSubmit)="onSubmit()" #form="ngForm">
+
+    <!-- TODO: 
+               validation error messages
+               describe the information expected by the form input e.g. "Name" in the first input and "Password" in the second to avoid adding labels (use ng-touched?)
+               add the facebook login process
+               add some visual sugar
+    -->
+
     Login: 
     <input 
     type="text" 
