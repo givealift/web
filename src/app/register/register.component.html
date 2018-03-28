@@ -12,15 +12,15 @@
     <div class="form-box">
       <input 
       type="text" 
-      [(ngModel)]="firstname"
       name="firstname"
+      ngModel
       required
       id="text1"/>
 
       <input 
       type="text" 
-      [(ngModel)]="surname"
       name="surname"
+      ngModel
       required
       id="text1"/>
       <br/>
@@ -28,30 +28,31 @@
 
     <input 
     type="password" 
-    [(ngModel)]="mail"
     name="mail"
-    required/>
+    ngModel
+    required
+    email/>
     <br/>
 
     <input 
     type="password" 
-    [(ngModel)]="pass"
     name="pass"
+    ngModel
     required/>
     <br/>
 
     <input 
     type="password" 
-    [(ngModel)]="passConfirm"
+    name="passConfirm"
+    ngModel
     required/>
     <br/>
 
-    <input class="btn btn-primary" style="width: 100%" type="submit" value="Zarejestruj" [disabled]="!form.valid" />
+    <input class="btn btn-primary" style="width: 100%" type="submit" value="Zarejestruj" [disabled]="!form.valid"/>
   </form>
   </div>
   <br/>
   <h4><em>PLACEHOLDER (fejs)</em></h4>
-  <h4>Nie masz jeszcze konta? <strong><a href="register">Zarejestruj się</a></strong></h4>
 
   
 </div>
