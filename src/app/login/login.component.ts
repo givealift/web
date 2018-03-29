@@ -17,6 +17,8 @@ export class LoginComponent {
   login = '';
   pass = '';
 
+  // userExists: Boolean = true;
+
   constructor(private http: HttpClient, private authService: AuthService, private router: Router) {
   }
 
@@ -33,10 +35,15 @@ export class LoginComponent {
         var success = this.authService.login(this.login, this.pass)
         if(success)
           this.moveToHomePage();
+        else{
+          this.login = '';
+          this.pass = '';
+          // this.userExists = false;
+        }
       }
     }
 
     private moveToHomePage(){
       this.router.navigate(['']);
     }
-}
+  }

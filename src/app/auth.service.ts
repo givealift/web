@@ -1,5 +1,8 @@
 export class AuthService {
 
+    testLogin = 'test';
+    testPassword = 'pass';
+
     loggedIn = false;
 
     isAuthenticated(){
@@ -13,9 +16,13 @@ export class AuthService {
     }
 
     login(username: string, password: string) {
-        this.loggedIn = true;
-        console.log("logging in: " + username + " " + password);
-        return true;
+        if(this.testLogin == username && this.testPassword == password){
+            console.log("logging in: " + username + " " + password);
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     logout(username: string, password: string){
