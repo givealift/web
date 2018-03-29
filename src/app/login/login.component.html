@@ -6,7 +6,6 @@
   <form (ngSubmit)="onSubmit()" #form="ngForm">
 
     <!-- TODO: 
-               validation error messages
                describe the information expected by the form input e.g. "Name" in the first input and "Password" in the second to avoid adding labels (use ng-touched?)
                add the facebook login process
                add some visual sugar
@@ -30,7 +29,7 @@
     name="pass"
     required
     #passRef="ngModel"/>
-    <div *ngIf="!passRef.valid && passRef.touched " class="alert alert-danger">Wpisz prawidłowe hasło</div>
+    <div *ngIf="!passRef.valid && passRef.touched " class="alert alert-danger">Wpisz poprawne hasło!</div>
     <br/>
   
 
