@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,34 +16,41 @@ export class LoginComponent {
   //TODO: find a better way to retrieve form values
   login = '';
   pass = '';
+  returnUrl: string;
 
   // userExists: Boolean = true;
 
-  constructor(private http: HttpClient, private authService: AuthService, private router: Router) {
+  constructor(
+      private route: ActivatedRoute,
+      private http: HttpClient, 
+      private authService: AuthService, 
+      private router: Router) {
   }
 
   ngOnInit() {
+    this.returnUrl = this.route.snapshot.queryParams['returnLink'] || '';
   }
 
 
   //TODO: add some validation and test the post method
   onSubmit(){
-      if(this.authService.loggedIn){
-        this.moveToHomePage();
-      }
-      else{
+      // if(localStorage.getItem('currentUser')){
+      //   this.moveToHomePage();
+      // }
+      // else{
         var success = this.authService.login(this.login, this.pass)
         if(success)
-          this.moveToHomePage();
+          this.moveToPage(this.returnUrl);
         else{
           this.login = '';
           this.pass = '';
+          this.authService.logout(this.login, this.pass);
           // this.userExists = false;
         }
       }
-    }
+    // }
 
-    private moveToHomePage(){
-      this.router.navigate(['']);
+    private moveToPage(routePath: string){
+      this.router.navigate([routePath]);
     }
   }

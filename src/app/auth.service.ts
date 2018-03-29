@@ -3,21 +3,10 @@ export class AuthService {
     testLogin = 'test';
     testPassword = 'pass';
 
-    loggedIn = false;
-
-    isAuthenticated(){
-        const promise = new Promise(
-            (resolve, reject) => {
-                setTimeout( () => {
-                    resolve(this.loggedIn)
-                }, 800);
-            });
-            return promise;
-    }
-
     login(username: string, password: string) {
         if(this.testLogin == username && this.testPassword == password){
-            console.log("logging in: " + username + " " + password);
+            console.log("Logged in!");
+            localStorage.setItem('currentUser', 'testUser');
             return true;
         }
         else {
@@ -26,7 +15,7 @@ export class AuthService {
     }
 
     logout(username: string, password: string){
-        this.loggedIn = false;
-        return true;
+        console.log("Logged out!")
+        localStorage.removeItem('currentUser');
     }
 }
