@@ -8,6 +8,19 @@ import { NgForm } from '@angular/forms';
 })
 export class RegisterComponent {
 
+  @ViewChild('form') loginForm: NgForm;
+
+
+  // contain in an object?
+  gender: string;
+  firstname: string = 'Test';
+  surname: string = 'Testingsky';
+  login: string = 'test';
+  email: string = 'test@testmail.com';
+  pass: string = 'test';
+  passConfirm: string = 'test2';
+  
+
   @ViewChild('form') registerForm: NgForm;
 
   constructor() { }
