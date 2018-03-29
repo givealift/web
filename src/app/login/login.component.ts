@@ -14,8 +14,8 @@ export class LoginComponent {
   @ViewChild('form') loginForm: NgForm;
   
   //TODO: find a better way to retrieve form values
-  login = '';
-  pass = '';
+  login: string;
+  pass: string;
   returnUrl: string;
 
   // userExists: Boolean = true;
@@ -40,7 +40,7 @@ export class LoginComponent {
       // else{
         var success = this.authService.login(this.login, this.pass)
         if(success)
-          this.moveToPage(this.returnUrl);
+          this.routeToPath(this.returnUrl);
         else{
           this.login = '';
           this.pass = '';
@@ -50,7 +50,7 @@ export class LoginComponent {
       }
     // }
 
-    private moveToPage(routePath: string){
+    private routeToPath(routePath: string){
       this.router.navigate([routePath]);
     }
   }
