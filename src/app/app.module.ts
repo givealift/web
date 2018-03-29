@@ -9,11 +9,14 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
 import { RegisterComponent } from './register/register.component';
+import { AuthService } from './auth.service';
+import { AuthGuard } from './auth-guard.service';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent }
+  // {path: 'add', canActivate: [AuthGuard], component: AddComponent }
 ];
 
 @NgModule({
@@ -22,16 +25,19 @@ const appRoutes: Routes = [
     LoginComponent,
     HomeComponent,
     NavComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     FormsModule,   
     BrowserModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
-    HttpClientModule
+    HttpClientModule,
+    ],
+  providers: [
+    AuthService, 
+    AuthGuard,
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
