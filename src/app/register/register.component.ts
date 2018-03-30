@@ -1,6 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UserService, User } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { AuthService } from '../services/auth.service';
 })
 export class RegisterComponent implements OnInit {
 
-  userModel: any = {};
+  userModel: User = new User();
+  passConfirm: string;
 
   @ViewChild('form') registerForm: NgForm;
 
@@ -18,6 +20,7 @@ export class RegisterComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -29,9 +32,8 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     this.userService.create(this.userModel).subscribe(
-      data => {
-        console.log(data);
-        this.router.navigate(['']);
+      () => {
+        this.router.navigate(['/login']);
       },
       error => {
         //always throws an error, so for testing

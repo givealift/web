@@ -12,10 +12,10 @@
 
       <!-- Group the form? -->
       <div class="form-box">
-        <input type="text" name="firstname" [(ngModel)]="userModel.firstname" required id="text1" #firstRef="ngModel" placeholder="Imię"
+        <input type="text" name="firstname" [(ngModel)]="userModel.firstName" required id="firstname" #firstRef="ngModel" placeholder="Imię"
         />
 
-        <input type="text" name="lastname" [(ngModel)]="userModel.lastname" required id="text1" #lastRef="ngModel" placeholder="Nazwisko"
+        <input type="text" name="lastname" [(ngModel)]="userModel.lastName" required id="lastname" #lastRef="ngModel" placeholder="Nazwisko"
         />
         <div *ngIf="!lastRef.valid && !firstRef.valid && lastRef.touched && firstRef.touched" class="alert alert-danger">Wpisz poprawne imię i nazwisko!</div>
         <br/>
@@ -29,7 +29,7 @@
       <div *ngIf="!emailRef.valid && emailRef.touched" class="alert alert-danger">Wpisz poprawny email!</div>
       <br/>
 
-      <input type="password" name="pass" [(ngModel)]="userModel.pass" required #passRef="ngModel" placeholder="Hasło" />
+      <input type="password" name="pass" [(ngModel)]="userModel.password" required #passRef="ngModel" placeholder="Hasło" />
       <div *ngIf="!passRef.valid && passRef.touched" class="alert alert-danger">Wpisz poprawne hasło!</div>
       <br/>
 
