@@ -1,0 +1,12 @@
+<div class="rounded background">
+
+  <p class="text-center text-secondary"> Twój profil </p>
+  <p class="text-info">Zalogowany jako
+    <i>{{user.login}}</i>
+  </p>
+  <h4>{{user.firstName}} {{user.lastName}}</h4>
+  <h5> {{user.email}}</h5>
+
+  <button type="button" class="btn btn-outline-primary btn-sm" (click)="edit()">Edytuj konto</button>
+  <button type="button" class="btn btn-outline-danger btn-sm float-right" (click)="delete()">Usuń konto</button>
+</div>
