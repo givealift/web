@@ -1,0 +1,60 @@
+<div class="registerContainer">
+  <h3></h3>
+
+  <div class="formContainer">
+  <form (ngSubmit)="onSubmit()" #form="ngForm">
+
+    <!-- TODO: make fullname and surname placement more consistent -->
+
+    <select>
+      <option>Mężczyzna</option>
+      <option>Kobieta</option>
+    </select>
+
+    <div class="form-box">
+      <input 
+      type="text" 
+      name="firstname"
+      ngModel
+      required
+      id="text1"/>
+
+      <input 
+      type="text" 
+      name="surname"
+      ngModel
+      required
+      id="text1"/>
+      <br/>
+    </div>
+
+    <input 
+    type="password" 
+    name="mail"
+    ngModel
+    required
+    email/>
+    <br/>
+
+    <input 
+    type="password" 
+    name="pass"
+    ngModel
+    required/>
+    <br/>
+
+    <input 
+    type="password" 
+    name="passConfirm"
+    ngModel
+    required/>
+    <br/>
+
+    <input class="btn btn-primary" style="width: 100%" type="submit" value="Zarejestruj" [disabled]="!form.valid"/>
+  </form>
+  </div>
+  <br/>
+  <h4><em>PLACEHOLDER (fejs)</em></h4>
+
+  
+</div>

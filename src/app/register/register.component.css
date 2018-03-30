@@ -1,0 +1,38 @@
+.registerContainer {
+    text-align: center;
+    margin-top: auto;
+}
+
+.formContainer {
+    margin: auto;
+    align-items: center;
+    width: 15%;
+}
+
+.form-box {
+    width: 100%;
+}
+
+#text1 {
+    width: 49%;
+}
+
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=password], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
