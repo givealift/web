@@ -4,7 +4,10 @@
   <div class="formContainer">
   <form (ngSubmit)="onSubmit()" #form="ngForm">
 
+    <!-- radio buttons? -->
+
     <select>
+      <option disabled selected>Płeć</option>
       <option>Mężczyzna</option>
       <option>Kobieta</option>
     </select>
@@ -18,7 +21,8 @@
       [(ngModel)]="firstname"
       required
       id="text1"
-      #firstRef="ngModel"/>
+      #firstRef="ngModel"
+      placeholder="Imię"/>
 
       <input 
       type="text" 
@@ -26,7 +30,8 @@
       [(ngModel)]="surname"
       required
       id="text1"
-      #surRef="ngModel"/>
+      #surRef="ngModel"
+      placeholder="Nazwisko"/>
       <div *ngIf="!surRef.valid && !firstRef.valid && surRef.touched && firstRef.touched"  class="alert alert-danger">Wpisz poprawne imię i nazwisko!</div>
       <br/>
     </div>
@@ -36,7 +41,8 @@
     name="login"
     [(ngModel)]="login"
     required
-    #loginRef="ngModel"/>
+    #loginRef="ngModel"
+    placeholder="Login"/>
     <div *ngIf="!loginRef.valid && loginRef.touched" class="alert alert-danger">Wpisz poprawny login!</div>
     <br/>
 
@@ -46,7 +52,8 @@
     [(ngModel)]="email"
     required
     email
-    #emailRef="ngModel"/>
+    #emailRef="ngModel"
+    placeholder="Email"/>
     <div *ngIf="!emailRef.valid && emailRef.touched" class="alert alert-danger">Wpisz poprawny email!</div>
     <br/>
 
@@ -55,7 +62,8 @@
     name="pass"
     [(ngModel)]="pass"
     required
-    #passRef="ngModel"/>
+    #passRef="ngModel"
+    placeholder="Hasło"/>
     <div *ngIf="!passRef.valid && passRef.touched" class="alert alert-danger">Wpisz poprawne hasło!</div>
     <br/>
 
@@ -64,7 +72,8 @@
     name="passConfirm"
     [(ngModel)]="passConfirm"
     required
-    #passConfirmRef="ngModel"/>
+    #passConfirmRef="ngModel"
+    placeholder="Potwierdź hasło">
     <div *ngIf="passConfirmRef.value!=passRef.value && passConfirmRef.touched && passRef.touched" class="alert alert-danger">Hasła nie zgadzają się!</div>
     <br/>
     
