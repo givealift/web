@@ -18,13 +18,17 @@ export class RegisterComponent {
   constructor(private router: Router, private userService: UserService) {
   }
 
-  ngOnInit() {
-  }
-
   onSubmit() {
-    console.log(this.userModel);
-    this.userService.create(this.userModel);
-    
+    this.userService.create(this.userModel).subscribe(
+      data => {
+        console.log(data);
+        this.router.navigate(['']);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+
   }
 
 }
