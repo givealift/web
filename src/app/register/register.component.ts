@@ -1,5 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -8,28 +10,21 @@ import { NgForm } from '@angular/forms';
 })
 export class RegisterComponent {
 
-  @ViewChild('form') loginForm: NgForm;
-
-
   // contain in an object?
-  gender: string;
-  firstname: string = 'Test';
-  surname: string = 'Testingsky';
-  login: string = 'test';
-  email: string = 'test@testmail.com';
-  pass: string = 'test';
-  passConfirm: string = 'test2';
-  
+  userModel: any = {};
 
   @ViewChild('form') registerForm: NgForm;
 
-  constructor() { }
+  constructor(private router: Router, private userService: UserService) {
+  }
 
   ngOnInit() {
   }
 
-  onSubmit(){
-    console.log(this.registerForm);
+  onSubmit() {
+    console.log(this.userModel);
+    this.userService.create(this.userModel);
+    
   }
 
 }
