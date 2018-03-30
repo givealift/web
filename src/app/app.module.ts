@@ -11,6 +11,7 @@ import { NavComponent } from './nav/nav.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
+import { FakeBackendProvider } from './helpers/fake-backend';
 import { UserService } from './services/user.service';
 
 const appRoutes: Routes = [
@@ -38,7 +39,7 @@ const appRoutes: Routes = [
   providers: [
     AuthService,
     AuthGuard,
-    UserService
+    FakeBackendProvider
   ],
   bootstrap: [AppComponent]
 })
