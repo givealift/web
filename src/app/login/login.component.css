@@ -3,6 +3,10 @@
     margin-top: 5%;
 }
 
+::placeholder {
+    text-align: center;
+}
+
 .formContainer {
     margin: auto;
     align-items: center;

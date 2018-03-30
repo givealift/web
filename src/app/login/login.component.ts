@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -12,19 +11,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class LoginComponent {
 
   @ViewChild('form') loginForm: NgForm;
-  
+
   //TODO: find a better way to retrieve form values
-  login: string;
-  pass: string;
+  userModel: any = {};
   returnUrl: string;
 
   // userExists: Boolean = true;
 
   constructor(
-      private route: ActivatedRoute,
-      private http: HttpClient, 
-      private authService: AuthService, 
-      private router: Router) {
+    private route: ActivatedRoute,
+    private authService: AuthService,
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -33,24 +30,24 @@ export class LoginComponent {
 
 
   //TODO: add some validation and test the post method
-  onSubmit(){
-      // if(localStorage.getItem('currentUser')){
-      //   this.moveToHomePage();
-      // }
-      // else{
-        var success = this.authService.login(this.login, this.pass)
-        if(success)
-          this.routeToPath(this.returnUrl);
-        else{
-          this.login = '';
-          this.pass = '';
-          this.authService.logout(this.login, this.pass);
-          // this.userExists = false;
-        }
-      }
+  onSubmit() {
+    // if(localStorage.getItem('currentUser')){
+    //   this.moveToHomePage();
     // }
-
-    private routeToPath(routePath: string){
-      this.router.navigate([routePath]);
+    // else{
+    var success = this.authService.login(this.userModel)
+    if (success)
+      this.routeToPath(this.returnUrl);
+    else {
+      this.userModel.login = '';
+      this.userModel.pass = '';
+      this.authService.logout(this.userModel);
+      // this.userExists = false;
     }
   }
+  // }
+
+  private routeToPath(routePath: string) {
+    this.router.navigate([routePath]);
+  }
+}

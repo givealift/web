@@ -1,5 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -8,15 +10,25 @@ import { NgForm } from '@angular/forms';
 })
 export class RegisterComponent {
 
+  userModel: any = {};
+
   @ViewChild('form') registerForm: NgForm;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private router: Router, private userService: UserService) {
   }
 
-  onSubmit(){
-    console.log(this.registerForm);
+  onSubmit() {
+    this.userService.create(this.userModel).subscribe(
+      data => {
+        console.log(data);
+        this.router.navigate(['']);
+      },
+      error => {
+        //always throws an error, so for testing
+        this.router.navigate(['']);
+      }
+    )
+
   }
 
 }
