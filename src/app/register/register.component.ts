@@ -10,7 +10,6 @@ import { UserService } from '../services/user.service';
 })
 export class RegisterComponent {
 
-  // contain in an object?
   userModel: any = {};
 
   @ViewChild('form') registerForm: NgForm;
@@ -28,9 +27,6 @@ export class RegisterComponent {
         //always throws error, so for testing
         this.router.navigate(['']);
       }
-      // error => {
-      //   console.log(error);
-      // }
     )
 
   }

@@ -1,6 +1,4 @@
 <div class="registerContainer">
-  <h3></h3>
-
   <div class="formContainer">
     <form (ngSubmit)="onSubmit()" #form="ngForm">
 
@@ -12,8 +10,7 @@
         <option>Kobieta</option>
       </select>
 
-
-      <!-- Group the form -->
+      <!-- Group the form? -->
       <div class="form-box">
         <input type="text" name="firstname" [(ngModel)]="userModel.firstname" required id="text1" #firstRef="ngModel" placeholder="Imię"
         />
