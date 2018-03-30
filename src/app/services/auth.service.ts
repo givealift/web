@@ -3,8 +3,7 @@ import { Injectable } from "@angular/core";
 @Injectable()
 export class AuthService {
 
-    testLogin = 'test';
-    testPassword = 'pass';
+    @Output() loggedInStatus: EventEmitter<boolean> = new EventEmitter();
 
     login(userModel: any) {
         if (this.testLogin == userModel.username && this.testPassword == userModel.password) {
@@ -19,6 +18,11 @@ export class AuthService {
 
     logout(userModel: any) {
         console.log("Logged out!")
-        localStorage.removeItem('currentUser');
+    }
+
+    isAuthenticated(): boolean {
+        // TODO: check if valid jwt (?) token & non expired
+        const user = JSON.parse(localStorage.getItem("currentUser")) as User;
+        return user !== null && user.token !== null;
     }
 }

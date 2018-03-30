@@ -9,8 +9,14 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="login">Zaloguj się</a>
+        <a class="nav-link" routerLinkActive="active" routerLink="/login" *ngIf="!loggedIn">Zaloguj się</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" routerLink="/register" *ngIf="!loggedIn">Zarejestruj się</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/add" *ngIf="loggedIn">Dodaj przejazd</a>
+        </li>
       <li class="nav-item">
         <a class="nav-link" href="register">Zarejestruj się</a>
       </li>
