@@ -24,7 +24,7 @@ export class RegisterComponent {
         this.router.navigate(['']);
       },
       error => {
-        //always throws error, so for testing
+        //always throws an error, so for testing
         this.router.navigate(['']);
       }
     )
