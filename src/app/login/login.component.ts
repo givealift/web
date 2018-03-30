@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -22,7 +21,6 @@ export class LoginComponent {
 
   constructor(
       private route: ActivatedRoute,
-      private http: HttpClient, 
       private authService: AuthService, 
       private router: Router) {
   }
