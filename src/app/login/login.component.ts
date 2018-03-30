@@ -22,12 +22,14 @@ export class LoginComponent {
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
-    private router: Router) {
-  }
+    private router: Router) { }
 
   ngOnInit() {
-    this.returnUrl = this.route.snapshot.queryParams['returnLink'] || '';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate([this.returnUrl]);
     }
+  }
 
   onSubmit() {
     this.authService.login(this.userModel.login, this.userModel.password)
