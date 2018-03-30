@@ -1,22 +1,24 @@
-import { Injectable } from "@angular/core";
+import { Injectable, EventEmitter, Output } from "@angular/core";
+import { User } from "./user.service";
+import { HttpClient } from '@angular/common/http';
+import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class AuthService {
 
+    private readonly authUrl: string = '/api/authenticate';
     @Output() loggedInStatus: EventEmitter<boolean> = new EventEmitter();
 
-    login(userModel: any) {
-        if (this.testLogin == userModel.username && this.testPassword == userModel.password) {
-            console.log("Logged in!");
-            localStorage.setItem('currentUser', 'testUser');
-            return true;
-        }
-        else {
-            return false;
-        }
+    constructor(private http: HttpClient) { }
+
+    login(login: string, password: string) {
+        const body = { login, password };
+        return this.http.post<User>(this.authUrl, body);
     }
 
-    logout(userModel: any) {
+    logout() {
+        localStorage.removeItem("currentUser");
+        this.loggedInStatus.emit(false);
         console.log("Logged out!")
     }
 
