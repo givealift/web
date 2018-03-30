@@ -13,6 +13,7 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { FakeBackendProvider } from './helpers/fake-backend';
 import { UserService } from './services/user.service';
+import { TokenProvider } from './helpers/token.interceptor';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -39,6 +40,7 @@ const appRoutes: Routes = [
   providers: [
     AuthService,
     AuthGuard,
+    TokenProvider,
     FakeBackendProvider
   ],
   bootstrap: [AppComponent]
