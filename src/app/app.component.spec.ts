@@ -11,6 +11,10 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
 import { RegisterComponent } from './register/register.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NewRideComponent } from './new-ride/new-ride.component';
+import { AuthService } from './services/auth.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,14 +30,16 @@ describe('AppComponent', () => {
         NavComponent,
         HomeComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        DashboardComponent,
+        NewRideComponent
       ],
       imports: [
         RouterModule.forRoot(appRoutes),
-        FormsModule
+        FormsModule, HttpClientModule
       ],
       providers: [
-        { provide: APP_BASE_HREF, useValue : '/' }
+        { provide: APP_BASE_HREF, useValue: "/" }, AuthService
       ]
     }).compileComponents();
   }));

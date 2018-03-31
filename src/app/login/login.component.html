@@ -1,46 +1,30 @@
 <div class="loginContainer">
-
-  
-
   <div class="formContainer">
-  <form (ngSubmit)="onSubmit()" #form="ngForm">
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
 
-    <!-- TODO: 
-               validation error messages
-               describe the information expected by the form input e.g. "Name" in the first input and "Password" in the second to avoid adding labels (use ng-touched?)
-               add the facebook login process
-               add some visual sugar
+      <!-- TODO: 
+          add the facebook login process
+          add some visual sugar
     -->
 
-    <label for="login">Login</label>
-    <input 
-    type="text" 
-    [(ngModel)]="login"
-    name="login"
-    required
-    #loginRef="ngModel"/>
-    <div *ngIf="!loginRef.valid && loginRef.touched" class="alert alert-danger">Wpisz poprawny login!</div>
-    <!-- <div *ngIf="!userExists" class="alert alert-danger">Wpisz poprawne dane!</div> -->
-    <br/>
+      <input type="text" [(ngModel)]="userModel.login" name="login" required #loginRef="ngModel" placeholder="Login" />
+      <div *ngIf="!loginRef.valid && loginRef.touched" class="alert alert-danger">Wpisz poprawny login!</div>
+      <br/>
 
-    <label for="pass">Hasło</label>
-    <input 
-    type="password" 
-    [(ngModel)]="pass"
-    name="pass"
-    required
-    #passRef="ngModel"/>
-    <div *ngIf="!passRef.valid && passRef.touched " class="alert alert-danger">Wpisz prawidłowe hasło!</div>
-    <br/>
-  
+      <input type="password" [(ngModel)]="userModel.password" name="password" required #passRef="ngModel" placeholder="Hasło" />
+      <div *ngIf="!passRef.valid && passRef.touched " class="alert alert-danger">Wpisz poprawne hasło!</div>
+      <br/>
 
-
-    <input class="btn btn-primary" style="width: 100%" type="submit" value="Zaloguj" [disabled]="!form.valid" />
-  </form>
+      <input class="btn btn-primary" style="width: 100%" type="submit" value="Zaloguj" [disabled]="!form.valid" />
+    </form>
   </div>
   <br/>
-  <h4><em>PLACEHOLDER (fejs)</em></h4>
-  <h4>Nie masz jeszcze konta? <strong><a href="register">Zarejestruj się</a></strong></h4>
-
-  
+  <h4>
+    <em>PLACEHOLDER (fejs)</em>
+  </h4>
+  <h4>Nie masz jeszcze konta?
+    <strong>
+      <a routerLinkActive="active" routerLink="../register">Zarejestruj się</a>
+    </strong>
+  </h4>
 </div>

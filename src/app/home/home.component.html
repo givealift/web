@@ -1,7 +1,13 @@
-<div style="text-align:center">
-  <h1>
-    Witaj w {{ title }}!
-  </h1>
-  <h2>Załap się na przejazd w każdej chwili, gdziekolwiek.</h2>
-  
-</div>
+  <!-- <div class="row">
+    <div *ngIf="loggedIn" class="col-md-2">
+      <app-dashboard> </app-dashboard>
+    </div> -->
+
+    <div [ngClass]="'col-md-12'" class="text-center">
+      <h1>
+        Witaj w {{ title }}!
+      </h1>
+      <h2>Załap się na przejazd w każdej chwili, gdziekolwiek.</h2>
+
+    </div>
+  <!-- </div> -->
