@@ -3,7 +3,6 @@
     <form (ngSubmit)="onSubmit()" #form="ngForm">
 
       <!-- radio buttons? -->
-
       <select>
         <option disabled selected>Płeć</option>
         <option>Mężczyzna</option>
@@ -11,31 +10,31 @@
       </select>
 
       <!-- Group the form? -->
+
+      <!-- Profile pic upload -->
       <div class="form-box">
-        <input type="text" name="firstname" [(ngModel)]="userModel.firstname" required id="text1" #firstRef="ngModel" placeholder="Imię"
+        <input type="text" name="firstname" [(ngModel)]="userModel.firstName" required id="firstname" #firstRef="ngModel" placeholder="Imię"
         />
 
-        <input type="text" name="lastname" [(ngModel)]="userModel.lastname" required id="text1" #lastRef="ngModel" placeholder="Nazwisko"
+        <input type="text" name="lastname" [(ngModel)]="userModel.lastName" required id="lastname" #lastRef="ngModel" placeholder="Nazwisko"
         />
         <div *ngIf="!lastRef.valid && !firstRef.valid && lastRef.touched && firstRef.touched" class="alert alert-danger">Wpisz poprawne imię i nazwisko!</div>
-        <br/>
+
       </div>
 
       <input type="text" name="login" [(ngModel)]="userModel.login" required #loginRef="ngModel" placeholder="Login" />
       <div *ngIf="!loginRef.valid && loginRef.touched" class="alert alert-danger">Wpisz poprawny login!</div>
-      <br/>
+
 
       <input type="text" name="mail" [(ngModel)]="userModel.email" required email #emailRef="ngModel" placeholder="Email" />
       <div *ngIf="!emailRef.valid && emailRef.touched" class="alert alert-danger">Wpisz poprawny email!</div>
-      <br/>
 
-      <input type="password" name="pass" [(ngModel)]="userModel.pass" required #passRef="ngModel" placeholder="Hasło" />
+
+      <input type="password" name="pass" [(ngModel)]="userModel.password" required #passRef="ngModel" placeholder="Hasło" />
       <div *ngIf="!passRef.valid && passRef.touched" class="alert alert-danger">Wpisz poprawne hasło!</div>
-      <br/>
 
       <input type="password" name="passConfirm" [(ngModel)]="passConfirm" required #passConfirmRef="ngModel" placeholder="Potwierdź hasło">
       <div *ngIf="passConfirmRef.value!=passRef.value && passConfirmRef.touched && passRef.touched" class="alert alert-danger">Hasła nie zgadzają się!</div>
-      <br/>
 
 
       <input class="btn btn-primary" style="width: 100%" type="submit" value="Zarejestruj" [disabled]="!form.valid || passRef.value!=passConfirmRef.value"

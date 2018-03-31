@@ -7,7 +7,9 @@ export class User {
     firstName: string;
     lastName: string;
     login: string;
-    pass: string;
+    password: string;
+    email: string;
+    token: string;
 }
 
 @Injectable()
@@ -20,13 +22,12 @@ export class UserService {
     constructor(private http: HttpClient) {
     }
 
-    update(user: User) {
-        console.log('update id' + user.id);
-        return this.http.put(this.userApiPath + user.id, user);
+    update(user: User) {        
+        return this.http.put<User>(this.userApiPath + user.id, user);
     }
 
     getById(id: number) {
-        return this.http.get(this.userApiPath + id);    
+        return this.http.get(this.userApiPath + id);
     }
 
     create(user: User) {

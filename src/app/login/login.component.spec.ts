@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login.component';
 import { AuthService } from '../services/auth.service';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -15,7 +16,8 @@ describe('LoginComponent', () => {
       ],
       imports: [
         FormsModule,
-        RouterTestingModule
+        RouterTestingModule,
+        HttpClientModule
       ],
       providers: [
         AuthService

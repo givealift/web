@@ -1,31 +1,46 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
-import { UserService } from '../services/user.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { UserService, User } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
 
-  userModel: any = {};
+  userModel: User = new User();
+  passConfirm: string;
+
+  returnUrl: string;
 
   @ViewChild('form') registerForm: NgForm;
 
-  constructor(private router: Router, private userService: UserService) {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: AuthService,
+    private userService: UserService
+  ) { }
+
+  ngOnInit() {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate([this.returnUrl]);
+    }
   }
 
   onSubmit() {
     this.userService.create(this.userModel).subscribe(
-      data => {
-        console.log(data);
-        this.router.navigate(['']);
+      () => {
+        localStorage.setItem("currentUser", JSON.stringify(this.userModel));
+        this.authService.loggedInStatus.emit(true);
+        this.router.navigate([this.returnUrl]);
       },
       error => {
-        //always throws an error, so for testing
-        this.router.navigate(['']);
+        this.router.navigate(['/login']);
       }
     )
 
