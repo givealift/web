@@ -10,19 +10,18 @@ describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
 
-  beforeEach(function () {
-    var store = {};
+  beforeAll(() => {
+    let currentUser = {
+      "firstName": "Jan",
+      "lastName": "wazingaaa",
+      "login": "qwe",
+      "email": "qwe@mail.com",
+      "id": 1,
+      "token": "fake-token"
+    }
+    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+  })
 
-    spyOn(localStorage, 'getItem').and.callFake(function (key) {
-      return store[key];
-    });
-    spyOn(localStorage, 'setItem').and.callFake(function (key, value) {
-      return store[key] = value + '';
-    });
-    spyOn(localStorage, 'clear').and.callFake(function () {
-      store = {};
-    });
-  });
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [DashboardComponent],
@@ -39,15 +38,6 @@ describe('DashboardComponent', () => {
   });
 
   it('should create', () => {
-    let currentUser = {
-      "firstName": "Jan",
-      "lastName": "wazingaaa",
-      "login": "qwe",
-      "email": "qwe@mail.com",
-      "id": 1,
-      "token": "fake-token"
-    }
-    localStorage.setItem("currentUser", JSON.stringify(currentUser));
     expect(component).toBeTruthy();
   });
 });
