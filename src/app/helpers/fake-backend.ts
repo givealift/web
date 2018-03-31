@@ -11,7 +11,7 @@ import { User } from '../services/user.service';
 
 let mockUsers: User[] = JSON.parse(localStorage.getItem('mock-users')) || [];
 @Injectable()
-class FakeBackendInterceptor implements HttpInterceptor {
+export class FakeBackendInterceptor implements HttpInterceptor {
 
     constructor() { }
 
