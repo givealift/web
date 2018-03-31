@@ -10,9 +10,9 @@ import { User } from '../services/user.service';
 })
 export class NavComponent implements OnInit {
 
-  protected user: User;
+  user: User;
 
-  protected loggedIn: boolean;
+  loggedIn: boolean;
 
   constructor(private authService: AuthService, private router: Router) { }
 
