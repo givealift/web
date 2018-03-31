@@ -6,6 +6,7 @@ import { Component, ViewChild } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { UserService } from '../services/user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from '../services/auth.service';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -17,7 +18,10 @@ describe('RegisterComponent', () => {
       imports: [FormsModule,
         RouterTestingModule,
         HttpClientModule],
-      providers: [UserService]
+      providers: [
+        UserService,
+        AuthService
+      ]
     })
       .compileComponents();
   }));
