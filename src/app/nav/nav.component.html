@@ -1,5 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#008CBA;">
-  <a class="navbar-brand" href="">Give A Lift</a>
+  <a class="navbar-brand" href="">
+    <img src="../../assets/logo.png" style="width:35px;"> Give A Lift
+  </a>
 
   <!-- TODO: 
       add more taskbar items 
@@ -15,10 +17,18 @@
         <a class="nav-link" routerLinkActive="active" routerLink="/register" *ngIf="!loggedIn">Zarejestruj się</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/add" *ngIf="loggedIn">Dodaj przejazd</a>
-        </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/" *ngIf="loggedIn" (click)="logout()">Wyloguj się</a>
+        <a class="nav-link" routerLinkActive="active" routerLink="/add" *ngIf="loggedIn">Dodaj przejazd</a>
+      </li>
+      <li class="nav-item dropdown" *ngIf="loggedIn">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Profil</a>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" href="profile">Mój profil</a>
+          <a class="dropdown-item" href="#">Przejazdy</a>
+          <a class="dropdown-item" href="#">Powiadomienia</a>
+          <a class="dropdown-item" href="#">Historia płatności</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="logout()">Wyloguj się</a>
+        </div>
       </li>
     </ul>
   </div>

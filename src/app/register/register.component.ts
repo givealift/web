@@ -14,6 +14,8 @@ export class RegisterComponent implements OnInit {
   userModel: User = new User();
   passConfirm: string;
 
+  returnUrl: string;
+
   @ViewChild('form') registerForm: NgForm;
 
   constructor(
@@ -24,20 +26,21 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     if (this.authService.isAuthenticated()) {
-      this.router.navigate([returnUrl]);
+      this.router.navigate([this.returnUrl]);
     }
   }
 
   onSubmit() {
     this.userService.create(this.userModel).subscribe(
       () => {
-        this.router.navigate(['/login']);
+        localStorage.setItem("currentUser", JSON.stringify(this.userModel));
+        this.authService.loggedInStatus.emit(true);
+        this.router.navigate([this.returnUrl]);
       },
       error => {
-        //always throws an error, so for testing
-        this.router.navigate(['']);
+        this.router.navigate(['/login']);
       }
     )
 
