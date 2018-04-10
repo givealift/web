@@ -7,6 +7,7 @@ import { HomeComponent } from "./home/home.component";
 import { AuthGuard } from "./services/auth-guard.service";
 import { NewRideComponent } from "./new-ride/new-ride.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
+import { RideListComponent } from "./ride-list/ride-list.component";
 
 const routes: Routes = [
 
@@ -16,6 +17,7 @@ const routes: Routes = [
     { path: 'add', component: NewRideComponent, canActivate: [AuthGuard] },
     { path: 'profile', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'new-ride', component: NewRideComponent, canActivate: [AuthGuard] },
+    { path: 'ride-list', component: RideListComponent },
 
 
     { path: '**', redirectTo: '' }

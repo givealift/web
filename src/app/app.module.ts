@@ -17,6 +17,8 @@ import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { FakeBackendProvider } from './helpers/fake-backend';
 import { TokenProvider } from './helpers/token.interceptor';
+import { RideListComponent } from './ride-list/ride-list.component';
+import { RideComponent } from './ride-list/ride/ride.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { TokenProvider } from './helpers/token.interceptor';
     NavComponent,
     RegisterComponent,
     DashboardComponent,
-    NewRideComponent
+    NewRideComponent,
+    RideListComponent,
+    RideComponent
   ],
   imports: [
     FormsModule,
