@@ -8,8 +8,6 @@ import { Ride } from '../../services/ride.service';
 })
 export class RideComponent implements OnInit {
 
-  test: String = "ayyyy";
-
   @Input()
   rideData: Ride = new Ride();
 

@@ -1,3 +1,16 @@
-<p>
-  new-ride works!
-</p>
+<div class="rideContainer">
+  <div class="formContainer">
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
+
+      <input type="text" [(ngModel)]="rideModel.from" name="from" required #fromRef="ngModel" placeholder="Miejsce startowe" />
+      <div *ngIf="!fromRef.valid && fromRef.touched" class="alert alert-danger">Wpisz poprawne miasto startowe!</div>
+      <br/>
+
+      <input type="text" [(ngModel)]="rideModel.to" name="to" required #toRef="ngModel" placeholder="Miejsce końcowe" />
+      <div *ngIf="!toRef.valid && toRef.touched " class="alert alert-danger">Wpisz poprawne miasto końcowe!</div>
+      <br/>
+
+      <input class="btn btn-primary" style="width: 100%" type="submit" value="Dodaj" [disabled]="!form.valid" />
+    </form>
+  </div>
+</div>

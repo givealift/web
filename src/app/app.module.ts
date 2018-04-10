@@ -19,6 +19,7 @@ import { FakeBackendProvider } from './helpers/fake-backend';
 import { TokenProvider } from './helpers/token.interceptor';
 import { RideListComponent } from './ride-list/ride-list.component';
 import { RideComponent } from './ride-list/ride/ride.component';
+import { RideService } from './services/ride.service';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { RideComponent } from './ride-list/ride/ride.component';
     AuthGuard,
     UserService,
     TokenProvider,
-    FakeBackendProvider
+    FakeBackendProvider,
+    RideService
   ],
   bootstrap: [AppComponent]
 })

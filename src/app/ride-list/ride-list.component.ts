@@ -7,22 +7,17 @@ import { Observable } from 'rxjs/Rx';
   templateUrl: './ride-list.component.html',
   styleUrls: ['./ride-list.component.css']
 })
-export class RideListComponent implements OnInit {
+export class RideListComponent {
 
   rides: any = [];
-  pollingData: any;
 
   constructor(private httpClient: HttpClient) {
-    this.pollingData = Observable.interval(1000)
+    Observable.interval(1000)
       .switchMap(() => httpClient.get('/api/rides/list'))
       .subscribe(
         (data) => {
           this.rides = data;
-          console.log('ayy');// see console you get output every 5 sec
         });
-  }
-
-  ngOnInit() {
   }
 
 }

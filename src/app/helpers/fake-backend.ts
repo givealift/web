@@ -155,8 +155,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     private getRidesList(request: HttpRequest<any>) {
-        this.createTestRide();
-
         return Observable.of(new HttpResponse({
             status: 200, body: mockRides
         }));

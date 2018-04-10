@@ -3,7 +3,9 @@
     <img class="media-object" src="../../../assets/logo.png" height="64" width="64">
   </div>
   <div class="media-body" style="margin-left: 10px">
-    <h4 class="media-heading"> {{ rideData.from }} -> {{ rideData.to }} </h4>
+    <h4 class="media-heading"> {{ rideData?.from }} -> {{ rideData?.to }} </h4>
+    <br/>
+    {{rideData.driver?.firstName}} {{rideData.driver?.lastName}}
   </div>
 </div>
 <hr/>
