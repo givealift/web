@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Rx';
 })
 export class RideListComponent implements OnInit {
 
-  private rides: any = [];
+  rides: any = [];
   pollingData: any;
 
   constructor(private httpClient: HttpClient) {
