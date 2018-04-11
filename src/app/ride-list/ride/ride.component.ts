@@ -6,14 +6,15 @@ import { Ride } from '../../services/ride.service';
   templateUrl: './ride.component.html',
   styleUrls: ['./ride.component.css']
 })
-export class RideComponent implements OnInit {
+export class RideComponent {
 
   @Input()
   rideData: Ride = new Ride();
 
   constructor() { }
 
-  ngOnInit() {
+  onClick() {
+      
   }
 
 }

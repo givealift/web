@@ -1,0 +1,4 @@
+.hoverable:hover {
+    background-color: lightblue;
+    transition: 0.2s;
+}

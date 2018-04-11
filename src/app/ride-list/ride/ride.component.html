@@ -1,11 +1,22 @@
-<div class="media">
-  <div class="media-left">
-    <img class="media-object" src="../../../assets/logo.png" height="64" width="64">
-  </div>
-  <div class="media-body" style="margin-left: 10px">
-    <h4 class="media-heading"> {{ rideData?.from }} -> {{ rideData?.to }} </h4>
-    <br/>
-    {{rideData.driver?.firstName}} {{rideData.driver?.lastName}} {{rideData.driver?.phone}}
+<div class="hoverable" (click)="onClick()">
+  <div class="media">
+    <div class="media-left" style="margin-left: 5px; margin-top: 5px;">
+      <img class="media-object" src="../../../assets/logo.png" height="64" width="64">
+    </div>
+    <div class="media-body" style="margin-left: 10px">
+      <h5 class="media-heading"> {{rideData.driver?.firstName}} {{rideData.driver?.lastName}} </h5>
+      {{rideData.driver?.phone}}
+    </div>
+    <div class="col-sm">
+      <h5>
+        <div class="row">
+          {{rideData.date | date:'EEEE, d MMMM - H:mm':'':'pl'}}
+        </div>
+        <div class="row">
+          {{rideData.from}} -> {{rideData.to}}
+        </div>
+      </h5>
+    </div>
   </div>
 </div>
 <hr/>

@@ -11,7 +11,7 @@ export class Ride {
     //
 
     driver: User;
-    
+    date: Date;
     //date
     //numberOfSeats
 }
