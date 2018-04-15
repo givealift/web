@@ -9,6 +9,7 @@ import 'rxjs/add/operator/materialize';
 import 'rxjs/add/operator/dematerialize';
 import { User } from '../services/user.service';
 import { Ride } from '../services/ride.service';
+import { of } from 'rxjs/observable/of';
 
 let mockUsers: User[] = JSON.parse(localStorage.getItem('mock-users')) || [];
 let mockRides: Ride[] = JSON.parse(localStorage.getItem('mock-rides')) || [];
@@ -50,12 +51,26 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 return this.createRide(request);
             }
 
+            if (request.url.match(/city\/search\/\?name=(.*)/) && request.method === 'GET') {
+                return this.searchCity(request);
+            }
+
             // pass through any requests not handled above
             return next.handle(request);
         })
             .materialize() // fix-around (https://github.com/Reactive-Extensions/RxJS/issues/648)
             .delay(500)
             .dematerialize();
+    }
+
+    private searchCity(request: HttpRequest<any>) {
+        const mockCities = ["Kraków", "Warszawa", "Rzeszów", "Wrocław", "Olkusz", "Bytom", "Radom", "Gdańsk"];
+        const term = request.url.match(/city\/search\/\?name=(.*)/)[1];
+        const mathingCities = mockCities.filter(name => name.toLowerCase().startsWith(term.toLowerCase()));
+
+        console.log((`matching Cities: ${mathingCities}`));
+        
+        return of(new HttpResponse({ status: 200, body: mathingCities }));
     }
 
     private createUser(request: HttpRequest<any>) {

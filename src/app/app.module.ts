@@ -20,6 +20,8 @@ import { TokenProvider } from './helpers/token.interceptor';
 import { RideListComponent } from './ride-list/ride-list.component';
 import { RideComponent } from './ride-list/ride/ride.component';
 import { RideService } from './services/ride.service';
+import { CitySearchComponent } from './city-search/city-search.component';
+import { CityService } from './services/city.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { RideService } from './services/ride.service';
     DashboardComponent,
     NewRideComponent,
     RideListComponent,
-    RideComponent
+    RideComponent,
+    CitySearchComponent
   ],
   imports: [
     FormsModule,
@@ -43,6 +46,7 @@ import { RideService } from './services/ride.service';
     AuthService,
     AuthGuard,
     UserService,
+    CityService,
     TokenProvider,
     FakeBackendProvider,
     RideService,
