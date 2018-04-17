@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { CitySearchComponent } from '../city-search/city-search.component';
 import { RideListComponent } from '../ride-list/ride-list.component';
-import { RideService } from '../services/ride.service';
+import { RideService, Ride } from '../services/ride.service';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   @ViewChild('to') cityTo: CitySearchComponent;
   @ViewChild(RideListComponent) rideList: RideListComponent;
   wasButtonClicked = false;
+  foundRides: Array<Ride>;
 
   title = 'Give-a-lift';
   loggedIn: boolean = this.authService.isAuthenticated();
@@ -32,7 +33,11 @@ export class HomeComponent implements OnInit {
   search() {
     console.log(this.cityFrom.city, this.cityTo.city);
     this.rideService.find(this.cityFrom.city, this.cityTo.city).subscribe(rides => {
-      this.rideList.rides = rides;
+      console.log("found rides");
+      
+      console.log(rides);
+      
+      this.foundRides = rides;
       this.wasButtonClicked = true;
     })
     

@@ -72,7 +72,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         const from = request.url.match(regexp)[1];
         const to = request.url.match(regexp)[2];
 
-        let matchingRides = mockRides.filter(ride => ride.from == from && ride.to == to);
+        let matchingRides = mockRides.filter(ride => ride.from.toLowerCase() == from.toLowerCase() && ride.to.toLowerCase() == to.toLowerCase());
         return of(new HttpResponse({ status: 200, body: matchingRides }));
     }
 
