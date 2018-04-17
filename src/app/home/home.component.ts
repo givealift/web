@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
   search() {
     console.log(this.cityFrom.city, this.cityTo.city);
     this.rideService.find(this.cityFrom.city, this.cityTo.city).subscribe(rides => {
-      this.rideList.rides = rides; // rideList.rides undefined ?????
+      this.rideList.rides = rides;
       this.wasButtonClicked = true;
     })
     
