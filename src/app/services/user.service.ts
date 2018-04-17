@@ -10,6 +10,7 @@ export class User {
     password: string;
     email: string;
     token: string;
+    phone: string;
 }
 
 @Injectable()

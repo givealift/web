@@ -29,6 +29,9 @@
       <input type="text" name="mail" [(ngModel)]="userModel.email" required email #emailRef="ngModel" placeholder="Email" />
       <div *ngIf="!emailRef.valid && emailRef.touched" class="alert alert-danger">Wpisz poprawny email!</div>
 
+      <input type="text" name="phone" [(ngModel)]="userModel.phone" required #phoneRef="ngModel" placeholder="Numer telefonu" pattern="^\+?[1-9]{1}[0-9]{3,14}$"
+      />
+      <div *ngIf="!phoneRef.valid && phoneRef.touched" class="alert alert-danger">Wpisz poprawny numer telefonu!</div>
 
       <input type="password" name="pass" [(ngModel)]="userModel.password" required #passRef="ngModel" placeholder="Hasło" />
       <div *ngIf="!passRef.valid && passRef.touched" class="alert alert-danger">Wpisz poprawne hasło!</div>
@@ -36,15 +39,8 @@
       <input type="password" name="passConfirm" [(ngModel)]="passConfirm" required #passConfirmRef="ngModel" placeholder="Potwierdź hasło">
       <div *ngIf="passConfirmRef.value!=passRef.value && passConfirmRef.touched && passRef.touched" class="alert alert-danger">Hasła nie zgadzają się!</div>
 
-
       <input class="btn btn-primary" style="width: 100%" type="submit" value="Zarejestruj" [disabled]="!form.valid || passRef.value!=passConfirmRef.value"
       />
     </form>
   </div>
-  <br/>
-  <h4>
-    <em>PLACEHOLDER (fejs)</em>
-  </h4>
-
-
 </div>

@@ -8,8 +8,10 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/materialize';
 import 'rxjs/add/operator/dematerialize';
 import { User } from '../services/user.service';
+import { Ride } from '../services/ride.service';
 
 let mockUsers: User[] = JSON.parse(localStorage.getItem('mock-users')) || [];
+let mockRides: Ride[] = JSON.parse(localStorage.getItem('mock-rides')) || [];
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
 
@@ -38,6 +40,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // authenticate
             if (request.url.endsWith('/api/authenticate') && request.method === 'POST') {
                 return this.authenticate(request);
+            }
+
+            if (request.url.endsWith('/api/rides/list') && request.method === 'GET') {
+                return this.getRidesList(request);
+            }
+
+            if (request.url.endsWith('/api/rides/') && request.method === 'POST') {
+                return this.createRide(request);
             }
 
             // pass through any requests not handled above
@@ -119,6 +129,37 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         } else {
             return Observable.throw('Login or password is incorrect');
         }
+    }
+
+    private createRide(request: HttpRequest<any>) {
+
+        let newRide = request.body;
+
+        newRide.id = mockRides.length + 1;
+        //tmp
+        newRide.date = Date.now();
+        mockRides.push(newRide);
+        localStorage.setItem('mock-rides', JSON.stringify(mockRides));
+
+        return Observable.of(new HttpResponse({ status: 200 }));
+    }
+
+    private createTestRide() {
+        let newRide: Ride = new Ride();
+        newRide.id = mockRides.length + 1;
+        let newDriver: User = JSON.parse(localStorage.getItem('currentUser'));
+        newRide.driver = newDriver;
+        newRide.from = "Kraków";
+        newRide.to = "Warszawa";
+
+        mockRides.push(newRide);
+        localStorage.setItem('mock-rides', JSON.stringify(mockRides));
+    }
+
+    private getRidesList(request: HttpRequest<any>) {
+        return Observable.of(new HttpResponse({
+            status: 200, body: mockRides
+        }));
     }
 }
 
