@@ -45,8 +45,4 @@ export class LoginComponent {
           this.userModel.password = '';
         });
   }
-
-  private routeToPath(routePath: string) {
-    this.router.navigate([routePath]);
-  }
 }

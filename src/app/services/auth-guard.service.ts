@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
             console.log(localStorage.getItem('currentUser'));
             return true;
         } else {
-            this.router.navigate(['login'], { queryParams: { returnLink: state.url } });
+            this.router.navigate(['login'], { queryParams: { returnUrl: state.url } });
             return false;
         }
     }
