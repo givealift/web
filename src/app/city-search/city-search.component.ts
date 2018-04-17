@@ -10,6 +10,7 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
   styleUrls: ['./city-search.component.css']
 })
 export class CitySearchComponent implements OnInit {
+  city: string = '';
   cities$: Observable<string[]>;
   private searchTerms = new Subject<string>();
 
@@ -25,6 +26,12 @@ export class CitySearchComponent implements OnInit {
       distinctUntilChanged(),
       switchMap((term: string) => this.cityService.searchCity(term))
     );
+  }
+
+  setCity(city: string) {
+    console.log(`setting city to: ${city}`);
+    
+    this.city = city;
   }
 
 }

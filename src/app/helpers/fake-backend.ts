@@ -51,6 +51,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 return this.createRide(request);
             }
 
+        if (request.url.match(/rides\/search\/\?from=(.*)&to=(.*)/) && request.method === 'GET') {
+                return this.searchRide(request);
+            }
+
             if (request.url.match(/city\/search\/\?name=(.*)/) && request.method === 'GET') {
                 return this.searchCity(request);
             }
@@ -61,6 +65,15 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             .materialize() // fix-around (https://github.com/Reactive-Extensions/RxJS/issues/648)
             .delay(500)
             .dematerialize();
+    }
+
+    private searchRide(request: HttpRequest<any>) {
+        const regexp = /rides\/search\/\?from=(.*)&to=(.*)/;
+        const from = request.url.match(regexp)[1];
+        const to = request.url.match(regexp)[2];
+
+        let matchingRides = mockRides.filter(ride => ride.from == from && ride.to == to);
+        return of(new HttpResponse({ status: 200, body: matchingRides }));
     }
 
     private searchCity(request: HttpRequest<any>) {
