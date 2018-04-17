@@ -1,11 +1,13 @@
 <div class="hoverable" (click)="onClick()">
   <div class="media">
-    <div class="media-left" style="margin-left: 5px; margin-top: 5px;">
+    <div class="media-left" style="margin-left: 5px; margin-top: 3px; margin-bottom: 3px;">
       <img class="media-object" src="../../../assets/logo.png" height="64" width="64">
     </div>
     <div class="media-body" style="margin-left: 10px">
       <h5 class="media-heading"> {{rideData.driver?.firstName}} {{rideData.driver?.lastName}} </h5>
-      {{rideData.driver?.phone}}
+      <a routerLinkActive="active" routerLink="#">Skontaktuj się</a>
+      <br/>
+      <a (click)="onClick()">Zarezerwuj</a>
     </div>
     <div class="col-sm">
       <h5>
