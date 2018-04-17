@@ -15,9 +15,11 @@
         <a class="nav-link" routerLinkActive="active" routerLink="/new-ride" *ngIf="loggedIn">Dodaj przejazd</a>
       </li>
       <li class="nav-item dropdown" *ngIf="loggedIn">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-          {{user?.firstName}} {{user?.lastName}}</a>
-        <!-- profile pic -->
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{user?.firstName}} {{user?.lastName}}
+          <img src="../../assets/logo.png" style="width:30px; height:30px"/>
+        </a>
+
         <div class="dropdown-menu dropdown-menu-right">
           <a class="dropdown-item" routerLinkActive="active" routerLink="profile">Mój profil</a>
           <a class="dropdown-item" routerLinkActive="active" routerLink="ride-list">Przejazdy</a>
