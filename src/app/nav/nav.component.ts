@@ -18,12 +18,10 @@ export class NavComponent implements OnInit {
 
   ngOnInit() {
     this.loggedIn = this.authService.isAuthenticated();
-    this.authService.loggedInStatus.subscribe(
-      loggedIn => {
-        this.loggedIn = loggedIn;
-        this.user = <User>JSON.parse(localStorage.getItem("currentUser"));
-      });
-    this.user = <User>JSON.parse(localStorage.getItem("currentUser"));
+    this.authService.loggedInStatus.subscribe(loggedIn => {
+      this.loggedIn = loggedIn;
+      this.user = <User>JSON.parse(localStorage.getItem("currentUser"));
+    });
   }
 
   logout(): void {

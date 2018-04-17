@@ -17,8 +17,9 @@ const routes: Routes = [
     { path: 'add', component: NewRideComponent, canActivate: [AuthGuard] },
     { path: 'profile', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'new-ride', component: NewRideComponent, canActivate: [AuthGuard] },
-    { path: 'ride-list', component: RideListComponent, canActivate: [AuthGuard] },
-    
+    { path: 'ride-list', component: RideListComponent },
+
+
     { path: '**', redirectTo: '' }
 ];
 
