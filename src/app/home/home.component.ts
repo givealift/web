@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { CitySearchComponent } from '../city-search/city-search.component';
 
 @Component({
   selector: 'app-home',
