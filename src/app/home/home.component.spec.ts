@@ -8,6 +8,10 @@ import { UserService } from '../services/user.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CitySearchComponent } from '../city-search/city-search.component';
 import { CityService } from '../services/city.service';
+import { RideListComponent } from '../ride-list/ride-list.component';
+import { FormsModule } from '@angular/forms';
+import { RideComponent } from '../ride-list/ride/ride.component';
+import { RideService } from '../services/ride.service';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -17,13 +21,16 @@ describe('HomeComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         HomeComponent,
-        CitySearchComponent
+        CitySearchComponent,
+        RideListComponent,
+        RideComponent
       ],
       imports: [
-        HttpClientModule, RouterTestingModule
+        HttpClientModule, RouterTestingModule,
+        FormsModule
       ],
       providers: [
-        AuthService, UserService, CityService
+        AuthService, UserService, CityService, RideService
       ]
     })
       .compileComponents();
