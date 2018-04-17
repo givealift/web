@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 
@@ -8,11 +8,16 @@ import { Observable } from 'rxjs/Rx';
   styleUrls: ['./ride-list.component.css']
 })
 export class RideListComponent {
-  @Input()
+
   rides: any = [];
 
-  constructor() {
-    
+  constructor(private httpClient: HttpClient) {
+    Observable.interval(1000)
+      .switchMap(() => httpClient.get('/api/rides/list'))
+      .subscribe(
+        (data) => {
+          this.rides = data;
+        });
   }
 
 }

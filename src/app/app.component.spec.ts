@@ -15,9 +15,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NewRideComponent } from './new-ride/new-ride.component';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
-import { CitySearchComponent } from './city-search/city-search.component';
-import { RideListComponent } from './ride-list/ride-list.component';
-import { RideComponent } from './ride-list/ride/ride.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -35,10 +32,7 @@ describe('AppComponent', () => {
         LoginComponent,
         RegisterComponent,
         DashboardComponent,
-        NewRideComponent,
-        CitySearchComponent,
-        RideListComponent,
-        RideComponent
+        NewRideComponent
       ],
       imports: [
         RouterModule.forRoot(appRoutes),
