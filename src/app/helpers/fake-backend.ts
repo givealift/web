@@ -24,7 +24,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return Observable.of(null).mergeMap(() => {
 
             // create user
-            if (request.url.endsWith('/api/user/') && request.method === 'POST') {
+      /*      if (request.url.endsWith('/api/user/') && request.method === 'POST') {
                 return this.createUser(request);
             }
 
@@ -41,7 +41,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // authenticate
             if (request.url.endsWith('/api/authenticate') && request.method === 'POST') {
                 return this.authenticate(request);
-            }
+            }*/
 
             if (request.url.endsWith('/api/rides/list') && request.method === 'GET') {
                 return this.getRidesList(request);
