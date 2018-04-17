@@ -45,4 +45,8 @@ export class RideService {
         return this.http.get<Ride[]>(this.userApiPath + 'list');
     }
 
+    find(from: string, to: string) {
+        return this.http.get<Ride[]>(this.userApiPath + `search/?from=${from}&to=${to}`);
+    }
+
 }

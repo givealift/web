@@ -1,0 +1,15 @@
+<div id="search-component" class="container">
+  <div class="city-search">
+    <div class="input-group-sm">
+      <input [(ngModel)]="city" #searchBox id="search-box" type="text" class="form-control" (keyup)="search(searchBox.value)" placeholder="Wyjazd z..."
+      />
+    </div>
+    <ul class="search-result">
+      <li *ngFor="let city of cities$ | async">
+        <a (click)="setCity(city)">
+          {{city}}
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
