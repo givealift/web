@@ -20,6 +20,7 @@ import { TokenProvider } from './helpers/token.interceptor';
 import { RideListComponent } from './ride-list/ride-list.component';
 import { RideComponent } from './ride-list/ride/ride.component';
 import { RideService } from './services/ride.service';
+import {UserProfileComponent} from "./user-profile/user_profile.component";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { RideService } from './services/ride.service';
     DashboardComponent,
     NewRideComponent,
     RideListComponent,
-    RideComponent
+    RideComponent,
+    UserProfileComponent
   ],
   imports: [
     FormsModule,

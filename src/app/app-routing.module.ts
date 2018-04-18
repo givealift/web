@@ -8,6 +8,7 @@ import { AuthGuard } from "./services/auth-guard.service";
 import { NewRideComponent } from "./new-ride/new-ride.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { RideListComponent } from "./ride-list/ride-list.component";
+import {UserProfileComponent} from "./user-profile/user_profile.component";
 
 const routes: Routes = [
 
@@ -15,9 +16,10 @@ const routes: Routes = [
     { path: "login", component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'add', component: NewRideComponent, canActivate: [AuthGuard] },
-    { path: 'profile', component: DashboardComponent, canActivate: [AuthGuard] },
+   // { path: 'profile', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'new-ride', component: NewRideComponent, canActivate: [AuthGuard] },
     { path: 'ride-list', component: RideListComponent },
+  { path: 'profile', component: UserProfileComponent},
 
 
     { path: '**', redirectTo: '' }

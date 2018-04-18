@@ -3,6 +3,7 @@ import { User } from "./user.service";
 import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
 import {environment} from "../../environments/environment";
+import {AuthToken} from "../model/auth-token";
 
 
 @Injectable()
@@ -16,7 +17,7 @@ export class AuthService {
     login(login: string, pass: string) {
       console.log(login, pass);
         const body = {username : login, password : pass};
-        return this.http.post<User>(this.authUrl + "authenticate", body);
+        return this.http.post<AuthToken>(this.authUrl + "authenticate", body);
     }
 
     logout() {
