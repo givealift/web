@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import {FormGroup, NgForm} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService, User } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
@@ -11,7 +11,10 @@ import { AuthService } from '../services/auth.service';
 })
 export class UserProfileComponent implements OnInit {
 
-  userModel: User ;
+  userModel: User= new User() ;
+  editForm: boolean = false;
+  editOrCancel =  "Edytuj";
+
   userId: number = parseInt(localStorage.getItem("id"));
 
   @ViewChild('form') form: NgForm;
@@ -24,10 +27,19 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
- this.userService.getById(this.userId)
-   .subscribe(user => {this.userModel = user; console.log(this.userModel)} );
+    this.editOrCancel =  "Edytuj";
+ //this.userService.getById(this.userId)
+ //  .subscribe(user => {this.userModel = user; console.log(this.userModel)} );
+// this.form.form.disable();
 
   }
+  enableForm(){
+    this.editForm = !this.editForm;
+    this.editOrCancel = this.editForm ? "Edytuj" : "Anuluj";
+
+  }
+
+
 
   onSubmit() {
     this.userService.update(this.userModel).subscribe(
@@ -35,7 +47,7 @@ export class UserProfileComponent implements OnInit {
 
       },
       error => {
-
+            console.log(error);
       }
     );
 

@@ -21,6 +21,8 @@ import { RideListComponent } from './ride-list/ride-list.component';
 import { RideComponent } from './ride-list/ride/ride.component';
 import { RideService } from './services/ride.service';
 import {UserProfileComponent} from "./user-profile/user_profile.component";
+import {PhotoComponent} from "./user-profile/photo/photo.component";
+import {PhotoModule} from "./user-profile/photo/photo.module";
 
 @NgModule({
   declarations: [
@@ -33,13 +35,15 @@ import {UserProfileComponent} from "./user-profile/user_profile.component";
     NewRideComponent,
     RideListComponent,
     RideComponent,
-    UserProfileComponent
+    UserProfileComponent,
+
   ],
   imports: [
     FormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    PhotoModule
   ],
   providers: [
     AuthService,
