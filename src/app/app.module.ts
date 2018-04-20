@@ -23,6 +23,10 @@ import { TokenProvider } from './helpers/token.interceptor';
 import { RideListComponent } from './ride-list/ride-list.component';
 import { RideComponent } from './ride-list/ride/ride.component';
 import { RideService } from './services/ride.service';
+import localePl from '@angular/common/locales/pl';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localePl);
+
 
 @NgModule({
   declarations: [
@@ -50,6 +54,7 @@ import { RideService } from './services/ride.service';
     TokenProvider,
     FakeBackendProvider,
     RideService,
+    {provide: MAT_DATE_LOCALE, useValue: 'pl'}
   ],
   bootstrap: [AppComponent]
 })
