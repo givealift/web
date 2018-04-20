@@ -1,32 +1,36 @@
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#008CBA;">
-  <a class="navbar-brand" routerLinkActive="active" routerLink="">
-    <img src="../../assets/logo.png" style="width:35px;"> Give A Lift
-  </a>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span routerLink="/">
+      <img class="logo" src="../../assets/logo.png"> Give a lift
+    </span>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="/login" *ngIf="!loggedIn">Zaloguj się</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="/register" *ngIf="!loggedIn">Zarejestruj się</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="/new-ride" *ngIf="loggedIn">Dodaj przejazd</a>
-      </li>
-      <li class="nav-item dropdown" *ngIf="loggedIn">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-          {{user?.firstName}} {{user?.lastName}}</a>
-        <!-- profile pic -->
-        <div class="dropdown-menu dropdown-menu-right">
-          <a class="dropdown-item" routerLinkActive="active" routerLink="profile">Mój profil</a>
-          <a class="dropdown-item" routerLinkActive="active" routerLink="ride-list">Przejazdy</a>
-          <a class="dropdown-item" routerLinkActive="active" routerLink="#">Powiadomienia</a>
-          <a class="dropdown-item" routerLinkActive="active" routerLink="#">Historia płatności</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" (click)="logout()">Wyloguj się</a>
-        </div>
-      </li>
-    </ul>
-  </div>
-</nav>
+    <span class="nav-spacer"></span>
+
+    <button mat-button routerLink="/login" *ngIf="!loggedIn">Zaloguj się</button>
+    <button mat-button routerLink="/register" *ngIf="!loggedIn">Nie masz konta?</button>
+    <button mat-button routerLink="/new-ride" *ngIf="loggedIn">Dodaj przejazd</button>
+
+    <button *ngIf="loggedIn" mat-button [matMenuTriggerFor]="dropdownMenu">
+      <mat-icon>menu</mat-icon>{{user?.firstName}} {{user?.lastName}}
+    </button>
+
+    <mat-menu #dropdownMenu="matMenu">
+      <button mat-menu-item routerLink="profile">
+        <mat-icon>person</mat-icon>
+        <span>Mój profil</span>
+      </button>
+      <button mat-menu-item routerLink="ride-list">
+        <mat-icon>directions_car</mat-icon>
+        <span>Przejazdy</span>
+      </button>
+      <button mat-menu-item disabled routerLink="">
+        <mat-icon>notification</mat-icon>
+        <span>Powiadomienia</span>
+      </button>
+      <button mat-menu-item routerLink="" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Wyloguj</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>

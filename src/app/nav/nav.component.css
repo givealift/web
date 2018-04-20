@@ -1,0 +1,22 @@
+.nav-spacer {
+    flex: 1 1 auto;
+}
+
+.spinner {
+  margin-left: 10px;
+}
+
+.center {
+  display: flex;           
+  justify-content: center; 
+  align-items: center;  
+}
+
+.btn-search {
+  margin-left: 25px;
+}
+
+.logo {
+    width: 35px;
+    margin-right: 5px;
+}
