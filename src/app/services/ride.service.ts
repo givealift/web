@@ -2,20 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { User } from "./user.service";
 import {environment} from "../../environments/environment";
+import {Ride} from "../model/ride";
 
-export class Ride {
-    id: number;
-
-    //routeInfo
-    from: String;
-    to: String;
-    //
-
-    driver: User;
-    date: Date;
-    //date
-    //numberOfSeats
-}
 
 @Injectable()
 export class RideService {
@@ -31,25 +19,25 @@ export class RideService {
 
 }
 
-    update(ride: Ride) {
-        return this.http.put<Ride>(this.userApiPath + ride.id, ride);
+    update(ride: Ride,id:number) {
+        return this.http.put<Ride>(this.apiUrl + id, ride);
     }
 
     getById(id: number) {
-        return this.http.get(this.userApiPath + id);
+        return this.http.get(this.apiUrl + id);
     }
 
     create(ride: Ride) {
         console.log(ride);
-        return this.http.post(this.userApiPath, ride);
+        return this.http.post(this.apiUrl, ride);
     }
 
     delete(id: number) {
-        return this.http.delete(this.userApiPath + id);
+        return this.http.delete(this.apiUrl + id);
     }
 
     getAll() {
-        return this.http.get<Ride[]>(this.userApiPath + 'list');
+        return this.http.get<Ride[]>(this.apiUrl + 'list');
     }
 
 }
