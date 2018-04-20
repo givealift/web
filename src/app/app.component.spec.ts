@@ -15,6 +15,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NewRideComponent } from './new-ride/new-ride.component';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MaterialModule } from './material.module';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -36,7 +37,8 @@ describe('AppComponent', () => {
       ],
       imports: [
         RouterModule.forRoot(appRoutes),
-        FormsModule, HttpClientModule
+        FormsModule, HttpClientModule,
+        MaterialModule
       ],
       providers: [
         { provide: APP_BASE_HREF, useValue: "/" }, AuthService
