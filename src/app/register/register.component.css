@@ -1,42 +1,21 @@
-.registerContainer {
+.center {
     text-align: center;
-    margin-top: auto;
-}
-
-::placeholder {
-    text-align: center;
-}
-
-.formContainer {
-    margin: auto;
+    justify-content: center;
     align-items: center;
-    width: 15%;
+}
+  
+.spinner { 
+      margin-top: 20px;
+      display: flex;
+}
+  
+.container {
+    display: flex;
+    flex-direction: column;
 }
 
-.form-box {
-    width: 100%;
+.inline-form-field {
+    margin-left: 10px;
+    margin-right: 10px;
 }
-
-#text1 {
-    width: 49%;
-}
-
-input[type=text], select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-input[type=password], select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
+  
