@@ -1,0 +1,50 @@
+<div class="container ">
+  <div class="row ">
+    <div class="col-sm-4 offset-sm-2">
+    <form (ngSubmit)="onSubmit()" #form="ngForm"  >
+
+      <!-- radio buttons? -->
+      <select [disabled]="editForm"  >
+        <option disabled selected>Płeć</option>
+        <option>Mężczyzna</option>
+        <option>Kobieta</option>
+      </select>
+
+      <!-- Group the form? -->
+
+      <!-- Profile pic upload -->
+      <div>
+        <input type="text" name="firstname" [disabled]="editForm" [(ngModel)]="userModel.firstName" required id="firstname" #firstRef="ngModel" placeholder="Imię"
+        />
+
+        <input type="text" name="lastname" [disabled]="editForm" [(ngModel)]="userModel.lastName" required id="lastname" #lastRef="ngModel" placeholder="Nazwisko"
+        />
+        <div *ngIf="!lastRef.valid && !firstRef.valid && lastRef.touched && firstRef.touched" class="alert alert-danger">Wpisz poprawne imię i nazwisko!</div>
+
+      </div>
+
+      <input type="text" name="login" [disabled]="editForm" [(ngModel)]="userModel.login" required #loginRef="ngModel" placeholder="Login" />
+      <div *ngIf="!loginRef.valid && loginRef.touched" class="alert alert-danger">Wpisz poprawny login!</div>
+
+
+      <input type="text" name="mail" [disabled]="editForm" [(ngModel)]="userModel.email" required email #emailRef="ngModel" placeholder="Email" />
+      <div *ngIf="!emailRef.valid && emailRef.touched" class="alert alert-danger">Wpisz poprawny email!</div>
+
+      <input type="text" name="phone" [disabled]="editForm" [(ngModel)]="userModel.phone" required #phoneRef="ngModel" placeholder="Numer telefonu" pattern="^\+?[1-9]{1}[0-9]{3,14}$"
+      />
+      <div *ngIf="!phoneRef.valid && phoneRef.touched" class="alert alert-danger">Wpisz poprawny numer telefonu!</div>
+      <div class="row">
+      <input class="btn btn-success" style="width: 100%" type="button"  value="{{editOrCancel}}"  (click)="enableForm()"/>
+        <input class="btn btn-primary" style="width: 100%" type="submit" value="{{editOrCancel}}" />
+      </div>
+    </form>
+    </div>
+    <div class="col-sm-4 offset-sm-2">
+      <app-user-photo></app-user-photo>
+
+
+
+
+    </div>
+  </div>
+</div>

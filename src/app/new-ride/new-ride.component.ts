@@ -18,7 +18,7 @@ export class NewRideComponent {
     private rideService: RideService) { }
 
   onSubmit() {
-    this.rideModel.driver = JSON.parse(localStorage.getItem('currentUser'));
+    this.rideModel.ownerId = parseInt(localStorage.getItem('id'));
     this.rideService.create(this.rideModel).subscribe(
       () => {
         this.router.navigate(['/ride-list']);

@@ -5,11 +5,11 @@ import { UserService, User } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-ride.component.html',
+  selector: 'app-profile-info',
+  templateUrl: './user-info.component.html',
   styleUrls: ['./user_info.component.css']
 })
-export class UserProfileComponent implements OnInit {
+export class UserInfoComponent implements OnInit {
 
   userModel: User= new User() ;
   editForm: boolean = false;

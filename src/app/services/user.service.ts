@@ -26,6 +26,10 @@ export class UserService {
     constructor(private http: HttpClient) {
     }
 
+     getUserRides(id:number, page:number){
+      return this.http.get(this.ApiPath+"user/rout/"+id, { queryParams: { page: page }});
+
+}
 
     update(user: User) {
         return this.http.put<User>(this.ApiPath + "user/edit/" + 1, user);

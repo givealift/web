@@ -4,7 +4,7 @@ import { UserService, User } from '../../services/user.service';
 import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-user-photo',
+  selector: 'app-profile-photo',
   templateUrl: './photo.component.html',
   styleUrls: ['./photo.component.css']
 })
@@ -33,9 +33,10 @@ export class PhotoComponent implements OnInit{
     let fileBrowser = this.fileInput.nativeElement;
     if (fileBrowser.files && fileBrowser.files[0]) {
       const formData = new FormData();
+      this.sanitizedPhoto = fileBrowser.file[0];
       formData.append("file", fileBrowser.files[0]);
       this.userService.upload(formData, 1).subscribe(res => {
-        // do stuff w/my uploaded file
+
       });
     }
   }

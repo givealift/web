@@ -20,9 +20,9 @@ import { TokenProvider } from './helpers/token.interceptor';
 import { RideListComponent } from './ride-list/ride-list.component';
 import { RideComponent } from './ride-list/ride/ride.component';
 import { RideService } from './services/ride.service';
-import {UserProfileComponent} from "./user-profile/user_profile.component";
+import {UserProfileComponent} from "./user-profile/user-info/user_info.component";
 import {PhotoComponent} from "./user-profile/photo/photo.component";
-import {PhotoModule} from "./user-profile/photo/photo.module";
+import {PhotoModule, UserProfileModule} from "./user-profile/user-profile.module";
 
 @NgModule({
   declarations: [
@@ -35,7 +35,6 @@ import {PhotoModule} from "./user-profile/photo/photo.module";
     NewRideComponent,
     RideListComponent,
     RideComponent,
-    UserProfileComponent,
 
   ],
   imports: [
@@ -43,7 +42,7 @@ import {PhotoModule} from "./user-profile/photo/photo.module";
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    PhotoModule
+    UserProfileModule
   ],
   providers: [
     AuthService,

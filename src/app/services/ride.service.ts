@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { User } from "./user.service";
+import {environment} from "../../environments/environment";
 
 export class Ride {
     id: number;
@@ -19,12 +20,18 @@ export class Ride {
 @Injectable()
 export class RideService {
 
-    private userApiPath: string = '/api/rides/';
+ private readonly apiUrl: string = environment.apiUrl
 
     constructor(private http: HttpClient) {
     }
 
-    update(ride: Ride) {        
+
+    getUserRides(id:number, page:number){
+   return this.http.get(this.apiUrl+"user/rout/"+id, { queryParams: { page: page }});
+
+}
+
+    update(ride: Ride) {
         return this.http.put<Ride>(this.userApiPath + ride.id, ride);
     }
 

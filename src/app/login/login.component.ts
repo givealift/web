@@ -34,8 +34,9 @@ export class LoginComponent {
   onSubmit() {
     this.authService.login(this.userModel.login, this.userModel.password)
       .subscribe(
-        user => {
-          localStorage.setItem("currentUser", JSON.stringify(user));
+        auth => {
+          localStorage.setItem("token",auth.token);
+          localStorage.setItem("id",auth.userId);
           this.authService.loggedInStatus.emit(true);
           this.router.navigate([this.returnUrl]);
         },

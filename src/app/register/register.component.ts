@@ -34,10 +34,9 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     this.userService.create(this.userModel).subscribe(
-      () => {
-        localStorage.setItem("currentUser", JSON.stringify(this.userModel));
-        this.authService.loggedInStatus.emit(true);
-        this.router.navigate([this.returnUrl]);
+      id => {
+        localStorage.setItem("id", id);
+       this.router.navigate(['/login']);
       },
       error => {
         this.router.navigate(['/login']);

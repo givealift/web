@@ -3,23 +3,21 @@ import {FormGroup, NgForm} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService, User } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
+import {Ride, RideService} from "../../services/ride.service";
 
 @Component({
-  selector: 'app-user-profile',
+  selector: 'app-profile-ride',
   templateUrl: './user-ride.component.html',
   styleUrls: ['./user_info.component.css']
 })
-export class UserProfileComponent implements OnInit {
-
-  userModel: User= new User() ;
-  editForm: boolean = false;
-  editOrCancel =  "Edytuj";
-
+export class UserRideComponent implements OnInit {
   userId: number = parseInt(localStorage.getItem("id"));
+  rides:Ride[];
+  page:number=0;
 
-  @ViewChild('form') form: NgForm;
 
   constructor(
+    private rideService:RideService,
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
@@ -27,28 +25,12 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
- //this.userService.getById(this.userId)
- //  .subscribe(user => {this.userModel = user; console.log(this.userModel)} );
-// this.form.form.disable();
-
-  }
-  enableForm(){
-    this.editForm = !this.editForm;
-    this.editOrCancel = this.editForm ? "Edytuj" : "Anuluj";
-
+    this.changePage(this.page);
   }
 
-
-
-  onSubmit() {
-    this.userService.update(this.userModel).subscribe(
-      () => {
-
-      },
-      error => {
-            console.log(error);
-      }
-    );
+  changePage(page:number){
+    this.userService.getUserRides(this.userId,this.page)
+  .subscribe(rides=>this.rides = rides );
 
   }
 

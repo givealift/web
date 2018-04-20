@@ -14,7 +14,7 @@ export class AuthService {
 
     constructor(private http: HttpClient) { }
 
-    login(login: string, pass: string) {
+    login(login: string, pass: string):Observable<AuthToken> {
       console.log(login, pass);
         const body = {username : login, password : pass};
         return this.http.post<AuthToken>(this.authUrl + "authenticate", body);
