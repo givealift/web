@@ -1,4 +1,4 @@
-<input type="file" #fileInput placeholder="Upload file..." />
-<button type="button" (click)="upload()">Upload</button>
+<input type="file" #fileInput placeholder="Wybierz zdjęcie" (change)="onSelectFile($event)"/>
+<button type="button" (click)="upload()">Ustaw</button>
 <img [src]="sanitizedPhoto" alt=""/>
 

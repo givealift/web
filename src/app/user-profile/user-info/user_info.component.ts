@@ -1,8 +1,8 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import {FormGroup, NgForm} from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { UserService, User } from '../../services/user.service';
-import { AuthService } from '../../services/auth.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {User, UserService} from '../../services/user.service';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-profile-info',
@@ -11,8 +11,9 @@ import { AuthService } from '../../services/auth.service';
 })
 export class UserInfoComponent implements OnInit {
 
-  userModel: User= new User() ;
-  editForm: boolean = false;
+  userModel: User = new User();
+  userCopyModel: User;
+  disableForm: boolean = true;
   editOrCancel =  "Edytuj";
 
   userId: number = parseInt(localStorage.getItem("id"));
@@ -27,14 +28,20 @@ export class UserInfoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
- //this.userService.getById(this.userId)
- //  .subscribe(user => {this.userModel = user; console.log(this.userModel)} );
-// this.form.form.disable();
+    this.userService.getById(this.userId)
+      .subscribe(user => {
+        this.userModel = user;
+        this.userCopyModel = Object.assign({}, this.userModel);
+      });
+
 
   }
   enableForm(){
-    this.editForm = !this.editForm;
-    this.editOrCancel = this.editForm ? "Edytuj" : "Anuluj";
+    this.disableForm = !this.disableForm;
+    if (this.disableForm) {
+      this.userModel = Object.assign({}, this.userCopyModel);
+    }
+    this.editOrCancel = this.disableForm ? "Edytuj" : "Anuluj";
 
   }
 
@@ -43,13 +50,11 @@ export class UserInfoComponent implements OnInit {
   onSubmit() {
     this.userService.update(this.userModel).subscribe(
       () => {
-
       },
       error => {
             console.log(error);
       }
     );
-
   }
 
 }

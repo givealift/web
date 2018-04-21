@@ -1,6 +1,6 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 
-import { UserService, User } from '../../services/user.service';
+import {UserService} from '../../services/user.service';
 import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
@@ -11,13 +11,14 @@ import {DomSanitizer} from '@angular/platform-browser';
 export class PhotoComponent implements OnInit{
   photo;
   sanitizedPhoto;
+  userId: number = parseInt(localStorage.getItem("id"));
 
   @ViewChild('fileInput') fileInput;
 
   constructor(private userService: UserService, private sanitizer: DomSanitizer ) {}
 
   ngOnInit() {
-    this.userService.getPhoto(1)
+    this.userService.getPhoto(parseInt(localStorage.getItem("id")))
       .subscribe(photo => {
           this.photo = photo;
           let urlCreator = window.URL;
@@ -26,16 +27,25 @@ export class PhotoComponent implements OnInit{
       )
   }
 
-
+  onSelectFile(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      let reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: any) => {
+        this.sanitizedPhoto = event.target.result;
+      };
+    }
+  }
 
 
   upload() {
     let fileBrowser = this.fileInput.nativeElement;
     if (fileBrowser.files && fileBrowser.files[0]) {
       const formData = new FormData();
-      this.sanitizedPhoto = fileBrowser.file[0];
+      //  let urlCreator = window.URL;
+      this.sanitizedPhoto = fileBrowser.files[0];
       formData.append("file", fileBrowser.files[0]);
-      this.userService.upload(formData, 1).subscribe(res => {
+      this.userService.upload(formData, this.userId).subscribe(res => {
 
       });
     }

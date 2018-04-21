@@ -1,7 +1,6 @@
-import { Injectable } from "@angular/core";
+import {Injectable} from "@angular/core";
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from "../../environments/environment";
-import {ResponseContentType} from "@angular/http";
 import {Ride} from "../model/ride";
 
 
@@ -39,7 +38,7 @@ export class UserService {
     }
 
     getById(id: number) {
-        return this.http.get<User>(this.ApiPath + "user/" + 1);
+      return this.http.get<User>(this.ApiPath + "user/" + id);
     }
 
     create(user: User) {

@@ -9,7 +9,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {HttpClientModule} from "@angular/common/http";
 import {AppRoutingModule} from "../app-routing.module";
 import {RideModule} from "../ride-list/ride/ride.module";
-import {routedComponents, UserProfileRouting} from "./user-profile.routing";
+import {UserProfileRouting} from "./user-profile.routing";
 
 @NgModule({
   imports: [UserProfileRouting,FormsModule, BrowserModule,
@@ -20,7 +20,7 @@ import {routedComponents, UserProfileRouting} from "./user-profile.routing";
     UserInfoComponent,
     UserProfileComponent,
     PhotoComponent,
-    ...routedComponents
+    UserRideComponent
     ],
   providers: [],
 })
