@@ -1,10 +1,10 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import {FormGroup, NgForm} from '@angular/forms';
+import { FormGroup, NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService, User } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
-import {Ride} from "../../model/ride";
-import {RideService} from "../../services/ride.service";
+import { Ride } from "../../model/ride";
+import { RideService } from "../../services/ride.service";
 
 
 @Component({
@@ -15,12 +15,12 @@ import {RideService} from "../../services/ride.service";
 export class UserRideComponent implements OnInit {
   userId: number = parseInt(localStorage.getItem("id"));
   rides: Ride[];
-  page:number=0;
+  page: number = 0;
 
 
 
   constructor(
-    private rideService:RideService,
+    private rideService: RideService,
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
@@ -31,9 +31,9 @@ export class UserRideComponent implements OnInit {
     this.changePage(this.page);
   }
 
-  changePage(page:number){
-    this.userService.getUserRides(this.userId,this.page)
-  .subscribe(rides=>this.rides = rides );
+  changePage(page: number) {
+    this.userService.getUserRides(this.userId, this.page)
+      .subscribe(rides => this.rides = rides);
 
   }
 

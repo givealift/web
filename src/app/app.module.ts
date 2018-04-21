@@ -20,7 +20,6 @@ import { RideListComponent } from './ride-list/ride-list.component';
 import { RideComponent } from './ride-list/ride/ride.component';
 import { RideService } from './services/ride.service';
 import {UserProfileModule} from "./user-profile/user-profile.module";
-import {RideModule} from "./ride-list/ride/ride.module";
 
 @NgModule({
   declarations: [
@@ -32,8 +31,6 @@ import {RideModule} from "./ride-list/ride/ride.module";
     DashboardComponent,
     NewRideComponent,
     RideListComponent,
-
-
   ],
   imports: [
     FormsModule,
@@ -41,7 +38,6 @@ import {RideModule} from "./ride-list/ride/ride.module";
     AppRoutingModule,
     HttpClientModule,
     UserProfileModule,
-    RideModule
   ],
   providers: [
     AuthService,
