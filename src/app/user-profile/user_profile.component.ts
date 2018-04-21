@@ -1,13 +1,14 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import {FormGroup, NgForm} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UserService, User } from '../../services/user.service';
-import { AuthService } from '../../services/auth.service';
+import {User, UserService} from "../services/user.service";
+import {AuthService} from "../services/auth.service";
+
 
 @Component({
   selector: 'app-user-profile',
-  templateUrl: './user-ride.component.html',
-  styleUrls: ['./user_info.component.css']
+  templateUrl: './user-profile.component.html',
+  styleUrls: ['./user_profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
 

@@ -36,7 +36,7 @@ export class LoginComponent {
       .subscribe(
         auth => {
           localStorage.setItem("token",auth.token);
-          localStorage.setItem("id",auth.userId);
+          localStorage.setItem("id",auth.userId.toLocaleString());
           this.authService.loggedInStatus.emit(true);
           this.router.navigate([this.returnUrl]);
         },

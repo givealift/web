@@ -1,22 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {UserInfoComponent, UserProfileComponent} from "./user-info/user_info.component";
+
 import {PhotoComponent} from "./photo/photo.component";
 import {UserRideComponent} from "./user-ride/user_ride.component";
 import {AuthGuard} from "../services/auth-guard.service";
+import {UserInfoComponent} from "./user-info/user_info.component";
+import {UserProfileComponent} from "./user_profile.component";
 
 
 
 const routes: Routes = [{
   path: '',
-  component: UserInfoComponent,
+  component: UserProfileComponent,
   children: [{
-    path: '/info',
-    component: UserInfoComponent,canActivate: [AuthGuard]
+    path: 'info',
+    component: UserInfoComponent
   },
   {
-    path: '/rides',
-    component: UserRideComponent,canActivate: [AuthGuard]
+    path: 'ride',
+    component: UserRideComponent
   }
 
 
@@ -27,9 +29,9 @@ const routes: Routes = [{
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class TablesRoutingModule { }
+export class UserProfileRouting { }
 
 export const routedComponents = [
- UserProfileComponent,
-  PhotoComponent
+ UserProfileComponent,UserInfoComponent,
+  PhotoComponent,UserRideComponent
 ];

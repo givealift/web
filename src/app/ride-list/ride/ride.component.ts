@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Ride } from '../../services/ride.service';
+import {Ride} from "../../model/ride";
+import {User} from "../../services/user.service";
+
 
 @Component({
   selector: 'app-ride',
@@ -9,12 +11,13 @@ import { Ride } from '../../services/ride.service';
 export class RideComponent {
 
   @Input()
-  rideData: Ride = new Ride();
+  rideData: Ride;
+  driver:User;
 
   constructor() { }
 
   onClick() {
-      
+
   }
 
 }

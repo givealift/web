@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { User } from "./user.service";
 import {environment} from "../../environments/environment";
 import {Ride} from "../model/ride";
@@ -15,7 +15,9 @@ export class RideService {
 
 
     getUserRides(id:number, page:number){
-   return this.http.get(this.apiUrl+"user/rout/"+id, { queryParams: { page: page }});
+      let params = new HttpParams();
+      params.append('page',page.toLocaleString());
+   return this.http.get(this.apiUrl+"user/route/"+id, { params: params});
 
 }
 

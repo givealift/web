@@ -15,14 +15,12 @@ import { NewRideComponent } from './new-ride/new-ride.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
-import { FakeBackendProvider } from './helpers/fake-backend';
 import { TokenProvider } from './helpers/token.interceptor';
 import { RideListComponent } from './ride-list/ride-list.component';
 import { RideComponent } from './ride-list/ride/ride.component';
 import { RideService } from './services/ride.service';
-import {UserProfileComponent} from "./user-profile/user-info/user_info.component";
-import {PhotoComponent} from "./user-profile/photo/photo.component";
-import {PhotoModule, UserProfileModule} from "./user-profile/user-profile.module";
+import {UserProfileModule} from "./user-profile/user-profile.module";
+import {RideModule} from "./ride-list/ride/ride.module";
 
 @NgModule({
   declarations: [
@@ -34,7 +32,7 @@ import {PhotoModule, UserProfileModule} from "./user-profile/user-profile.module
     DashboardComponent,
     NewRideComponent,
     RideListComponent,
-    RideComponent,
+
 
   ],
   imports: [
@@ -42,14 +40,14 @@ import {PhotoModule, UserProfileModule} from "./user-profile/user-profile.module
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    UserProfileModule
+    UserProfileModule,
+    RideModule
   ],
   providers: [
     AuthService,
     AuthGuard,
     UserService,
     TokenProvider,
-    FakeBackendProvider,
     RideService,
   ],
   bootstrap: [AppComponent]

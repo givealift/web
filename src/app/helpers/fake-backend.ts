@@ -8,55 +8,60 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/materialize';
 import 'rxjs/add/operator/dematerialize';
 import { User } from '../services/user.service';
-import { Ride } from '../services/ride.service';
+import {Ride} from "../model/ride";
+import {materialize} from "rxjs/operators";
+
 
 let mockUsers: User[] = JSON.parse(localStorage.getItem('mock-users')) || [];
 let mockRides: Ride[] = JSON.parse(localStorage.getItem('mock-rides')) || [];
 @Injectable()
-export class FakeBackendInterceptor implements HttpInterceptor {
+export class FakeBackendInterceptor  {
 
     constructor() { }
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+   // intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-        // wrap in delayed observable to simulate server api call
-        return Observable.of(null).mergeMap(() => {
+     // wrap in delayed observable to simulate server api call
+     // return Observable.of(null).mergeMap(() => {
+     //
+     //      // create user
+     // !*      if (request.url.endsWith('/api/user/') && request.method === 'POST') {
+     //          return this.createUser(request);
+     //      }
+     //
+     //      // update user
+     //      if (request.url.match(/\/api\/user\/\d+$/) && request.method === 'PUT') {
+     //          return this.updateUser(request);
+     //      }
+     //
+     //      // delete user
+     //      if (request.url.match(/\/api\/user\/\d+$/) && request.method === 'DELETE') {
+     //          return this.deleteUser(request);
+     //      }
+     //
+     //      // authenticate
+     //      if (request.url.endsWith('/api/authenticate') && request.method === 'POST') {
+     //          return this.authenticate(request);
+     //      }
+     //
+     //     if (request.url.endsWith('/api/rides/list') && request.method === 'GET') {
+     //          return this.getRidesList(request);
+     //      }
+     //
+     //      if (request.url.endsWith('/api/rides/') && request.method === 'POST') {
+     //          return this.createRide(request);
+     //      }
+     //
+     //      // pass through any requests not handled above
+     //      return next.handle(request);
+     //  })
+  /* .
+     materialize() // fix-around (https://github.com/Reactive-Extensions/RxJS/issues/648)
+       .delay(500)
+       .dematerialize();*/
+  // }
 
-            // create user
-      /*      if (request.url.endsWith('/api/user/') && request.method === 'POST') {
-                return this.createUser(request);
-            }
 
-            // update user
-            if (request.url.match(/\/api\/user\/\d+$/) && request.method === 'PUT') {
-                return this.updateUser(request);
-            }
-
-            // delete user
-            if (request.url.match(/\/api\/user\/\d+$/) && request.method === 'DELETE') {
-                return this.deleteUser(request);
-            }
-
-            // authenticate
-            if (request.url.endsWith('/api/authenticate') && request.method === 'POST') {
-                return this.authenticate(request);
-            }*/
-
-            if (request.url.endsWith('/api/rides/list') && request.method === 'GET') {
-                return this.getRidesList(request);
-            }
-
-            if (request.url.endsWith('/api/rides/') && request.method === 'POST') {
-                return this.createRide(request);
-            }
-
-            // pass through any requests not handled above
-            return next.handle(request);
-        })
-            .materialize() // fix-around (https://github.com/Reactive-Extensions/RxJS/issues/648)
-            .delay(500)
-            .dematerialize();
-    }
 
     private createUser(request: HttpRequest<any>) {
 
@@ -144,27 +149,29 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return Observable.of(new HttpResponse({ status: 200 }));
     }
 
-    private createTestRide() {
-        let newRide: Ride = new Ride();
-        newRide.id = mockRides.length + 1;
-        let newDriver: User = JSON.parse(localStorage.getItem('currentUser'));
-        newRide.driver = newDriver;
-        newRide.from = "Kraków";
-        newRide.to = "Warszawa";
-
-        mockRides.push(newRide);
-        localStorage.setItem('mock-rides', JSON.stringify(mockRides));
-    }
-
-    private getRidesList(request: HttpRequest<any>) {
-        return Observable.of(new HttpResponse({
-            status: 200, body: mockRides
-        }));
-    }
+    // private createTestRide() {
+    //   let newRide: Ride ;
+    //     newRide.id = mockRides.length + 1;
+    //     let newDriver: User = JSON.parse(localStorage.getItem('currentUser'));
+    //     newRide.driver = newDriver;
+    //     newRide.from = "Kraków";
+    //     newRide.to = "Warszawa";
+    //
+    //     mockRides.push(newRide);
+    //     localStorage.setItem('mock-rides', JSON.stringify(mockRides));
+    // }
+    //
+    // private getRidesList(request: HttpRequest<any>) {
+    //     return Observable.of(new HttpResponse({
+    //         status: 200, body: mockRides
+    //     }));
+    // }
 }
+/*
 
 export const FakeBackendProvider = {
     provide: HTTP_INTERCEPTORS,
     useClass: FakeBackendInterceptor,
     multi: true
 };
+*/
