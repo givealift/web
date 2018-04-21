@@ -9,6 +9,7 @@ import {NewRideComponent} from "./new-ride/new-ride.component";
 import {RideListComponent} from "./ride-list/ride-list.component";
 import {UserInfoComponent} from "./user-profile/user-info/user_info.component";
 import {UserRideComponent} from "./user-profile/user-ride/user_ride.component";
+import { UserProfileComponent } from "./user-profile/user_profile.component";
 
 const routes: Routes = [
 
@@ -19,9 +20,10 @@ const routes: Routes = [
   // { path: 'profile', component: DashboardComponent, canActivate: [AuthGuard] },
   {path: 'new-ride', component: NewRideComponent, canActivate: [AuthGuard]},
   {path: 'ride-list', component: RideListComponent},
-  {path: 'profile/info', component: UserInfoComponent},
-  {path: 'profile/rides', component: UserRideComponent},
-//  {path: 'profile', loadChildren: 'app/user-profile/user-profile.module#UserProfileModule'},
+  {path: 'profile', component: UserProfileComponent, children: [
+    {path: 'info', component: UserInfoComponent},
+    {path: 'rides', component: UserRideComponent},
+  ]},
 
 
   {path: '**', redirectTo: ''}

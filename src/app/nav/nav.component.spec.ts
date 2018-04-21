@@ -4,6 +4,7 @@ import { NavComponent } from './nav.component';
 import { AuthService } from '../services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
+import { UserService } from '../services/user.service';
 
 describe('NavComponent', () => {
   let component: NavComponent;
@@ -16,7 +17,7 @@ describe('NavComponent', () => {
         HttpClientModule, RouterTestingModule
       ],
       providers: [
-        AuthService
+        AuthService, UserService
       ]
     })
       .compileComponents();
