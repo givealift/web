@@ -13,7 +13,6 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NavComponent } from './nav/nav.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { NewRideComponent } from './new-ride/new-ride.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
@@ -35,7 +34,6 @@ registerLocaleData(localePl);
     HomeComponent,
     NavComponent,
     RegisterComponent,
-    DashboardComponent,
     NewRideComponent,
     RideListComponent,
     RideComponent
