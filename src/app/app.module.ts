@@ -4,6 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
+import { MaterialModule } from './material.module';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
@@ -39,7 +42,8 @@ import { RideModule } from './ride-list/ride/ride.module';
     AppRoutingModule,
     HttpClientModule,
     UserProfileModule,
-    RideModule
+    RideModule,
+    MaterialModule,
   ],
   providers: [
     AuthService,

@@ -4,6 +4,7 @@ import { NavComponent } from './nav.component';
 import { AuthService } from '../services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MaterialModule } from '../material.module';
 import { UserService } from '../services/user.service';
 
 describe('NavComponent', () => {
@@ -14,7 +15,8 @@ describe('NavComponent', () => {
     TestBed.configureTestingModule({
       declarations: [NavComponent],
       imports: [
-        HttpClientModule, RouterTestingModule
+        HttpClientModule, RouterTestingModule,
+        MaterialModule
       ],
       providers: [
         AuthService, UserService
