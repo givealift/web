@@ -7,11 +7,13 @@ import { BrowserModule } from "@angular/platform-browser";
 import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "../../app-routing.module";
 import { RideComponent } from "./ride.component";
+import { MaterialModule } from "../../material.module";
 
 @NgModule({
     imports: [FormsModule, BrowserModule,
         AppRoutingModule,
-        HttpClientModule],
+        HttpClientModule,
+        MaterialModule],
     exports: [RideComponent],
     declarations: [
         RideComponent

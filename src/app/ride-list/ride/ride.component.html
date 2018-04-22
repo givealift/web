@@ -5,13 +5,13 @@
     </mat-grid-tile>
     <mat-grid-tile [colspan]="2">
       <div class="align-left">
-        {{rideData.driver?.firstName}} {{rideData.driver?.lastName}}
+        {{driver?.firstName}} {{driver?.lastName}}
       </div>
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="3">
-      {{rideData.date | date:'EEEE, d MMMM - H:mm':'':'pl'}}
-      <br/> {{rideData.from}} -> {{rideData.to}}
+      {{rideData?.departureTime | date:'EEEE, d MMMM - H:mm':'':'pl'}}
+      <br/> {{rideData?.from}} -> {{rideData?.to}}
     </mat-grid-tile>
     <mat-grid-tile [colspan]="2">
       <!-- empty -->

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
+import { RideService } from '../services/ride.service';
 
 @Component({
   selector: 'app-ride-list',
@@ -11,9 +12,9 @@ export class RideListComponent {
 
   rides: any = [];
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private rideService: RideService) {
     Observable.interval(1000)
-      .switchMap(() => httpClient.get('/api/rides/list'))
+      .switchMap(() => this.rideService.getAll())
       .subscribe(
         (data) => {
           this.rides = data;

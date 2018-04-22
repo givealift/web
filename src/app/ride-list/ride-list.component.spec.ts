@@ -4,6 +4,7 @@ import { RideListComponent } from './ride-list.component';
 import { RideComponent } from './ride/ride.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '../material.module';
+import { RideService } from '../services/ride.service';
 
 describe('RideListComponent', () => {
   let component: RideListComponent;
@@ -12,8 +13,8 @@ describe('RideListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [RideListComponent, RideComponent],
-      imports: [HttpClientModule,
-        MaterialModule]
+      imports: [MaterialModule, HttpClientModule],
+      providers: [RideService]
     })
       .compileComponents();
   }));
