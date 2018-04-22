@@ -12,6 +12,7 @@ export class RideComponent {
 
   @Input()
   rideData: Ride;
+  
   driver:User;
 
   constructor() { }

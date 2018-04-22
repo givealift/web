@@ -12,10 +12,10 @@
     <div class="col-sm">
       <h5>
         <div class="row">
-          {{rideData.departureTime | date:'EEEE, d MMMM - H:mm':'':'pl'}}
+          {{rideData?.departureTime | date:'EEEE, d MMMM - H:mm':'':'pl'}}
         </div>
         <div class="row">
-          {{rideData.from}} -> {{rideData.to}}
+          {{rideData?.from}} -> {{rideData?.to}}
         </div>
       </h5>
     </div>

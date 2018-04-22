@@ -10,11 +10,13 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "../app-routing.module";
 import { UserProfileRouting } from "./user-profile.routing";
 import { RideComponent } from "../ride-list/ride/ride.component";
+import { RideModule } from "../ride-list/ride/ride.module";
 
 @NgModule({
   imports: [UserProfileRouting, FormsModule, BrowserModule,
     AppRoutingModule,
-    HttpClientModule],
+    HttpClientModule,
+    RideModule],
   exports: [PhotoComponent],
   declarations: [
     UserInfoComponent,
