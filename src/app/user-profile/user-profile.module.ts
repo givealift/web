@@ -8,15 +8,18 @@ import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "../app-routing.module";
-import { UserProfileRouting } from "./user-profile.routing";
 import { RideComponent } from "../ride-list/ride/ride.component";
 import { RideModule } from "../ride-list/ride/ride.module";
+import { MaterialModule } from "../material.module";
 
 @NgModule({
-  imports: [UserProfileRouting, FormsModule, BrowserModule,
+  imports: [
+    FormsModule,
+    BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    RideModule],
+    RideModule,
+    MaterialModule],
   exports: [PhotoComponent],
   declarations: [
     UserInfoComponent,
