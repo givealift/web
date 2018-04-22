@@ -1,46 +1,65 @@
-<div class="registerContainer">
-  <div class="formContainer">
-    <form (ngSubmit)="onSubmit()" #form="ngForm">
-
-      <!-- radio buttons? -->
-      <select>
-        <option disabled selected>Płeć</option>
-        <option>Mężczyzna</option>
-        <option>Kobieta</option>
-      </select>
-
-      <!-- Group the form? -->
-
-      <!-- Profile pic upload -->
-      <div class="form-box">
-        <input type="text" name="firstname" [(ngModel)]="userModel.firstName" required id="firstname" #firstRef="ngModel" placeholder="Imię"
-        />
-
-        <input type="text" name="lastname" [(ngModel)]="userModel.lastName" required id="lastname" #lastRef="ngModel" placeholder="Nazwisko"
-        />
-        <div *ngIf="!lastRef.valid && !firstRef.valid && lastRef.touched && firstRef.touched" class="alert alert-danger">Wpisz poprawne imię i nazwisko!</div>
-
+<mat-card>
+  <div class="container">
+    <form #form="ngForm">
+      <div class="row center">
+        <mat-radio-group>
+          <mat-radio-button value="Mężczyzna">Mężczyzna</mat-radio-button>
+          <mat-radio-button value="Kobieta">Kobieta</mat-radio-button>
+        </mat-radio-group>
       </div>
 
-      <input type="text" name="login" [(ngModel)]="userModel.login" required #loginRef="ngModel" placeholder="Login" />
-      <div *ngIf="!loginRef.valid && loginRef.touched" class="alert alert-danger">Wpisz poprawny login!</div>
+      <div class="row center">
+        <mat-form-field class="inline-form-field">
+          <input matInput [(ngModel)]="userModel.firstName" name="firstname" required #firstRef="ngModel" placeholder="Imię" />
+          <mat-error *ngIf="firstRef.invalid ">Wpisz poprawne imię!</mat-error>
+        </mat-form-field>
+        <mat-form-field class="inline-form-field">
+          <input matInput [(ngModel)]="userModel.lastName" name="lastname" required #lastRef="ngModel" placeholder="Nazwisko" />
+          <mat-error *ngIf="lastRef.invalid ">Wpisz poprawne nazwisko!</mat-error>
+        </mat-form-field>
+      </div>
 
+      <div class="row center">
+        <mat-form-field>
+          <input matInput [(ngModel)]="userModel.email" name="mail" required email #mailRef="ngModel" placeholder="Email" />
+          <mat-error *ngIf="mailRef.invalid">Wpisz poprawnego maila!</mat-error>
+        </mat-form-field>
+      </div>
 
-      <input type="text" name="mail" [(ngModel)]="userModel.email" required email #emailRef="ngModel" placeholder="Email" />
-      <div *ngIf="!emailRef.valid && emailRef.touched" class="alert alert-danger">Wpisz poprawny email!</div>
+      <div class="row center">
+        <mat-form-field>
+          <input matInput [(ngModel)]="userModel.phone" name="phone" required #phoneRef="ngModel" placeholder="Numer telefonu" pattern="^\+?[1-9]{1}[0-9]{3,14}$"
+          />
+          <mat-error *ngIf="phoneRef.invalid">Wpisz poprawny numer telefonu!</mat-error>
+        </mat-form-field>
+      </div>
 
-      <input type="text" name="phone" [(ngModel)]="userModel.phone" required #phoneRef="ngModel" placeholder="Numer telefonu" pattern="^\+?[1-9]{1}[0-9]{3,14}$"
-      />
-      <div *ngIf="!phoneRef.valid && phoneRef.touched" class="alert alert-danger">Wpisz poprawny numer telefonu!</div>
+      <div class="row center">
+        <mat-form-field>
+          <input matInput type="password" [(ngModel)]="userModel.pass" name="pass" required #passRef="ngModel" placeholder="Hasło"
+          />
+          <mat-error *ngIf="passRef.invalid">Wpisz poprawne hasło!</mat-error>
+        </mat-form-field>
+      </div>
 
-      <input type="password" name="pass" [(ngModel)]="userModel.password" required #passRef="ngModel" placeholder="Hasło" />
-      <div *ngIf="!passRef.valid && passRef.touched" class="alert alert-danger">Wpisz poprawne hasło!</div>
+      <div class="row center">
+        <mat-form-field>
+          <input matInput type="password" [(ngModel)]="userModel.passConfirm" name="passConfirm" required #passConfirmRef="ngModel"
+            placeholder="Potwierdź hasło" />
+            <!-- TODO: doesnt work for some reason in material. fix -->
+          <mat-error *ngIf="passConfirmRef.value != passRef.value">Wpisz poprawne hasło!</mat-error>
+        </mat-form-field>
+      </div>
 
-      <input type="password" name="passConfirm" [(ngModel)]="passConfirm" required #passConfirmRef="ngModel" placeholder="Potwierdź hasło">
-      <div *ngIf="passConfirmRef.value!=passRef.value && passConfirmRef.touched && passRef.touched" class="alert alert-danger">Hasła nie zgadzają się!</div>
+      <div class="row center">
+        <button mat-raised-button type="submit" [disabled]="!form.valid" (click)="onSubmit()">
+          Zaloguj
+        </button>
+      </div>
 
-      <input class="btn btn-primary" style="width: 100%" type="submit" value="Zarejestruj" [disabled]="!form.valid || passRef.value!=passConfirmRef.value"
-      />
+      <div class="row center">
+        <mat-spinner class="spinner" [diameter]="40" [style.display]="showSpinner ? 'inline' : 'none'"></mat-spinner>
+      </div>
     </form>
   </div>
-</div>
+</mat-card>

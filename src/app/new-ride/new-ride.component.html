@@ -1,20 +1,37 @@
-<div class="rideContainer">
-  <div class="formContainer" style="width: 60%">
-    <h2>Dodaj przejazd:</h2> 
-    <form (ngSubmit)="onSubmit()" #form="ngForm">
-      <div class="row" >
-        <div class="col-md-4">
-            <input type="text" [(ngModel)]="rideModel.from" name="from" required #fromRef="ngModel" placeholder="Miejsce startowe" />
-            <div *ngIf="!fromRef.valid && fromRef.touched" class="alert alert-danger">Wpisz poprawne miasto startowe!</div>
-        </div>
-        <div class="col-md-4">
-            <input type="text" [(ngModel)]="rideModel.to" name="to" required #toRef="ngModel" placeholder="Miejsce końcowe" />
-            <div *ngIf="!toRef.valid && toRef.touched " class="alert alert-danger">Wpisz poprawne miasto końcowe!</div>
-        </div>
-        <div class="col-md-2">
-            <input class="btn btn-primary" style="margin: 8px 0px; padding: 12px 20px" type="submit" value="Dodaj" [disabled]="!form.valid" />
-        </div>
-    </div>     
-    </form>
-  </div>
-</div>
+< <mat-card>
+    <div class="container">
+        <h2>Dodaj przejazd: </h2>
+        <form #form="ngForm">
+            <div class="row center">
+                <mat-form-field>
+                    <input matInput [(ngModel)]="rideModel.from" name="from" required #fromRef="ngModel" placeholder="Miejsce startowe" />
+                    <mat-error *ngIf="fromRef.invalid">Wpisz poprawne miasto startowe!</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="row center">
+                <mat-form-field>
+                    <input matInput [(ngModel)]="rideModel.to" name="to" required #toRef="ngModel" placeholder="Miejsce końcowe" />
+                    <mat-error *ngIf="toRef.invalid">Wpisz poprawne miasto końcowe!</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row center">
+                <mat-form-field>
+                    <input matInput [min]="minDate" name="date" [matDatepicker]="picker" placeholder="Kiedy?" [(ngModel)]="rideModel.date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="row center ">
+                <button mat-raised-button type="submit " [disabled]="!form.valid " (click)="onSubmit() ">
+                    Dodaj
+                </button>
+            </div>
+
+            <!-- TODO: need to implement a time picker -->
+            <div class="row center ">
+                <mat-spinner class="spinner " [diameter]="40 " [style.display]="showSpinner ? 'inline' : 'none' "></mat-spinner>
+            </div>
+        </form>
+    </div>
+    </mat-card>

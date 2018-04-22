@@ -13,11 +13,14 @@ export class NewRideComponent {
   @ViewChild('form') rideForm: NgForm;
 
   rideModel: any = {};
+  showSpinner = false;
 
   constructor(private router: Router,
     private rideService: RideService) { }
 
   onSubmit() {
+    this.showSpinner = true;
+
     this.rideModel.ownerId = parseInt(localStorage.getItem('id'));
     this.rideService.create(this.rideModel).subscribe(
       () => {

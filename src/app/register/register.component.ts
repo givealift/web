@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
 
   userModel: User = new User();
   passConfirm: string;
+  showSpinner = false;
 
   returnUrl: string;
 
@@ -33,6 +34,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
+    this.showSpinner = true;
     this.userService.create(this.userModel).subscribe(
       id => {
         localStorage.setItem("id", id.toLocaleString());

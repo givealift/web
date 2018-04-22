@@ -141,8 +141,6 @@ export class FakeBackendInterceptor  {
         let newRide = request.body;
 
         newRide.id = mockRides.length + 1;
-        //tmp
-        newRide.date = Date.now();
         mockRides.push(newRide);
         localStorage.setItem('mock-rides', JSON.stringify(mockRides));
 

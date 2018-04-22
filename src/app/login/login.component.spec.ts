@@ -4,6 +4,7 @@ import { LoginComponent } from './login.component';
 import { AuthService } from '../services/auth.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
+import { MaterialModule } from '../material.module';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -17,7 +18,8 @@ describe('LoginComponent', () => {
       imports: [
         FormsModule,
         RouterTestingModule,
-        HttpClientModule
+        HttpClientModule,
+        MaterialModule
       ],
       providers: [
         AuthService

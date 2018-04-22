@@ -9,7 +9,6 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
 import { RegisterComponent } from './register/register.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { NewRideComponent } from './new-ride/new-ride.component';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -31,7 +30,6 @@ describe('AppComponent', () => {
         HomeComponent,
         LoginComponent,
         RegisterComponent,
-        DashboardComponent,
         NewRideComponent
       ],
       imports: [

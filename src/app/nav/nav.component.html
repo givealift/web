@@ -6,9 +6,13 @@
 
     <span class="nav-spacer"></span>
 
-    <button mat-button routerLink="/login" *ngIf="!loggedIn">Zaloguj się</button>
-    <button mat-button routerLink="/register" *ngIf="!loggedIn">Nie masz konta?</button>
-    <button mat-button routerLink="/new-ride" *ngIf="loggedIn">Dodaj przejazd</button>
+    <button mat-icon-button routerLink="" *ngIf="loggedIn">
+      <mat-icon>notifications</mat-icon>
+      <span></span>
+    </button>
+    <button mat-raised-button color="primary" routerLink="/login" *ngIf="!loggedIn">Zaloguj się</button>
+    <button mat-raised-button color="primary" routerLink="/register" *ngIf="!loggedIn">Nie masz konta?</button>
+    <button mat-raised-button color="primary" routerLink="/new-ride" *ngIf="loggedIn">Dodaj przejazd</button>
 
     <button *ngIf="loggedIn" mat-button [matMenuTriggerFor]="dropdownMenu">
       <mat-icon>menu</mat-icon>{{user?.firstName}} {{user?.lastName}}
@@ -22,10 +26,6 @@
       <button mat-menu-item routerLink="ride-list">
         <mat-icon>directions_car</mat-icon>
         <span>Przejazdy</span>
-      </button>
-      <button mat-menu-item disabled routerLink="">
-        <mat-icon>notification</mat-icon>
-        <span>Powiadomienia</span>
       </button>
       <button mat-menu-item routerLink="" (click)="logout()">
         <mat-icon>logout</mat-icon>
