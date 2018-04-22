@@ -5,12 +5,13 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
 import { RideService } from '../services/ride.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MaterialModule } from '../material.module';
 
 describe('NewRideComponent', () => {
   let component: NewRideComponent;
   let fixture: ComponentFixture<NewRideComponent>;
 
-  
+
   beforeAll(() => {
     let currentUser = {
       "firstName": "Jan",
@@ -29,7 +30,8 @@ describe('NewRideComponent', () => {
       declarations: [NewRideComponent],
       imports: [FormsModule,
         RouterTestingModule,
-        HttpClientModule],
+        HttpClientModule,
+        MaterialModule],
       providers: [RideService]
     })
       .compileComponents();

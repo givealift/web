@@ -1,4 +1,4 @@
-<div class="hoverable" (click)="onClick()">
+<!-- <div class="hoverable" (click)="onClick()">
   <div class="media">
     <div class="media-left" style="margin-left: 5px; margin-top: 3px; margin-bottom: 3px;">
       <img class="media-object" src="../../../assets/logo.png" height="64" width="64">
@@ -21,4 +21,35 @@
     </div>
   </div>
 </div>
+<hr/> -->
+
+<mat-card>
+  <mat-grid-list cols="8" rows="2" rowHeight="40px">
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
+      <img class="media-object" src="../../../assets/logo.png" height="64" width="64">
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2">
+      <div class="align-left">
+        {{rideData.driver?.firstName}} {{rideData.driver?.lastName}}
+      </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="3">
+      {{rideData.date | date:'EEEE, d MMMM - H:mm':'':'pl'}}
+      <br/> {{rideData.from}} -> {{rideData.to}}
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2">
+      <!-- empty -->
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2">
+      <div class="align-left">
+        Skontaktuj się
+        <br/>Zarezerwuj
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="5 ">
+      <!-- empty -->
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-card>
 <hr/>

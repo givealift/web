@@ -13,7 +13,6 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NavComponent } from './nav/nav.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { NewRideComponent } from './new-ride/new-ride.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
@@ -23,6 +22,10 @@ import { TokenProvider } from './helpers/token.interceptor';
 import { RideListComponent } from './ride-list/ride-list.component';
 import { RideComponent } from './ride-list/ride/ride.component';
 import { RideService } from './services/ride.service';
+import localePl from '@angular/common/locales/pl';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localePl);
+
 
 @NgModule({
   declarations: [
@@ -31,7 +34,6 @@ import { RideService } from './services/ride.service';
     HomeComponent,
     NavComponent,
     RegisterComponent,
-    DashboardComponent,
     NewRideComponent,
     RideListComponent,
     RideComponent
@@ -50,6 +52,7 @@ import { RideService } from './services/ride.service';
     TokenProvider,
     FakeBackendProvider,
     RideService,
+    {provide: MAT_DATE_LOCALE, useValue: 'pl'}
   ],
   bootstrap: [AppComponent]
 })

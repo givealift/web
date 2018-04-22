@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RideListComponent } from './ride-list.component';
 import { RideComponent } from './ride/ride.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MaterialModule } from '../material.module';
 
 describe('RideListComponent', () => {
   let component: RideListComponent;
@@ -11,7 +12,8 @@ describe('RideListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [RideListComponent, RideComponent],
-      imports: [HttpClientModule]
+      imports: [HttpClientModule,
+        MaterialModule]
     })
       .compileComponents();
   }));

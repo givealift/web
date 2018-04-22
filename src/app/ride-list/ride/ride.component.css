@@ -11,3 +11,8 @@ a:link {
 a:hover {
     color:darkblue;
 }
+
+.align-left {
+    position: absolute;
+    left: 10px;
+}

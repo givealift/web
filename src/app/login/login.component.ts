@@ -16,6 +16,7 @@ export class LoginComponent {
   //TODO: find a better way to retrieve form values
   userModel: User = new User();
   returnUrl: string;
+  showSpinner = false;
 
   // userExists: Boolean = true;
 
@@ -32,6 +33,7 @@ export class LoginComponent {
   }
 
   onSubmit() {
+    this.showSpinner = true;
     this.authService.login(this.userModel.login, this.userModel.password)
       .subscribe(
         user => {
