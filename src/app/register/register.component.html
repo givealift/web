@@ -45,7 +45,7 @@
       <div class="row center">
         <mat-form-field>
           <input matInput type="password" [(ngModel)]="userModel.passConfirm" name="passConfirm" required #passConfirmRef="ngModel"
-            placeholder="Hasło" />
+            placeholder="Potwierdź hasło" />
             <!-- TODO: doesnt work for some reason in material. fix -->
           <mat-error *ngIf="passConfirmRef.value != passRef.value">Wpisz poprawne hasło!</mat-error>
         </mat-form-field>
