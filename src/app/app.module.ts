@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MaterialModule } from './material.module';
+import { MaterialModule } from './modules/material.module';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { AppComponent } from './app.component';
@@ -24,6 +24,7 @@ import { RideComponent } from './ride-list/ride/ride.component';
 import { RideService } from './services/ride.service';
 import localePl from '@angular/common/locales/pl';
 import { registerLocaleData } from '@angular/common';
+import { CitySearchComponent } from './city-search/city-search.component';
 registerLocaleData(localePl);
 
 
@@ -36,7 +37,8 @@ registerLocaleData(localePl);
     RegisterComponent,
     NewRideComponent,
     RideListComponent,
-    RideComponent
+    RideComponent,
+    CitySearchComponent
   ],
   imports: [
     FormsModule,
