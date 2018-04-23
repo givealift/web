@@ -26,6 +26,7 @@ export class NewRideComponent {
         this.router.navigate(['/ride-list']);
       },
       error => {
+        this.showSpinner = false;
         this.router.navigate(['/home']);
       }
     )

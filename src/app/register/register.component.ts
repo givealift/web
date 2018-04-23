@@ -42,6 +42,7 @@ export class RegisterComponent implements OnInit {
         this.router.navigate([this.returnUrl]);
       },
       error => {
+        this.showSpinner = false;
         this.router.navigate(['/login']);
       }
     )
