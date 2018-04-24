@@ -1,7 +1,13 @@
-<div [ngClass]="'col-md-12'" class="text-center">
-  <h1>
-    Witaj w {{ title }}!
-  </h1>
-  <h2>Załap się na przejazd w każdej chwili, gdziekolwiek.</h2>
+<mat-card class="bg-image">
+  <div [ngClass]="'col-md-12'" class="text-center welcome-text">
+    <h1>
+      Witaj w {{ title }}!
+    </h1>
+    <h2>Załap się na przejazd w każdej chwili, gdziekolwiek.</h2>
 
-</div>
+  </div>
+  <div class="row centered">
+    <app-city-search class="input-on-image centered"></app-city-search>
+    <app-city-search class="input-on-image centered"></app-city-search>
+  </div>
+</mat-card>

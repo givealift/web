@@ -1,0 +1,11 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input #searchBox matInput placeholder="State" aria-label="State" [matAutocomplete]="auto" (keyup)="search(searchBox.value)">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let city of filteredCities$ | async" [value]="city.name">
+        <span (click)="print(city)">{{ city.name }}</span>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <br />
+</form>

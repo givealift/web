@@ -1,0 +1,27 @@
+.bg-image { 
+    background-image: url("../../assets/background.jpg");
+    height: 500px; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.welcome-text {
+    color: white;
+    text-shadow: black 2px 2px;
+}
+
+.centered {
+    display: flex;           /* establish flex container */
+      justify-content: center; /* center items vertically, in this case */
+      align-items: center;  
+  }
+
+.input-on-image {
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 15px;
+    max-width: 240px;
+    width: 100%;
+}

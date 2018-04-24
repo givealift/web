@@ -24,6 +24,8 @@ import { RideComponent } from './ride-list/ride/ride.component';
 import { RideService } from './services/ride.service';
 import localePl from '@angular/common/locales/pl';
 import { registerLocaleData } from '@angular/common';
+import { CitySearchComponent } from './city-search/city-search.component';
+import { CityService } from './services/city-service';
 registerLocaleData(localePl);
 
 
@@ -36,10 +38,12 @@ registerLocaleData(localePl);
     RegisterComponent,
     NewRideComponent,
     RideListComponent,
+    CitySearchComponent,
     RideComponent
   ],
   imports: [
     FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -49,6 +53,7 @@ registerLocaleData(localePl);
     AuthService,
     AuthGuard,
     UserService,
+    CityService,
     TokenProvider,
     FakeBackendProvider,
     RideService,
