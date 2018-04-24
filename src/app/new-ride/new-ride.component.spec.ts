@@ -5,7 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
 import { RideService } from '../services/ride.service';
 import { HttpClientModule } from '@angular/common/http';
-import { MaterialModule } from '../material.module';
+import { MaterialModule } from '../modules/material.module';
 
 describe('NewRideComponent', () => {
   let component: NewRideComponent;

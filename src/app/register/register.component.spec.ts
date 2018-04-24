@@ -7,7 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { UserService } from '../services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
-import { MaterialModule } from '../material.module';
+import { MaterialModule } from '../modules/material.module';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
