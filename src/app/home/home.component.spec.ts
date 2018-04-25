@@ -5,6 +5,11 @@ import { AuthService } from '../services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../services/user.service';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MaterialModule } from '../modules/material.module';
+import { CitySearchComponent } from '../city-search/city-search.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CityService } from '../services/city-service';
+import { RideService } from '../services/ride.service';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -13,13 +18,20 @@ describe('HomeComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        HomeComponent,
+        HomeComponent, CitySearchComponent
       ],
       imports: [
-        HttpClientModule, RouterTestingModule
+        HttpClientModule,
+        RouterTestingModule,
+        MaterialModule,
+        FormsModule,
+        ReactiveFormsModule
       ],
       providers: [
-        AuthService, UserService
+        AuthService,
+        UserService,
+        CityService,
+        RideService
       ]
     })
       .compileComponents();
