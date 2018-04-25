@@ -57,7 +57,7 @@ registerLocaleData(localePl);
     TokenProvider,
     FakeBackendProvider,
     RideService,
-    {provide: MAT_DATE_LOCALE, useValue: 'pl'}
+    { provide: MAT_DATE_LOCALE, useValue: 'pl' }
   ],
   bootstrap: [AppComponent]
 })
