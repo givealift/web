@@ -8,7 +8,7 @@
 
 .welcome-text {
     color: white;
-    text-shadow: black 2px 2px;
+    text-shadow:rgb(35, 35, 35) 2px 2px 3px;
 }
 
 .centered {
@@ -24,4 +24,15 @@
     margin: 15px;
     max-width: 240px;
     width: 100%;
+}
+
+.search-bar {
+    margin-top: 70px;
+}
+
+.btn-search {
+    border-radius: 10px;
+    max-width: 130px;
+    width: 100%;
+    padding: 5px;
 }

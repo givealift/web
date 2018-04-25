@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { Observable } from 'rxjs/Observable';
@@ -8,11 +8,6 @@ import { Subject } from 'rxjs/Subject';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { CityService, City } from '../services/city-service';
 
-export class State {
-  constructor(public name: string, public population: string, public flag: string) { }
-}
-
-
 @Component({
   selector: 'app-city-search',
   templateUrl: './city-search.component.html',
@@ -20,7 +15,10 @@ export class State {
 })
 export class CitySearchComponent implements OnInit {
 
-  selectedCity = new FormControl();
+  @Input()
+  placeholder: string;
+
+  selectedCity = new City();
   filteredCities$: Observable<City[]>;
   private searchTerms = new Subject<string>();
 
@@ -38,8 +36,8 @@ export class CitySearchComponent implements OnInit {
     );
   }
 
-  print(city: City) {
-    console.log(city);
+  formatDisplayName(city?: City): string | undefined {
+    return city ? city.name : undefined;
   }
 
 }
