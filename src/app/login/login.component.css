@@ -13,3 +13,11 @@
   display: flex;
   flex-direction: column;
 }
+
+.mat-card button:hover{
+  background-color: lightgray;
+}
+
+.mat-card {
+  border-radius: 25px;
+}

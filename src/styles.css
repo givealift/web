@@ -4,3 +4,15 @@
 body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
+
+mat-card {
+    width: 18%;
+    margin: auto;
+    margin-top: 10%;
+    opacity: 0.9;
+    border-radius: 25px;
+}
+
+mat-card button:hover{
+    background-color: lightgray;
+}

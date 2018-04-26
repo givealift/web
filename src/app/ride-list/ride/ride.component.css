@@ -1,18 +1,10 @@
-.hoverable:hover {
-    background-color: lightblue;
-    transition: 0.2s;
-}
-
-a:link {
-    text-decoration: none;
-    color: lightskyblue;
-}
-
-a:hover {
-    color:darkblue;
+mat-card {
+    width: 100%;
+    border-radius: 25px;
+    margin-top: 20px;
 }
 
 .align-left {
     position: absolute;
-    left: 10px;
+    text-align: left;
 }
