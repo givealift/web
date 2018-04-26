@@ -134,7 +134,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     private createRide(request: HttpRequest<any>) {
 
         let newRide = request.body;
-        newRide.driver.firstName="Testings";
+        newRide.driver.firstName="Test";
         newRide.driver.lastName="Testovsky";
         newRide.id = mockRides.length + 1;
         mockRides.push(newRide);
