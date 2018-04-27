@@ -1,10 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MaterialModule } from './material.module';
+import { MaterialModule } from './modules/material.module';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { AppComponent } from './app.component';
@@ -25,6 +25,7 @@ import { UserProfileModule } from "./user-profile/user-profile.module";
 import { RideModule } from './ride-list/ride/ride.module';
 import localePl from '@angular/common/locales/pl';
 import { registerLocaleData } from '@angular/common';
+import { MatIconRegistry } from '@angular/material';
 registerLocaleData(localePl);
 
 
@@ -53,8 +54,12 @@ registerLocaleData(localePl);
     UserService,
     TokenProvider,
     RideService,
-    {provide: MAT_DATE_LOCALE, useValue: 'pl'}
+    { provide: MAT_DATE_LOCALE, useValue: 'pl' }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(matIconRegistry: MatIconRegistry, domSanitizer: DomSanitizer) {
+    matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('../assets/mdi.svg'));
+  }
+}

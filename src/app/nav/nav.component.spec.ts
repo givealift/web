@@ -4,8 +4,8 @@ import { NavComponent } from './nav.component';
 import { AuthService } from '../services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MaterialModule } from '../material.module';
 import { UserService } from '../services/user.service';
+import { MaterialModule } from '../modules/material.module';
 
 describe('NavComponent', () => {
   let component: NavComponent;

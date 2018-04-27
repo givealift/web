@@ -11,6 +11,9 @@ import {
     , MatDatepickerModule
     , MatListModule
     , MatTabsModule
+    , MatTooltipModule
+    , MatTooltip
+    , MatIconRegistry
     , MatRadioModule
     , MatGridListModule
     , MatExpansionModule
@@ -36,6 +39,7 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
         , MatRadioModule
         , MatGridListModule
         , MatExpansionModule
+        , MatTooltipModule
     ],
     exports: [
         BrowserAnimationsModule
@@ -53,6 +57,7 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
         , MatRadioModule
         , MatGridListModule
         , MatExpansionModule
+        , MatTooltipModule
     ],
 })
 export class MaterialModule { }

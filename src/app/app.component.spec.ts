@@ -12,8 +12,8 @@ import { RegisterComponent } from './register/register.component';
 import { NewRideComponent } from './new-ride/new-ride.component';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
-import { MaterialModule } from './material.module';
 import { UserService } from './services/user.service';
+import { MaterialModule } from './modules/material.module';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },

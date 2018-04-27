@@ -10,7 +10,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "../app-routing.module";
 import { RideComponent } from "../ride-list/ride/ride.component";
 import { RideModule } from "../ride-list/ride/ride.module";
-import { MaterialModule } from "../material.module";
+import { MaterialModule } from "../modules/material.module";
 
 @NgModule({
   imports: [

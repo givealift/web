@@ -5,7 +5,10 @@
 }
 
 
-
+mat-card {
+    width: 60%;
+    border-radius: 25px;
+}
 
 #text1 {
     width: 49%;
