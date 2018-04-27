@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -24,6 +24,7 @@ import { RideComponent } from './ride-list/ride/ride.component';
 import { RideService } from './services/ride.service';
 import localePl from '@angular/common/locales/pl';
 import { registerLocaleData } from '@angular/common';
+import { MatIconRegistry } from '@angular/material';
 registerLocaleData(localePl);
 
 
@@ -52,8 +53,12 @@ registerLocaleData(localePl);
     TokenProvider,
     FakeBackendProvider,
     RideService,
-    {provide: MAT_DATE_LOCALE, useValue: 'pl'}
+    { provide: MAT_DATE_LOCALE, useValue: 'pl' }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(matIconRegistry: MatIconRegistry, domSanitizer: DomSanitizer) {
+    matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('../assets/mdi.svg'));
+  }
+}

@@ -1,55 +1,31 @@
-<!-- <div class="hoverable" (click)="onClick()">
-  <div class="media">
-    <div class="media-left" style="margin-left: 5px; margin-top: 3px; margin-bottom: 3px;">
-      <img class="media-object" src="../../../assets/logo.png" height="64" width="64">
-    </div>
-    <div class="media-body" style="margin-left: 10px">
-      <h5 class="media-heading"> {{rideData.driver?.firstName}} {{rideData.driver?.lastName}} </h5>
-      <a routerLinkActive="active" routerLink="#">Skontaktuj się</a>
-      <br/>
-      <a (click)="onClick()">Zarezerwuj</a>
-    </div>
-    <div class="col-sm">
-      <h5>
-        <div class="row">
-          {{rideData.date | date:'EEEE, d MMMM - H:mm':'':'pl'}}
-        </div>
-        <div class="row">
-          {{rideData.from}} -> {{rideData.to}}
-        </div>
-      </h5>
-    </div>
-  </div>
-</div>
-<hr/> -->
-
 <mat-card>
-  <mat-grid-list cols="8" rows="2" rowHeight="40px">
-    <mat-grid-tile [colspan]="1" [rowspan]="2">
-      <img class="media-object" src="../../../assets/logo.png" height="64" width="64">
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="2">
-      <div class="align-left">
-        {{rideData.driver?.firstName}} {{rideData.driver?.lastName}}
-      </div>
-    </mat-grid-tile>
-
+  <mat-grid-list cols="8" rows="3" rowHeight="30px">
     <mat-grid-tile [colspan]="3">
-      {{rideData.date | date:'EEEE, d MMMM - H:mm':'':'pl'}}
-      <br/> {{rideData.from}} -> {{rideData.to}}
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="2">
-      <!-- empty -->
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="2">
       <div class="align-left">
-        Skontaktuj się
-        <br/>Zarezerwuj
+        <h4>
+          {{rideData.driver?.firstName}} {{rideData.driver?.lastName}}
+        </h4>
       </div>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="5 ">
-      <!-- empty -->
+    <mat-grid-tile [colspan]="4" rowspan="3" class="borders">
+      <h5>
+        <strong>{{rideData.date | date:'EEEE, d MMMM - H:mm':'':'pl'}}</strong>
+        <br/> {{rideData.from}} -> {{rideData.to}}
+      </h5>
+
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" rowspan="3">
+      <div class="show-on-hover">
+        <button mat-icon-button matTooltip="Skontaktuj się" matTooltipPosition="right">
+          <mat-icon>phone_iphone</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Zarezerwuj" matTooltipPosition="right">
+          <mat-icon>content_paste</mat-icon>
+        </button>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="3" rowspan="2">
+      <img class="media-object" src="../../../assets/logo.png" height="64" width="64">
     </mat-grid-tile>
   </mat-grid-list>
 </mat-card>
-<hr/>

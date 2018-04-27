@@ -10,9 +10,12 @@ import {
     , MatCardModule
     , MatDatepickerModule
     , MatListModule
-    , MatRadioModule,
-    MatGridListModule,
-    MatExpansionModule
+    , MatRadioModule
+    , MatGridListModule
+    , MatExpansionModule
+    , MatTooltipModule
+    , MatTooltip
+    , MatIconRegistry
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
@@ -34,6 +37,7 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
         , MatRadioModule
         , MatGridListModule
         , MatExpansionModule
+        , MatTooltipModule
     ],
     exports: [
         BrowserAnimationsModule
@@ -50,6 +54,7 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
         , MatRadioModule
         , MatGridListModule
         , MatExpansionModule
+        , MatTooltipModule
     ],
 })
 export class MaterialModule { }
