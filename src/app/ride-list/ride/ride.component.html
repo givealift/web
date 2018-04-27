@@ -7,18 +7,19 @@
         </h4>
       </div>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="4" rowspan="3">
+    <mat-grid-tile [colspan]="4" rowspan="3" class="borders">
       <h5>
-        {{rideData.date | date:'EEEE, d MMMM - H:mm':'':'pl'}}
+        <strong>{{rideData.date | date:'EEEE, d MMMM - H:mm':'':'pl'}}</strong>
         <br/> {{rideData.from}} -> {{rideData.to}}
       </h5>
+
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" rowspan="3">
       <div class="show-on-hover">
-        <button mat-icon-button matTooltip="Skontaktuj się">
+        <button mat-icon-button matTooltip="Skontaktuj się" matTooltipPosition="right">
           <mat-icon>phone_iphone</mat-icon>
         </button>
-        <button mat-icon-button matTooltip="Zarezerwuj">
+        <button mat-icon-button matTooltip="Zarezerwuj" matTooltipPosition="right">
           <mat-icon>content_paste</mat-icon>
         </button>
       </div>

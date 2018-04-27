@@ -27,3 +27,7 @@ mat-radio-button {
     margin-right: 10px;
     margin-left: 10px;
 }
+
+mat-card:hover {
+    box-shadow: 0 10px 6px -6px black;
+  }

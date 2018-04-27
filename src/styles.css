@@ -9,10 +9,11 @@ mat-card {
     width: 18%;
     margin: auto;
     margin-top: 10%;
-    opacity: 0.9;
+    opacity: 1;
     border-radius: 25px;
 }
 
 mat-card button:hover{
     background-color: lightgray;
 }
+  

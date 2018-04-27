@@ -14,10 +14,11 @@
   flex-direction: column;
 }
 
-.mat-card button:hover{
-  background-color: lightgray;
-}
-
-.mat-card {
+mat-card {
   border-radius: 25px;
 }
+
+mat-card:hover {
+  box-shadow: 0 10px 6px -6px black;
+}
+
