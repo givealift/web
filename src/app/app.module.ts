@@ -1,5 +1,5 @@
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule, LOCALE_ID, APP_INITIALIZER } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
@@ -27,6 +27,7 @@ import { registerLocaleData } from '@angular/common';
 import { CitySearchComponent } from './city-search/city-search.component';
 import { CityService } from './services/city-service';
 import { MatIconRegistry } from '@angular/material';
+import { CitiesProvider } from './providers/cities-provider';
 registerLocaleData(localePl);
 
 
@@ -58,7 +59,9 @@ registerLocaleData(localePl);
     TokenProvider,
     FakeBackendProvider,
     RideService,
-    { provide: MAT_DATE_LOCALE, useValue: 'pl' }
+    CitiesProvider,
+    { provide: MAT_DATE_LOCALE, useValue: 'pl' },
+    { provide: APP_INITIALIZER, useFactory: citiesProviderFactory, deps: [CitiesProvider], multi: true }
   ],
   bootstrap: [AppComponent]
 })
@@ -66,4 +69,8 @@ export class AppModule {
   constructor(matIconRegistry: MatIconRegistry, domSanitizer: DomSanitizer) {
     matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('../assets/mdi.svg'));
   }
+}
+
+export function citiesProviderFactory(provider: CitiesProvider) {
+  return () => provider.load();
 }
