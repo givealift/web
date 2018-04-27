@@ -16,6 +16,9 @@ import {
     , MatFormFieldModule
     , MatOptionModule
     , MatAutocompleteModule
+    , MatTooltipModule
+    , MatTooltip
+    , MatIconRegistry
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
@@ -40,6 +43,7 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
         , MatFormFieldModule
         , MatOptionModule
         , MatAutocompleteModule
+        , MatTooltipModule
     ],
     exports: [
         BrowserAnimationsModule
@@ -59,6 +63,7 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
         , MatFormFieldModule
         , MatOptionModule
         , MatAutocompleteModule
+        , MatTooltipModule
     ],
 })
 export class MaterialModule { }
