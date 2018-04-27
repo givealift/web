@@ -25,7 +25,7 @@ mat-card:hover button {
 }
 
 mat-card:hover {
-    box-shadow: 0 6px 4px -4px black;
+    box-shadow: 0 5px 4px -4px black;
     transform: scale(1.025);
     transition: all 0.25s;
 }

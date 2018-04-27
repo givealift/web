@@ -16,4 +16,19 @@ mat-card {
 mat-card button:hover{
     background-color: lightgray;
 }
+
+button.mat-menu-item {
+    line-height: 24px !important;
+}
+  
+a.mat-menu-item > mat-icon {
+    margin-bottom: 14px;
+}
+  
+.mat-icon svg {
+    height: 24px;
+    width: 24px;
+    /* to line up the logout icon */
+    margin-left: 2px;
+}
   

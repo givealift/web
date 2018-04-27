@@ -13,8 +13,9 @@ import {
     , MatRadioModule
     , MatGridListModule
     , MatExpansionModule
-    , MatTooltipModule,
-    MatTooltip
+    , MatTooltipModule
+    , MatTooltip
+    , MatIconRegistry
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMomentDateModule } from "@angular/material-moment-adapter";

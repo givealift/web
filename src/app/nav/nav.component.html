@@ -18,7 +18,7 @@
       <mat-icon>menu</mat-icon>{{user?.firstName}} {{user?.lastName}}
     </button>
 
-    <mat-menu #dropdownMenu="matMenu">
+    <mat-menu #dropdownMenu="matMenu" yPosition="below" overlapTrigger="false">
       <button mat-menu-item routerLink="profile">
         <mat-icon>person</mat-icon>
         <span>Mój profil</span>
@@ -28,7 +28,7 @@
         <span>Przejazdy</span>
       </button>
       <button mat-menu-item routerLink="" (click)="logout()">
-        <mat-icon>logout</mat-icon>
+        <mat-icon svgIcon="logout"></mat-icon>
         <span>Wyloguj</span>
       </button>
     </mat-menu>
