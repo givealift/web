@@ -49,21 +49,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/api/rides/') && request.method === 'POST') {
                 return this.createRide(request);
             }
-            "http://localhost:4200/api/route/search?from=2020&to=2002&date=2018-04-29"
-            if (request.url.match(/route\/search\?from=(.*)&to=(.*)&date=(.*)/) && request.method === 'GET') {
-                const rides = [
-                    { fromCityId: 2020, toCityId: 2002, date: "2018-04-29" },
-                    { fromCityId: 2020, toCityId: 2002, date: "2018-04-30" },
-                    { fromCityId: 2002, toCityId: 2020, date: "2018-04-29" },
-                    { fromCityId: 2002, toCityId: 2020, date: "2018-04-30" }
-                ];
+            if (request.url.match(/route\/search/) && request.method === 'GET') {
+                let from = request.params.get("from");
+                let to = request.params.get("to");
+                let date = request.params.get("date");
 
-                let [all, from, to, date] = request.url.match(/route\/search\?from=(.*)&to=(.*)&date=(.*)/);
-
-                let matching = rides.filter(obj => obj.fromCityId == +from && obj.toCityId == +to && obj.date == date);
-
-                console.log(from, to, date);
-                console.log(matching);
+                let matching = this.sampleRides.filter(obj => obj.from.city.cityId == +from && obj.to.city.cityId == +to && obj.departureTime.includes(date));
 
                 return Observable.of(new HttpResponse({ status: 200, body: matching }));
             }
@@ -178,6 +169,169 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             status: 200, body: mockRides
         }));
     }
+
+    sampleRides = [
+        {
+            "routeId": 203,
+            "ownerId": 601,
+            "from": {
+                "localizationId": 201,
+                "city": {
+                    "cityId": 19,
+                    "name": "Katowice",
+                    "country": "powiat Katowice",
+                    "province": "śląskie",
+                    "cityInfo": {
+                        "cityInfoId": 20,
+                        "population": 304362,
+                        "citySize": 165
+                    }
+                },
+                "street": "krzywa",
+                "buildingNumber": 4
+            },
+            "to": {
+                "localizationId": 202,
+                "city": {
+                    "cityId": 1,
+                    "name": "Warszawa",
+                    "country": "powiat Warszawa",
+                    "province": "mazowieckie",
+                    "cityInfo": {
+                        "cityInfoId": 2,
+                        "population": 1724404,
+                        "citySize": 517
+                    }
+                },
+                "street": "string",
+                "buildingNumber": 0
+            },
+            "departureTime": "2018-04-28 11:12",
+            "numberOfSeats": 4,
+            "numberOfOccupiedSeats": 1,
+            "price": 10.0
+        },
+        {
+            "routeId": 212,
+            "ownerId": 601,
+            "from": {
+                "localizationId": 210,
+                "city": {
+                    "cityId": 19,
+                    "name": "Katowice",
+                    "country": "powiat Katowice",
+                    "province": "śląskie",
+                    "cityInfo": {
+                        "cityInfoId": 20,
+                        "population": 304362,
+                        "citySize": 165
+                    }
+                },
+                "street": "krzywa",
+                "buildingNumber": 4
+            },
+            "to": {
+                "localizationId": 211,
+                "city": {
+                    "cityId": 1,
+                    "name": "Warszawa",
+                    "country": "powiat Warszawa",
+                    "province": "mazowieckie",
+                    "cityInfo": {
+                        "cityInfoId": 2,
+                        "population": 1724404,
+                        "citySize": 517
+                    }
+                },
+                "street": "string",
+                "buildingNumber": 0
+            },
+            "departureTime": "2018-04-28 11:12",
+            "numberOfSeats": 4,
+            "numberOfOccupiedSeats": 1,
+            "price": 10.0
+        },
+        {
+            "routeId": 215,
+            "ownerId": 601,
+            "from": {
+                "localizationId": 213,
+                "city": {
+                    "cityId": 19,
+                    "name": "Katowice",
+                    "country": "powiat Katowice",
+                    "province": "śląskie",
+                    "cityInfo": {
+                        "cityInfoId": 20,
+                        "population": 304362,
+                        "citySize": 165
+                    }
+                },
+                "street": "krzywa",
+                "buildingNumber": 4
+            },
+            "to": {
+                "localizationId": 214,
+                "city": {
+                    "cityId": 1,
+                    "name": "Warszawa",
+                    "country": "powiat Warszawa",
+                    "province": "mazowieckie",
+                    "cityInfo": {
+                        "cityInfoId": 2,
+                        "population": 1724404,
+                        "citySize": 517
+                    }
+                },
+                "street": "string",
+                "buildingNumber": 0
+            },
+            "departureTime": "2018-04-28 20:12",
+            "numberOfSeats": 4,
+            "numberOfOccupiedSeats": 1,
+            "price": 10.0
+        },
+        {
+            "routeId": 218,
+            "ownerId": 601,
+            "from": {
+                "localizationId": 216,
+                "city": {
+                    "cityId": 1,
+                    "name": "Warszawa",
+                    "country": "powiat Warszawa",
+                    "province": "mazowieckie",
+                    "cityInfo": {
+                        "cityInfoId": 2,
+                        "population": 1724404,
+                        "citySize": 517
+                    }
+                },
+                "street": "krzywa",
+                "buildingNumber": 0
+            },
+            "to": {
+                "localizationId": 217,
+                "city": {
+                    "cityId": 19,
+                    "name": "Katowice",
+                    "country": "powiat Katowice",
+                    "province": "śląskie",
+                    "cityInfo": {
+                        "cityInfoId": 20,
+                        "population": 304362,
+                        "citySize": 165
+                    }
+                },
+                "street": "string",
+                "buildingNumber": 4
+            },
+            "departureTime": "2018-04-28 20:12",
+            "numberOfSeats": 4,
+            "numberOfOccupiedSeats": 1,
+            "price": 10.0
+        }
+    ]
 }
 
 export const FakeBackendProvider = {
