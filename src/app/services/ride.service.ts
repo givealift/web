@@ -10,17 +10,24 @@ import * as moment from 'moment';
 import { environment } from "../../environments/environment";
 
 export class Ride {
-    id: number;
-
-    //routeInfo
-    from: String;
-    to: String;
-    //
-
-    driver: User;
-    date: Date;
-    //date
-    //numberOfSeats
+    routeId: number;
+    ownerId: number;
+    from: {
+        localizationId: number;
+        city: City
+        street: string;
+        buildingNumber: number
+    };
+    to: {
+        localizationId: number;
+        city: City
+        street: string;
+        buildingNumber: number
+    };
+    departureTime: string; // YYYY-MM-DD hh:mm
+    numberOfSeats: number;
+    numberOfOccupiedSeats: number;
+    price: number
 }
 
 @Injectable()
@@ -51,7 +58,7 @@ export class RideService {
     private lookForCity = (city: City): Observable<City[]> => this.cityService.searchCity(city.toString(), 1);
 
     update(ride: Ride) {
-        return this.http.put<Ride>(this.url + ride.id, ride);
+        return this.http.put<Ride>(this.url + ride.routeId, ride);
     }
 
     getById(id: number) {

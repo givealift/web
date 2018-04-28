@@ -154,11 +154,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     private createTestRide() {
         let newRide: Ride = new Ride();
-        newRide.id = mockRides.length + 1;
+        newRide.routeId = mockRides.length + 1;
         let newDriver: User = JSON.parse(localStorage.getItem('currentUser'));
-        newRide.driver = newDriver;
-        newRide.from = "Kraków";
-        newRide.to = "Warszawa";
+        newRide.ownerId = newDriver.id;
+        newRide.from.city.cityId = "19";
+        newRide.to.city.cityId = "1";
 
         mockRides.push(newRide);
         localStorage.setItem('mock-rides', JSON.stringify(mockRides));
