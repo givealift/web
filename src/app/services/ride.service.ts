@@ -12,6 +12,8 @@ import { environment } from "../../environments/environment";
 export class Ride {
     routeId: number;
     ownerId: number;
+    driver: any; // temp fix until views are not updated
+    date: any; // ^
     from: {
         localizationId: number;
         city: City
