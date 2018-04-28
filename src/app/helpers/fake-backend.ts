@@ -23,24 +23,24 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return Observable.of(null).mergeMap(() => {
 
             // create user
-      /*      if (request.url.endsWith('/api/user/') && request.method === 'POST') {
-                return this.createUser(request);
-            }
-
-            // update user
-            if (request.url.match(/\/api\/user\/\d+$/) && request.method === 'PUT') {
-                return this.updateUser(request);
-            }
-
-            // delete user
-            if (request.url.match(/\/api\/user\/\d+$/) && request.method === 'DELETE') {
-                return this.deleteUser(request);
-            }
-
-            // authenticate
-            if (request.url.endsWith('/api/authenticate') && request.method === 'POST') {
-                return this.authenticate(request);
-            }*/
+            /*      if (request.url.endsWith('/api/user/') && request.method === 'POST') {
+                      return this.createUser(request);
+                  }
+      
+                  // update user
+                  if (request.url.match(/\/api\/user\/\d+$/) && request.method === 'PUT') {
+                      return this.updateUser(request);
+                  }
+      
+                  // delete user
+                  if (request.url.match(/\/api\/user\/\d+$/) && request.method === 'DELETE') {
+                      return this.deleteUser(request);
+                  }
+      
+                  // authenticate
+                  if (request.url.endsWith('/api/authenticate') && request.method === 'POST') {
+                      return this.authenticate(request);
+                  }*/
 
             if (request.url.endsWith('/api/rides/list') && request.method === 'GET') {
                 return this.getRidesList(request);
@@ -48,6 +48,24 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             if (request.url.endsWith('/api/rides/') && request.method === 'POST') {
                 return this.createRide(request);
+            }
+            "http://localhost:4200/api/route/search?from=2020&to=2002&date=2018-04-29"
+            if (request.url.match(/route\/search\?from=(.*)&to=(.*)&date=(.*)/) && request.method === 'GET') {
+                const rides = [
+                    { fromCityId: 2020, toCityId: 2002, date: "2018-04-29" },
+                    { fromCityId: 2020, toCityId: 2002, date: "2018-04-30" },
+                    { fromCityId: 2002, toCityId: 2020, date: "2018-04-29" },
+                    { fromCityId: 2002, toCityId: 2020, date: "2018-04-30" }
+                ];
+
+                let [all, from, to, date] = request.url.match(/route\/search\?from=(.*)&to=(.*)&date=(.*)/);
+
+                let matching = rides.filter(obj => obj.fromCityId == +from && obj.toCityId == +to && obj.date == date);
+
+                console.log(from, to, date);
+                console.log(matching);
+
+                return Observable.of(new HttpResponse({ status: 200, body: matching }));
             }
 
             // pass through any requests not handled above

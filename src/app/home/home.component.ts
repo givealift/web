@@ -36,19 +36,17 @@ export class HomeComponent implements OnInit {
 
   search(fromCity: City, toCity: City) {
     //TODO: move logic to rideService, add date
+
+    console.log(fromCity, toCity);
+
     this.showSpinner = true;
+    this.rideService
+      .search(fromCity, toCity, this.date.value)
+      .subscribe(rides => {
 
-    const lookForCity = (city: City): Observable<City[]> => this.cityService.searchCity(city.toString(), 1);
+        this.showSpinner = false;
+      })
 
-    let cityFromObject = fromCity.hasOwnProperty("cityId") ? Observable.of([fromCity]) : lookForCity(fromCity);
-    let cityToObject = toCity.hasOwnProperty("cityId") ? Observable.of([toCity]) : lookForCity(toCity);
 
-    Observable.forkJoin([cityFromObject, cityToObject]).subscribe(([foundFromCities, foundToCities]) => {
-      console.log("fetched from city:");
-      console.log(foundFromCities[0]);
-      console.log("fetched to city:");
-      console.log(foundToCities[0]);
-      this.showSpinner = false;
-    })
   }
 }

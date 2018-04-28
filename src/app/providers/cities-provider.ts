@@ -22,6 +22,7 @@ export class CitiesProvider {
             if (savedCities !== null && savedCities.length >= 100) {
                 this.cities = savedCities;
                 resolve(true);
+                return;
             }
 
             const URL = `${env.apiUrl}/city/generate?limit=${this.FETCH_LIMIT}`
