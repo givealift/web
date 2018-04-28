@@ -25,8 +25,8 @@ export class CitiesProvider {
                 return;
             }
 
-            const URL = `${env.apiUrl}/city/generate?limit=${this.FETCH_LIMIT}`
-            this.http.post<City[]>(URL, {})
+            const URL = `${env.apiUrl}/city`;
+            this.http.get<City[]>(URL)
                 .subscribe(cities => {
                     this.cities = cities;
                     localStorage.setItem("cities", JSON.stringify(cities));

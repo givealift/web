@@ -7,6 +7,7 @@ import { Observable } from "rxjs";
 import { of } from "rxjs/observable/of";
 import { combineLatest } from "rxjs/observable/combineLatest";
 import * as moment from 'moment';
+import { environment } from "../../environments/environment";
 
 export class Ride {
     id: number;
@@ -25,7 +26,7 @@ export class Ride {
 @Injectable()
 export class RideService {
 
-    private url: string = '/api/route';
+    private readonly url: string = `${environment.apiUrl}/route`;
 
     constructor(private http: HttpClient, private cityService: CityService) {
     }
@@ -36,29 +37,15 @@ export class RideService {
         const [fromStream, toStream] = [from, to]
             .map(maybeCity => maybeCity.hasOwnProperty("cityId") ? Observable.of([maybeCity]) : this.lookForCity(maybeCity));
 
-        combineLatest(fromStream, toStream)
-            .flatMap(([fromCity, toCity]) => {
-                const params = new HttpParams({
-                    fromObject: {
-                        from: fromCity[0].cityId,
-                        to: toCity[0].cityId,
-                        date: moment(date).format("YYYY-MM-DD")
-                    }
-                })
-                return this.http.get<Ride[]>(`${this.url}/search?from=${fromCity[0].cityId}&to=${toCity[0].cityId}&date=${moment(date).format("YYYY-MM-DD")}`)
+        return combineLatest(fromStream, toStream)
+            .flatMap(([[fromCity], [toCity]]) => {
+                const params = new HttpParams()
+                    .set("from", fromCity.cityId)
+                    .set("to", toCity.cityId)
+                    .set("date", moment(date).format("YYYY-MM-DD"));
+
+                return this.http.get<Ride[]>(`${this.url}/search`, { params: params })
             })
-            .subscribe(console.log);
-
-
-        // Observable.forkJoin([fromStream, toStream]).subscribe(([foundFromCities, foundToCities]) => {
-        //     // remove nested subscribe
-        //     console.log("fetched from city:");
-        //     console.log(foundFromCities[0]);
-        //     console.log("fetched to city:");
-        //     console.log(foundToCities[0]);
-        // })
-
-        return of([]);
     }
 
     private lookForCity = (city: City): Observable<City[]> => this.cityService.searchCity(city.toString(), 1);

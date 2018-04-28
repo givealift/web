@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
     this.rideService
       .search(fromCity, toCity, this.date.value)
       .subscribe(rides => {
-
+        console.log(rides); // temporary action with fetched rides
         this.showSpinner = false;
       })
 
