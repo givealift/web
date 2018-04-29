@@ -1,10 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NavComponent } from './nav.component';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../_services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MaterialModule } from '../modules/material.module';
+import { MaterialModule } from '../_modules/material.module';
 
 describe('NavComponent', () => {
   let component: NavComponent;

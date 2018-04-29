@@ -9,7 +9,9 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "heroku-postbuild": "ng build --prod",
-    "start": "node server.js"
+    "start": "node server.js",
+    "gh-build": "ng build --prod --base-href \"https://givealift.github.io/web/\"",
+    "gh-deploy": "npm run gh-build & ngh"
   },
   "private": true,
   "dependencies": {

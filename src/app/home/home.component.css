@@ -1,3 +1,47 @@
+/* .bg-image { 
+    background-image: url("../../assets/background.jpg");
+    height: 500px; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.welcome-text {
+    color: white;
+    text-shadow:rgb(35, 35, 35) 2px 2px 3px;
+} */
+
+mat-card {
+    width: 60%;
+    border-radius: 25px;
+}
+
+.centered {
+    display: flex;           /* establish flex container */
+      justify-content: center; /* center items vertically, in this case */
+      align-items: center;  
+  }
+
+.input-on-image {
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 15px;
+    max-width: 240px;
+    width: 100%;
+}
+
+.search-bar {
+    margin-top: 70px;
+}
+
+.btn-search {
+    border-radius: 10px;
+    max-width: 130px;
+    width: 100%;
+    padding: 5px;
+}
+
 .center {
     margin-top: 10%;
 }

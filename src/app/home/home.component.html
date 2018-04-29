@@ -1,7 +1,22 @@
-  <div [ngClass]="'col-md-12'" class="text-center center">
+<mat-card class="bg-image">
+  <div [ngClass]="'col-md-12'" class="text-center welcome-text">
     <h1>
       Witaj w {{ title }}!
     </h1>
     <h2>Załap się na przejazd w każdej chwili, gdziekolwiek.</h2>
 
   </div>
+  <div class="row centered search-bar">
+    <app-city-search #fromCity [placeholder]="startCityPlaceholder" class="input-on-image centered"></app-city-search>
+    <app-city-search #toCity [placeholder]="endCityPlaceholder" class="input-on-image centered"></app-city-search>
+
+    <mat-form-field class="input-on-image centered">
+      <input matInput [min]="minDate" [matDatepicker]="picker" placeholder="Kiedy?" [formControl]="date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <button mat-button class="btn-search" color="accent" mat-raised-button (click)="search(fromCity.selectedCity, toCity.selectedCity)">Szukaj</button>
+    <mat-spinner class="spinner" [diameter]="20" [style.display]="showSpinner ? 'inline' : 'none'"></mat-spinner>
+  </div>
+</mat-card>
