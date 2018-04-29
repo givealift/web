@@ -11,6 +11,6 @@
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
-  <button mat-button class="btn-search" color="accent" mat-raised-button (click)="search(fromCity.selectedCity, toCity.selectedCity)">Szukaj</button>
-  <mat-spinner class="spinner" [diameter]="20" [style.display]="showSpinner ? 'inline' : 'none'"></mat-spinner>
-</div>
+    <button *ngIf="!showSpinner" mat-button class="btn-search" color="accent" mat-raised-button (click)="search(fromCity.selectedCity, toCity.selectedCity)">Szukaj</button>
+    <mat-spinner class="spinner" [diameter]="20" [style.display]="showSpinner ? 'inline' : 'none'"></mat-spinner>
+  </div>

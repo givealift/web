@@ -42,6 +42,8 @@ export class HomeComponent implements OnInit {
       .subscribe(routes => {
         console.log(routes); // temporary action with fetched routes
         this.showSpinner = false;
+      }, err => {
+        this.showSpinner = false;
       })
   }
 }
