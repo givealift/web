@@ -5,7 +5,7 @@ import { Observable } from "rxjs/Observable";
 import { of } from "rxjs/observable/of";
 import { tap } from "rxjs/operators/tap";
 import { environment } from "../../environments/environment";
-import { CitiesProvider } from "../providers/cities-provider";
+import { CitiesProvider } from "../_providers/cities-provider";
 
 export class City {
     cityId: string;

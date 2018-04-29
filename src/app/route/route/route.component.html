@@ -3,14 +3,14 @@
     <mat-grid-tile [colspan]="3">
       <div class="align-left">
         <h4>
-          {{rideData.driver?.firstName}} {{rideData.driver?.lastName}}
+          {{routeData.driver?.firstName}} {{routeData.driver?.lastName}}
         </h4>
       </div>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="4" rowspan="3" class="borders">
       <h5>
-        <strong>{{rideData.date | date:'EEEE, d MMMM - H:mm':'':'pl'}}</strong>
-        <br/> {{rideData.from}} -> {{rideData.to}}
+        <strong>{{routeData.date | date:'EEEE, d MMMM - H:mm':'':'pl'}}</strong>
+        <br/> {{routeData.from}} -> {{routeData.to}}
       </h5>
 
     </mat-grid-tile>

@@ -7,11 +7,12 @@ import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/materialize';
 import 'rxjs/add/operator/dematerialize';
-import { User } from '../services/user.service';
-import { Ride } from '../services/ride.service';
+import { User } from '../_services/user.service';
+import { Route } from '../_services/route.service';
+import * as moment from 'moment';
 
 let mockUsers: User[] = JSON.parse(localStorage.getItem('mock-users')) || [];
-let mockRides: Ride[] = JSON.parse(localStorage.getItem('mock-rides')) || [];
+let mockRoutes: Route[] = JSON.parse(localStorage.getItem('mock-routes')) || [];
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
 
@@ -42,19 +43,19 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                       return this.authenticate(request);
                   }*/
 
-            if (request.url.endsWith('/api/rides/list') && request.method === 'GET') {
-                return this.getRidesList(request);
+            if (request.url.endsWith('/api/routes/list') && request.method === 'GET') {
+                return this.getroutesList(request);
             }
 
-            if (request.url.endsWith('/api/rides/') && request.method === 'POST') {
-                return this.createRide(request);
+            if (request.url.endsWith('/api/routes/') && request.method === 'POST') {
+                return this.createroute(request);
             }
             if (request.url.match(/route\/search/) && request.method === 'GET') {
                 let from = request.params.get("from");
                 let to = request.params.get("to");
                 let date = request.params.get("date");
 
-                let matching = this.sampleRides.filter(obj => obj.from.city.cityId == +from && obj.to.city.cityId == +to && obj.departureTime.includes(date));
+                let matching = this.sampleroutes.filter(obj => obj.from.city.cityId == +from && obj.to.city.cityId == +to && obj.departureTime.includes(date));
 
                 return Observable.of(new HttpResponse({ status: 200, body: matching }));
             }
@@ -140,37 +141,37 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
     }
 
-    private createRide(request: HttpRequest<any>) {
+    private createroute(request: HttpRequest<any>) {
 
-        let newRide = request.body;
-        newRide.driver.firstName="Test";
-        newRide.driver.lastName="Testovsky";
-        newRide.id = mockRides.length + 1;
-        mockRides.push(newRide);
-        localStorage.setItem('mock-rides', JSON.stringify(mockRides));
+        let newroute = request.body;
+        newroute.driver.firstName="Test";
+        newroute.driver.lastName="Testovsky";
+        newroute.id = mockRoutes.length + 1;
+        mockRoutes.push(newroute);
+        localStorage.setItem('mock-routes', JSON.stringify(mockRoutes));
 
         return Observable.of(new HttpResponse({ status: 200 }));
     }
 
-    private createTestRide() {
-        let newRide: Ride = new Ride();
-        newRide.routeId = mockRides.length + 1;
+    private createTestroute() {
+        let newroute: Route = new Route();
+        newroute.routeId = mockRoutes.length + 1;
         let newDriver: User = JSON.parse(localStorage.getItem('currentUser'));
-        newRide.ownerId = newDriver.id;
-        newRide.from.city.cityId = "19";
-        newRide.to.city.cityId = "1";
+        newroute.ownerId = newDriver.id;
+        newroute.from.city.cityId = "19";
+        newroute.to.city.cityId = "1";
 
-        mockRides.push(newRide);
-        localStorage.setItem('mock-rides', JSON.stringify(mockRides));
+        mockRoutes.push(newroute);
+        localStorage.setItem('mock-routes', JSON.stringify(mockRoutes));
     }
 
-    private getRidesList(request: HttpRequest<any>) {
+    private getroutesList(request: HttpRequest<any>) {
         return Observable.of(new HttpResponse({
-            status: 200, body: mockRides
+            status: 200, body: mockRoutes
         }));
     }
 
-    sampleRides = [
+    sampleroutes = [
         {
             "routeId": 203,
             "ownerId": 601,
@@ -206,7 +207,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 "street": "string",
                 "buildingNumber": 0
             },
-            "departureTime": "2018-04-28 11:12",
+            "departureTime": moment().format("YYYY-MM-DD hh:mm"),
             "numberOfSeats": 4,
             "numberOfOccupiedSeats": 1,
             "price": 10.0
@@ -246,7 +247,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 "street": "string",
                 "buildingNumber": 0
             },
-            "departureTime": "2018-04-28 11:12",
+            "departureTime": moment().format("YYYY-MM-DD hh:mm"),
             "numberOfSeats": 4,
             "numberOfOccupiedSeats": 1,
             "price": 10.0
@@ -286,7 +287,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 "street": "string",
                 "buildingNumber": 0
             },
-            "departureTime": "2018-04-28 20:12",
+            "departureTime": moment().add(1,"hour").format("YYYY-MM-DD hh:mm"),
             "numberOfSeats": 4,
             "numberOfOccupiedSeats": 1,
             "price": 10.0
@@ -326,7 +327,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 "street": "string",
                 "buildingNumber": 4
             },
-            "departureTime": "2018-04-28 20:12",
+            "departureTime": moment().add(1,"hour").format("YYYY-MM-DD hh:mm"),
             "numberOfSeats": 4,
             "numberOfOccupiedSeats": 1,
             "price": 10.0

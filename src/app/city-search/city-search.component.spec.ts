@@ -1,10 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CitySearchComponent } from './city-search.component';
-import { CityService } from '../services/city-service';
-import { MaterialModule } from '../modules/material.module';
+import { CityService } from '../_services/city.service';
+import { MaterialModule } from '../_modules/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CitiesProvider } from '../_providers/cities-provider';
 
 describe('CitySearchComponent', () => {
   let component: CitySearchComponent;
@@ -20,7 +21,7 @@ describe('CitySearchComponent', () => {
         ReactiveFormsModule
       ],
       providers: [
-        CityService
+        CityService, CitiesProvider
       ]
     })
       .compileComponents();

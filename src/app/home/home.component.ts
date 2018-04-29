@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../_services/auth.service';
 import { FormControl, Validators } from '@angular/forms';
 import * as moment from "moment";
-import { City, CityService } from '../services/city-service';
-import { RideService } from '../services/ride.service';
+import { City, CityService } from '../_services/city.service';
+import { RouteService } from '../_services/route.service';
 import { Observable } from 'rxjs/Observable';
 @Component({
   selector: 'app-home',
@@ -28,25 +28,19 @@ export class HomeComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private cityService: CityService,
-    private rideService: RideService) { }
+    private routeService: RouteService) { }
 
   ngOnInit() {
     this.authService.loggedInStatus.subscribe(loggedIn => this.loggedIn = loggedIn);
   }
 
   search(fromCity: City, toCity: City) {
-    //TODO: move logic to rideService, add date
-
-    console.log(fromCity, toCity);
-
     this.showSpinner = true;
-    this.rideService
+    this.routeService
       .search(fromCity, toCity, this.date.value)
-      .subscribe(rides => {
-        console.log(rides); // temporary action with fetched rides
+      .subscribe(routes => {
+        console.log(routes); // temporary action with fetched routes
         this.showSpinner = false;
       })
-
-
   }
 }

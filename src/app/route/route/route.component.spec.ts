@@ -1,23 +1,23 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RideComponent } from './ride.component';
-import { Ride } from '../../services/ride.service';
-import { MaterialModule } from '../../modules/material.module';
+import { RouteComponent } from './route.component';
+import { Route } from '../../_services/route.service';
+import { MaterialModule } from '../../_modules/material.module';
 
-describe('RideComponent', () => {
-  let component: RideComponent;
-  let fixture: ComponentFixture<RideComponent>;
+describe('RouteComponent', () => {
+  let component: RouteComponent;
+  let fixture: ComponentFixture<RouteComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [RideComponent],
+      declarations: [RouteComponent],
       imports: [MaterialModule]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RideComponent);
+    fixture = TestBed.createComponent(RouteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

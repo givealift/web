@@ -10,10 +10,10 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
 import { RegisterComponent } from './register/register.component';
-import { NewRideComponent } from './new-ride/new-ride.component';
-import { AuthService } from './services/auth.service';
+import { NewRouteComponent } from './route/new-route/new-route.component';
+import { AuthService } from './_services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
-import { MaterialModule } from './modules/material.module';
+import { MaterialModule } from './_modules/material.module';
 import { CitySearchComponent } from './city-search/city-search.component';
 
 const appRoutes: Routes = [
@@ -31,7 +31,7 @@ describe('AppComponent', () => {
         HomeComponent,
         LoginComponent,
         RegisterComponent,
-        NewRideComponent,
+        NewRouteComponent,
         CitySearchComponent
       ],
       imports: [

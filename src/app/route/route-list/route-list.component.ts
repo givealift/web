@@ -3,20 +3,20 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 
 @Component({
-  selector: 'app-ride-list',
-  templateUrl: './ride-list.component.html',
-  styleUrls: ['./ride-list.component.css']
+  selector: 'app-route-list',
+  templateUrl: './route-list.component.html',
+  styleUrls: ['./route-list.component.css']
 })
-export class RideListComponent {
+export class RouteListComponent {
 
-  rides: any = [];
+  routes: any = [];
 
   constructor(private httpClient: HttpClient) {
     Observable.interval(1000)
-      .switchMap(() => httpClient.get('/api/rides/list'))
+      .switchMap(() => httpClient.get('/api/routes/list'))
       .subscribe(
         (data) => {
-          this.rides = data;
+          this.routes = data;
         });
   }
 

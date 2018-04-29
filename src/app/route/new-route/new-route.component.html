@@ -1,23 +1,23 @@
-< <mat-card>
+<mat-card>
     <div class="container">
         <h2>Dodaj przejazd: </h2>
         <form #form="ngForm">
             <div class="row center">
                 <mat-form-field>
-                    <input matInput [(ngModel)]="rideModel.from" name="from" required #fromRef="ngModel" placeholder="Miejsce startowe" />
+                    <input matInput [(ngModel)]="routeModel.from" name="from" required #fromRef="ngModel" placeholder="Miejsce startowe" />
                     <mat-error *ngIf="fromRef.invalid">Wpisz poprawne miasto startowe!</mat-error>
                 </mat-form-field>
             </div>
 
             <div class="row center">
                 <mat-form-field>
-                    <input matInput [(ngModel)]="rideModel.to" name="to" required #toRef="ngModel" placeholder="Miejsce końcowe" />
+                    <input matInput [(ngModel)]="routeModel.to" name="to" required #toRef="ngModel" placeholder="Miejsce końcowe" />
                     <mat-error *ngIf="toRef.invalid">Wpisz poprawne miasto końcowe!</mat-error>
                 </mat-form-field>
             </div>
             <div class="row center">
                 <mat-form-field>
-                    <input matInput name="date" [matDatepicker]="picker" placeholder="Kiedy?" [(ngModel)]="rideModel.date">
+                    <input matInput name="date" [matDatepicker]="picker" placeholder="Kiedy?" [(ngModel)]="routeModel.date">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
@@ -34,4 +34,4 @@
             </div>
         </form>
     </div>
-    </mat-card>
+</mat-card>

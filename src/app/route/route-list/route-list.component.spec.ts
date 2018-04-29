@@ -1,17 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RideListComponent } from './ride-list.component';
-import { RideComponent } from './ride/ride.component';
+import { RouteListComponent } from './route-list.component';
 import { HttpClientModule } from '@angular/common/http';
-import { MaterialModule } from '../modules/material.module';
+import { MaterialModule } from '../../_modules/material.module';
+import { RouteComponent } from '../route/route.component';
 
-describe('RideListComponent', () => {
-  let component: RideListComponent;
-  let fixture: ComponentFixture<RideListComponent>;
+describe('RouteListComponent', () => {
+  let component: RouteListComponent;
+  let fixture: ComponentFixture<RouteListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [RideListComponent, RideComponent],
+      declarations: [RouteListComponent, RouteComponent],
       imports: [HttpClientModule,
         MaterialModule]
     })
@@ -19,7 +19,7 @@ describe('RideListComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RideListComponent);
+    fixture = TestBed.createComponent(RouteListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

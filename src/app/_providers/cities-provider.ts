@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-import { City } from "../services/city-service";
+import { Injectable, APP_INITIALIZER } from "@angular/core";
+import { City } from "../_services/city.service";
 import { HttpClient } from "@angular/common/http";
 import { environment as env } from "../../environments/environment";
 
@@ -24,6 +24,7 @@ export class CitiesProvider {
                 resolve(true);
                 return;
             }
+            console.log("fetchin.g..");
 
             const URL = `${env.apiUrl}/city`;
             this.http.get<City[]>(URL)
@@ -34,4 +35,8 @@ export class CitiesProvider {
                 })
         })
     }
+}
+
+export function citiesProviderFactory(provider: CitiesProvider) {
+    return () => provider.load();
 }

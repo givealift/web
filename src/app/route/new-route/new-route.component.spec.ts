@@ -1,15 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewRideComponent } from './new-ride.component';
+import { NewRouteComponent } from './new-route.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
-import { RideService } from '../services/ride.service';
+import { RouteService } from '../../_services/route.service';
 import { HttpClientModule } from '@angular/common/http';
-import { MaterialModule } from '../modules/material.module';
+import { MaterialModule } from '../../_modules/material.module';
+import { CityService } from '../../_services/city.service';
+import { CitiesProvider } from '../../_providers/cities-provider';
 
-describe('NewRideComponent', () => {
-  let component: NewRideComponent;
-  let fixture: ComponentFixture<NewRideComponent>;
+describe('NewRouteComponent', () => {
+  let component: NewRouteComponent;
+  let fixture: ComponentFixture<NewRouteComponent>;
 
 
   beforeAll(() => {
@@ -27,18 +29,18 @@ describe('NewRideComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NewRideComponent],
+      declarations: [NewRouteComponent],
       imports: [FormsModule,
         RouterTestingModule,
         HttpClientModule,
         MaterialModule],
-      providers: [RideService]
+      providers: [RouteService, CityService, CitiesProvider]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NewRideComponent);
+    fixture = TestBed.createComponent(NewRouteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
