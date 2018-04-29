@@ -6,6 +6,8 @@ import { CityService } from '../_services/city.service';
 import { RouteService } from '../_services/route.service';
 import { Observable } from 'rxjs/Observable';
 import { City, Route } from '../_models';
+
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -19,11 +21,9 @@ export class HomeComponent implements OnInit {
 
   loggedIn: boolean = this.authService.isAuthenticated();
 
-  minDate = new Date();
+  today = new Date();
   date = new FormControl(moment(), [Validators.required]);
 
-  fromCity: City;
-  toCity: City;
   foundRoutes: Route[];
 
   showSpinner = false;
@@ -34,6 +34,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.authService.loggedInStatus.subscribe(loggedIn => this.loggedIn = loggedIn);
+  }
+
+  onEnter() {
+    let button: HTMLElement = document.getElementsByClassName("btn-search")[0] as HTMLElement
+    button.click();    
   }
 
   search(fromCity: City, toCity: City) {
