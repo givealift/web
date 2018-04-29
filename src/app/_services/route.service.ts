@@ -58,7 +58,7 @@ export class RouteService {
     }
 
     getAll() {
-        return this.http.get<Route[]>(this.url + 'list');
+        return this.http.get<Route[]>(this.url + '/list');
     }
 
 }
