@@ -42,11 +42,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                       return this.authenticate(request);
                   }*/
 
-            if (request.url.endsWith('/api/routes/list') && request.method === 'GET') {
+            if (request.url.endsWith('/api/route/list') && request.method === 'GET') {
                 return this.getroutesList(request);
             }
 
-            if (request.url.endsWith('/api/routes/') && request.method === 'POST') {
+            if (request.url.endsWith('/api/route') && request.method === 'POST') {
                 return this.createroute(request);
             }
             if (request.url.match(/route\/search/) && request.method === 'GET') {

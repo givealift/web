@@ -13,7 +13,7 @@ export class RouteListComponent {
 
   constructor(private httpClient: HttpClient) {
     Observable.interval(1000)
-      .switchMap(() => httpClient.get('/api/routes/list'))
+      .switchMap(() => httpClient.get('/api/route/list'))
       .subscribe(
         (data) => {
           this.routes = data;
