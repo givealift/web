@@ -1,17 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
+import { User } from "../_models";
 
-export class User {
-    id: number;
-    gender: string;
-    firstName: string;
-    lastName: string;
-    login: string;
-    password: string;
-    email: string;
-    token: string;
-    phone: string;
-}
 
 @Injectable()
 export class UserService {
@@ -39,5 +29,4 @@ export class UserService {
     delete(id: number) {
         return this.http.delete(this.userApiPath + id);
     }
-
 }

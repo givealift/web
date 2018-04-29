@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RouteComponent } from './route.component';
-import { Route } from '../../_services/route.service';
+import { Route } from '../../_models';
 import { MaterialModule } from '../../_modules/material.module';
 
 describe('RouteComponent', () => {

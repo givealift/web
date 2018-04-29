@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Route } from '../../_services/route.service';
+import { Route } from '../../_models';
 
 @Component({
   selector: 'app-route',

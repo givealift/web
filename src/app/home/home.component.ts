@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { FormControl, Validators } from '@angular/forms';
 import * as moment from "moment";
-import { City, CityService } from '../_services/city.service';
+import { CityService } from '../_services/city.service';
 import { RouteService } from '../_services/route.service';
 import { Observable } from 'rxjs/Observable';
+import { City } from '../_models';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

@@ -1,5 +1,5 @@
 import { Injectable, APP_INITIALIZER } from "@angular/core";
-import { City } from "../_services/city.service";
+import { City } from "../_models";
 import { HttpClient } from "@angular/common/http";
 import { environment as env } from "../../environments/environment";
 

@@ -6,7 +6,8 @@ import { startWith } from 'rxjs/operators/startWith';
 import { map } from 'rxjs/operators/map';
 import { Subject } from 'rxjs/Subject';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { CityService, City } from '../_services/city.service';
+import { CityService } from '../_services/city.service';
+import { City } from '../_models';
 
 @Component({
   selector: 'app-city-search',

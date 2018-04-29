@@ -1,36 +1,14 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { User } from "./user.service";
-import { City, CityService } from "./city.service";
+import { CityService } from "./city.service";
 import { Moment } from "moment";
 import { Observable } from "rxjs";
 import { of } from "rxjs/observable/of";
 import { combineLatest } from "rxjs/observable/combineLatest";
 import * as moment from 'moment';
 import { environment } from "../../environments/environment";
+import { City, Route, User } from "../_models/";
 
-export class Route {
-    routeId: number;
-    ownerId: number;
-    driver: any; // temp fix until views are not updated
-    date: any; // ^
-    from: {
-        localizationId: number;
-        city: City
-        street: string;
-        buildingNumber: number
-    };
-    to: {
-        localizationId: number;
-        city: City
-        street: string;
-        buildingNumber: number
-    };
-    departureTime: string; // YYYY-MM-DD hh:mm
-    numberOfSeats: number;
-    numberOfOccupiedSeats: number;
-    price: number
-}
 
 @Injectable()
 export class RouteService {
@@ -48,12 +26,15 @@ export class RouteService {
 
         return combineLatest(fromStream, toStream)
             .flatMap(([[fromCity], [toCity]]) => {
-                const params = new HttpParams()
-                    .set("from", fromCity.cityId)
-                    .set("to", toCity.cityId)
-                    .set("date", moment(date).format("YYYY-MM-DD"));
+                if (fromCity && toCity) {
+                    const params = new HttpParams()
+                        .set("from", fromCity.cityId)
+                        .set("to", toCity.cityId)
+                        .set("date", moment(date).format("YYYY-MM-DD"));
 
-                return this.http.get<Route[]>(`${this.url}/search`, { params: params })
+                    return this.http.get<Route[]>(`${this.url}/search`, { params: params })
+                }
+                return of([]);
             })
     }
 

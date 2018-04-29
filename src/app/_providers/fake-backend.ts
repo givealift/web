@@ -7,8 +7,7 @@ import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/materialize';
 import 'rxjs/add/operator/dematerialize';
-import { User } from '../_services/user.service';
-import { Route } from '../_services/route.service';
+import { Route, User } from '../_models';
 import * as moment from 'moment';
 
 let mockUsers: User[] = JSON.parse(localStorage.getItem('mock-users')) || [];

@@ -1,27 +1,12 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { User } from "./user.service";
+import { City, User } from "../_models";
 import { Observable } from "rxjs/Observable";
 import { of } from "rxjs/observable/of";
 import { tap } from "rxjs/operators/tap";
 import { environment } from "../../environments/environment";
 import { CitiesProvider } from "../_providers/cities-provider";
 
-export class City {
-    cityId: string;
-    name: string;
-    country: string;
-    province: string;
-    cityInfo: {
-        cityInfoId: number,
-        population: number,
-        citySize: number
-    }
-
-    toString() {
-        return this.name || "";
-    }
-}
 
 @Injectable()
 export class CityService {
