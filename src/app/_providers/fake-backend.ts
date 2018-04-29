@@ -22,41 +22,34 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         // wrap in delayed observable to simulate server api call
         return Observable.of(null).mergeMap(() => {
 
-            // create user
-            /*      if (request.url.endsWith('/api/user/') && request.method === 'POST') {
-                      return this.createUser(request);
-                  }
-      
-                  // update user
-                  if (request.url.match(/\/api\/user\/\d+$/) && request.method === 'PUT') {
-                      return this.updateUser(request);
-                  }
-      
-                  // delete user
-                  if (request.url.match(/\/api\/user\/\d+$/) && request.method === 'DELETE') {
-                      return this.deleteUser(request);
-                  }
-      
-                  // authenticate
-                  if (request.url.endsWith('/api/authenticate') && request.method === 'POST') {
-                      return this.authenticate(request);
-                  }*/
+            switch (true) {
+                // list routes
+                case (request.url.endsWith('/api/route/list') && request.method === 'GET'):
+                    return this.getRoutesList(request);
 
-            if (request.url.endsWith('/api/route/list') && request.method === 'GET') {
-                return this.getroutesList(request);
-            }
+                // post route
+                case (request.url.endsWith('/api/route/') && request.method === 'POST'):
+                    return this.createRoute(request);
 
-            if (request.url.endsWith('/api/route') && request.method === 'POST') {
-                return this.createroute(request);
-            }
-            if (request.url.match(/route\/search/) && request.method === 'GET') {
-                let from = request.params.get("from");
-                let to = request.params.get("to");
-                let date = request.params.get("date");
+                // search route
+                case (request.url.match(/route\/search/) && request.method === 'GET'):
+                    return this.searchRoute(request);
 
-                let matching = this.sampleroutes.filter(obj => obj.from.city.cityId == +from && obj.to.city.cityId == +to && obj.departureTime.includes(date));
+                // // create user
+                // case (request.url.endsWith('/api/user/') && request.method === 'POST'):
+                //     return this.createUser(request);
 
-                return Observable.of(new HttpResponse({ status: 200, body: matching }));
+                // // update user
+                // case (request.url.match(/\/api\/user\/\d+$/) && request.method === 'PUT'):
+                //     return this.updateUser(request);
+
+                // // delete user
+                // case (request.url.match(/\/api\/user\/\d+$/) && request.method === 'DELETE'):
+                //     return this.deleteUser(request);
+
+                // // authenticate
+                // case (request.url.endsWith('/api/authenticate') && request.method === 'POST'):
+                //     return this.authenticate(request);
             }
 
             // pass through any requests not handled above
@@ -140,11 +133,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
     }
 
-    private createroute(request: HttpRequest<any>) {
+    private createRoute(request: HttpRequest<any>) {
 
         let newroute = request.body;
-        newroute.driver.firstName="Test";
-        newroute.driver.lastName="Testovsky";
+        newroute.driver.firstName = "Test";
+        newroute.driver.lastName = "Testovsky";
         newroute.id = mockRoutes.length + 1;
         mockRoutes.push(newroute);
         localStorage.setItem('mock-routes', JSON.stringify(mockRoutes));
@@ -152,7 +145,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return Observable.of(new HttpResponse({ status: 200 }));
     }
 
-    private createTestroute() {
+    private createTestRoute() {
         let newroute: Route = new Route();
         newroute.routeId = mockRoutes.length + 1;
         let newDriver: User = JSON.parse(localStorage.getItem('currentUser'));
@@ -164,10 +157,20 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         localStorage.setItem('mock-routes', JSON.stringify(mockRoutes));
     }
 
-    private getroutesList(request: HttpRequest<any>) {
+    private getRoutesList(request: HttpRequest<any>) {
         return Observable.of(new HttpResponse({
             status: 200, body: mockRoutes
         }));
+    }
+
+    private searchRoute(request: HttpRequest<any>) {
+        let from = request.params.get("from");
+        let to = request.params.get("to");
+        let date = request.params.get("date");
+
+        let matching = this.sampleroutes.filter(obj => obj.from.city.cityId == +from && obj.to.city.cityId == +to && obj.departureTime.includes(date));
+
+        return Observable.of(new HttpResponse({ status: 200, body: matching }));
     }
 
     sampleroutes = [
@@ -286,7 +289,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 "street": "string",
                 "buildingNumber": 0
             },
-            "departureTime": moment().add(1,"hour").format("YYYY-MM-DD hh:mm"),
+            "departureTime": moment().add(1, "hour").format("YYYY-MM-DD hh:mm"),
             "numberOfSeats": 4,
             "numberOfOccupiedSeats": 1,
             "price": 10.0
@@ -326,7 +329,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 "street": "string",
                 "buildingNumber": 4
             },
-            "departureTime": moment().add(1,"hour").format("YYYY-MM-DD hh:mm"),
+            "departureTime": moment().add(1, "hour").format("YYYY-MM-DD hh:mm"),
             "numberOfSeats": 4,
             "numberOfOccupiedSeats": 1,
             "price": 10.0
