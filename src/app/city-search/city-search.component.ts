@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { Observable } from 'rxjs/Observable';
@@ -19,11 +19,17 @@ export class CitySearchComponent implements OnInit {
   @Input()
   placeholder: string;
 
+  @Output() enterPressed = new EventEmitter();
+
   selectedCity = new City();
   filteredCities$: Observable<City[]>;
   private searchTerms = new Subject<string>();
 
   constructor(private cityService: CityService) { }
+
+  onEnter() {
+    this.enterPressed.emit();
+  }
 
   search(term: string): void {
     this.searchTerms.next(term);

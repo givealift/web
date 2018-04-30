@@ -1,6 +1,6 @@
 <mat-form-field>
   <input #city [(ngModel)]="selectedCity" #searchBox matInput placeholder="{{placeholder}}" [matAutocomplete]="auto"
-    (keyup)="search(searchBox.value)">
+    (keyup)="search(searchBox.value)" (keyup.enter)="onEnter()">
   <mat-autocomplete #auto="matAutocomplete" [displayWith]="formatDisplayName">
     <mat-option *ngFor="let city of filteredCities$ | async" [value]="city">
       <span>{{ city.name }}</span>
