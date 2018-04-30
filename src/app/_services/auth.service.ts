@@ -16,7 +16,7 @@ export class AuthService {
     login(login: string, pass: string) {
       console.log(login, pass);
         const body = {username : login, password : pass};
-        return this.http.post<User>(this.authUrl + "authenticate", body);
+        return this.http.post<User>(this.authUrl + "/authenticate", body);
     }
 
     logout() {
