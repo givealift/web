@@ -1,8 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../_services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { User } from '../services/user.service';
+import { User } from "../_models";
+
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent {
   //TODO: find a better way to retrieve form values
   userModel: User = new User();
   returnUrl: string;
+  showSpinner = false;
 
   // userExists: Boolean = true;
 
@@ -32,6 +34,7 @@ export class LoginComponent {
   }
 
   onSubmit() {
+    this.showSpinner = true;
     this.authService.login(this.userModel.login, this.userModel.password)
       .subscribe(
         user => {
@@ -40,6 +43,7 @@ export class LoginComponent {
           this.router.navigate([this.returnUrl]);
         },
         error => {
+          this.showSpinner = false;
           console.log(error);
           this.userModel.login = '';
           this.userModel.password = '';

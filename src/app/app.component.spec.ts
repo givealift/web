@@ -4,17 +4,17 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { APP_BASE_HREF } from '@angular/common';
-
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
 import { RegisterComponent } from './register/register.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { NewRideComponent } from './new-ride/new-ride.component';
-import { AuthService } from './services/auth.service';
+import { NewRouteComponent } from './route/new-route/new-route.component';
+import { AuthService } from './_services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MaterialModule } from './_modules/material.module';
+import { CitySearchComponent } from './city-search/city-search.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -31,12 +31,14 @@ describe('AppComponent', () => {
         HomeComponent,
         LoginComponent,
         RegisterComponent,
-        DashboardComponent,
-        NewRideComponent
+        NewRouteComponent,
+        CitySearchComponent
       ],
       imports: [
         RouterModule.forRoot(appRoutes),
-        FormsModule, HttpClientModule
+        FormsModule, HttpClientModule,
+        MaterialModule,
+        ReactiveFormsModule
       ],
       providers: [
         { provide: APP_BASE_HREF, useValue: "/" }, AuthService

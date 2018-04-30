@@ -4,9 +4,10 @@ import { RegisterComponent } from './register.component';
 import { NgForm } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
-import { UserService } from '../services/user.service';
+import { UserService } from '../_services/user.service';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../_services/auth.service';
+import { MaterialModule } from '../_modules/material.module';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -17,7 +18,8 @@ describe('RegisterComponent', () => {
       declarations: [RegisterComponent],
       imports: [FormsModule,
         RouterTestingModule,
-        HttpClientModule],
+        HttpClientModule,
+        MaterialModule],
       providers: [
         UserService,
         AuthService

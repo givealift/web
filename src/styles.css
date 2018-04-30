@@ -1,5 +1,34 @@
-/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
+
+mat-card {
+    width: 18%;
+    margin: auto;
+    margin-top: 10%;
+    opacity: 1;
+    border-radius: 25px;
+}
+
+mat-card button:hover{
+    background-color: lightgray;
+}
+
+button.mat-menu-item {
+    line-height: 24px !important;
+}
+  
+a.mat-menu-item > mat-icon {
+    margin-bottom: 14px;
+}
+  
+.mat-icon svg {
+    height: 24px;
+    width: 24px;
+    /* to line up the logout icon */
+    margin-left: 2px;
+}
+  

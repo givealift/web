@@ -1,38 +1,24 @@
-.loginContainer {
-    text-align: center;
-    margin-top: 5%;
+.center {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
-::placeholder {
-    text-align: center;
+.spinner { 
+    margin-top: 20px;
+    display: flex;
 }
 
-.formContainer {
-    margin: auto;
-    align-items: center;
-    width: 15%;
+.container {
+  display: flex;
+  flex-direction: column;
 }
 
-input[type=text], select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+mat-card {
+  border-radius: 25px;
 }
 
-input[type=password], select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+mat-card:hover {
+  box-shadow: 0 10px 6px -6px black;
 }
 
-input.ng-invalid.ng-touched {
-    border: 1px solid red;
-}

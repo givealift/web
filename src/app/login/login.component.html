@@ -1,30 +1,28 @@
-<div class="loginContainer">
-  <div class="formContainer">
-    <form (ngSubmit)="onSubmit()" #form="ngForm">
+<mat-card>
+  <div class="container">
+    <form #form="ngForm">
+      <div class="row center">
+        <mat-form-field>
+          <input matInput [(ngModel)]="userModel.login" name="login" required #loginRef="ngModel" placeholder="Login" />
+          <mat-error *ngIf="loginRef.invalid">Wpisz poprawny login!</mat-error>
+        </mat-form-field>
+      </div>
 
-      <!-- TODO: 
-          add the facebook login process
-          add some visual sugar
-    -->
-
-      <input type="text" [(ngModel)]="userModel.login" name="login" required #loginRef="ngModel" placeholder="Login" />
-      <div *ngIf="!loginRef.valid && loginRef.touched" class="alert alert-danger">Wpisz poprawny login!</div>
-      <br/>
-
-      <input type="password" [(ngModel)]="userModel.password" name="password" required #passRef="ngModel" placeholder="Hasło" />
-      <div *ngIf="!passRef.valid && passRef.touched " class="alert alert-danger">Wpisz poprawne hasło!</div>
-      <br/>
-
-      <input class="btn btn-primary" style="width: 100%" type="submit" value="Zaloguj" [disabled]="!form.valid" />
+      <div class="row center">
+        <mat-form-field>
+          <input matInput [(ngModel)]="userModel.password" type="password" name="password" required #passRef="ngModel" placeholder="Hasło"
+          />
+          <mat-error *ngIf="passRef.invalid">Wpisz poprawne hasło!</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="row center">
+        <button mat-raised-button class="hoverable" type="submit" [disabled]="!form.valid" (click)="onSubmit()">
+          Zaloguj
+        </button>
+      </div>
+      <div class="row center">
+        <mat-spinner class="spinner" [diameter]="40" [style.display]="showSpinner ? 'inline' : 'none'"></mat-spinner>
+      </div>
     </form>
   </div>
-  <br/>
-  <h4>
-    <em>PLACEHOLDER (fejs)</em>
-  </h4>
-  <h4>Nie masz jeszcze konta?
-    <strong>
-      <a routerLinkActive="active" routerLink="../register">Zarejestruj się</a>
-    </strong>
-  </h4>
-</div>
+</mat-card>

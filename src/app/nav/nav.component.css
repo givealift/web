@@ -1,0 +1,28 @@
+.nav-spacer {
+    flex: 1 1 auto;
+}
+
+.spinner {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.center {
+  display: flex;           
+  justify-content: center; 
+  align-items: center;  
+}
+
+.btn-search {
+  margin-left: 25px;
+}
+
+.mat-raised-button {
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.logo {
+    width: 35px;
+    margin-right: 5px;
+}
