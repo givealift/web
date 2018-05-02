@@ -3,16 +3,15 @@
     <mat-grid-tile [colspan]="3">
       <div class="align-left">
         <h4>
-          {{routeData.driver?.firstName}} {{routeData.driver?.lastName}}
+          {{routeData?.driver?.firstName}} {{routeData?.driver?.lastName}}
         </h4>
       </div>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="4" rowspan="3" class="borders">
       <h5>
-        <strong>{{routeData.date | date:'EEEE, d MMMM - H:mm':'':'pl'}}</strong>
-        <br/> {{routeData.from}} -> {{routeData.to}}
+        <strong>{{routeData?.date | date:'EEEE, d MMMM - H:mm':'':'pl'}}</strong>
+        <br/> {{routeData?.from}} -> {{routeData?.to}}
       </h5>
-
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" rowspan="3">
       <div class="show-on-hover">

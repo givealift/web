@@ -37,10 +37,9 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     this.showSpinner = true;
     this.userService.create(this.userModel).subscribe(
-      () => {
-        localStorage.setItem("currentUser", JSON.stringify(this.userModel));
-        this.authService.loggedInStatus.emit(true);
-        this.router.navigate([this.returnUrl]);
+      id => {
+        localStorage.setItem("id", id.toLocaleString());
+       this.router.navigate(['/login']);
       },
       error => {
         this.showSpinner = false;
