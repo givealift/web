@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RouteListComponent } from './route-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '../../_modules/material.module';

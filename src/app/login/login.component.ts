@@ -37,9 +37,8 @@ export class LoginComponent {
     this.showSpinner = true;
     this.authService.login(this.userModel.login, this.userModel.password)
       .subscribe(
-        auth => {
-          localStorage.setItem("token",auth.token);
-          localStorage.setItem("id",auth.id.toLocaleString());
+        user => {
+          localStorage.setItem("currentUser", JSON.stringify(user));
           this.authService.loggedInStatus.emit(true);
           this.router.navigate([this.returnUrl]);
         },
