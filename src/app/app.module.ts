@@ -26,6 +26,7 @@ import { FakeBackendProvider } from './_providers/fake-backend';
 import localePl from '@angular/common/locales/pl';
 import { registerLocaleData } from '@angular/common';
 import { MatIconRegistry } from '@angular/material';
+import { DataTransferService } from './_services/data-transfer.service';
 import { UserProfileComponent } from './user-profile/user_profile.component';
 import { UserRideComponent } from './user-profile/user-ride/user_ride.component';
 import { UserInfoComponent } from './user-profile/user-info/user_info.component';
@@ -67,6 +68,7 @@ registerLocaleData(localePl);
     FakeBackendProvider,
     RouteService,
     CitiesProvider,
+    DataTransferService,
     { provide: APP_INITIALIZER, useFactory: citiesProviderFactory, deps: [CitiesProvider], multi: true },
     { provide: MAT_DATE_LOCALE, useValue: 'pl' }
   ],
