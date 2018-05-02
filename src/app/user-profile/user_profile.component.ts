@@ -1,8 +1,9 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { User, UserService } from "../services/user.service";
-import { AuthService } from "../services/auth.service";
+import { User } from '../_models';
+import { AuthService } from '../_services/auth.service';
+import { UserService } from '../_services/user.service';
 
 
 @Component({

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../_services/auth.service';
 import { Router } from '@angular/router';
-import {User, UserService} from '../services/user.service';
+import { User } from "../_models";
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-nav',
@@ -11,10 +12,10 @@ import {User, UserService} from '../services/user.service';
 export class NavComponent implements OnInit {
 
   user: User;
-  userId:number;
+  userId: number;
   loggedIn: boolean;
 
-  constructor(private authService: AuthService,private userService:UserService, private router: Router) { }
+  constructor(private authService: AuthService, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.loggedIn = this.authService.isAuthenticated();
@@ -22,7 +23,7 @@ export class NavComponent implements OnInit {
       this.loggedIn = loggedIn;
       this.userId = parseInt(localStorage.getItem("id"));
       this.userService.getById(this.userId)
-        .subscribe(user=> this.user = user);
+        .subscribe(user => this.user = user);
     });
   }
 

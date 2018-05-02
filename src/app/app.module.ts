@@ -1,31 +1,35 @@
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule, LOCALE_ID, APP_INITIALIZER } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
-
-import { MaterialModule } from './modules/material.module';
+import { MaterialModule } from './_modules/material.module';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-
-import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NavComponent } from './nav/nav.component';
-import { NewRideComponent } from './new-ride/new-ride.component';
-import { AuthGuard } from './services/auth-guard.service';
-import { AuthService } from './services/auth.service';
-import { UserService } from './services/user.service';
-import { TokenProvider } from './helpers/token.interceptor';
-import { RideListComponent } from './ride-list/ride-list.component';
-import { RideComponent } from './ride-list/ride/ride.component';
-import { RideService } from './services/ride.service';
-import { UserProfileModule } from "./user-profile/user-profile.module";
-import { RideModule } from './ride-list/ride/ride.module';
+import { RouteComponent } from './route/route/route.component';
+import { NewRouteComponent } from './route/new-route/new-route.component';
+import { RouteListComponent } from './route/route-list/route-list.component';
+import { CitySearchComponent } from './city-search/city-search.component';
+import { AuthGuard } from './_services/auth-guard.service';
+import { AuthService } from './_services/auth.service';
+import { UserService } from './_services/user.service';
+import { CityService } from './_services/city.service';
+import { RouteService } from './_services/route.service';
+import { CitiesProvider, citiesProviderFactory } from './_providers/cities-provider';
+import { TokenProvider } from './_providers/token.interceptor';
+import { FakeBackendProvider } from './_providers/fake-backend';
 import localePl from '@angular/common/locales/pl';
 import { registerLocaleData } from '@angular/common';
 import { MatIconRegistry } from '@angular/material';
+import { UserProfileComponent } from './user-profile/user_profile.component';
+import { UserRideComponent } from './user-profile/user-ride/user_ride.component';
+import { UserInfoComponent } from './user-profile/user-info/user_info.component';
+import { PhotoComponent } from './user-profile/photo/photo.component';
 registerLocaleData(localePl);
 
 
@@ -36,24 +40,34 @@ registerLocaleData(localePl);
     HomeComponent,
     NavComponent,
     RegisterComponent,
-    NewRideComponent,
-    RideListComponent,
+    RouteListComponent,
+    NewRouteComponent,
+    RouteListComponent,
+    CitySearchComponent,
+    RouteComponent,
+    UserProfileComponent,
+    UserRideComponent,
+    UserInfoComponent,
+    PhotoComponent
   ],
   imports: [
     FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    UserProfileModule,
-    RideModule,
     MaterialModule,
   ],
   providers: [
     AuthService,
     AuthGuard,
     UserService,
+    CityService,
     TokenProvider,
-    RideService,
+    FakeBackendProvider,
+    RouteService,
+    CitiesProvider,
+    { provide: APP_INITIALIZER, useFactory: citiesProviderFactory, deps: [CitiesProvider], multi: true },
     { provide: MAT_DATE_LOCALE, useValue: 'pl' }
   ],
   bootstrap: [AppComponent]

@@ -1,8 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {User, UserService} from '../../services/user.service';
-import {AuthService} from '../../services/auth.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { User } from '../../_models';
+import { AuthService } from '../../_services/auth.service';
+import { UserService } from '../../_services/user.service';
 
 @Component({
   selector: 'app-profile-info',
@@ -14,7 +15,7 @@ export class UserInfoComponent implements OnInit {
   userModel: User = new User();
   userCopyModel: User;
   disableForm: boolean = true;
-  editOrCancel =  "Edytuj";
+  editOrCancel = "Edytuj";
 
   userId: number = parseInt(localStorage.getItem("id"));
 
@@ -36,7 +37,7 @@ export class UserInfoComponent implements OnInit {
 
 
   }
-  enableForm(){
+  enableForm() {
     this.disableForm = !this.disableForm;
     if (this.disableForm) {
       this.userModel = Object.assign({}, this.userCopyModel);
@@ -52,7 +53,7 @@ export class UserInfoComponent implements OnInit {
       () => {
       },
       error => {
-            console.log(error);
+        console.log(error);
       }
     );
   }

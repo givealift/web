@@ -1,7 +1,20 @@
-  <div [ngClass]="'col-md-12'" class="text-center center">
-    <h1>
-      Witaj w {{ title }}!
-    </h1>
-    <h2>Załap się na przejazd w każdej chwili, gdziekolwiek.</h2>
+<div class="welcome-text centered">
+  <h1>Załap się na przejazd w każdej chwili, gdziekolwiek.</h1>
+</div>
+<div class="row centered search-bar">
+  <app-city-search #fromCity [placeholder]="startCityPlaceholder" class="input-on-image centered" (enterPressed)="onEnter()"></app-city-search>
+  <app-city-search #toCity [placeholder]="endCityPlaceholder" class="input-on-image centered" (enterPressed)="onEnter()"></app-city-search>
 
-  </div>
+  <mat-form-field class="input-on-image centered">
+    <input matInput [min]="today" [matDatepicker]="picker" placeholder="Kiedy?" [formControl]="date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <button *ngIf="!showSpinner" mat-button class="btn-search" color="accent" mat-raised-button (click)="search(fromCity.selectedCity, toCity.selectedCity)">Szukaj</button>
+  <mat-spinner class="spinner" [diameter]="20" [style.display]="showSpinner ? 'inline' : 'none'"></mat-spinner>
+</div>
+
+<mat-card *ngIf="foundRoutes">
+  <pre>{{foundRoutes | json}}</pre>
+</mat-card>

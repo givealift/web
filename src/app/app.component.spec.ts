@@ -9,11 +9,12 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
 import { RegisterComponent } from './register/register.component';
-import { NewRideComponent } from './new-ride/new-ride.component';
-import { AuthService } from './services/auth.service';
+import { NewRouteComponent } from './route/new-route/new-route.component';
+import { AuthService } from './_services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
-import { UserService } from './services/user.service';
-import { MaterialModule } from './modules/material.module';
+import { CitySearchComponent } from './city-search/city-search.component';
+import { UserService } from './_services/user.service';
+import { MaterialModule } from './_modules/material.module';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -30,12 +31,14 @@ describe('AppComponent', () => {
         HomeComponent,
         LoginComponent,
         RegisterComponent,
-        NewRideComponent
+        NewRouteComponent,
+        CitySearchComponent
       ],
       imports: [
         RouterModule.forRoot(appRoutes),
         FormsModule, HttpClientModule,
-        MaterialModule
+        MaterialModule,
+        ReactiveFormsModule
       ],
       providers: [
         { provide: APP_BASE_HREF, useValue: "/" },

@@ -1,3 +1,54 @@
+/* .bg-image { 
+    background-image: url("../../assets/background.jpg");
+    height: 500px; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+*/
+
+.welcome-text h1 {
+    color: #ffffff;
+    font-size: 2.2rem;
+    background-color: #434343a6;
+    border-radius: 0px 0px 20px 20px;
+    padding: 10px;
+    -webkit-box-shadow: inset 10px 24px 26px -19px rgba(0,0,0,0.75);
+    box-shadow: inset 0 14px 30px -16px rgba(0,0,0,0.75);
+}
+
+mat-card {
+    width: 60%;
+    border-radius: 25px;
+}
+
+.centered {
+    display: flex;           /* establish flex container */
+      justify-content: center; /* center items vertically, in this case */
+      align-items: center;  
+  }
+
+.input-on-image {
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 15px;
+    max-width: 240px;
+    width: 100%;
+}
+
+.search-bar {
+    margin-top: 70px;
+}
+
+.btn-search {
+    border-radius: 10px;
+    max-width: 130px;
+    width: 100%;
+    padding: 5px;
+    margin: 15px;
+}
+
 .center {
     margin-top: 10%;
 }

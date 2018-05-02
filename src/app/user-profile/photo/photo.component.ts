@@ -1,29 +1,29 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
-import {UserService} from '../../services/user.service';
-import {DomSanitizer} from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
+import { UserService } from '../../_services/user.service';
 
 @Component({
   selector: 'app-profile-photo',
   templateUrl: './photo.component.html',
   styleUrls: ['./photo.component.css']
 })
-export class PhotoComponent implements OnInit{
+export class PhotoComponent implements OnInit {
   photo;
   sanitizedPhoto;
   userId: number = parseInt(localStorage.getItem("id"));
 
   @ViewChild('fileInput') fileInput;
 
-  constructor(private userService: UserService, private sanitizer: DomSanitizer ) {}
+  constructor(private userService: UserService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.userService.getPhoto(parseInt(localStorage.getItem("id")))
       .subscribe(photo => {
-          this.photo = photo;
-          let urlCreator = window.URL;
-          this.sanitizedPhoto = this.sanitizer.bypassSecurityTrustUrl(urlCreator.createObjectURL(this.photo));
-        }
+        this.photo = photo;
+        let urlCreator = window.URL;
+        this.sanitizedPhoto = this.sanitizer.bypassSecurityTrustUrl(urlCreator.createObjectURL(this.photo));
+      }
       )
   }
 
