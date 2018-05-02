@@ -1,23 +1,20 @@
 <mat-card>
-  <mat-grid-list cols="8" rows="5" rowHeight="25px">
-    <mat-grid-tile [colspan]="3" rowspan="1">
-      <div class="align-left">
+  <mat-grid-list cols="8" rows="5" rowHeight="32px" gutterSize="0px">
+    <mat-grid-tile colspan="3" rowspan="1" >
+      <div class="align-vertically">
         <h4>
-          OwnerId: {{routeData?.ownerId}} {{routeData?.driver.firstName}} {{routeData?.driver.lastName}}
+          OwnerId: {{routeData?.ownerId}}
+          <!-- {{routeData?.driver.firstName}} {{routeData?.driver.lastName}} -->
         </h4>
       </div>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="4" rowspan="5" class="borders">
-      <h5>
+    <mat-grid-tile colspan="4" rowspan="1" class="border-bottom">
+      <h4>
+        <mat-icon class="icon-align">alarm</mat-icon>
         <strong>{{routeData?.departureTime | date:'EEEE, d MMMM - H:mm':'':'pl'}}</strong>
-        <br/> {{routeData?.from.city.name}} -> {{routeData?.to.city.name}}
-        <h6 >
-            Miejsca: <strong class="text-primary">{{routeData?.numberOfOccupiedSeats}}/{{routeData?.numberOfSeats}}</strong>
-        </h6>
-      </h5>
-
+      </h4>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="1" rowspan="5">
+    <mat-grid-tile colspan="1" rowspan="5">
       <div class="show-on-hover">
         <button mat-icon-button matTooltip="Skontaktuj się" matTooltipPosition="right">
           <mat-icon>phone_iphone</mat-icon>
@@ -27,12 +24,43 @@
         </button>
       </div>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="3" rowspan="3">
+    <mat-grid-tile colspan="3" rowspan="3" >
       <img class="media-object" src="../../../assets/logo.png" height="64" width="64">
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="3" rowspan="1">
+    <mat-grid-tile colspan="3" rowspan="1">
+      <h5 class="text-truncate">
+        <mat-icon class="icon-align">directions_car</mat-icon>
+        {{routeData?.from?.city?.name}} &#10145; {{routeData?.to?.city?.name}}
+      </h5>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="4">
+      <h4>
+        <strong>
+          <p class="text-primary">{{routeData?.price}} zł</p>
+        </strong>
+      </h4>
+
+    </mat-grid-tile>
+    <mat-grid-tile colspan="3" rowspan="2">
+      <h6 class="text-truncate">
+        <mat-icon class="icon-align">pin_drop</mat-icon>
+        <strong>{{routeData?.from?.city?.name}}</strong>, ul. {{routeData?.from?.street}} {{routeData?.from?.buildingNumber}}
+        <br/>
+        <mat-icon class="icon-align">pin_drop</mat-icon>
+        <strong>{{routeData?.to?.city?.name}}</strong>, ul. {{routeData?.to?.street}} {{routeData?.to?.buildingNumber}}
+      </h6>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="3" rowspan="1" >
       <h6 class="text-primary">
-          Ocena: 4.5/5.0
+        Ocena:
+        <strong>4.5/5.0</strong>
+      </h6>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="3" rowspan="1">
+      <h6 class="text-primary text-center">
+        Miejsca:
+        <strong>{{routeData?.numberOfOccupiedSeats}}/{{routeData?.numberOfSeats}}</strong>
       </h6>
     </mat-grid-tile>
   </mat-grid-list>
