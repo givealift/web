@@ -6,6 +6,8 @@ import { CityService } from '../_services/city.service';
 import { RouteService } from '../_services/route.service';
 import { Observable } from 'rxjs/Observable';
 import { City, Route } from '../_models';
+import { Router } from '@angular/router';
+import { DataTransferService } from '../_services/data-transfer.service';
 
 
 @Component({
@@ -30,7 +32,9 @@ export class HomeComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private cityService: CityService,
-    private routeService: RouteService) { }
+    private routeService: RouteService,
+    private router: Router,
+    private dataTransferService: DataTransferService) { }
 
   ngOnInit() {
     this.authService.loggedInStatus.subscribe(loggedIn => this.loggedIn = loggedIn);
@@ -38,7 +42,7 @@ export class HomeComponent implements OnInit {
 
   onEnter() {
     let button: HTMLElement = document.getElementsByClassName("btn-search")[0] as HTMLElement
-    button.click();    
+    button.click();
   }
 
   search(fromCity: City, toCity: City) {
@@ -49,7 +53,8 @@ export class HomeComponent implements OnInit {
       .subscribe(routes => {
         this.foundRoutes = routes;
         console.log(routes); // temporary action with fetched routes
-        this.showSpinner = false;
+        this.dataTransferService.storeData('route-list', routes);
+        this.router.navigate(['route-list']);
       }, err => {
         this.showSpinner = false;
       })

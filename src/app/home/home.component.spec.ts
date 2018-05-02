@@ -11,6 +11,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CityService } from '../_services/city.service';
 import { RouteService } from '../_services/route.service';
 import { CitiesProvider } from '../_providers/cities-provider';
+import { DataTransferService } from '../_services/data-transfer.service';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -33,7 +34,8 @@ describe('HomeComponent', () => {
         UserService,
         CityService,
         RouteService,
-        CitiesProvider
+        CitiesProvider,
+        DataTransferService
       ]
     })
       .compileComponents();

@@ -1,20 +1,23 @@
 <mat-card>
-  <mat-grid-list cols="8" rows="3" rowHeight="30px">
-    <mat-grid-tile [colspan]="3">
+  <mat-grid-list cols="8" rows="5" rowHeight="25px">
+    <mat-grid-tile [colspan]="3" rowspan="1">
       <div class="align-left">
         <h4>
-          {{routeData.driver?.firstName}} {{routeData.driver?.lastName}}
+          OwnerId: {{routeData?.ownerId}} {{routeData?.driver.firstName}} {{routeData?.driver.lastName}}
         </h4>
       </div>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="4" rowspan="3" class="borders">
+    <mat-grid-tile [colspan]="4" rowspan="5" class="borders">
       <h5>
-        <strong>{{routeData.date | date:'EEEE, d MMMM - H:mm':'':'pl'}}</strong>
-        <br/> {{routeData.from}} -> {{routeData.to}}
+        <strong>{{routeData?.departureTime | date:'EEEE, d MMMM - H:mm':'':'pl'}}</strong>
+        <br/> {{routeData?.from.city.name}} -> {{routeData?.to.city.name}}
+        <h6 >
+            Miejsca: <strong class="text-primary">{{routeData?.numberOfOccupiedSeats}}/{{routeData?.numberOfSeats}}</strong>
+        </h6>
       </h5>
 
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="1" rowspan="3">
+    <mat-grid-tile [colspan]="1" rowspan="5">
       <div class="show-on-hover">
         <button mat-icon-button matTooltip="Skontaktuj się" matTooltipPosition="right">
           <mat-icon>phone_iphone</mat-icon>
@@ -24,8 +27,13 @@
         </button>
       </div>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="3" rowspan="2">
+    <mat-grid-tile [colspan]="3" rowspan="3">
       <img class="media-object" src="../../../assets/logo.png" height="64" width="64">
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="3" rowspan="1">
+      <h6 class="text-primary">
+          Ocena: 4.5/5.0
+      </h6>
     </mat-grid-tile>
   </mat-grid-list>
 </mat-card>

@@ -31,6 +31,7 @@ import { FakeBackendProvider } from './_providers/fake-backend';
 import localePl from '@angular/common/locales/pl';
 import { registerLocaleData } from '@angular/common';
 import { MatIconRegistry } from '@angular/material';
+import { DataTransferService } from './_services/data-transfer.service';
 registerLocaleData(localePl);
 
 
@@ -63,6 +64,7 @@ registerLocaleData(localePl);
     FakeBackendProvider,
     RouteService,
     CitiesProvider,
+    DataTransferService,
     { provide: APP_INITIALIZER, useFactory: citiesProviderFactory, deps: [CitiesProvider], multi: true },
     { provide: MAT_DATE_LOCALE, useValue: 'pl' }
   ],
