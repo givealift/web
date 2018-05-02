@@ -10,15 +10,16 @@ import {
     , MatCardModule
     , MatDatepickerModule
     , MatListModule
-    , MatRadioModule
-    , MatGridListModule
-    , MatExpansionModule
+    , MatTabsModule
     , MatFormFieldModule
     , MatOptionModule
     , MatAutocompleteModule
     , MatTooltipModule
     , MatTooltip
     , MatIconRegistry
+    , MatRadioModule
+    , MatGridListModule
+    , MatExpansionModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
@@ -37,6 +38,7 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
         , MatDatepickerModule
         , MatMomentDateModule
         , MatListModule
+        , MatTabsModule
         , MatRadioModule
         , MatGridListModule
         , MatExpansionModule
@@ -57,6 +59,7 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
         , MatDatepickerModule
         , MatMomentDateModule
         , MatListModule
+        , MatTabsModule
         , MatRadioModule
         , MatGridListModule
         , MatExpansionModule

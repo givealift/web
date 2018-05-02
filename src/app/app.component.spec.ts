@@ -2,7 +2,6 @@ import { TestBed, async } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { APP_BASE_HREF } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -13,8 +12,9 @@ import { RegisterComponent } from './register/register.component';
 import { NewRouteComponent } from './route/new-route/new-route.component';
 import { AuthService } from './_services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
-import { MaterialModule } from './_modules/material.module';
 import { CitySearchComponent } from './city-search/city-search.component';
+import { UserService } from './_services/user.service';
+import { MaterialModule } from './_modules/material.module';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -41,7 +41,9 @@ describe('AppComponent', () => {
         ReactiveFormsModule
       ],
       providers: [
-        { provide: APP_BASE_HREF, useValue: "/" }, AuthService
+        { provide: APP_BASE_HREF, useValue: "/" },
+        AuthService,
+        UserService
       ]
     }).compileComponents();
   }));
