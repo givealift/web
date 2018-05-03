@@ -13,49 +13,28 @@ import { UserService } from '../../_services/user.service';
 export class UserInfoComponent implements OnInit {
 
   userModel: User = new User();
-  userCopyModel: User;
-  disableForm: boolean = true;
-  editOrCancel = "Edytuj";
 
-  userId: number = parseInt(localStorage.getItem("id"));
+  userId: number;
 
   @ViewChild('form') form: NgForm;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private authService: AuthService,
-    private userService: UserService
-  ) { }
+  constructor(private route: ActivatedRoute, private router: Router, private userService: UserService) {
+    this.route.params.subscribe(
+      param => this.userId = param.id,
+      error => this.router.navigate['home']
+    );
+  }
 
   ngOnInit() {
     this.userService.getById(this.userId)
-      .subscribe(user => {
-        this.userModel = user;
-        this.userCopyModel = Object.assign({}, this.userModel);
-      });
-
-
-  }
-  enableForm() {
-    this.disableForm = !this.disableForm;
-    if (this.disableForm) {
-      this.userModel = Object.assign({}, this.userCopyModel);
-    }
-    this.editOrCancel = this.disableForm ? "Edytuj" : "Anuluj";
-
-  }
-
-
-
-  onSubmit() {
-    this.userService.update(this.userModel).subscribe(
-      () => {
-      },
-      error => {
-        console.log(error);
-      }
-    );
+      .subscribe(
+        user => {
+          this.userModel = user;
+          console.log(user);
+        },
+        error => {
+          this.router.navigate[''];
+        });
   }
 
 }

@@ -1,38 +1,48 @@
-/*import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RegisterComponent } from './user_profile.component';
-import { NgForm } from '@angular/forms';
-import { Component, ViewChild } from '@angular/core';
-import { RouterTestingModule } from '@angular/router/testing';
-import { UserService } from '../services/user.service';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from '../services/auth.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MaterialModule } from '../../_modules/material.module';
+import { RouteListComponent } from '../../route/route-list/route-list.component';
+import { RouteComponent } from '../../route/route/route.component';
+import { RouteService } from '../../_services/route.service';
+import { CitySearchComponent } from '../../city-search/city-search.component';
+import { CityService } from '../../_services/city.service';
+import { CitiesProvider } from '../../_providers/cities-provider';
+import { AuthService } from '../../_services/auth.service';
+import { UserService } from '../../_services/user.service';
+import { DataTransferService } from '../../_services/data-transfer.service';
+import { UserInfoComponent } from './user_info.component';
 
-describe('RegisterComponent', () => {
-  let component: RegisterComponent;
-  let fixture: ComponentFixture<RegisterComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [RegisterComponent],
-      imports: [FormsModule,
-        RouterTestingModule,
-        HttpClientModule],
-      providers: [
-        UserService,
-        AuthService
-      ]
-    })
-      .compileComponents();
-  }));
+describe('UserInfoComponent', () => {
+    let component: UserInfoComponent;
+    let fixture: ComponentFixture<UserInfoComponent>;
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(RegisterComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [
+                UserInfoComponent,
+            ],
+            imports: [
+                MaterialModule,
+                RouterTestingModule,
+                HttpClientModule,
+                MaterialModule
+            ],
+            providers: [
+              UserService
+            ]
+        })
+            .compileComponents();
+    }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});*/
+    beforeEach(() => {
+        fixture = TestBed.createComponent(UserInfoComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
+});
