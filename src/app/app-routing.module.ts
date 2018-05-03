@@ -5,11 +5,11 @@ import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { HomeComponent } from "./home/home.component";
 import { UserInfoComponent } from "./user-profile/user-info/user_info.component";
-import { UserRideComponent } from "./user-profile/user-ride/user_ride.component";
 import { UserProfileComponent } from "./user-profile/user_profile.component";
 import { AuthGuard } from "./_services/auth-guard.service";
 import { NewRouteComponent } from "./route/new-route/new-route.component";
 import { RouteListComponent } from "./route/route-list/route-list.component";
+import { UserRouteComponent } from "./user-profile/user-route/user-route.component";
 
 const routes: Routes = [
 
@@ -21,7 +21,7 @@ const routes: Routes = [
   {
     path: 'profile', component: UserProfileComponent, children: [
       { path: 'info', component: UserInfoComponent },
-      { path: 'routes', component: UserRideComponent },
+      { path: 'routes', component: UserRouteComponent },
     ]
   },
 
