@@ -35,6 +35,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 case (request.url.match(/route\/search/) && request.method === 'GET'):
                     return this.searchRoute(request);
 
+                case (request.url.match(/api\/user\/favourites\/\d+/) && request.method === 'GET'):
+                    return this.getUserFavourites(request);
+
                 // // create user
                 // case (request.url.endsWith('/api/user/') && request.method === 'POST'):
                 //     return this.createUser(request);
@@ -61,7 +64,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             .dematerialize();
     }
 
-    // private createUser(request: HttpRequest<any>) {
+    private getUserFavourites (request) {
+        let userFavouriteIds = [203, 212];
+        let favRoutes = this.sampleroutes.filter(
+            route => {
+                return userFavouriteIds.indexOf(route.routeId) !== -1;
+            }
+        );
+        return Observable.of(new HttpResponse({ status: 200, body: favRoutes}));
+    }
+
+    private createUser(request: HttpRequest<any>) {
 
     //     let newUser = request.body;
 
@@ -146,17 +159,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return Observable.of(new HttpResponse({ status: 200 }));
     }
 
-    private createTestRoute() {
-        let newroute: Route = new Route();
-        newroute.routeId = mockRoutes.length + 1;
-        let newDriver: User = JSON.parse(localStorage.getItem('currentUser'));
-        newroute.ownerId = newDriver.id;
-        newroute.from.city.cityId = "19";
-        newroute.to.city.cityId = "1";
+    // private createTestRoute() {
+    //     let newroute: Route = new Route();
+    //     newroute.routeId = mockRoutes.length + 1;
+    //     let newDriver: User = JSON.parse(localStorage.getItem('currentUser'));
+    //     newroute.ownerId = newDriver.id;
+    //     newroute.from.city.cityId = "19";
+    //     newroute.to.city.cityId = "1";
 
-        mockRoutes.push(newroute);
-        localStorage.setItem('mock-routes', JSON.stringify(mockRoutes));
-    }
+    //     mockRoutes.push(newroute);
+    //     localStorage.setItem('mock-routes', JSON.stringify(mockRoutes));
+    // }
 
     private getRoutesList(request: HttpRequest<any>) {
         return Observable.of(new HttpResponse({

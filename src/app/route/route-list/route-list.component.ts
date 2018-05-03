@@ -10,7 +10,7 @@ import { DataTransferService } from '../../_services/data-transfer.service';
 })
 export class RouteListComponent implements OnInit {
 
-  routes: any = [];
+  @Input() routes: any = [];
 
   constructor(private dataTransferService: DataTransferService){}
 

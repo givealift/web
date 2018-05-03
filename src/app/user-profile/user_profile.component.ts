@@ -32,6 +32,7 @@ export class UserProfileComponent implements OnInit {
     //this.userService.getById(this.userId)
     //  .subscribe(user => {this.userModel = user; console.log(this.userModel)} );
     // this.form.form.disable();
+    console.log(this.router.url);
 
   }
   enableForm() {
