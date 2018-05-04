@@ -12,21 +12,22 @@ export class RouteComponent implements OnInit {
   @Input()
   routeData: Route = new Route();
 
-  userData: User;
+  //input dostaje od Component'u: Route-list, wnioskowany ze scierzyki ( router )
+  @Input()
+  isThisProfileFavouriteRoutes: boolean = false;
 
-  constructor(private userService: UserService) {
-  }
-
-  ngOnInit() {
-    let userId = this.routeData.ownerId;
-    this.userService.getById(userId)
-      .subscribe(user => {
-        this.userData = user;
-      });
-  }
+  constructor() { }
 
   onClick() {
 
+  }
+
+  getClassName() {
+    if ( this.isThisProfileFavouriteRoutes === true ) {
+      return "favouriteRouteStyle";
+    } else {
+      return ""; //route
+    }
   }
 
 }

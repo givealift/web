@@ -4,3 +4,10 @@
     margin-right: 30%;
     border: black 2px;
 }
+
+.favouriteRoutesStyle {
+  margin-top: 15px;
+  margin-left: 10%;
+  margin-right: 10%;
+  border: green 5px;
+}

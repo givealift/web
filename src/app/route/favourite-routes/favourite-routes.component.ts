@@ -13,6 +13,7 @@ export class FavouriteRoutesComponent implements OnInit {
   ) { }
 
   public favouriteRoutes;
+  public isThisFavouriteRoutes_var: boolean = false;
 
   ngOnInit() {
     this.userService.getUserFavourites(1).subscribe(
@@ -20,7 +21,9 @@ export class FavouriteRoutesComponent implements OnInit {
         console.log('worked: ', routes);
         this.favouriteRoutes = routes;
       }
-    )
+    );
+
+    this.isThisFavouriteRoutes_var = true;
   }
 
 }

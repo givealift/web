@@ -5,6 +5,13 @@ mat-card {
     opacity: 1;
 }
 
+mat-card.favouriteRouteStyle {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 10px;
+  opacity: 50;
+}
+
 .align-left {
     position: absolute;
     text-align: left;
@@ -51,3 +58,15 @@ button:hover {
 .align-vertically {
     margin-top: 5px;
 }
+
+
+
+
+/* .borders {
+    border-left: dashed gray 1px;
+    border-right: dashed gray 1px;
+}
+
+mat-grid-tile {
+    border: dashed gray 1px;
+} */
