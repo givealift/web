@@ -12,13 +12,13 @@ export class FavouriteRoutesComponent implements OnInit {
     private userService: UserService
   ) { }
 
-  public ourRoutes;
+  public favouriteRoutes;
 
   ngOnInit() {
     this.userService.getUserFavourites(1).subscribe(
       routes => {
         console.log('worked: ', routes);
-        this.ourRoutes = routes;
+        this.favouriteRoutes = routes;
       }
     )
   }

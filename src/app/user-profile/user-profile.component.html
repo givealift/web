@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="isShowProfile()">
     <nav mat-tab-nav-bar label="profile-tab">
         <a mat-tab-link routerLinkActive #rlaRide="routerLinkActive" [active]="rlaRide.isActive" routerLink='routes'>
             Przejazdy
