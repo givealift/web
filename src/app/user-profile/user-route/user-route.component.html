@@ -1,1 +1,3 @@
-<app-route-list></app-route-list>
+<div class="routeList">
+  <app-route *ngFor="let route of routes" [routeData]="route"></app-route>
+</div>

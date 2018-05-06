@@ -1,11 +1,24 @@
-
+<button mat-raised-button class="hoverable" type="submit" [disabled]="!form.valid" (click)="updateUser()">
+  Zapisz
+</button>
+<form #form="ngForm">
   <mat-grid-list cols="8" rows="11" rowHeight="40px">
+
     <mat-grid-tile colspan="2" rowspan="3">
       <app-profile-photo></app-profile-photo>
     </mat-grid-tile>
     <mat-grid-tile colspan="6" rowspan="2">
       <h1>
-        {{user.firstName}} {{user.lastName}}
+        <div class="row center">
+          <mat-form-field class="inline-form-field">
+            <input matInput [(ngModel)]="user.firstName" name="firstname" required #firstRef="ngModel"/>
+            <mat-error *ngIf="firstRef.invalid ">Wpisz poprawne imię!</mat-error>
+          </mat-form-field>
+          <mat-form-field class="inline-form-field">
+            <input matInput [(ngModel)]="user.lastName" name="lastname" required #lastRef="ngModel"/>
+            <mat-error *ngIf="lastRef.invalid ">Wpisz poprawne nazwisko!</mat-error>
+          </mat-form-field>
+        </div>
       </h1>
     </mat-grid-tile>
     <mat-grid-tile colspan="6" rowspan="1">
@@ -23,7 +36,10 @@
     <mat-grid-tile colspan="6" rowspan="1">
       <h5 class="align-left">
         <mat-icon>mail_outline</mat-icon>
-        {{user.email}}
+        <mat-form-field>
+          <input matInput [(ngModel)]="user.email" name="mail" required email #mailRef="ngModel"/>
+          <mat-error *ngIf="mailRef.invalid">Wpisz poprawnego maila!</mat-error>
+        </mat-form-field>
       </h5>
     </mat-grid-tile>
     <mat-grid-tile colspan="2" rowspan="3">
@@ -32,7 +48,12 @@
     <mat-grid-tile colspan="6" rowspan="1">
       <h5 class="align-left">
         <mat-icon>phone</mat-icon>
-        {{user.phone}}
+        <mat-form-field>
+          <input matInput [(ngModel)]="user.phone" name="phone" required #phoneRef="ngModel"
+                 pattern="^\+?[1-9]{1}[0-9]{3,14}$"
+          />
+          <mat-error *ngIf="phoneRef.invalid">Wpisz poprawny numer telefonu!</mat-error>
+        </mat-form-field>
       </h5>
     </mat-grid-tile>
     <mat-grid-tile colspan="6" rowspan="1">
@@ -52,10 +73,15 @@
       <h4 class="align-vertically"> O sobie: </h4>
     </mat-grid-tile>
     <mat-grid-tile colspan="8" rowspan="3">
-      <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis justo tellus. Sed leo erat, bibendum id turpis
+      <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis justo tellus. Sed leo erat, bibendum id
+        turpis
         vel, placerat dignissim justo. Morbi volutpat justo sit amet elit scelerisque, et faucibus lorem faucibus. Etiam
-        ac tellus euismod eros ultrices malesuada quis non nibh. Aenean placerat dui at enim mattis, in luctus lacus placerat.
-        Vivamus consectetur enim orci, sit amet ultrices nunc vehicula sed. Proin varius justo orci, eu mollis orci luctus
+        ac tellus euismod eros ultrices malesuada quis non nibh. Aenean placerat dui at enim mattis, in luctus lacus
+        placerat.
+        Vivamus consectetur enim orci, sit amet ultrices nunc vehicula sed. Proin varius justo orci, eu mollis orci
+        luctus
         non. Quisque varius augue sit amet sagittis porttitor.</h6>
     </mat-grid-tile>
+
   </mat-grid-list>
+</form>
