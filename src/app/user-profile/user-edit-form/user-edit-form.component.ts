@@ -8,8 +8,10 @@ import {UserService} from "../../_services/user.service";
   styleUrls: ['./user-edit-form.component.css']
 })
 export class UserEditFormComponent implements OnInit {
+
+  @Input() 
+  user: User = new User();
   
-  @Input() user: User;
   userId: number = parseInt(localStorage.getItem("id"));
   @Output() userChange: EventEmitter<User>;
 
