@@ -5,7 +5,7 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="6" rowspan="2">
       <h1>
-        {{user.firstName}} {{user.lastName}}
+        {{user?.firstName}} {{user?.lastName}}
       </h1>
     </mat-grid-tile>
     <mat-grid-tile colspan="6" rowspan="1">
@@ -23,7 +23,7 @@
     <mat-grid-tile colspan="6" rowspan="1">
       <h5 class="align-left">
         <mat-icon>mail_outline</mat-icon>
-        {{user.email}}
+        {{user?.email}}
       </h5>
     </mat-grid-tile>
     <mat-grid-tile colspan="2" rowspan="3">
@@ -32,7 +32,7 @@
     <mat-grid-tile colspan="6" rowspan="1">
       <h5 class="align-left">
         <mat-icon>phone</mat-icon>
-        {{user.phone}}
+        {{user?.phone}}
       </h5>
     </mat-grid-tile>
     <mat-grid-tile colspan="6" rowspan="1">

@@ -7,6 +7,9 @@ import { AuthService } from '../../_services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../../_services/user.service';
 import { FormsModule } from '@angular/forms';
+import { UserInfoComponent } from '../user-info/user_info.component';
+import { UserEditFormComponent } from '../user-edit-form/user-edit-form.component';
+import { PhotoComponent } from '../photo/photo.component';
 
 describe('UserEditComponent', () => {
   let component: UserEditComponent;
@@ -16,6 +19,9 @@ describe('UserEditComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         UserEditComponent,
+        UserInfoComponent,
+        UserEditFormComponent,
+        PhotoComponent
       ],
       imports: [
         MaterialModule,

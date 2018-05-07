@@ -12,6 +12,7 @@ import { AuthService } from '../../_services/auth.service';
 import { UserService } from '../../_services/user.service';
 import { DataTransferService } from '../../_services/data-transfer.service';
 import { UserInfoComponent } from './user_info.component';
+import { PhotoComponent } from '../photo/photo.component';
 
 
 describe('UserInfoComponent', () => {
@@ -22,6 +23,7 @@ describe('UserInfoComponent', () => {
         TestBed.configureTestingModule({
             declarations: [
                 UserInfoComponent,
+                PhotoComponent
             ],
             imports: [
                 MaterialModule,
