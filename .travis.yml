@@ -9,4 +9,4 @@ before_script:
    - npm install -g @angular/cli
 
 script:
-   - ng test --single-run
+   - ng test --single-run --sourcemaps=false
