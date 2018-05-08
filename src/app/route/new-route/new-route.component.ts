@@ -15,8 +15,6 @@ export class NewRouteComponent {
   // @ViewChild('form2') routeDetailForm: NgForm;
   @ViewChild('form3') additionalLocationsForm: NgForm;
 
-  isLinear = true;
-
   timeModel: any = {};
 
   routeModel: Route = new Route();
