@@ -13,11 +13,18 @@ export class NewRouteComponent {
 
   // @ViewChild('form1') routeForm: NgForm;
   // @ViewChild('form2') routeDetailForm: NgForm;
+  @ViewChild('form3') additionalLocationsForm: NgForm;
 
   isLinear = true;
 
+  timeModel: any = {};
+
   routeModel: Route = new Route();
   showSpinner = false;
+
+  chipModel: any = {};
+
+  cityChips: any = [];
 
   constructor(private router: Router,
     private routeService: RouteService) { }
@@ -35,6 +42,20 @@ export class NewRouteComponent {
       }
     )
   }
+
+  addChip() {
+    this.cityChips.push(this.chipModel);
+    this.chipModel = {};
+    this.additionalLocationsForm.reset();
+  }
+
+  remove(chip: any) {
+    let index = this.cityChips.indexOf(chip);
+
+    if (index >= 0)
+      this.cityChips.splice(index, 1);
+  }
+
 
 
 }
