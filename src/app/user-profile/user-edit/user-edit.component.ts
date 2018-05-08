@@ -32,7 +32,6 @@ export class UserEditComponent implements OnInit {
     this.userService.getById(this.userId)
       .subscribe(user => {
         this.userModel = user;
-        console.log(this.userModel);
         this.userCopyModel = Object.assign({}, this.userModel);
       });
 
@@ -51,6 +50,8 @@ export class UserEditComponent implements OnInit {
     console.log(eventUser);
     this.userModel = eventUser;
     this.userCopyModel = Object.assign({}, this.userModel);
+    this.disableForm = !this.disableForm;
+    this.editOrCancel = this.disableForm ? "Edytuj" : "Anuluj";
   }
 
 

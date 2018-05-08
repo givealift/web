@@ -15,9 +15,8 @@ export class UserService {
     }
 
     getUserRides(id: number, page: number) {
-        let params = new HttpParams();
-        params.append('page', page.toLocaleString());
-      return this.http.get<Route[]>(this.ApiPath + "/user/rout/" + id, {params: params});
+      let params = new HttpParams().set('page', page.toLocaleString());
+      return this.http.get<Route[]>(this.ApiPath + "/user/route/" + id, {params: params});
 
     }
 
