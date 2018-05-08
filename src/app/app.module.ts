@@ -31,6 +31,7 @@ import { UserProfileComponent } from './user-profile/user_profile.component';
 import { UserRideComponent } from './user-profile/user-ride/user_ride.component';
 import { UserInfoComponent } from './user-profile/user-info/user_info.component';
 import { PhotoComponent } from './user-profile/photo/photo.component';
+
 registerLocaleData(localePl);
 
 
@@ -49,7 +50,7 @@ registerLocaleData(localePl);
     UserProfileComponent,
     UserRideComponent,
     UserInfoComponent,
-    PhotoComponent
+    PhotoComponent,
   ],
   imports: [
     FormsModule,
