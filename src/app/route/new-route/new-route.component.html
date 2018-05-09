@@ -39,12 +39,21 @@
                         </mat-form-field>
                     </mat-grid-tile>
 
-                    <mat-grid-tile colspan="2" rowspan="3">
+                    <mat-grid-tile colspan="1" rowspan="3">
                         <mat-form-field>
-                            <input matInput name="date" [min]="today" [matDatepicker]="picker" required placeholder="Kiedy?" #dateRef="ngModel" [(ngModel)]="routeModel.date">
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                            <mat-error *ngIf="dateRef.invalid">Wybierz datę!</mat-error>
+                            <input matInput name="dateFrom" [min]="today" [matDatepicker]="pickerFrom" required placeholder="Data odjazdu" #dateFromRef="ngModel" [(ngModel)]="routeModel.from.date">
+                            <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerFrom></mat-datepicker>
+                            <mat-error *ngIf="dateFromRef.invalid">Wybierz datę!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="1" rowspan="3">
+                        <mat-form-field>
+                            <input matInput name="dateTo" [min]="today" [matDatepicker]="pickerTo" required placeholder="Data przyjazdu" #dateToRef="ngModel" [(ngModel)]="routeModel.to.date">
+                            <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerTo></mat-datepicker>
+                            <mat-error *ngIf="dateToRef.invalid">Wybierz datę!</mat-error>
                         </mat-form-field>
                     </mat-grid-tile>
 

@@ -23,14 +23,14 @@ export class NewRouteComponent {
   showSpinner = false;
 
   chipModel: any = {};
-
-  cityChips: any = [];
+  cityChips = new Array<Location>();
 
   constructor(private router: Router,
     private routeService: RouteService) {
   }
 
   onSubmit() {
+    this.routeModel.stops = this.cityChips;
     this.showSpinner = true;
     this.routeModel.driver = JSON.parse(localStorage.getItem('currentUser'));
     this.routeService.create(this.routeModel).subscribe(
