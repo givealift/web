@@ -8,11 +8,11 @@ import { Route } from '../../_models';
 
 
 @Component({
-  selector: 'app-profile-ride',
-  templateUrl: './user-ride.component.html',
-  styleUrls: ['./user_ride.component.css']
+  selector: 'app-profile-route',
+  templateUrl: './user-route.component.html',
+  styleUrls: ['./user-route.component.css']
 })
-export class UserRideComponent implements OnInit {
+export class UserRouteComponent implements OnInit {
   userId: number = parseInt(localStorage.getItem("id"));
   routes: Route[];
   page: number = 0;
@@ -21,7 +21,6 @@ export class UserRideComponent implements OnInit {
     private routeService: RouteService,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService,
     private userService: UserService
   ) { }
 

@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
+import { UserRouteComponent } from './user-route.component';
 import { MaterialModule } from '../../_modules/material.module';
 import { RouteListComponent } from '../../route/route-list/route-list.component';
 import { RouteComponent } from '../../route/route/route.component';
@@ -11,35 +12,37 @@ import { CitiesProvider } from '../../_providers/cities-provider';
 import { AuthService } from '../../_services/auth.service';
 import { UserService } from '../../_services/user.service';
 import { DataTransferService } from '../../_services/data-transfer.service';
-import { UserInfoComponent } from './user_info.component';
-import { PhotoComponent } from '../photo/photo.component';
 
 
-describe('UserInfoComponent', () => {
-    let component: UserInfoComponent;
-    let fixture: ComponentFixture<UserInfoComponent>;
+describe('UserRouteComponent', () => {
+    let component: UserRouteComponent;
+    let fixture: ComponentFixture<UserRouteComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                UserInfoComponent,
-                PhotoComponent
+                UserRouteComponent,
+                RouteListComponent,
+                RouteComponent
             ],
             imports: [
-                MaterialModule,
-                RouterTestingModule,
                 HttpClientModule,
+                RouterTestingModule,
                 MaterialModule
             ],
             providers: [
-              UserService
+                RouteService,
+                CityService,
+                CitiesProvider,
+                UserService,
+                DataTransferService
             ]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(UserInfoComponent);
+        fixture = TestBed.createComponent(UserRouteComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

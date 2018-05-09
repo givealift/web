@@ -5,11 +5,12 @@ import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { HomeComponent } from "./home/home.component";
 import { UserInfoComponent } from "./user-profile/user-info/user_info.component";
-import { UserRideComponent } from "./user-profile/user-ride/user_ride.component";
 import { UserProfileComponent } from "./user-profile/user_profile.component";
 import { AuthGuard } from "./_services/auth-guard.service";
 import { NewRouteComponent } from "./route/new-route/new-route.component";
 import { RouteListComponent } from "./route/route-list/route-list.component";
+import { UserRouteComponent } from "./user-profile/user-route/user-route.component";
+import { UserEditComponent } from "./user-profile/user-edit/user-edit.component";
 
 const routes: Routes = [
 
@@ -18,10 +19,11 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'new-route', component: NewRouteComponent, canActivate: [AuthGuard] },
   { path: 'route-list', component: RouteListComponent },
+  { path: 'user/:id', component: UserInfoComponent },
   {
     path: 'profile', component: UserProfileComponent, children: [
-      { path: 'info', component: UserInfoComponent },
-      { path: 'routes', component: UserRideComponent },
+      { path: 'edit', component: UserEditComponent },
+      { path: 'routes', component: UserRouteComponent },
     ]
   },
 
