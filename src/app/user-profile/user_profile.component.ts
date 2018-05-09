@@ -1,9 +1,9 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { FormGroup, NgForm } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { User } from '../_models';
-import { AuthService } from '../_services/auth.service';
-import { UserService } from '../_services/user.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {User} from '../_models';
+import {AuthService} from '../_services/auth.service';
+import {UserService} from '../_services/user.service';
 
 
 @Component({
@@ -41,7 +41,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    this.userService.update(this.userModel).subscribe(
+    this.userService.update(this.userModel, this.userId).subscribe(
       () => {
 
       },

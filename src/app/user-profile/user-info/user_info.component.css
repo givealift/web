@@ -1,3 +1,24 @@
 mat-card {
+    margin-top: 30px;
     border-radius: 25px;
+    width: 40%;
+}
+
+mat-grid-tile .align-left {
+    position: absolute;
+    left: 5px;
+}
+
+mat-icon {
+    position: relative;
+    top: 3px;
+}
+
+.top-border {
+    border-top: 1px dashed gray;
+}
+
+mat-grid-tile .align-vertically {
+    position: absolute;
+    top: 10px;
 }
