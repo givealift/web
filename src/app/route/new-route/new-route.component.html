@@ -41,7 +41,7 @@
 
                     <mat-grid-tile colspan="2" rowspan="3">
                         <mat-form-field>
-                            <input matInput name="date" [matDatepicker]="picker" required placeholder="Kiedy?" #dateRef="ngModel" [(ngModel)]="routeModel.date">
+                            <input matInput name="date" [min]="today" [matDatepicker]="picker" required placeholder="Kiedy?" #dateRef="ngModel" [(ngModel)]="routeModel.date">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                             <mat-error *ngIf="dateRef.invalid">Wybierz datę!</mat-error>
@@ -117,7 +117,21 @@
                         </mat-chip-list>
                     </mat-grid-tile>
 
+                    <mat-grid-tile colspan="2" rowspan="2">
+                        <mat-form-field>
+                            <input matInput [min]="today" name="date" [matDatepicker]="picker2" required placeholder="Data" #optDateRef="ngModel" [(ngModel)]="chipModel.date">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                            <mat-error *ngIf="optDateRef.invalid">Wybierz datę!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
 
+                    <mat-grid-tile colspan="2" rowspan="2">
+                        <mat-form-field>
+                            <input matInput name="timeOpt" type="time" required placeholder="Odjazd" step="600" #optTimeRef="ngModel" [(ngModel)]="chipModel.time">
+                            <mat-error *ngIf="optTimeRef.invalid">Wybierz godzinę odjazdu!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
 
                     <mat-grid-tile colspan="2" rowspan="2">
                         <button mat-raised-button [disabled]="!form3.valid" (click)="addChip()">
@@ -125,7 +139,7 @@
                         </button>
                     </mat-grid-tile>
                     <mat-grid-tile colspan="4" rowspan="2">
-                        <button mat-raised-button matStepperNext>
+                        <button mat-raised-button matStepperNext (click)="completeOptionalStep()">
                             Dalej
                         </button>
                     </mat-grid-tile>
@@ -140,7 +154,7 @@
                 <mat-grid-list cols="2" rows="12" rowHeight="35px">
                     <mat-grid-tile colspan="2" rowspan="2">
 
-                        <mat-form-field style="width: 200px !important;">
+                        <mat-form-field>
                             <span matSuffix>zł</span>
                             <input matInput [(ngModel)]="routeModel.price" type="tel" name="price" required #priceRef="ngModel" placeholder="Cena" />
                             <mat-error *ngIf="priceRef.invalid">Wpisz poprawną cenę!</mat-error>
@@ -149,10 +163,10 @@
                     </mat-grid-tile>
 
                     <mat-grid-tile colspan="2" rowspan="2">
-                        <mat-form-field style="width: 200px !important;">
-                            <input matInput [(ngModel)]="routeModel.numberOfSeats" type="number" name="seats" required #seatsRef="ngModel" placeholder="Liczba miejsc"
-                            />
-                            <mat-error *ngIf="seatsRef.invalid">Wpisz poprawną liczbę miejsc!</mat-error>
+                        <mat-form-field>
+                        <input matInput [(ngModel)]="routeModel.numberOfSeats" type="number" name="seats" required #seatsRef="ngModel" placeholder="Liczba miejsc"
+                        />
+                        <mat-error *ngIf="seatsRef.invalid">Wpisz poprawną liczbę miejsc!</mat-error>
                         </mat-form-field>
                     </mat-grid-tile>
 

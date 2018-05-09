@@ -15,6 +15,8 @@ export class NewRouteComponent {
   // @ViewChild('form2') routeDetailForm: NgForm;
   @ViewChild('form3') additionalLocationsForm: NgForm;
 
+  today = new Date();
+
   timeModel: any = {};
 
   routeModel: Route = new Route();
@@ -25,7 +27,8 @@ export class NewRouteComponent {
   cityChips: any = [];
 
   constructor(private router: Router,
-    private routeService: RouteService) { }
+    private routeService: RouteService) {
+  }
 
   onSubmit() {
     this.showSpinner = true;
@@ -53,7 +56,4 @@ export class NewRouteComponent {
     if (index >= 0)
       this.cityChips.splice(index, 1);
   }
-
-
-
 }
