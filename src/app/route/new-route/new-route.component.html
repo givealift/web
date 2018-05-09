@@ -7,7 +7,7 @@
             <form #form1="ngForm">
                 <ng-template matStepLabel>Dane przejazdu</ng-template>
 
-                <mat-grid-list cols="2" rows="13" rowHeight="30px">
+                <mat-grid-list cols="2" rows="14" rowHeight="35px">
                     <mat-grid-tile colspan="1" rowspan="2">
                         <mat-form-field>
                             <input matInput [(ngModel)]="routeModel.from.city" name="from" required #fromRef="ngModel" placeholder="Miasto startowe"
@@ -25,7 +25,7 @@
 
                     <mat-grid-tile colspan="1" rowspan="2">
                         <mat-form-field>
-                            <input matInput [(ngModel)]="routeModel.from.street" name="fromStreet" required #fromStreetRef="ngModel" placeholder="Ulica"
+                            <input matInput [(ngModel)]="routeModel.from.street" name="fromStreet" required #fromStreetRef="ngModel" placeholder="Miejsce"
                             />
                             <mat-error *ngIf="fromStreetRef.invalid">Wpisz poprawną nazwę!</mat-error>
                         </mat-form-field>
@@ -33,16 +33,18 @@
 
                     <mat-grid-tile colspan="1" rowspan="2">
                         <mat-form-field>
-                            <input matInput [(ngModel)]="routeModel.to.street" name="toStreet" required #toStreetRef="ngModel" placeholder="Ulica" />
+                            <input matInput [(ngModel)]="routeModel.to.street" name="toStreet" required #toStreetRef="ngModel" placeholder="Miejsce"
+                            />
                             <mat-error *ngIf="toStreetRef.invalid">Wpisz poprawną nazwę!</mat-error>
                         </mat-form-field>
                     </mat-grid-tile>
 
-                    <mat-grid-tile colspan="2" rowspan="2">
+                    <mat-grid-tile colspan="2" rowspan="3">
                         <mat-form-field>
-                            <input matInput name="date" [matDatepicker]="picker" placeholder="Kiedy?" [(ngModel)]="routeModel.date">
+                            <input matInput name="date" [matDatepicker]="picker" required placeholder="Kiedy?" #dateRef="ngModel" [(ngModel)]="routeModel.date">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
+                            <mat-error *ngIf="dateRef.invalid">Wybierz datę!</mat-error>
                         </mat-form-field>
                     </mat-grid-tile>
 
@@ -50,13 +52,15 @@
 
                     <mat-grid-tile colspan="1" rowspan="3">
                         <mat-form-field>
-                            <input matInput name="timeFrom" type="time" placeholder="Odjazd" [(ngModel)]="timeModel.from">
+                            <input matInput name="timeFrom" type="time" required placeholder="Odjazd" step="600" #fromTimeRef="ngModel" [(ngModel)]="timeModel.from">
+                            <mat-error *ngIf="fromTimeRef.invalid">Wybierz godzinę odjazdu!</mat-error>
                         </mat-form-field>
                     </mat-grid-tile>
 
                     <mat-grid-tile colspan="1" rowspan="3">
                         <mat-form-field>
-                            <input matInput name="timeTo" type="time" placeholder="Przyjazd" [(ngModel)]="timeModel.to">
+                            <input matInput name="timeTo" type="time" required placeholder="Przyjazd" step="600" #toTimeRef="ngModel" [(ngModel)]="timeModel.to">
+                            <mat-error *ngIf="toTimeRef.invalid">Wybierz godzinę przyjazdu!</mat-error>
                         </mat-form-field>
                     </mat-grid-tile>
 
@@ -73,14 +77,18 @@
         <mat-step optional="true" [stepControl]="form3">
             <form #form3="ngForm">
                 <ng-template matStepLabel>Miasta pośrednie</ng-template>
-                <mat-grid-list cols="4" rows="8" rowHeight="30px">
-                    <mat-grid-tile colspan="2" rowspan="5">
-                        <mat-chip-list #chipList class="mat-chip-list-stacked">
-                            <mat-chip *ngFor="let cityChip of cityChips" selectable="false" (removed)="remove(cityChip)">
-                                {{cityChip?.city}}
-                                <mat-icon matChipRemove>cancel</mat-icon>
-                            </mat-chip>
-                        </mat-chip-list>
+                <mat-grid-list cols="4" rows="12" rowHeight="35px">
+                    <mat-grid-tile class="bottom-line" colspan="1" rowspan="2">
+                        Od:&ensp;
+                        <mat-chip>
+                            {{routeModel.from.city}}
+                        </mat-chip>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="bottom-line" colspan="1" rowspan="2">
+                        Do:&ensp;
+                        <mat-chip>
+                            {{routeModel.to.city}}
+                        </mat-chip>
                     </mat-grid-tile>
                     <mat-grid-tile colspan="2" rowspan="2">
                         <mat-form-field>
@@ -88,12 +96,29 @@
                             <mat-error *ngIf="cityRef.invalid">Wpisz poprawne miasto!</mat-error>
                         </mat-form-field>
                     </mat-grid-tile>
+
+                    <mat-grid-tile colspan="2" rowspan="1">
+                        Przez:
+                    </mat-grid-tile>
                     <mat-grid-tile colspan="2" rowspan="2">
                         <mat-form-field>
-                            <input class="short" matInput [(ngModel)]="chipModel.street" name="street" required #streetRef="ngModel" placeholder="Ulica" />
-                            <mat-error *ngIf="streetRef.invalid">Wpisz poprawną ulicę!</mat-error>
+                            <input class="short" matInput [(ngModel)]="chipModel.street" name="street" required #streetRef="ngModel" placeholder="Miejsce"
+                            />
+                            <mat-error *ngIf="streetRef.invalid">Wpisz poprawne miejsce!</mat-error>
                         </mat-form-field>
                     </mat-grid-tile>
+
+                    <mat-grid-tile colspan="2" rowspan="6">
+                        <mat-chip-list #chipList>
+                            <mat-chip style="margin: 0 4px 4px 0;" *ngFor="let cityChip of cityChips" selectable="false" (removed)="remove(cityChip)">
+                                {{cityChip?.city}}
+                                <mat-icon matChipRemove>cancel</mat-icon>
+                            </mat-chip>
+                        </mat-chip-list>
+                    </mat-grid-tile>
+
+
+
                     <mat-grid-tile colspan="2" rowspan="2">
                         <button mat-raised-button [disabled]="!form3.valid" (click)="addChip()">
                             Dodaj

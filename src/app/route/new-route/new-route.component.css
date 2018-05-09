@@ -21,6 +21,11 @@ mat-card:hover {
 
 mat-grid-tile mat-chip-list {
     position: absolute;
-    left: 5px;
+    left: 0px;
     top: 5px;
+}
+
+.bottom-line {
+    padding-bottom: 5px;
+    border-bottom: 1px dashed gray;
 }
