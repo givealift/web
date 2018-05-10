@@ -1,8 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { AuthService } from '../_services/auth.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { User } from "../_models";
+import {Component, ViewChild} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {AuthService} from '../_services/auth.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {User} from "../_models";
 
 
 @Component({
@@ -19,8 +19,6 @@ export class LoginComponent {
   returnUrl: string;
   showSpinner = false;
 
-  // userExists: Boolean = true;
-
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
@@ -35,17 +33,17 @@ export class LoginComponent {
 
   onSubmit() {
     this.showSpinner = true;
-    this.authService.login(this.userModel.login, this.userModel.password)
+    this.authService.login(this.userModel.email, this.userModel.password)
       .subscribe(
-        user => {
-          localStorage.setItem("currentUser", JSON.stringify(user));
+        auth => {
+          this.authService.storeCredentials(auth);
           this.authService.loggedInStatus.emit(true);
           this.router.navigate([this.returnUrl]);
         },
         error => {
           this.showSpinner = false;
           console.log(error);
-          this.userModel.login = '';
+          this.userModel.email = '';
           this.userModel.password = '';
         });
   }

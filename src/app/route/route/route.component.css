@@ -38,11 +38,16 @@ button:hover {
     color: white;
 }
 
-/* .borders {
-    border-left: dashed gray 1px;
-    border-right: dashed gray 1px;
+.border-bottom {
+    border-bottom: dashed gray 1px;
 }
 
-mat-grid-tile {
-    border: dashed gray 1px;
-} */
+.icon-align {
+    position: relative;
+    top: 3px;
+}
+
+
+.align-vertically {
+    margin-top: 5px;
+}

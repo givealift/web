@@ -1,65 +1,138 @@
 <mat-card>
-  <div class="container">
-    <form #form="ngForm">
-      <div class="row center">
-        <mat-radio-group>
-          <mat-radio-button value="Mężczyzna">Mężczyzna</mat-radio-button>
-          <mat-radio-button value="Kobieta">Kobieta</mat-radio-button>
-        </mat-radio-group>
-      </div>
+  <mat-horizontal-stepper [linear]="true" #stepper>
 
-      <div class="row center">
-        <mat-form-field class="inline-form-field">
-          <input matInput [(ngModel)]="userModel.firstName" name="firstname" required #firstRef="ngModel" placeholder="Imię" />
-          <mat-error *ngIf="firstRef.invalid ">Wpisz poprawne imię!</mat-error>
-        </mat-form-field>
-        <mat-form-field class="inline-form-field">
-          <input matInput [(ngModel)]="userModel.lastName" name="lastname" required #lastRef="ngModel" placeholder="Nazwisko" />
-          <mat-error *ngIf="lastRef.invalid ">Wpisz poprawne nazwisko!</mat-error>
-        </mat-form-field>
-      </div>
+    <mat-step [stepControl]="form1">
+      <form #form1="ngForm">
+        <ng-template matStepLabel>Logowanie</ng-template>
 
-      <div class="row center">
-        <mat-form-field>
-          <input matInput [(ngModel)]="userModel.email" name="mail" required email #mailRef="ngModel" placeholder="Email" />
-          <mat-error *ngIf="mailRef.invalid">Wpisz poprawnego maila!</mat-error>
-        </mat-form-field>
-      </div>
+        <mat-grid-list cols="1" rows="8" rowHeight="35px">
 
-      <div class="row center">
-        <mat-form-field>
-          <input matInput [(ngModel)]="userModel.phone" name="phone" required #phoneRef="ngModel" placeholder="Numer telefonu" pattern="^\+?[1-9]{1}[0-9]{3,14}$"
-          />
-          <mat-error *ngIf="phoneRef.invalid">Wpisz poprawny numer telefonu!</mat-error>
-        </mat-form-field>
-      </div>
+          <mat-grid-tile rowspan="2">
+            <mat-form-field>
+              <input matInput [(ngModel)]="userModel.email" name="mail" required email #mailRef="ngModel" placeholder="Email" />
+              <mat-error *ngIf="mailRef.invalid">Wpisz poprawnego maila!</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
 
-      <div class="row center">
-        <mat-form-field>
-          <input matInput type="password" [(ngModel)]="userModel.password" name="pass" required #passRef="ngModel" placeholder="Hasło"
-          />
-          <mat-error *ngIf="passRef.invalid">Wpisz poprawne hasło!</mat-error>
-        </mat-form-field>
-      </div>
+          <mat-grid-tile rowspan="2">
+            <mat-form-field>
+              <input matInput type="password" [(ngModel)]="userModel.password" name="pass" required #passRef="ngModel" placeholder="Hasło"
+              />
+              <mat-error *ngIf="passRef.invalid">Wpisz poprawne hasło!</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
 
-      <div class="row center">
-        <mat-form-field>
-          <input matInput type="password" [(ngModel)]="passConfirm" name="passConfirm" required #passConfirmRef="ngModel"
-            placeholder="Potwierdź hasło" />
-            <!-- TODO: doesnt work for some reason in material. fix -->
-          <mat-error *ngIf="passConfirmRef.value != passRef.value">Wpisz poprawne hasło!</mat-error>
-        </mat-form-field>
-      </div>
+          <mat-grid-tile rowspan="2">
+            <mat-form-field>
+              <input matInput type="password" [(ngModel)]="passConfirm" name="passConfirm" required #passConfirmRef="ngModel" placeholder="Potwierdź hasło"
+              />
+              <!-- TODO: doesnt work for some reason in material. fix -->
+              <mat-error *ngIf="passConfirmRef.value != passRef.value">Wpisz poprawne hasło!</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
 
-      <div class="row center">
-        <button mat-raised-button type="submit" [disabled]="!form.valid" (click)="onSubmit()">
-          Zaloguj
-        </button>
-      </div>
+          <mat-grid-tile rowspan="2">
+            <button mat-raised-button [disabled]="!form1.valid" matStepperNext>
+              Dalej
+            </button>
+          </mat-grid-tile>
 
-      <div class="row center">
-        <mat-spinner class="spinner" [diameter]="40" [style.display]="showSpinner ? 'inline' : 'none'"></mat-spinner>
-      </div>
-    </form>
-  </div>
+        </mat-grid-list>
+
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="form2">
+      <ng-template matStepLabel>Użytkownik</ng-template>
+      <form #form2="ngForm">
+        <mat-grid-list cols="2" rows="10" rowHeight="35px">
+
+          <!-- <mat-grid-tile colspan="2" rowspan="2">
+            <mat-radio-group [(ngModel)]="userModel.gender">
+              <mat-radio-button value="male">Mężczyzna</mat-radio-button>
+              <mat-radio-button value="female">Kobieta</mat-radio-button>
+            </mat-radio-group>
+          </mat-grid-tile> -->
+
+          <mat-grid-tile colspan="1" rowspan="2">
+            <mat-form-field class="inline-form-field">
+              <input matInput [(ngModel)]="userModel.firstName" name="firstname" required #firstRef="ngModel" placeholder="Imię" />
+              <mat-error *ngIf="firstRef.invalid ">Wpisz poprawne imię!</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="1" rowspan="2">
+            <mat-form-field class="inline-form-field">
+              <input matInput [(ngModel)]="userModel.lastName" name="lastname" required #lastRef="ngModel" placeholder="Nazwisko" />
+              <mat-error *ngIf="lastRef.invalid ">Wpisz poprawne nazwisko!</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="2" rowspan="2">
+            <mat-form-field>
+              <input matInput name="date" [max]="today" [matDatepicker]="picker" required placeholder="Data urodzenia" #dateRef="ngModel"
+                [(ngModel)]="optionalInfo.date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error *ngIf="dateRef.invalid">Wybierz datę!</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="2" rowspan="2">
+            <mat-form-field>
+              <input matInput [(ngModel)]="userModel.phone" name="phone" required #phoneRef="ngModel" placeholder="Numer telefonu" pattern="^\+?[1-9]{1}[0-9]{3,14}$"
+              />
+              <mat-error *ngIf="phoneRef.invalid">Wpisz poprawny numer telefonu!</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="2" rowspan="2">
+            <button mat-raised-button type="submit" [disabled]="!form2.valid" matStepperNext>
+              Dalej
+            </button>
+          </mat-grid-tile>
+
+        </mat-grid-list>
+      </form>
+    </mat-step>
+    <mat-step optional="true" [stepControl]="form3">
+      <ng-template matStepLabel>Opcjonalne</ng-template>
+      <form #form3="ngForm">
+        <mat-grid-list cols="4" rows="10" rowHeight="35px">
+
+          <mat-grid-tile colspan="1" rowspan="2">
+
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="2" rowspan="2">
+            <mat-form-field>
+              <input matInput [(ngModel)]="optionalInfo.car" name="car" #carRef="ngModel" placeholder="Model samochodu" />
+              <mat-error *ngIf="carRef.invalid">Wpisz poprawną nazwę samochodu!</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="1" rowspan="2">
+
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="4" rowspan="6">
+            <mat-form-field style="width: 100% !important">
+              <textarea name="bio" matInput class=".textarea" [(ngModel)]="optionalInfo.bio" rows="6" placeholder="Coś o sobie"></textarea>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="4" rowspan="2">
+            <button mat-raised-button type="submit" [disabled]="!form2.valid || !form1.valid" (click)="onSubmit()">
+              Zaloguj
+            </button>
+          </mat-grid-tile>
+
+        </mat-grid-list>
+
+        <div class="row center">
+          <mat-spinner class="spinner" [diameter]="40" [style.display]="showSpinner ? 'inline' : 'none'"></mat-spinner>
+        </div>
+      </form>
+    </mat-step>
+
+  </mat-horizontal-stepper>
 </mat-card>

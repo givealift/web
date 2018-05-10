@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RouteListComponent } from './route-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '../../_modules/material.module';
 import { RouteComponent } from '../route/route.component';
+import { DataTransferService } from '../../_services/data-transfer.service';
 
 describe('RouteListComponent', () => {
   let component: RouteListComponent;
@@ -13,7 +13,8 @@ describe('RouteListComponent', () => {
     TestBed.configureTestingModule({
       declarations: [RouteListComponent, RouteComponent],
       imports: [HttpClientModule,
-        MaterialModule]
+        MaterialModule],
+      providers: [DataTransferService]
     })
       .compileComponents();
   }));

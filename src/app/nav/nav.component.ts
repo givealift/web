@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { Router } from '@angular/router';
 import { User } from "../_models";
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-nav',
@@ -9,18 +10,15 @@ import { User } from "../_models";
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-
-  user: User;
-
+  userId: number;
   loggedIn: boolean;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.loggedIn = this.authService.isAuthenticated();
     this.authService.loggedInStatus.subscribe(loggedIn => {
-      this.loggedIn = loggedIn;
-      this.user = <User>JSON.parse(localStorage.getItem("currentUser"));
+      this.loggedIn = loggedIn
     });
   }
 

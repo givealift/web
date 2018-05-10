@@ -28,8 +28,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return this.getRoutesList(request);
 
                 // post route
-                case (request.url.endsWith('/api/route/') && request.method === 'POST'):
-                    return this.createRoute(request);
+                // case (request.url.endsWith('/api/route/') && request.method === 'POST'):
+                //     return this.createRoute(request);
 
                 // search route
                 case (request.url.match(/route\/search/) && request.method === 'GET'):
@@ -50,6 +50,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // // authenticate
                 // case (request.url.endsWith('/api/authenticate') && request.method === 'POST'):
                 //     return this.authenticate(request);
+
             }
 
             // pass through any requests not handled above
@@ -60,23 +61,23 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             .dematerialize();
     }
 
-    private createUser(request: HttpRequest<any>) {
+    // private createUser(request: HttpRequest<any>) {
 
-        let newUser = request.body;
+    //     let newUser = request.body;
 
-        // check if username already taken
-        let duplicateUser = mockUsers.filter(user => user.login === newUser.login).length;
-        if (duplicateUser) {
-            return Observable.throw(`login "${newUser.login}" is already taken`);
-        }
+    //     // check if username already taken
+    //     let duplicateUser = mockUsers.filter(user => user.login === newUser.login).length;
+    //     if (duplicateUser) {
+    //         return Observable.throw(`login "${newUser.login}" is already taken`);
+    //     }
 
-        // save new user
-        newUser.id = mockUsers.length + 1;
-        mockUsers.push(newUser);
-        localStorage.setItem('mock-users', JSON.stringify(mockUsers));
+    //     // save new user
+    //     newUser.id = mockUsers.length + 1;
+    //     mockUsers.push(newUser);
+    //     localStorage.setItem('mock-users', JSON.stringify(mockUsers));
 
-        return Observable.of(new HttpResponse({ status: 200 }));
-    }
+    //     return Observable.of(new HttpResponse({ status: 200 }));
+    // }
 
     private updateUser(request: HttpRequest<any>) {
 
@@ -116,22 +117,22 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
     }
 
-    private authenticate(request: HttpRequest<any>) {
-        // find user
-        let filteredUsers = mockUsers
-            .filter(user => user.login === request.body.login
-                && user.password === request.body.password
-            );
+    // private authenticate(request: HttpRequest<any>) {
+    //     // find user
+    //     let filteredUsers = mockUsers
+    //         .filter(user => user.login === request.body.login
+    //             && user.password === request.body.password
+    //         );
 
-        if (filteredUsers.length) {
-            let user = { ...filteredUsers[0] };
-            user.token = 'fake-token';
-            delete user.password;
-            return Observable.of(new HttpResponse({ status: 200, body: user }));
-        } else {
-            return Observable.throw('Login or password is incorrect');
-        }
-    }
+    //     if (filteredUsers.length) {
+    //         let user = { ...filteredUsers[0] };
+    //         user.token = 'fake-token';
+    //         delete user.password;
+    //         return Observable.of(new HttpResponse({ status: 200, body: user }));
+    //     } else {
+    //         return Observable.throw('Login or password is incorrect');
+    //     }
+    // }
 
     private createRoute(request: HttpRequest<any>) {
 
@@ -333,7 +334,87 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             "numberOfSeats": 4,
             "numberOfOccupiedSeats": 1,
             "price": 10.0
-        }
+        },
+        {
+            "routeId": 203,
+            "ownerId": 601,
+            "from": {
+                "localizationId": 201,
+                "city": {
+                    "cityId": 19,
+                    "name": "Katowice",
+                    "country": "powiat Katowice",
+                    "province": "śląskie",
+                    "cityInfo": {
+                        "cityInfoId": 20,
+                        "population": 304362,
+                        "citySize": 165
+                    }
+                },
+                "street": "krzywa",
+                "buildingNumber": 4
+            },
+            "to": {
+                "localizationId": 202,
+                "city": {
+                    "cityId": 1,
+                    "name": "Warszawa",
+                    "country": "powiat Warszawa",
+                    "province": "mazowieckie",
+                    "cityInfo": {
+                        "cityInfoId": 2,
+                        "population": 1724404,
+                        "citySize": 517
+                    }
+                },
+                "street": "string",
+                "buildingNumber": 0
+            },
+            "departureTime": moment().format("YYYY-MM-DD hh:mm"),
+            "numberOfSeats": 4,
+            "numberOfOccupiedSeats": 1,
+            "price": 10.0
+        },
+        {
+            "routeId": 203,
+            "ownerId": 601,
+            "from": {
+                "localizationId": 201,
+                "city": {
+                    "cityId": 19,
+                    "name": "Katowice",
+                    "country": "powiat Katowice",
+                    "province": "śląskie",
+                    "cityInfo": {
+                        "cityInfoId": 20,
+                        "population": 304362,
+                        "citySize": 165
+                    }
+                },
+                "street": "krzywa",
+                "buildingNumber": 4
+            },
+            "to": {
+                "localizationId": 202,
+                "city": {
+                    "cityId": 1,
+                    "name": "Warszawa",
+                    "country": "powiat Warszawa",
+                    "province": "mazowieckie",
+                    "cityInfo": {
+                        "cityInfoId": 2,
+                        "population": 1724404,
+                        "citySize": 517
+                    }
+                },
+                "street": "string",
+                "buildingNumber": 0
+            },
+            "departureTime": moment().format("YYYY-MM-DD hh:mm"),
+            "numberOfSeats": 4,
+            "numberOfOccupiedSeats": 1,
+            "price": 10.0
+        },
     ]
 }
 

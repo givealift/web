@@ -1,24 +1,14 @@
-import { City } from "./city";
-
+import { Location } from "./location";
 export class Route {
+    driver: any; // temp fix until views are not updated
+
     routeId: number;
     ownerId: number;
-    driver: any; // temp fix until views are not updated
-    date: any; // ^
-    from: {
-        localizationId: number;
-        city: City
-        street: string;
-        buildingNumber: number
-    };
-    to: {
-        localizationId: number;
-        city: City
-        street: string;
-        buildingNumber: number
-    };
-    departureTime: string; // YYYY-MM-DD hh:mm
     numberOfSeats: number;
     numberOfOccupiedSeats: number;
-    price: number
+    price: number;
+
+    from: Location = new Location();
+    to: Location = new Location();
+    stops: Array<Location>;
 }
