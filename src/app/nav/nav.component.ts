@@ -10,8 +10,6 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-
-  user: User;
   userId: number;
   loggedIn: boolean;
 
@@ -20,10 +18,7 @@ export class NavComponent implements OnInit {
   ngOnInit() {
     this.loggedIn = this.authService.isAuthenticated();
     this.authService.loggedInStatus.subscribe(loggedIn => {
-      this.loggedIn = loggedIn;
-      this.userId = parseInt(localStorage.getItem("id"));
-      this.userService.getById(this.userId)
-        .subscribe(user => this.user = user);
+      this.loggedIn = loggedIn
     });
   }
 

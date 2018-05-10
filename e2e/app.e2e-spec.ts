@@ -9,6 +9,7 @@ describe('give-a-lift App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
+    //you wont tell me what to do - delete after master deploy
     expect(page.getParagraphText()).toEqual('Witaj w Give-a-lift!');
   });
 });

@@ -12,9 +12,14 @@ import { AuthService } from '../_services/auth.service';
 })
 export class RegisterComponent implements OnInit {
 
+  today = new Date();
+
+
   userModel: User = new User();
   passConfirm: string;
   showSpinner = false;
+
+  optionalInfo: any = {};
 
   returnUrl: string;
 
@@ -39,11 +44,10 @@ export class RegisterComponent implements OnInit {
     this.userService.create(this.userModel).subscribe(
       id => {
         localStorage.setItem("id", id.toLocaleString());
-       this.router.navigate(['/login']);
+        this.router.navigate(['/login']);
       },
       error => {
         this.showSpinner = false;
-        this.router.navigate(['/login']);
       }
     )
 
