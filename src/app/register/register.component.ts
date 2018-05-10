@@ -15,10 +15,11 @@ export class RegisterComponent implements OnInit {
   today = new Date();
 
 
-  tmpDate: any = {};
   userModel: User = new User();
   passConfirm: string;
   showSpinner = false;
+
+  optionalInfo: any = {};
 
   returnUrl: string;
 

@@ -3,7 +3,7 @@
 
     <mat-step [stepControl]="form1">
       <form #form1="ngForm">
-        <ng-template matStepLabel>Dane logowania</ng-template>
+        <ng-template matStepLabel>Logowanie</ng-template>
 
         <mat-grid-list cols="1" rows="8" rowHeight="35px">
 
@@ -32,7 +32,7 @@
           </mat-grid-tile>
 
           <mat-grid-tile rowspan="2">
-            <button mat-raised-button [disabled]="!form1.valid " matStepperNext>
+            <button mat-raised-button [disabled]="!form1.valid" matStepperNext>
               Dalej
             </button>
           </mat-grid-tile>
@@ -42,7 +42,7 @@
       </form>
     </mat-step>
     <mat-step [stepControl]="form2">
-      <ng-template matStepLabel>Dane użytkownika</ng-template>
+      <ng-template matStepLabel>Użytkownik</ng-template>
       <form #form2="ngForm">
         <mat-grid-list cols="2" rows="10" rowHeight="35px">
 
@@ -70,7 +70,7 @@
           <mat-grid-tile colspan="2" rowspan="2">
             <mat-form-field>
               <input matInput name="date" [max]="today" [matDatepicker]="picker" required placeholder="Data urodzenia" #dateRef="ngModel"
-                [(ngModel)]="tmpDate.date">
+                [(ngModel)]="optionalInfo.date">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
               <mat-error *ngIf="dateRef.invalid">Wybierz datę!</mat-error>
@@ -86,6 +86,41 @@
           </mat-grid-tile>
 
           <mat-grid-tile colspan="2" rowspan="2">
+            <button mat-raised-button type="submit" [disabled]="!form2.valid" matStepperNext>
+              Dalej
+            </button>
+          </mat-grid-tile>
+
+        </mat-grid-list>
+      </form>
+    </mat-step>
+    <mat-step optional="true" [stepControl]="form3">
+      <ng-template matStepLabel>Opcjonalne</ng-template>
+      <form #form3="ngForm">
+        <mat-grid-list cols="4" rows="10" rowHeight="35px">
+
+          <mat-grid-tile colspan="1" rowspan="2">
+
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="2" rowspan="2">
+            <mat-form-field>
+              <input matInput [(ngModel)]="optionalInfo.car" name="car" #carRef="ngModel" placeholder="Model samochodu" />
+              <mat-error *ngIf="carRef.invalid">Wpisz poprawną nazwę samochodu!</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="1" rowspan="2">
+
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="4" rowspan="6">
+            <mat-form-field style="width: 100% !important">
+              <textarea name="bio" matInput class=".textarea" [(ngModel)]="optionalInfo.bio" rows="6" placeholder="Coś o sobie"></textarea>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="4" rowspan="2">
             <button mat-raised-button type="submit" [disabled]="!form2.valid || !form1.valid" (click)="onSubmit()">
               Zaloguj
             </button>
@@ -98,5 +133,6 @@
         </div>
       </form>
     </mat-step>
+
   </mat-horizontal-stepper>
 </mat-card>
