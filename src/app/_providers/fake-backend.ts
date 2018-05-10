@@ -334,7 +334,87 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             "numberOfSeats": 4,
             "numberOfOccupiedSeats": 1,
             "price": 10.0
-        }
+        },
+        {
+            "routeId": 203,
+            "ownerId": 601,
+            "from": {
+                "localizationId": 201,
+                "city": {
+                    "cityId": 19,
+                    "name": "Katowice",
+                    "country": "powiat Katowice",
+                    "province": "śląskie",
+                    "cityInfo": {
+                        "cityInfoId": 20,
+                        "population": 304362,
+                        "citySize": 165
+                    }
+                },
+                "street": "krzywa",
+                "buildingNumber": 4
+            },
+            "to": {
+                "localizationId": 202,
+                "city": {
+                    "cityId": 1,
+                    "name": "Warszawa",
+                    "country": "powiat Warszawa",
+                    "province": "mazowieckie",
+                    "cityInfo": {
+                        "cityInfoId": 2,
+                        "population": 1724404,
+                        "citySize": 517
+                    }
+                },
+                "street": "string",
+                "buildingNumber": 0
+            },
+            "departureTime": moment().format("YYYY-MM-DD hh:mm"),
+            "numberOfSeats": 4,
+            "numberOfOccupiedSeats": 1,
+            "price": 10.0
+        },
+        {
+            "routeId": 203,
+            "ownerId": 601,
+            "from": {
+                "localizationId": 201,
+                "city": {
+                    "cityId": 19,
+                    "name": "Katowice",
+                    "country": "powiat Katowice",
+                    "province": "śląskie",
+                    "cityInfo": {
+                        "cityInfoId": 20,
+                        "population": 304362,
+                        "citySize": 165
+                    }
+                },
+                "street": "krzywa",
+                "buildingNumber": 4
+            },
+            "to": {
+                "localizationId": 202,
+                "city": {
+                    "cityId": 1,
+                    "name": "Warszawa",
+                    "country": "powiat Warszawa",
+                    "province": "mazowieckie",
+                    "cityInfo": {
+                        "cityInfoId": 2,
+                        "population": 1724404,
+                        "citySize": 517
+                    }
+                },
+                "street": "string",
+                "buildingNumber": 0
+            },
+            "departureTime": moment().format("YYYY-MM-DD hh:mm"),
+            "numberOfSeats": 4,
+            "numberOfOccupiedSeats": 1,
+            "price": 10.0
+        },
     ]
 }
 
