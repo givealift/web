@@ -1,0 +1,8 @@
+<ul class="pagination-dots">
+    <li><a (click)="changePageNumber(1)">«</a></li>
+    <li><a (click)="changePageNumber(currentPage-1)">‹</a></li>
+    <li *ngFor="let pnum of pageNumbers" [ngClass]="{'active':currentPage==pnum}" (click)="changePageNumber(pnum)"><a>{{pnum}}</a> </li>
+    <li><a (click)="changePageNumber(currentPage+1)">›</a></li>
+    <li><a (click)="changePageNumber(pageAmount)">»</a></li>
+</ul>
+
