@@ -1,17 +1,6 @@
-.center {
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-}
-  
 .spinner { 
       margin-top: 20px;
       display: flex;
-}
-  
-.container {
-    display: flex;
-    flex-direction: column;
 }
 
 .inline-form-field {
@@ -20,6 +9,7 @@
 }
 
 mat-card {
+    width: 25%;
     border-radius: 25px;
 }
 
@@ -30,4 +20,8 @@ mat-radio-button {
 
 mat-card:hover {
     box-shadow: 0 10px 6px -6px black;
-  }
+}
+
+mat-form-field {
+    width: 200px !important;
+}
