@@ -15,7 +15,7 @@
     <button mat-raised-button color="primary" routerLink="/new-route" *ngIf="loggedIn">Dodaj przejazd</button>
 
     <button *ngIf="loggedIn" mat-button [matMenuTriggerFor]="dropdownMenu">
-      <mat-icon>menu</mat-icon>{{user?.firstName}} {{user?.lastName}}
+      <mat-icon>menu</mat-icon>
     </button>
 
     <mat-menu #dropdownMenu="matMenu" yPosition="below" overlapTrigger="false">
@@ -23,9 +23,9 @@
         <mat-icon>person</mat-icon>
         <span>Mój profil</span>
       </button>
-      <button mat-menu-item routerLink="route-list">
+      <button mat-menu-item routerLink="profile/routes">
         <mat-icon>directions_car</mat-icon>
-        <span>Przejazdy</span>
+        <span>Moje przejazdy</span>
       </button>
       <button mat-menu-item routerLink="" (click)="logout()">
         <mat-icon svgIcon="logout"></mat-icon>
