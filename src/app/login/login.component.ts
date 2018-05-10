@@ -33,7 +33,7 @@ export class LoginComponent {
 
   onSubmit() {
     this.showSpinner = true;
-    this.authService.login(this.userModel.login, this.userModel.password)
+    this.authService.login(this.userModel.email, this.userModel.password)
       .subscribe(
         auth => {
           this.authService.storeCredentials(auth);
@@ -43,7 +43,7 @@ export class LoginComponent {
         error => {
           this.showSpinner = false;
           console.log(error);
-          this.userModel.login = '';
+          this.userModel.email = '';
           this.userModel.password = '';
         });
   }

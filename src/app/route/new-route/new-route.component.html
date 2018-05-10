@@ -1,37 +1,196 @@
 <mat-card>
-    <div class="container">
-        <h2>Dodaj przejazd: </h2>
-        <form #form="ngForm">
-            <div class="row center">
-                <mat-form-field>
-                    <input matInput [(ngModel)]="routeModel.from" name="from" required #fromRef="ngModel" placeholder="Miejsce startowe" />
-                    <mat-error *ngIf="fromRef.invalid">Wpisz poprawne miasto startowe!</mat-error>
-                </mat-form-field>
-            </div>
+    <h2 class="text-center">Dodaj przejazd: </h2>
+    <mat-horizontal-stepper [linear]="true" #stepper>
 
-            <div class="row center">
-                <mat-form-field>
-                    <input matInput [(ngModel)]="routeModel.to" name="to" required #toRef="ngModel" placeholder="Miejsce końcowe" />
-                    <mat-error *ngIf="toRef.invalid">Wpisz poprawne miasto końcowe!</mat-error>
-                </mat-form-field>
-            </div>
-            <div class="row center">
-                <mat-form-field>
-                    <input matInput name="date" [matDatepicker]="picker" placeholder="Kiedy?" [(ngModel)]="routeModel.date">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-            </div>
-            <div class="row center ">
-                <button mat-raised-button type="submit " [disabled]="!form.valid " (click)="onSubmit() ">
-                    Dodaj
-                </button>
-            </div>
+        <!-- window 1 -->
+        <mat-step [stepControl]="form1">
+            <form #form1="ngForm">
+                <ng-template matStepLabel>Dane przejazdu</ng-template>
 
-            <!-- TODO: need to implement a time picker -->
-            <div class="row center ">
-                <mat-spinner class="spinner " [diameter]="40 " [style.display]="showSpinner ? 'inline' : 'none' "></mat-spinner>
-            </div>
-        </form>
-    </div>
+                <mat-grid-list cols="2" rows="14" rowHeight="35px">
+                    <mat-grid-tile colspan="1" rowspan="2">
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="routeModel.from.city.name" name="from" required #fromRef="ngModel" placeholder="Miasto startowe"
+                            />
+                            <mat-error *ngIf="fromRef.invalid">Wpisz poprawne miasto!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="1" rowspan="2">
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="routeModel.to.city.name" name="to" required #toRef="ngModel" placeholder="Miasto końcowe" />
+                            <mat-error *ngIf="toRef.invalid">Wpisz poprawne miasto!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="1" rowspan="2">
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="routeModel.from.placeOfMeeting" name="fromStreet" required #fromStreetRef="ngModel" placeholder="Miejsce"
+                            />
+                            <mat-error *ngIf="fromStreetRef.invalid">Wpisz poprawną nazwę!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="1" rowspan="2">
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="routeModel.to.placeOfMeeting" name="toStreet" required #toStreetRef="ngModel" placeholder="Miejsce"
+                            />
+                            <mat-error *ngIf="toStreetRef.invalid">Wpisz poprawną nazwę!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="1" rowspan="3">
+                        <mat-form-field>
+                            <input matInput name="dateFrom" [min]="today" [matDatepicker]="pickerFrom" required placeholder="Data odjazdu" #dateFromRef="ngModel" [(ngModel)]="routeModel.from.date">
+                            <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerFrom></mat-datepicker>
+                            <mat-error *ngIf="dateFromRef.invalid">Wybierz datę!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="1" rowspan="3">
+                        <mat-form-field>
+                            <input matInput name="dateTo" [min]="today" [matDatepicker]="pickerTo" required placeholder="Data przyjazdu" #dateToRef="ngModel" [(ngModel)]="routeModel.to.date">
+                            <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerTo></mat-datepicker>
+                            <mat-error *ngIf="dateToRef.invalid">Wybierz datę!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="1" rowspan="3">
+                        <mat-form-field>
+                            <input matInput name="timeFrom" type="time" required placeholder="Odjazd" step="600" #fromTimeRef="ngModel" [(ngModel)]="timeModel.from">
+                            <mat-error *ngIf="fromTimeRef.invalid">Wybierz godzinę odjazdu!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="1" rowspan="3">
+                        <mat-form-field>
+                            <input matInput name="timeTo" type="time" required placeholder="Przyjazd" step="600" #toTimeRef="ngModel" [(ngModel)]="timeModel.to">
+                            <mat-error *ngIf="toTimeRef.invalid">Wybierz godzinę przyjazdu!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="2" rowspan="2">
+                        <button mat-raised-button [disabled]="!form1.valid " matStepperNext>
+                            Dalej
+                        </button>
+                    </mat-grid-tile>
+                </mat-grid-list>
+
+            </form>
+        </mat-step>
+
+        <mat-step optional="true" [stepControl]="form3">
+            <form #form3="ngForm">
+                <ng-template matStepLabel>Miasta pośrednie</ng-template>
+                <mat-grid-list cols="4" rows="12" rowHeight="35px">
+                    <mat-grid-tile class="bottom-line" colspan="1" rowspan="2">
+                        Od:&ensp;
+                        <mat-chip>
+                            {{routeModel.from.city.name}}
+                        </mat-chip>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="bottom-line" colspan="1" rowspan="2">
+                        Do:&ensp;
+                        <mat-chip>
+                            {{routeModel.to.city.name}}
+                        </mat-chip>
+                    </mat-grid-tile>
+                    <mat-grid-tile colspan="2" rowspan="2">
+                        <mat-form-field>
+                            <input class="short" matInput [(ngModel)]="chipModel.name" name="city" required #cityRef="ngModel" placeholder="Miasto" />
+                            <mat-error *ngIf="cityRef.invalid">Wpisz poprawne miasto!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="2" rowspan="1">
+                        Przez:
+                    </mat-grid-tile>
+                    <mat-grid-tile colspan="2" rowspan="2">
+                        <mat-form-field>
+                            <input class="short" matInput [(ngModel)]="chipModel.placeOfMeeting" name="street" required #streetRef="ngModel" placeholder="Miejsce"
+                            />
+                            <mat-error *ngIf="streetRef.invalid">Wpisz poprawne miejsce!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="2" rowspan="6">
+                        <mat-chip-list #chipList>
+                            <mat-chip style="margin: 0 4px 4px 0;" *ngFor="let cityChip of cityChips" selectable="false" (removed)="remove(cityChip)">
+                                {{cityChip?.city}}
+                                <mat-icon matChipRemove>cancel</mat-icon>
+                            </mat-chip>
+                        </mat-chip-list>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="2" rowspan="2">
+                        <mat-form-field>
+                            <input matInput [min]="today" name="date" [matDatepicker]="picker2" required placeholder="Data" #optDateRef="ngModel" [(ngModel)]="chipTimeModel.date">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                            <mat-error *ngIf="optDateRef.invalid">Wybierz datę!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="2" rowspan="2">
+                        <mat-form-field>
+                            <input matInput name="timeOpt" type="time" required placeholder="Odjazd" step="600" #optTimeRef="ngModel" [(ngModel)]="chipTimeModel.time">
+                            <mat-error *ngIf="optTimeRef.invalid">Wybierz godzinę odjazdu!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="2" rowspan="2">
+                        <button mat-raised-button [disabled]="!form3.valid" (click)="addChip()">
+                            Dodaj
+                        </button>
+                    </mat-grid-tile>
+                    <mat-grid-tile colspan="4" rowspan="2">
+                        <button mat-raised-button matStepperNext>
+                            Dalej
+                        </button>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </form>
+        </mat-step>
+
+        <mat-step>
+            <form #form2="ngForm">
+                <ng-template matStepLabel>Szczegóły przejazdu</ng-template>
+
+                <mat-grid-list cols="2" rows="12" rowHeight="35px">
+                    <mat-grid-tile colspan="2" rowspan="2">
+
+                        <mat-form-field>
+                            <span matSuffix>zł</span>
+                            <input matInput [(ngModel)]="routeModel.price" type="tel" name="price" required #priceRef="ngModel" placeholder="Cena" />
+                            <mat-error *ngIf="priceRef.invalid">Wpisz poprawną cenę!</mat-error>
+                        </mat-form-field>
+
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="2" rowspan="2">
+                        <mat-form-field>
+                        <input matInput [(ngModel)]="routeModel.numberOfSeats" type="number" name="seats" required #seatsRef="ngModel" placeholder="Liczba miejsc"
+                        />
+                        <mat-error *ngIf="seatsRef.invalid">Wpisz poprawną liczbę miejsc!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="2" rowspan="2">
+                        <button mat-raised-button type="submit" [disabled]="!form2.valid || !form1.valid" (click)="onSubmit() ">
+                            Dodaj
+                        </button>
+                    </mat-grid-tile>
+
+                </mat-grid-list>
+
+                <div class="row center">
+                    <mat-spinner class="spinner " [diameter]="40" [style.display]="showSpinner ? 'inline' : 'none' "></mat-spinner>
+                </div>
+
+                <!-- window 2 -->
+            </form>
+        </mat-step>
+    </mat-horizontal-stepper>
 </mat-card>

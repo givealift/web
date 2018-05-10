@@ -3,8 +3,8 @@
     <form #form="ngForm">
       <div class="row center">
         <mat-form-field>
-          <input matInput [(ngModel)]="userModel.login" name="login" required #loginRef="ngModel" placeholder="Login" />
-          <mat-error *ngIf="loginRef.invalid">Wpisz poprawny login!</mat-error>
+          <input matInput [(ngModel)]="userModel.email" email name="login" required #loginRef="ngModel" placeholder="Email" />
+          <mat-error *ngIf="loginRef.invalid">Wpisz poprawny mail!</mat-error>
         </mat-form-field>
       </div>
 

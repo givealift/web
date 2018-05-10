@@ -1,8 +1,8 @@
-import {Component, Input, ViewChild} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {User} from '../../_models';
-import {UserService} from '../../_services/user.service';
+import { Component, Input, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { User } from '../../_models';
+import { UserService } from '../../_services/user.service';
 
 @Component({
   selector: 'app-profile-info',
@@ -11,7 +11,7 @@ import {UserService} from '../../_services/user.service';
 })
 export class UserInfoComponent {
 
-  @Input() 
+  @Input()
   user: User = new User();
 
   userId: number;
@@ -22,6 +22,15 @@ export class UserInfoComponent {
     this.route.params.subscribe(
       param => this.userId = param.id,
       error => this.router.navigate['home']
+    );
+    this.userService.getById(this.userId).subscribe(
+      user => {
+        this.user = user;
+        console.log(user);
+      },
+      error => {
+        this.router.navigate['home'];
+      }
     );
   }
 
