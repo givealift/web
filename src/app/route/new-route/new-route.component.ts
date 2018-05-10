@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouteService } from '../../_services/route.service';
-import { Route } from '../../_models';
+import { Route, Location } from '../../_models';
 
 @Component({
   selector: 'app-new-route',
