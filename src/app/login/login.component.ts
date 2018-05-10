@@ -19,8 +19,6 @@ export class LoginComponent {
   returnUrl: string;
   showSpinner = false;
 
-  // userExists: Boolean = true;
-
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
@@ -38,8 +36,7 @@ export class LoginComponent {
     this.authService.login(this.userModel.login, this.userModel.password)
       .subscribe(
         auth => {
-          localStorage.setItem("token", auth.token);
-          localStorage.setItem("id", auth.userId);
+          this.authService.storeCredentials(auth);
           this.authService.loggedInStatus.emit(true);
           this.router.navigate([this.returnUrl]);
         },
