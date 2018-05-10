@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouteService } from '../../_services/route.service';
 import { Route, Location } from '../../_models';
+import * as moment from 'moment';
+import { AuthService } from '../../_services/auth.service';
 
 @Component({
   selector: 'app-new-route',
@@ -26,13 +28,18 @@ export class NewRouteComponent {
   cityChips = new Array<Location>();
 
   constructor(private router: Router,
-    private routeService: RouteService) {
+    private routeService: RouteService,
+    private authService: AuthService) {
   }
 
   onSubmit() {
     this.routeModel.stops = this.cityChips;
     this.showSpinner = true;
-    this.routeModel.driver = JSON.parse(localStorage.getItem('currentUser'));
+    const { token, id } = this.authService.getCredentials();
+    this.routeModel.ownerId = +id;
+    console.log(this.routeModel.from.date);
+    console.log(this.timeModel);
+
     this.routeService.create(this.routeModel).subscribe(
       () => {
         this.router.navigate(['/route-list']);
@@ -55,5 +62,9 @@ export class NewRouteComponent {
 
     if (index >= 0)
       this.cityChips.splice(index, 1);
+  }
+
+  buildDepartureTimeString(date: moment.Moment, time: string): string {
+    return `${moment(date).format("YYYY-MM-DD")} ${time}`;
   }
 }

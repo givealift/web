@@ -9,6 +9,9 @@ import { MaterialModule } from '../../_modules/material.module';
 import { CityService } from '../../_services/city.service';
 import { CitiesProvider } from '../../_providers/cities-provider';
 
+import * as moment from 'moment';
+import { AuthService } from '../../_services/auth.service';
+
 describe('NewRouteComponent', () => {
   let component: NewRouteComponent;
   let fixture: ComponentFixture<NewRouteComponent>;
@@ -34,7 +37,7 @@ describe('NewRouteComponent', () => {
         RouterTestingModule,
         HttpClientModule,
         MaterialModule],
-      providers: [RouteService, CityService, CitiesProvider]
+      providers: [RouteService, CityService, AuthService, CitiesProvider]
     })
       .compileComponents();
   }));
@@ -47,5 +50,12 @@ describe('NewRouteComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should create correct departure time from given date', () => {
+    const today = moment();
+    const time = today.format("hh:mm");
+    const expectedString = today.format("YYYY-MM-DD hh:mm");
+    expect(component.buildDepartureTimeString(today, time)).toEqual(expectedString);
   });
 });
