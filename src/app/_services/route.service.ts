@@ -44,7 +44,7 @@ export class RouteService {
         return this.http.put<Route>(this.url + route.routeId, route);
     }
 
-    getById(id: number) {
+    getById(id: number, page: number) {
         return this.http.get(this.url + id);
     }
 
