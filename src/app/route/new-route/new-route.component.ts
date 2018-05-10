@@ -20,6 +20,7 @@ export class NewRouteComponent {
   today = new Date();
 
   timeModel: any = {};
+  chipTimeModel: any = {};
 
   routeModel: Route = new Route();
   showSpinner = false;
@@ -33,12 +34,13 @@ export class NewRouteComponent {
   }
 
   onSubmit() {
+    this.routeModel.from.date = this.buildDepartureTimeString(this.routeModel.from.date, this.timeModel.from)
+    this.routeModel.to.date = this.buildDepartureTimeString(this.routeModel.to.date, this.timeModel.to);
+
     this.routeModel.stops = this.cityChips;
     this.showSpinner = true;
     const { token, id } = this.authService.getCredentials();
     this.routeModel.ownerId = +id;
-    console.log(this.routeModel.from.date);
-    console.log(this.timeModel);
 
     this.routeService.create(this.routeModel).subscribe(
       () => {
@@ -52,8 +54,11 @@ export class NewRouteComponent {
   }
 
   addChip() {
-    this.cityChips.push(this.chipModel);
+    let newLocation = this.buildLocationFromChipModel();
+
+    this.cityChips.push(newLocation);
     this.chipModel = {};
+    this.chipTimeModel = {};
     this.additionalLocationsForm.reset();
   }
 
@@ -66,5 +71,16 @@ export class NewRouteComponent {
 
   buildDepartureTimeString(date: moment.Moment, time: string): string {
     return `${moment(date).format("YYYY-MM-DD")} ${time}`;
+  }
+
+  buildLocationFromChipModel() : Location {
+    let newLocation = new Location();
+
+    let chipDateTime = this.buildDepartureTimeString(this.chipTimeModel.date, this.chipTimeModel.time)
+    newLocation.date = chipDateTime;
+    newLocation.city.name = this.chipModel.name;
+    newLocation.placeOfMeeting = this.chipModel.placeOfMeeting;
+
+    return newLocation;
   }
 }

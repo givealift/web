@@ -2,8 +2,8 @@ import { City } from ".";
 
 export class Location {
     buildingNumber: number;
-    city: City;
+    city: City = new City();
     date: any;
     localizationId: number;
-    street: string;
+    placeOfMeeting: string;
 }

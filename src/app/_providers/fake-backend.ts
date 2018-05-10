@@ -28,8 +28,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return this.getRoutesList(request);
 
                 // post route
-                case (request.url.endsWith('/api/route/') && request.method === 'POST'):
-                    return this.createRoute(request);
+                // case (request.url.endsWith('/api/route/') && request.method === 'POST'):
+                //     return this.createRoute(request);
 
                 // search route
                 case (request.url.match(/route\/search/) && request.method === 'GET'):

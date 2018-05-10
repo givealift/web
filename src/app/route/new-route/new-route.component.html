@@ -10,7 +10,7 @@
                 <mat-grid-list cols="2" rows="14" rowHeight="35px">
                     <mat-grid-tile colspan="1" rowspan="2">
                         <mat-form-field>
-                            <input matInput [(ngModel)]="routeModel.from.city" name="from" required #fromRef="ngModel" placeholder="Miasto startowe"
+                            <input matInput [(ngModel)]="routeModel.from.city.name" name="from" required #fromRef="ngModel" placeholder="Miasto startowe"
                             />
                             <mat-error *ngIf="fromRef.invalid">Wpisz poprawne miasto!</mat-error>
                         </mat-form-field>
@@ -18,14 +18,14 @@
 
                     <mat-grid-tile colspan="1" rowspan="2">
                         <mat-form-field>
-                            <input matInput [(ngModel)]="routeModel.to.city" name="to" required #toRef="ngModel" placeholder="Miasto końcowe" />
+                            <input matInput [(ngModel)]="routeModel.to.city.name" name="to" required #toRef="ngModel" placeholder="Miasto końcowe" />
                             <mat-error *ngIf="toRef.invalid">Wpisz poprawne miasto!</mat-error>
                         </mat-form-field>
                     </mat-grid-tile>
 
                     <mat-grid-tile colspan="1" rowspan="2">
                         <mat-form-field>
-                            <input matInput [(ngModel)]="routeModel.from.street" name="fromStreet" required #fromStreetRef="ngModel" placeholder="Miejsce"
+                            <input matInput [(ngModel)]="routeModel.from.placeOfMeeting" name="fromStreet" required #fromStreetRef="ngModel" placeholder="Miejsce"
                             />
                             <mat-error *ngIf="fromStreetRef.invalid">Wpisz poprawną nazwę!</mat-error>
                         </mat-form-field>
@@ -33,7 +33,7 @@
 
                     <mat-grid-tile colspan="1" rowspan="2">
                         <mat-form-field>
-                            <input matInput [(ngModel)]="routeModel.to.street" name="toStreet" required #toStreetRef="ngModel" placeholder="Miejsce"
+                            <input matInput [(ngModel)]="routeModel.to.placeOfMeeting" name="toStreet" required #toStreetRef="ngModel" placeholder="Miejsce"
                             />
                             <mat-error *ngIf="toStreetRef.invalid">Wpisz poprawną nazwę!</mat-error>
                         </mat-form-field>
@@ -90,18 +90,18 @@
                     <mat-grid-tile class="bottom-line" colspan="1" rowspan="2">
                         Od:&ensp;
                         <mat-chip>
-                            {{routeModel.from.city}}
+                            {{routeModel.from.city.name}}
                         </mat-chip>
                     </mat-grid-tile>
                     <mat-grid-tile class="bottom-line" colspan="1" rowspan="2">
                         Do:&ensp;
                         <mat-chip>
-                            {{routeModel.to.city}}
+                            {{routeModel.to.city.name}}
                         </mat-chip>
                     </mat-grid-tile>
                     <mat-grid-tile colspan="2" rowspan="2">
                         <mat-form-field>
-                            <input class="short" matInput [(ngModel)]="chipModel.city" name="city" required #cityRef="ngModel" placeholder="Miasto" />
+                            <input class="short" matInput [(ngModel)]="chipModel.name" name="city" required #cityRef="ngModel" placeholder="Miasto" />
                             <mat-error *ngIf="cityRef.invalid">Wpisz poprawne miasto!</mat-error>
                         </mat-form-field>
                     </mat-grid-tile>
@@ -111,7 +111,7 @@
                     </mat-grid-tile>
                     <mat-grid-tile colspan="2" rowspan="2">
                         <mat-form-field>
-                            <input class="short" matInput [(ngModel)]="chipModel.street" name="street" required #streetRef="ngModel" placeholder="Miejsce"
+                            <input class="short" matInput [(ngModel)]="chipModel.placeOfMeeting" name="street" required #streetRef="ngModel" placeholder="Miejsce"
                             />
                             <mat-error *ngIf="streetRef.invalid">Wpisz poprawne miejsce!</mat-error>
                         </mat-form-field>
@@ -128,7 +128,7 @@
 
                     <mat-grid-tile colspan="2" rowspan="2">
                         <mat-form-field>
-                            <input matInput [min]="today" name="date" [matDatepicker]="picker2" required placeholder="Data" #optDateRef="ngModel" [(ngModel)]="chipModel.date">
+                            <input matInput [min]="today" name="date" [matDatepicker]="picker2" required placeholder="Data" #optDateRef="ngModel" [(ngModel)]="chipTimeModel.date">
                             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                             <mat-datepicker #picker2></mat-datepicker>
                             <mat-error *ngIf="optDateRef.invalid">Wybierz datę!</mat-error>
@@ -137,7 +137,7 @@
 
                     <mat-grid-tile colspan="2" rowspan="2">
                         <mat-form-field>
-                            <input matInput name="timeOpt" type="time" required placeholder="Odjazd" step="600" #optTimeRef="ngModel" [(ngModel)]="chipModel.time">
+                            <input matInput name="timeOpt" type="time" required placeholder="Odjazd" step="600" #optTimeRef="ngModel" [(ngModel)]="chipTimeModel.time">
                             <mat-error *ngIf="optTimeRef.invalid">Wybierz godzinę odjazdu!</mat-error>
                         </mat-form-field>
                     </mat-grid-tile>
