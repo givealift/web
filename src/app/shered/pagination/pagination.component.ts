@@ -15,7 +15,7 @@ export class PaginationComponent {
     pageChange: EventEmitter<any[]> = new EventEmitter<any[]>();
     @Input()
     applications: any[] = [];
-    private pageAmount: number = 0;
+    pageAmount: number = 0;
     pageNumbers: Array<number> = [];
     readonly applicationsOnPage = 10;
     currentPage: number = 1;
