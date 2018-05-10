@@ -17,12 +17,13 @@ export class UserRouteComponent implements OnInit {
   routes: Route[];
   page: number = 0;
 
-  constructor(
-    private routeService: RouteService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private userService: UserService
-  ) { }
+  constructor(private routeService: RouteService, private route: ActivatedRoute, private router: Router, private userService: UserService) {
+    let id = +localStorage.getItem("id");
+    let page = 0;
+    this.userService.getUserRides(id, page).subscribe(
+      data => this.routes = data
+    );
+  }
 
   ngOnInit() {
     this.changePage(this.page);
