@@ -39,7 +39,7 @@ export class CitySearchComponent implements OnInit {
     this.filteredCities$ = this.searchTerms.pipe(
       debounceTime(0.3 * 1000),
       distinctUntilChanged(),
-      switchMap((term: string) => this.cityService.searchCity(term))
+      switchMap((term: string) => this.cityService.searchCities(term))
     );
   }
 
