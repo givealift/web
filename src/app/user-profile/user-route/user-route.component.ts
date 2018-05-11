@@ -1,10 +1,8 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { FormGroup, NgForm } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { RouteService } from '../../_services/route.service';
-import { AuthService } from '../../_services/auth.service';
-import { UserService } from '../../_services/user.service';
-import { Route } from '../../_models';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {RouteService} from '../../_services/route.service';
+import {UserService} from '../../_services/user.service';
+import {Route} from '../../_models';
 
 
 @Component({
@@ -16,6 +14,7 @@ export class UserRouteComponent implements OnInit {
   userId: number = parseInt(localStorage.getItem("id"));
   routes: Route[];
   page: number = 0;
+  routesAmount: number = 15;
 
   constructor(private routeService: RouteService, private route: ActivatedRoute, private router: Router, private userService: UserService) {
     let id = +localStorage.getItem("id");
@@ -30,7 +29,8 @@ export class UserRouteComponent implements OnInit {
   }
 
   changePage(page: number) {
-    this.userService.getUserRides(this.userId, this.page)
+    console.log(page);
+    this.userService.getUserRides(this.userId, page)
       .subscribe(routes => this.routes = routes);
 
   }
