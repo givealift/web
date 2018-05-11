@@ -15,7 +15,8 @@
 }
 
 mat-card {
-    width: 30%;
+    min-width: 570px;
+    min-height: 500px;
     border-radius: 25px;
 }
 

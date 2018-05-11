@@ -1,7 +1,8 @@
 mat-card {
     margin-top: 30px;
     border-radius: 25px;
-    width: 40%;
+    min-width: 770px;
+    min-height: 500px;
 }
 
 mat-grid-tile .align-left {
