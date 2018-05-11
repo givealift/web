@@ -16,11 +16,15 @@ describe("CityService", () => {
             imports: [
                 HttpClientModule
             ]
-        })
+        }).compileComponents()
     }))
 
     beforeEach(() => {
         cityService = TestBed.get(CityService);
+    })
+
+    beforeAll(() => {
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 25 * 1000;
     })
 
     it("#searchCity should return one city if exists", () => {
