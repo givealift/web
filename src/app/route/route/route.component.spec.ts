@@ -5,6 +5,7 @@ import { Route } from '../../_models';
 import { MaterialModule } from '../../_modules/material.module';
 import { UserService } from '../../_services/user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { DataProviderService } from '../../_services/data-provider.service';
 
 describe('RouteComponent', () => {
   let component: RouteComponent;
@@ -20,7 +21,8 @@ describe('RouteComponent', () => {
         HttpClientModule
       ],
       providers: [
-        UserService
+        UserService,
+        DataProviderService
       ]
     })
       .compileComponents();

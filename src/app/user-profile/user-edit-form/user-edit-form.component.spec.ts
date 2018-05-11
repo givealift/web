@@ -7,6 +7,7 @@ import { PhotoComponent } from '../photo/photo.component';
 import { UserService } from '../../_services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
+import { DataProviderService } from '../../_services/data-provider.service';
 
 describe('UserEditFormComponent', () => {
   let hostComponent: TestHostComponent;
@@ -25,7 +26,8 @@ describe('UserEditFormComponent', () => {
         HttpClientModule
       ],
       providers: [
-        UserService
+        UserService,
+        DataProviderService
       ]
     })
       .compileComponents();

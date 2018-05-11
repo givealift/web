@@ -10,8 +10,12 @@ describe("CityService", () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             providers: [
-                CityService, CitiesProvider],
-            imports: [HttpClientModule]
+                CityService,
+                CitiesProvider
+            ],
+            imports: [
+                HttpClientModule
+            ]
         })
     }))
 

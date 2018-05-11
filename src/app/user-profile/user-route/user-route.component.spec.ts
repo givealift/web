@@ -11,7 +11,7 @@ import { CityService } from '../../_services/city.service';
 import { CitiesProvider } from '../../_providers/cities-provider';
 import { AuthService } from '../../_services/auth.service';
 import { UserService } from '../../_services/user.service';
-import { DataTransferService } from '../../_services/data-transfer.service';
+import { DataProviderService } from '../../_services/data-provider.service';
 
 
 describe('UserRouteComponent', () => {
@@ -35,7 +35,7 @@ describe('UserRouteComponent', () => {
                 CityService,
                 CitiesProvider,
                 UserService,
-                DataTransferService
+                DataProviderService
             ]
         })
             .compileComponents();
