@@ -6,7 +6,7 @@ import { environment as env } from "../../environments/environment";
 @Injectable()
 export class CitiesProvider {
 
-    private cities: City[] = null;
+    private cities: City[] = [];
     private readonly FETCH_LIMIT = 500;
 
     constructor(private http: HttpClient) { }
