@@ -7,7 +7,7 @@ import { RouteService } from '../_services/route.service';
 import { Observable } from 'rxjs/Observable';
 import { City, Route } from '../_models';
 import { Router } from '@angular/router';
-import { DataTransferService } from '../_services/data-transfer.service';
+import { DataProviderService } from '../_services/data-provider.service';
 
 
 @Component({
@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
     private cityService: CityService,
     private routeService: RouteService,
     private router: Router,
-    private dataTransferService: DataTransferService) { }
+    private dataTransferService: DataProviderService) { }
 
   ngOnInit() {
     this.authService.loggedInStatus.subscribe(loggedIn => this.loggedIn = loggedIn);
