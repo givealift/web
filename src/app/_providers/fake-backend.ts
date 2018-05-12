@@ -38,6 +38,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 case (request.url.match(/api\/user\/favourites\/\d+/) && request.method === 'GET'):
                     return this.getUserFavourites(request);
 
+                case (request.url.match(/route\/\d+/) && request.method === 'GET'):
+                  return this.getRouteDetailsById(request);
+
                 // // create user
                 // case (request.url.endsWith('/api/user/') && request.method === 'POST'):
                 //     return this.createUser(request);
@@ -62,6 +65,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             .materialize() // fix-around (https://github.com/Reactive-Extensions/RxJS/issues/648)
             .delay(500)
             .dematerialize();
+    }
+
+    private getRouteDetailsById(request) {
+      request.toString();
+      let RouteId = [203];
+      let routeDetails = this.sampleroutes.filter(
+        route => {
+          return RouteId.indexOf(route.routeId) !== -1;
+        }
+      );
+      return Observable.of(new HttpResponse({ status: 200, body: routeDetails}));
     }
 
     private getUserFavourites (request) {
@@ -182,7 +196,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let to = request.params.get("to");
         let date = request.params.get("date");
 
-        let matching = this.sampleroutes.filter(obj => obj.from.city.cityId == +from && obj.to.city.cityId == +to && obj.departureTime.includes(date));
+        let matching = this.sampleroutes.filter(obj => obj.from.city.cityId === +from && obj.to.city.cityId == +to && obj.departureTime.includes(date));
 
         return Observable.of(new HttpResponse({ status: 200, body: matching }));
     }
@@ -347,88 +361,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             "numberOfSeats": 4,
             "numberOfOccupiedSeats": 1,
             "price": 10.0
-        },
-        {
-            "routeId": 203,
-            "ownerId": 601,
-            "from": {
-                "localizationId": 201,
-                "city": {
-                    "cityId": 19,
-                    "name": "Katowice",
-                    "country": "powiat Katowice",
-                    "province": "śląskie",
-                    "cityInfo": {
-                        "cityInfoId": 20,
-                        "population": 304362,
-                        "citySize": 165
-                    }
-                },
-                "street": "krzywa",
-                "buildingNumber": 4
-            },
-            "to": {
-                "localizationId": 202,
-                "city": {
-                    "cityId": 1,
-                    "name": "Warszawa",
-                    "country": "powiat Warszawa",
-                    "province": "mazowieckie",
-                    "cityInfo": {
-                        "cityInfoId": 2,
-                        "population": 1724404,
-                        "citySize": 517
-                    }
-                },
-                "street": "string",
-                "buildingNumber": 0
-            },
-            "departureTime": moment().format("YYYY-MM-DD hh:mm"),
-            "numberOfSeats": 4,
-            "numberOfOccupiedSeats": 1,
-            "price": 10.0
-        },
-        {
-            "routeId": 203,
-            "ownerId": 601,
-            "from": {
-                "localizationId": 201,
-                "city": {
-                    "cityId": 19,
-                    "name": "Katowice",
-                    "country": "powiat Katowice",
-                    "province": "śląskie",
-                    "cityInfo": {
-                        "cityInfoId": 20,
-                        "population": 304362,
-                        "citySize": 165
-                    }
-                },
-                "street": "krzywa",
-                "buildingNumber": 4
-            },
-            "to": {
-                "localizationId": 202,
-                "city": {
-                    "cityId": 1,
-                    "name": "Warszawa",
-                    "country": "powiat Warszawa",
-                    "province": "mazowieckie",
-                    "cityInfo": {
-                        "cityInfoId": 2,
-                        "population": 1724404,
-                        "citySize": 517
-                    }
-                },
-                "street": "string",
-                "buildingNumber": 0
-            },
-            "departureTime": moment().format("YYYY-MM-DD hh:mm"),
-            "numberOfSeats": 4,
-            "numberOfOccupiedSeats": 1,
-            "price": 10.0
-        },
-    ]
+        }
+    ];
 }
 
 export const FakeBackendProvider = {

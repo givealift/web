@@ -17,9 +17,9 @@ export class RouteListComponent implements OnInit {
   constructor(
     private dataTransferService: DataTransferService,
     private router: Router
-  ){}
+  ) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.routes = this.dataTransferService.getData("route-list");
   }
 
@@ -35,14 +35,25 @@ export class RouteListComponent implements OnInit {
   isThisProfileFavouriteRoutes() {
     let response = false;
 
-    if ( this.router.url === "/profile/favourite-routes" ) response = true;
+    if ( this.router.url === "/profile/favourite-routes" ) { response = true; }
 
+    return response;
+  }
+
+  isThisRouteDetails() {
+    let response = false;
+
+    // if ( this.router.url.match("/route/203") ) { response = true; }
+    //if ( this.router.url.match("\\/(route)\\/\\d+") ) { response = true; }
+    if ( this.router.url.match(/\/(route)\/\d+/) ) { response = true; }
     return response;
   }
 
   getClassName() {
     if ( this.isThisProfileFavouriteRoutes() ) {
       return "favouriteRoutesStyle";
+    } else if ( this.isThisRouteDetails() ) {
+      return "routeDetailsStyle";
     } else {
       return "routeList";
     }

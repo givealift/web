@@ -1,5 +1,4 @@
-<mat-card *ngIf="isThisProfileFavouriteRoutes === false">
-<mat-card *ngIf="isThisProfileFavouriteRoutes === true" [class]="getClassName()">
+<mat-card [class.favouriteRouteStyle]="isThisProfileFavouriteRoutes" [class.routeDetailsStyle]="isThisRouteDetails">
   <mat-grid-list cols="8" rows="5" rowHeight="32px" gutterSize="0px">
     <mat-grid-tile colspan="3" rowspan="1">
       <div class="align-vertically">
@@ -21,6 +20,12 @@
         </button>
         <button mat-icon-button matTooltipShowDelay="100" matTooltip="Zarezerwuj" matTooltipPosition="right">
           <mat-icon>content_paste</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Dodaj do ulubionych" matTooltipPosition="right">
+          <mat-icon>favorite</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Szczegóły" matTooltipPosition="right" (click)="redirectDetails()">
+          <mat-icon>info</mat-icon>
         </button>
       </div>
     </mat-grid-tile>

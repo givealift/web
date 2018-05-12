@@ -31,6 +31,7 @@ import { UserRideComponent } from './user-profile/user-ride/user_ride.component'
 import { UserInfoComponent } from './user-profile/user-info/user_info.component';
 import { PhotoComponent } from './user-profile/photo/photo.component';
 import { FavouriteRoutesComponent } from './route/favourite-routes/favourite-routes.component';
+import { RouteDetailsComponent } from './route/route-details/route-details.component';
 registerLocaleData(localePl);
 
 
@@ -50,7 +51,8 @@ registerLocaleData(localePl);
     UserRouteComponent,
     UserInfoComponent,
     PhotoComponent,
-    FavouriteRoutesComponent
+    FavouriteRoutesComponent,
+    RouteDetailsComponent
   ],
   imports: [
     FormsModule,

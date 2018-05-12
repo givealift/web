@@ -10,6 +10,8 @@ import { AuthGuard } from "./_services/auth-guard.service";
 import { NewRouteComponent } from "./route/new-route/new-route.component";
 import { RouteListComponent } from "./route/route-list/route-list.component";
 import { FavouriteRoutesComponent } from "./route/favourite-routes/favourite-routes.component";
+import {RouteDetailsComponent} from "./route/route-details/route-details.component";
+import {RouteService} from "./_services/route.service";
 
 const routes: Routes = [
 
@@ -26,6 +28,7 @@ const routes: Routes = [
       { path: 'favourite-routes', component: FavouriteRoutesComponent }
     ]
   },
+  { path: 'route/:routeId', component: RouteDetailsComponent },
 
   { path: '**', redirectTo: '' }
 ];

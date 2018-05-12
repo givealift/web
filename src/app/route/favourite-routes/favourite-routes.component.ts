@@ -18,7 +18,7 @@ export class FavouriteRoutesComponent implements OnInit {
   ngOnInit() {
     this.userService.getUserFavourites(1).subscribe(
       routes => {
-        console.log('worked: ', routes);
+        console.log('getUserFavourites - worked: ', routes);
         this.favouriteRoutes = routes;
       }
     );

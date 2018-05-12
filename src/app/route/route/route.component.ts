@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Route, User } from '../../_models';
-import { UserService } from '../../_services/user.service';
+import { Route } from '../../_models';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-route',
@@ -16,18 +16,17 @@ export class RouteComponent implements OnInit {
   @Input()
   isThisProfileFavouriteRoutes: boolean = false;
 
-  constructor() { }
+  @Input()
+  isThisRouteDetails: boolean = false;
+
+  constructor( private router: Router ) { }
+
+  redirectDetails() {
+    this.router.navigate(["/route/" + this.routeData.routeId]);
+  }
 
   onClick() {
 
-  }
-
-  getClassName() {
-    if ( this.isThisProfileFavouriteRoutes === true ) {
-      return "favouriteRouteStyle";
-    } else {
-      return ""; //route
-    }
   }
 
 }

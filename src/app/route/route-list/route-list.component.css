@@ -3,11 +3,27 @@
     margin-left: 30%;
     margin-right: 30%;
     border: black 2px;
+    color: royalblue;
+    min-height: 350px;
+    min-width: 700px;
 }
 
 .favouriteRoutesStyle {
   margin-top: 15px;
   margin-left: 10%;
   margin-right: 10%;
-  border: green 5px;
+  border: black 2px;
+  color: hotpink;
+  min-height: 350px;
+  min-width: 700px;
+}
+
+.routeDetailsStyle {
+  margin-top: 15px;
+  margin-left: 5%;
+  margin-right: 5%;
+  border: black 2px;
+  color: royalblue;
+  min-height: 350px;
+  min-width: 700px;
 }
