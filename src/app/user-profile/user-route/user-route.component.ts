@@ -12,7 +12,7 @@ import {Route} from '../../_models';
 })
 export class UserRouteComponent implements OnInit {
   userId: number = parseInt(localStorage.getItem("id"));
-  routes: Route[];
+  routes: Route[] = [];
   page: number = 0;
   routesAmount: number = 25;
 

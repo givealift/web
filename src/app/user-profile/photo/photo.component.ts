@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 
-import { DomSanitizer } from '@angular/platform-browser';
-import { UserService } from '../../_services/user.service';
+import {DomSanitizer} from '@angular/platform-browser';
+import {UserService} from '../../_services/user.service';
 
 @Component({
   selector: 'app-profile-photo',
@@ -11,6 +11,8 @@ import { UserService } from '../../_services/user.service';
 export class PhotoComponent implements OnInit {
   photo;
   sanitizedPhoto;
+  @Input()
+  edit: boolean = false;
   userId: number = parseInt(localStorage.getItem("id"));
 
   @ViewChild('fileInput') fileInput;

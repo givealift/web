@@ -29,9 +29,7 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //this.userService.getById(this.userId)
-    //  .subscribe(user => {this.userModel = user; console.log(this.userModel)} );
-    // this.form.form.disable();
+
 
   }
   enableForm() {

@@ -5,13 +5,14 @@
   <mat-grid-list cols="8" rows="11" rowHeight="40px">
 
     <mat-grid-tile colspan="2" rowspan="3">
-      <app-profile-photo></app-profile-photo>
+      <app-profile-photo [edit]="true"></app-profile-photo>
     </mat-grid-tile>
     <mat-grid-tile colspan="6" rowspan="2">
       <h1>
         <div class="row center">
           <mat-form-field class="inline-form-field">
-            <input matInput [(ngModel)]="user.firstName" name="firstname" required #firstRef="ngModel" />
+            <input matInput [(ngModel)]="user.firstName" name="firstname" required #firstRef="ngModel"
+                   placeholder="imie"/>
             <mat-error *ngIf="firstRef.invalid ">Wpisz poprawne imię!</mat-error>
           </mat-form-field>
           <mat-form-field class="inline-form-field">
@@ -24,13 +25,17 @@
     <mat-grid-tile colspan="6" rowspan="1">
       <h5 class="align-left">
         <mat-icon>person</mat-icon>
-        22 lat/a
+
+
+        <mat-form-field class="inline-form-field">
+          <input matInput [(ngModel)]="user.age" name="age" #lastRef="ngModel"/>
+        </mat-form-field>
       </h5>
     </mat-grid-tile>
     <mat-grid-tile colspan="2" rowspan="1">
       <h5 class="text-primary">
         Ocena:
-        <strong>4.5/5</strong>
+        <strong>{{user.rate}}</strong>
       </h5>
     </mat-grid-tile>
     <mat-grid-tile colspan="6" rowspan="1">
@@ -57,7 +62,9 @@
     <mat-grid-tile colspan="6" rowspan="1">
       <h5 class="align-left">
         <mat-icon>gps_fixed</mat-icon>
-        Brody 184, Kalwaria Zebrzydowska
+        <mat-form-field class="inline-form-field">
+          <input matInput [(ngModel)]="user.address" name="address" required #lastRef="ngModel"/>
+        </mat-form-field>
       </h5>
     </mat-grid-tile>
     <mat-grid-tile colspan="6" rowspan="1">

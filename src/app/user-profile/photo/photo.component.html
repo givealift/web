@@ -1,5 +1,22 @@
-<input type="file" #fileInput placeholder="Wybierz zdjęcie" (change)="onSelectFile($event)"/>
-<button mat-raised-button class="hoverable" type="button" (click)="upload()">
-  Zmień
+<mat-grid-list cols="4" rows="5" rowHeight="50px">
+  <mat-grid-tile colspan="4" rowspan="4">
+    <img [src]="sanitizedPhoto" alt="../../../assets/logo.png"/>
+  </mat-grid-tile>
+  <span *ngIf="edit">
+  <mat-grid-tile colspan="2" rowspan="1">
+    <div class="button-row"> <button mat-raised-button color="primary" (click)="fileInput.click()"
+    ><mat-icon>photo</mat-icon> Wybierz</button>
+      <input hidden type="file" #fileInput (change)="onSelectFile($event)"/> </div>
+  </mat-grid-tile>
+
+    <!--
+    <input type="file" #fileInput placeholder="Wybierz zdjęcie" (change)="onSelectFile($event)"/>-->
+
+  <mat-grid-tile colspan="2" rowspan="1">
+<button mat-raised-button color="primary" type="button" (click)="upload()">
+Ustaw
 </button>
-<img [src]="sanitizedPhoto" alt="" width="60px" height="100px"/>
+  </mat-grid-tile>
+    </span>
+</mat-grid-list>
+
