@@ -12,7 +12,7 @@ export class PaginationComponent {
     pageChange: EventEmitter<number> = new EventEmitter<number>();
   pageAmount: number;
   @Input()
-  elementsAmount: number = 0;
+  elementsAmount: number;
     pageNumbers: Array<number> = [];
     readonly applicationsOnPage = 10;
     currentPage: number = 1;

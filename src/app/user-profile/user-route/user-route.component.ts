@@ -14,7 +14,7 @@ export class UserRouteComponent implements OnInit {
   userId: number = parseInt(localStorage.getItem("id"));
   routes: Route[];
   page: number = 0;
-  routesAmount: number = 15;
+  routesAmount: number = 25;
 
   constructor(private routeService: RouteService, private route: ActivatedRoute, private router: Router, private userService: UserService) {
     let id = +localStorage.getItem("id");

@@ -4,3 +4,9 @@
   margin-right: 30%;
   border: black 2px;
 }
+
+md-grid-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

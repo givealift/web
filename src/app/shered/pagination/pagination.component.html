@@ -1,14 +1,13 @@
-<nav class="pagination pagination_type1">
-  <ol class="pagination__list">
-    <li class="pagination__group"><a (click)="changePageNumber(1)"
-                                     class="pagination__item pagination__control pagination__control_prev"><<</a></li>
-    <li class="pagination__group"><a (click)="changePageNumber(currentPage-1)" class="pagination__item"><</a></li>
-    <li class="pagination__group">
-      <span class="pagination__item pagination__item_active" *ngFor="let pnum of pageNumbers"
-            [ngClass]="{'active':currentPage==pnum}" (click)="changePageNumber(pnum)">{{pnum}}</span>
+<ul class="pagination modal-1">
+  <li><a (click)="changePageNumber(1)" class="prev"> first
+  </a></li>
+  <li><a (click)="changePageNumber(currentPage-1)" class="prev"> &laquo;</a></li>
+  <li>
+    <a *ngFor="let pnum of pageNumbers"
+       [ngClass]="{'active':currentPage==pnum}" (click)="changePageNumber(pnum)">{{pnum}}</a>
     </li>
-    <li class="pagination__group"><a (click)="changePageNumber(currentPage+1)" class="pagination__item">> </a></li>
-    <li class="pagination__group"><a (click)="changePageNumber(pageAmount)"
-                                     class="pagination__item pagination__control pagination__control_next">>> </a></li>
-  </ol>
-</nav>
+  <li><a (click)="changePageNumber(currentPage+1)" class="next"> &raquo;</a></li>
+  <li><a (click)="changePageNumber(pageAmount)" class="next"
+  >last</a></li>
+</ul>
+
