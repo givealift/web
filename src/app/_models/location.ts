@@ -1,4 +1,4 @@
-import { City } from ".";
+import { City } from "./city";
 
 export class Location {
     buildingNumber: number;
