@@ -10,7 +10,7 @@ import { ActivatedRoute } from "@angular/router";
 export class RouteDetailsComponent implements OnInit {
 
   @Input()
-  private routeDetails;
+  routeDetails;
 
   private routeId;
 
