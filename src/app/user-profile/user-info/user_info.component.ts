@@ -24,7 +24,6 @@ export class UserInfoComponent {
       error => this.router.navigate['home']
     );
     this.userService.getById(this.userId).subscribe(user => {
-      console.log(user);
       if (user != null) {
         this.user = user;
       }

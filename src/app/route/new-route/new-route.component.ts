@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouteService } from '../../_services/route.service';
-import { Route, Location } from '../../_models';
+import { Route, Location, City } from '../../_models';
 import * as moment from 'moment';
 import { AuthService } from '../../_services/auth.service';
+import { CityService } from '../../_services/city.service';
 
 @Component({
   selector: 'app-new-route',
@@ -30,12 +31,24 @@ export class NewRouteComponent {
 
   constructor(private router: Router,
     private routeService: RouteService,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private cityService: CityService) {
   }
 
   onSubmit() {
     this.routeModel.from.date = this.buildDepartureTimeString(this.routeModel.from.date, this.timeModel.from)
     this.routeModel.to.date = this.buildDepartureTimeString(this.routeModel.to.date, this.timeModel.to);
+
+    let fromCity: City;
+    let toCity: City;
+
+    this.cityService.searchCity(this.routeModel.from.city.name).subscribe(
+      city => this.routeModel.from.city = city
+    );
+
+    this.cityService.searchCity(this.routeModel.to.city.name).subscribe(
+      city => this.routeModel.to.city = city
+    );
 
     this.routeModel.stops = this.cityChips;
     this.showSpinner = true;
@@ -73,12 +86,17 @@ export class NewRouteComponent {
     return `${moment(date).format("YYYY-MM-DD")} ${time}`;
   }
 
-  buildLocationFromChipModel() : Location {
+  buildLocationFromChipModel(): Location {
     let newLocation = new Location();
+
+    let city: City;
+
+    this.cityService.searchCity(this.chipModel.name).subscribe(
+      city => this.chipModel.city = city
+    );
 
     let chipDateTime = this.buildDepartureTimeString(this.chipTimeModel.date, this.chipTimeModel.time)
     newLocation.date = chipDateTime;
-    newLocation.city.name = this.chipModel.name;
     newLocation.placeOfMeeting = this.chipModel.placeOfMeeting;
 
     return newLocation;
