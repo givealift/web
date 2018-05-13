@@ -7,7 +7,7 @@ import { Route, User } from "../_models";
 @Injectable()
 export class UserService {
 
-    private ApiPath: string = environment.apiUrl+'/';
+  private ApiPath: string = environment.apiUrl;
 
   // split into smaller services if it gets too big?
 
@@ -20,13 +20,9 @@ export class UserService {
 
   }
 
-    getUserFavourites(userId: number) {
-        return this.http.get(this.ApiPath + 'user/favourites/' + userId);
-    }
-
-    update(user: User) {
-        return this.http.put<User>(this.ApiPath + "user/edit/" + 1, user);
-    }
+  update(user: User, userId: number) {
+    return this.http.put<User>(this.ApiPath + "/user/edit/" + userId, user);
+  }
 
   getById(id: number) {
     return this.http.get<User>(this.ApiPath + "/user/" + id);
@@ -51,4 +47,9 @@ export class UserService {
     return this.http.post(this.ApiPath + "user/photo/" + id, formData);
 
   }
+
+  getUserFavourites(userId: number) {
+    return this.http.get(this.ApiPath + 'user/favourites/' + userId);
+  }
+
 }

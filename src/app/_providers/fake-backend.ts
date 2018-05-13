@@ -104,7 +104,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     //     localStorage.setItem('mock-users', JSON.stringify(mockUsers));
 
     //     return Observable.of(new HttpResponse({ status: 200 }));
-    // }
+    }
 
     private updateUser(request: HttpRequest<any>) {
 

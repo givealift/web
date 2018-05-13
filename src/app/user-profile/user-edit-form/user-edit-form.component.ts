@@ -9,9 +9,9 @@ import {UserService} from "../../_services/user.service";
 })
 export class UserEditFormComponent implements OnInit {
 
-  @Input() 
+  @Input()
   user: User = new User();
-  
+
   userId: number = parseInt(localStorage.getItem("id"));
   @Output() userChange: EventEmitter<User>;
 

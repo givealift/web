@@ -54,6 +54,4 @@ export class UserEditComponent implements OnInit {
     this.editOrCancel = this.disableForm ? "Edytuj" : "Anuluj";
   }
 
-
-
 }

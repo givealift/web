@@ -9,7 +9,7 @@ import {UserService} from '../_services/user.service';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user_profile.component.css']
+  styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
 

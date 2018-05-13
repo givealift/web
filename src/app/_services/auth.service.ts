@@ -6,7 +6,6 @@ import { Authentication } from "../_models/authentication";
 
 @Injectable()
 export class AuthService {
-  isLoggedIn: boolean = false; //logowanie fake'owe
 
   private readonly authUrl: string = environment.apiUrl;
   @Output() loggedInStatus: EventEmitter<boolean> = new EventEmitter();
@@ -29,11 +28,22 @@ export class AuthService {
     return token !== null && id !== null;
   }
 
-    isAuthenticated(): boolean {
-        // TODO: check if valid jwt (?) token & non expired
-        // const user = JSON.parse(localStorage.getItem("currentUser")) as User;
-        // return user !== null && user.token !== null;
-      this.isLoggedIn = true;   //logowanie fake'owe
-      return this.isLoggedIn;   //logowanie fake'owe
-    }
+  public storeCredentials(credentials: Authentication) {
+    console.log(credentials);
+
+    localStorage.setItem("token", credentials.token);
+    localStorage.setItem("id", credentials.userId);
+  }
+
+  public getCredentials(): { token: string | null, id: string | null } {
+    return {
+      token: localStorage.getItem("token"),
+      id: localStorage.getItem("id")
+    };
+  }
+
+  public removeCredentials() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("id");
+  }
 }

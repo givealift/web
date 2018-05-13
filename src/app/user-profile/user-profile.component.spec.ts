@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
-import { UserProfileComponent } from './user_profile.component';
+import { UserProfileComponent } from './user-profile.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MaterialModule } from '../_modules/material.module';
 import { AuthService } from '../_services/auth.service';
