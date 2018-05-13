@@ -22,10 +22,10 @@ export class RouteService {
 
         // passed argument may not be a city object but string
         const [fromStream, toStream] = [from, to]
-            .map(maybeCity => maybeCity.hasOwnProperty("cityId") ? Observable.of([maybeCity]) : this.lookForCity(maybeCity));
+            .map(maybeCity => maybeCity.hasOwnProperty("cityId") ? Observable.of(maybeCity) : this.lookForCity(maybeCity));
 
         return combineLatest(fromStream, toStream)
-            .flatMap(([[fromCity], [toCity]]) => {
+            .flatMap(([fromCity, toCity]) => {
                 if (fromCity && toCity) {
                     const params = new HttpParams()
                         .set("from", fromCity.cityId)
@@ -38,7 +38,7 @@ export class RouteService {
             })
     }
 
-    private lookForCity = (city: City): Observable<City[]> => this.cityService.searchCity(city.toString(), 1);
+    private lookForCity = (city: City): Observable<City | null> => this.cityService.searchCity(city.toString());
 
     update(route: Route) {
         return this.http.put<Route>(this.url + route.routeId, route);

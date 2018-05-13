@@ -5,6 +5,8 @@ import { AuthService } from '../_services/auth.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '../_modules/material.module';
+import { UserService } from '../_services/user.service';
+import { DataProviderService } from '../_services/data-provider.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -22,7 +24,9 @@ describe('LoginComponent', () => {
         MaterialModule
       ],
       providers: [
-        AuthService
+        AuthService,
+        UserService,
+        DataProviderService
       ]
     })
       .compileComponents();

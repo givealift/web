@@ -3,7 +3,7 @@ import { RouteListComponent } from './route-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '../../_modules/material.module';
 import { RouteComponent } from '../route/route.component';
-import { DataTransferService } from '../../_services/data-transfer.service';
+import { DataProviderService } from '../../_services/data-provider.service';
 
 describe('RouteListComponent', () => {
   let component: RouteListComponent;
@@ -14,7 +14,7 @@ describe('RouteListComponent', () => {
       declarations: [RouteListComponent, RouteComponent],
       imports: [HttpClientModule,
         MaterialModule],
-      providers: [DataTransferService]
+      providers: [DataProviderService]
     })
       .compileComponents();
   }));

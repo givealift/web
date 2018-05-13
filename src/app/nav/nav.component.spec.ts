@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { UserService } from '../_services/user.service';
 import { MaterialModule } from '../_modules/material.module';
+import { DataProviderService } from '../_services/data-provider.service';
 
 describe('NavComponent', () => {
   let component: NavComponent;
@@ -13,13 +14,18 @@ describe('NavComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NavComponent],
+      declarations: [
+        NavComponent
+      ],
       imports: [
-        HttpClientModule, RouterTestingModule,
+        HttpClientModule, 
+        RouterTestingModule,
         MaterialModule
       ],
       providers: [
-        AuthService, UserService
+        AuthService, 
+        UserService,
+        DataProviderService
       ]
     })
       .compileComponents();
