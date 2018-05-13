@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {RouteService} from '../../_services/route.service';
-import {UserService} from '../../_services/user.service';
-import {Route} from '../../_models';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { RouteService } from '../../_services/route.service';
+import { UserService } from '../../_services/user.service';
+import { Route } from '../../_models';
 
 
 @Component({

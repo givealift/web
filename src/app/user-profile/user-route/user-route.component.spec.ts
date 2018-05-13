@@ -12,6 +12,7 @@ import { CitiesProvider } from '../../_providers/cities-provider';
 import { AuthService } from '../../_services/auth.service';
 import { UserService } from '../../_services/user.service';
 import { DataTransferService } from '../../_services/data-transfer.service';
+import { PaginationComponent } from '../../shered/pagination/pagination.component';
 
 
 describe('UserRouteComponent', () => {
@@ -23,7 +24,8 @@ describe('UserRouteComponent', () => {
             declarations: [
                 UserRouteComponent,
                 RouteListComponent,
-                RouteComponent
+                RouteComponent,
+                PaginationComponent
             ],
             imports: [
                 HttpClientModule,

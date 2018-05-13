@@ -36,7 +36,6 @@ import { PaginationComponent } from './shered/pagination/pagination.component';
 
 registerLocaleData(localePl);
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +54,7 @@ registerLocaleData(localePl);
     PhotoComponent,
     UserEditComponent,
     UserEditFormComponent,
-    PaginationComponent //temporary
+    PaginationComponent
   ],
   imports: [
     FormsModule,
