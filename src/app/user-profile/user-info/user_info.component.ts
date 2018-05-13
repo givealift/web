@@ -23,15 +23,15 @@ export class UserInfoComponent {
       param => this.userId = param.id,
       error => this.router.navigate['home']
     );
-    let possibleUser = this.userService.getById(this.userId);
-    console.log(possibleUser);
-
-    if (possibleUser != null) {
-      this.user = possibleUser;
-    }
-    else {
-      this.router.navigate['home'];
-    }
+    this.userService.getById(this.userId).subscribe(user => {
+      console.log(user);
+      if (user != null) {
+        this.user = user;
+      }
+      else {
+        this.router.navigate['home'];
+      }
+    });
   }
 
 }

@@ -3,6 +3,11 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from "../../environments/environment";
 import { Route, User } from "../_models";
 import { DataProviderService } from "./data-provider.service";
+import { Observable } from "rxjs/Observable";
+import { tap } from "rxjs/operators/tap";
+import { catchError } from "rxjs/operators";
+import { map } from "rxjs/operators";
+import { of } from "rxjs/observable/of";
 
 
 @Injectable()
@@ -24,23 +29,23 @@ export class UserService {
     return this.http.put<User>(this.ApiPath + "/user/edit/" + userId, user);
   }
 
-  getById(id: number) {
-    let possibleUserData = this.dataProviderService.getData('user/' + id);
+  getById(id: number): Observable<User> {
+    let possibleUserData = this.dataProviderService.getData(`user/${id}`);
 
-    if (possibleUserData != null) {
-      return possibleUserData;
+    if (possibleUserData) {
+      return of(possibleUserData);
     }
-    else {
-      this.http.get<User>(this.ApiPath + "/user/" + id).subscribe(
-        data => {
-          this.dataProviderService.storeData('user/' + id, data);
-          return data;
-        },
-        error => {
-          return null;
-        }
-      );
-    }
+
+    return this.http
+      .get<User>(`${this.ApiPath}/user/${id}`, { observe: 'response' })
+      .pipe(
+        map(res => res.status === 204 ? null : res.body),
+        tap(data => {
+          if (data) {
+            this.dataProviderService.storeData(`user/${id}`, data);
+          }
+        }),
+        catchError(_ => of(null)));
   }
 
   create(user: User) {

@@ -19,9 +19,10 @@ export class RouteComponent implements OnInit {
 
   ngOnInit() {
     let userId = this.routeData.ownerId;
-    let possibleUser = this.userService.getById(userId);
-    if (possibleUser != null)
-      this.userData = possibleUser;
+    this.userService.getById(userId).subscribe(user => {
+      if (user)
+        this.userData = user;
+    });
   }
 
   onClick() {

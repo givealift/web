@@ -29,16 +29,15 @@ export class UserEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    let possibleUser = this.userService.getById(this.userId);
-
-    if (possibleUser != null) {
-      this.userModel = possibleUser;
-      this.userCopyModel = Object.assign({}, this.userModel);
-    }
-    else {
-      this.router.navigate[''];
-    }
-
+    this.userService.getById(this.userId).subscribe(user => {
+      if (user) {
+        this.userModel = user;
+        this.userCopyModel = Object.assign({}, this.userModel);
+      }
+      else {
+        this.router.navigate[''];
+      }
+    });
   }
 
   enableForm() {
