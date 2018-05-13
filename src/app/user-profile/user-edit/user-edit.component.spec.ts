@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { UserInfoComponent } from '../user-info/user_info.component';
 import { UserEditFormComponent } from '../user-edit-form/user-edit-form.component';
 import { PhotoComponent } from '../photo/photo.component';
+import { DataProviderService } from '../../_services/data-provider.service';
 
 describe('UserEditComponent', () => {
   let component: UserEditComponent;
@@ -32,6 +33,7 @@ describe('UserEditComponent', () => {
       providers: [
         AuthService,
         UserService,
+        DataProviderService
       ]
     })
       .compileComponents();

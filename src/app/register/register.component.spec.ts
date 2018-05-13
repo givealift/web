@@ -8,6 +8,7 @@ import { UserService } from '../_services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../_services/auth.service';
 import { MaterialModule } from '../_modules/material.module';
+import { DataProviderService } from '../_services/data-provider.service';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -15,14 +16,19 @@ describe('RegisterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [RegisterComponent],
-      imports: [FormsModule,
+      declarations: [
+        RegisterComponent
+      ],
+      imports: [
+        FormsModule,
         RouterTestingModule,
         HttpClientModule,
-        MaterialModule],
+        MaterialModule
+      ],
       providers: [
         UserService,
-        AuthService
+        AuthService,
+        DataProviderService
       ]
     })
       .compileComponents();

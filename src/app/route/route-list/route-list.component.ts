@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
-import { DataTransferService } from '../../_services/data-transfer.service';
+import { DataProviderService } from '../../_services/data-provider.service';
 
 @Component({
   selector: 'app-route-list',
@@ -12,7 +12,7 @@ export class RouteListComponent implements OnInit {
 
   routes: any = [];
 
-  constructor(private dataTransferService: DataTransferService){}
+  constructor(private dataTransferService: DataProviderService){}
 
   ngOnInit(){
     this.routes = this.dataTransferService.getData("route-list");

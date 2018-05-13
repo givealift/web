@@ -11,7 +11,8 @@
 
 mat-card {
     border-radius: 25px;
-    width: 35%;
+    min-width: 670px;
+    min-height: 620px;
 }
   
 mat-card:hover {

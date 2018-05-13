@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {User} from '../../_models';
-import {AuthService} from '../../_services/auth.service';
-import {UserService} from '../../_services/user.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { User } from '../../_models';
+import { AuthService } from '../../_services/auth.service';
+import { UserService } from '../../_services/user.service';
 
 @Component({
   selector: 'app-user-edit',
@@ -29,14 +29,18 @@ export class UserEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.getById(this.userId)
-      .subscribe(user => {
-        this.userModel = user;
-        this.userCopyModel = Object.assign({}, this.userModel);
-      });
+    let possibleUser = this.userService.getById(this.userId);
 
+    if (possibleUser != null) {
+      this.userModel = possibleUser;
+      this.userCopyModel = Object.assign({}, this.userModel);
+    }
+    else {
+      this.router.navigate[''];
+    }
 
   }
+
   enableForm() {
     this.disableForm = !this.disableForm;
     if (this.disableForm) {
