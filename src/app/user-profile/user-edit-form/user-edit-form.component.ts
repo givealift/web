@@ -11,6 +11,8 @@ export class UserEditFormComponent implements OnInit {
 
   @Input() 
   user: User = new User();
+
+  tmpModel: any = {};
   
   userId: number = parseInt(localStorage.getItem("id"));
   @Output() userChange: EventEmitter<User>;
