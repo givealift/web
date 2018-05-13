@@ -9,24 +9,24 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class RouteDetailsComponent implements OnInit {
 
-  public routeDetails;
+  private routeDetails;
   private routeId;
 
   constructor(
     private routeService: RouteService,
     private activatedRoute: ActivatedRoute
   ) {
-    this.activatedRoute.params.subscribe( res => {
+    this.activatedRoute.params.subscribe(res => {
       this.routeId = res.routeId;
       console.log('route-details: got routeId= ' + this.routeId);
-    } );
+    });
   }
 
   ngOnInit() {
     // this.routeId = 203; //206
 
     // this.routeService.getRouteDetailsById( this.routeId ).subscribe(
-    this.routeService.getById( this.routeId ).subscribe(
+    this.routeService.getById(this.routeId).subscribe(
       routes => {
         this.routeDetails = routes;
         console.log('getById(' + this.routeId + ') worked: ', routes);

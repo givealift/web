@@ -15,12 +15,6 @@ export class RouteComponent implements OnInit {
 
   userData: User;
 
-  @Input() //input dostaje od Component'u: Route-list, wnioskowany ze scierzyki ( router )
-  isThisProfileFavouriteRoutes: boolean = false;
-
-  @Input() //input dostaje od Component'u: Route-list, wnioskowany ze scierzyki ( router )
-  isThisRouteDetails: boolean = false;
-
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {

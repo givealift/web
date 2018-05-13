@@ -27,11 +27,11 @@ const routes: Routes = [
     path: 'profile', component: UserProfileComponent, children: [
       { path: 'info', component: UserInfoComponent },
       { path: 'edit', component: UserEditComponent },
-      { path: 'routes', component: UserRouteComponent },
-      { path: 'favourite-routes', component: FavouriteRoutesComponent }
+      { path: 'routes', component: UserRouteComponent }
     ]
   },
   { path: 'route/:routeId', component: RouteDetailsComponent },
+  { path: 'profile/fav-routes', component: FavouriteRoutesComponent },
 
   { path: '**', redirectTo: '' }
 ];

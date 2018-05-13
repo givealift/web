@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '../../_modules/material.module';
 import { RouteComponent } from '../route/route.component';
 import { DataProviderService } from '../../_services/data-provider.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('RouteListComponent', () => {
   let component: RouteListComponent;
@@ -11,9 +12,15 @@ describe('RouteListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [RouteListComponent, RouteComponent],
-      imports: [HttpClientModule,
-        MaterialModule],
+      declarations: [
+        RouteListComponent,
+        RouteComponent
+      ],
+      imports: [
+        HttpClientModule,
+        MaterialModule,
+        RouterTestingModule
+      ],
       providers: [DataProviderService]
     })
       .compileComponents();
