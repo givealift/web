@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { RouteService } from "../../_services/route.service";
 import { ActivatedRoute } from "@angular/router";
 
@@ -9,7 +9,9 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class RouteDetailsComponent implements OnInit {
 
+  @Input()
   private routeDetails;
+
   private routeId;
 
   constructor(
