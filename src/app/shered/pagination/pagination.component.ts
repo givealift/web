@@ -15,7 +15,7 @@ export class PaginationComponent {
 
     @Input()
     elementsAmount: number;
-    
+
     pageNumbers: Array<number> = [];
     readonly applicationsOnPage = 10;
     currentPage: number = 1;
@@ -26,7 +26,7 @@ export class PaginationComponent {
 
     changePageNumber(pageNum: any) {
         if (pageNum > 0 && pageNum <= this.pageAmount) {
-            this.pageChange.emit(pageNum);
+          this.pageChange.emit((pageNum - 1));
             this.currentPage = pageNum;
         }
     }
