@@ -2,6 +2,7 @@ import { EventEmitter, Injectable, Output } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { environment } from "../../environments/environment";
 import { Authentication } from "../_models/authentication";
+import { UserService } from "./user.service";
 
 
 @Injectable()
@@ -10,7 +11,7 @@ export class AuthService {
   private readonly authUrl: string = environment.apiUrl;
   @Output() loggedInStatus: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private userService: UserService) { }
 
   login(login: string, pass: string) {
     const body = { username: login, password: pass };

@@ -1,8 +1,9 @@
-import {Component, ViewChild} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {AuthService} from '../_services/auth.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {User} from "../_models";
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { AuthService } from '../_services/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { User } from "../_models";
+import { UserService } from '../_services/user.service';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class LoginComponent {
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
-    private router: Router) { }
+    private router: Router,
+    private userService: UserService) { }
 
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';

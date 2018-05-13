@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {User} from '../_models';
-import {AuthService} from '../_services/auth.service';
-import {UserService} from '../_services/user.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { User } from '../_models';
+import { AuthService } from '../_services/auth.service';
+import { UserService } from '../_services/user.service';
 
 
 @Component({
@@ -35,6 +35,7 @@ export class UserProfileComponent implements OnInit {
     console.log(this.router.url);
 
   }
+
   enableForm() {
     this.editForm = !this.editForm;
     this.editOrCancel = this.editForm ? "Edytuj" : "Anuluj";
@@ -58,7 +59,7 @@ export class UserProfileComponent implements OnInit {
   isShowProfile() {
     let response = true;
 
-    if( this.router.url==="/profile/favourite-routes" ) response = false;
+    if (this.router.url === "/profile/favourite-routes") response = false;
 
     return response;
   }

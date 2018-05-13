@@ -25,7 +25,7 @@
 
                     <mat-grid-tile colspan="1" rowspan="2">
                         <mat-form-field>
-                            <input matInput [(ngModel)]="routeModel.from.placeOfMeeting" name="fromStreet" required #fromStreetRef="ngModel" placeholder="Miejsce"
+                            <input matInput [(ngModel)]="routeModel.from.placeOfMeeting" name="fromStreet" required #fromStreetRef="ngModel" placeholder="Miejsce odjazdu"
                             />
                             <mat-error *ngIf="fromStreetRef.invalid">Wpisz poprawną nazwę!</mat-error>
                         </mat-form-field>
@@ -33,7 +33,7 @@
 
                     <mat-grid-tile colspan="1" rowspan="2">
                         <mat-form-field>
-                            <input matInput [(ngModel)]="routeModel.to.placeOfMeeting" name="toStreet" required #toStreetRef="ngModel" placeholder="Miejsce"
+                            <input matInput [(ngModel)]="routeModel.to.placeOfMeeting" name="toStreet" required #toStreetRef="ngModel" placeholder="Miejsce przyjazdu"
                             />
                             <mat-error *ngIf="toStreetRef.invalid">Wpisz poprawną nazwę!</mat-error>
                         </mat-form-field>
@@ -59,14 +59,14 @@
 
                     <mat-grid-tile colspan="1" rowspan="3">
                         <mat-form-field>
-                            <input matInput name="timeFrom" type="time" required placeholder="Odjazd" step="600" #fromTimeRef="ngModel" [(ngModel)]="timeModel.from">
+                            <input matInput name="timeFrom" type="time" required placeholder="Godzina odjazdu" step="600" #fromTimeRef="ngModel" [(ngModel)]="timeModel.from">
                             <mat-error *ngIf="fromTimeRef.invalid">Wybierz godzinę odjazdu!</mat-error>
                         </mat-form-field>
                     </mat-grid-tile>
 
                     <mat-grid-tile colspan="1" rowspan="3">
                         <mat-form-field>
-                            <input matInput name="timeTo" type="time" required placeholder="Przyjazd" step="600" #toTimeRef="ngModel" [(ngModel)]="timeModel.to">
+                            <input matInput name="timeTo" type="time" required placeholder="Godzina przyjazdu" step="600" #toTimeRef="ngModel" [(ngModel)]="timeModel.to">
                             <mat-error *ngIf="toTimeRef.invalid">Wybierz godzinę przyjazdu!</mat-error>
                         </mat-form-field>
                     </mat-grid-tile>

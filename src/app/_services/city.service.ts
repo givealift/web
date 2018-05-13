@@ -1,12 +1,14 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { City, User } from "../_models";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 import { of } from "rxjs/observable/of";
 import { tap } from "rxjs/operators/tap";
 import 'rxjs/add/operator/first';
+import 'rxjs/add/operator/mergeMap';
 import { environment } from "../../environments/environment";
 import { CitiesProvider } from "../_providers/cities-provider";
+import { first } from "rxjs/operator/first";
 
 
 @Injectable()
@@ -19,7 +21,9 @@ export class CityService {
 
     searchCity(cityName: string): Observable<City | null> {
         return this.searchCities(cityName, 1)
-            .first(undefined, undefined, null);
+            .mergeMap(cities => {
+                return of(cities[0] || null);
+            })
     }
 
     searchCities(term: string, limit: number = 20): Observable<City[]> {

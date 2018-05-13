@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CitySearchComponent } from './city-search/city-search.component';
 import { UserService } from './_services/user.service';
 import { MaterialModule } from './_modules/material.module';
+import { DataProviderService } from './_services/data-provider.service';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -43,7 +44,8 @@ describe('AppComponent', () => {
       providers: [
         { provide: APP_BASE_HREF, useValue: "/" },
         AuthService,
-        UserService
+        UserService,
+        DataProviderService
       ]
     }).compileComponents();
   }));
