@@ -25,7 +25,6 @@ import { FakeBackendProvider } from './_providers/fake-backend';
 import localePl from '@angular/common/locales/pl';
 import { registerLocaleData } from '@angular/common';
 import { MatIconRegistry } from '@angular/material';
-import { DataTransferService } from './_services/data-transfer.service';
 import { UserProfileComponent } from './user-profile/user_profile.component';
 import { UserInfoComponent } from './user-profile/user-info/user_info.component';
 import { PhotoComponent } from './user-profile/photo/photo.component';
@@ -33,6 +32,7 @@ import { UserRouteComponent } from './user-profile/user-route/user-route.compone
 import { UserEditComponent } from './user-profile/user-edit/user-edit.component';
 import { UserEditFormComponent } from './user-profile/user-edit-form/user-edit-form.component';
 import { PaginationComponent } from './shered/pagination/pagination.component';
+import { DataProviderService } from './_services/data-provider.service';
 
 registerLocaleData(localePl);
 
@@ -73,7 +73,7 @@ registerLocaleData(localePl);
     FakeBackendProvider,
     RouteService,
     CitiesProvider,
-    DataTransferService,
+    DataProviderService,
     { provide: APP_INITIALIZER, useFactory: citiesProviderFactory, deps: [CitiesProvider], multi: true },
     { provide: MAT_DATE_LOCALE, useValue: 'pl' }
   ],

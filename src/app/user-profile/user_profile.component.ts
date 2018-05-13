@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {User} from '../_models';
-import {AuthService} from '../_services/auth.service';
-import {UserService} from '../_services/user.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { User } from '../_models';
+import { AuthService } from '../_services/auth.service';
+import { UserService } from '../_services/user.service';
 
 
 @Component({
@@ -29,9 +29,8 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-
   }
+
   enableForm() {
     this.editForm = !this.editForm;
     this.editOrCancel = this.editForm ? "Edytuj" : "Anuluj";
