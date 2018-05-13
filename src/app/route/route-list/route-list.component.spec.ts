@@ -11,10 +11,17 @@ describe('RouteListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [RouteListComponent, RouteComponent],
-      imports: [HttpClientModule,
-        MaterialModule],
-      providers: [DataProviderService]
+      declarations: [
+        RouteListComponent, 
+        RouteComponent
+      ],
+      imports: [
+        HttpClientModule,
+        MaterialModule
+      ],
+      providers: [
+        DataProviderService
+      ]
     })
       .compileComponents();
   }));
