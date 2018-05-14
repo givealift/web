@@ -37,6 +37,7 @@ export class NewRouteComponent {
     this.routeModel.from.date = this.buildDepartureTimeString(this.routeModel.from.date, this.timeModel.from)
     this.routeModel.to.date = this.buildDepartureTimeString(this.routeModel.to.date, this.timeModel.to);
 
+    this.routeModel.numberOfOccupiedSeats = 0;
     this.routeModel.stops = this.cityChips;
     this.showSpinner = true;
     const { token, id } = this.authService.getCredentials();
@@ -73,7 +74,7 @@ export class NewRouteComponent {
     return `${moment(date).format("YYYY-MM-DD")} ${time}`;
   }
 
-  buildLocationFromChipModel() : Location {
+  buildLocationFromChipModel(): Location {
     let newLocation = new Location();
 
     let chipDateTime = this.buildDepartureTimeString(this.chipTimeModel.date, this.chipTimeModel.time)
