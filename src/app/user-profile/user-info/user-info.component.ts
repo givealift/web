@@ -7,7 +7,7 @@ import { UserService } from '../../_services/user.service';
 @Component({
   selector: 'app-profile-info',
   templateUrl: './user-info.component.html',
-  styleUrls: ['./user_info.component.css']
+  styleUrls: ['./user-info.component.css']
 })
 export class UserInfoComponent {
 
@@ -26,7 +26,7 @@ export class UserInfoComponent {
     let possibleUser = this.userService.getById(this.userId);
 
     console.log(possibleUser);
-    
+
     if (possibleUser != null) {
       this.user = possibleUser;
     }

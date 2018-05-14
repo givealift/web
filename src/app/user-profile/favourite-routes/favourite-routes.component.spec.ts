@@ -5,9 +5,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { UserService } from '../../_services/user.service';
 import { DataProviderService } from '../../_services/data-provider.service';
 import { MaterialModule } from '../../_modules/material.module';
-import { RouteListComponent } from '../route-list/route-list.component';
-import { Route } from '../../_models';
-import { RouteComponent } from '../route/route.component';
+import { RouteListComponent } from '../../route/route-list/route-list.component';
+import { Route } from '../../_models/index';
+import { RouteComponent } from '../../route/route/route.component';
 import { RouteService } from '../../_services/route.service';
 import { HttpClientModule } from '@angular/common/http';
 

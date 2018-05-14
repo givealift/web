@@ -1,4 +1,26 @@
 mat-card {
     margin-top: 0px;
     padding-top: 0px;
+    width: 660px;
+    height: 55px;
+    min-width: 250px;
+    min-height: 50px;
+}
+
+a.mat-tab-link {
+  height: 48px;
+  padding: 5px 5px;
+  cursor: pointer;
+  box-sizing: border-box;
+  opacity: .6;
+  min-width: 200px;
+  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  vertical-align: top;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
 }

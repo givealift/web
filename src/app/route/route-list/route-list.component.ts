@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
-import { FavouriteRoutesComponent } from "../favourite-routes/favourite-routes.component";
 import { Router } from "@angular/router";
 import { DataProviderService } from '../../_services/data-provider.service';
 
@@ -29,32 +28,5 @@ export class RouteListComponent implements OnInit {
   //     (data) => {
   //       this.routes = data;
   //     });
-
-  isThisProfileFavouriteRoutes() {
-    let response = false;
-
-    if (this.router.url === "/profile/favourite-routes") { response = true; }
-
-    return response;
-  }
-
-  isThisRouteDetails() {
-    let response = false;
-
-    // if ( this.router.url.match("/route/203") ) { response = true; }
-    //if ( this.router.url.match("\\/(route)\\/\\d+") ) { response = true; }
-    if (this.router.url.match(/\/(route)\/\d+/)) { response = true; }
-    return response;
-  }
-
-  getClassName() {
-    if (this.isThisProfileFavouriteRoutes()) {
-      return "favouriteRoutesStyle";
-    } else if (this.isThisRouteDetails()) {
-      return "routeDetailsStyle";
-    } else {
-      return "routeList";
-    }
-  }
 
 }

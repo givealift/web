@@ -26,12 +26,12 @@ import localePl from '@angular/common/locales/pl';
 import { registerLocaleData } from '@angular/common';
 import { MatIconRegistry } from '@angular/material';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { UserInfoComponent } from './user-profile/user-info/user_info.component';
+import { UserInfoComponent } from './user-profile/user-info/user-info.component';
 import { PhotoComponent } from './user-profile/photo/photo.component';
 import { UserRouteComponent } from './user-profile/user-route/user-route.component';
 import { UserEditComponent } from './user-profile/user-edit/user-edit.component';
 import { UserEditFormComponent } from './user-profile/user-edit-form/user-edit-form.component';
-import { FavouriteRoutesComponent } from './route/favourite-routes/favourite-routes.component';
+import { FavouriteRoutesComponent } from './user-profile/favourite-routes/favourite-routes.component';
 import { RouteDetailsComponent } from './route/route-details/route-details.component';
 import { DataProviderService } from './_services/data-provider.service';
 
