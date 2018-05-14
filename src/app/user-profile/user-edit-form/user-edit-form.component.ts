@@ -52,6 +52,10 @@ export class UserEditFormComponent implements OnInit {
 
   updateUser() {
     console.log(this.userModel);
+
+    if (this.userModel.password == null)
+      delete this.userModel.password;
+
     this.userService.update(this.userModel, this.userId).subscribe(
       response => {
         console.log(response);
