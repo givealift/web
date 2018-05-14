@@ -26,11 +26,8 @@ export class UserEditFormComponent implements OnInit {
   optionalInfo: any = {};
 
   userId: number = parseInt(localStorage.getItem("id"));
-  @Output() userChange: EventEmitter<User>;
-
 
   constructor(private userService: UserService, private router: Router, private sanitizer: DomSanitizer) {
-    this.userChange = new EventEmitter<User>();
   }
 
   ngOnInit() {
@@ -54,10 +51,11 @@ export class UserEditFormComponent implements OnInit {
   }
 
   updateUser() {
-    this.userChange.emit(this.userModel);
     console.log(this.userModel);
     this.userService.update(this.userModel, this.userId).subscribe(
-      () => {
+      response => {
+        console.log(response);
+        console.log("success");
       },
       error => {
         console.log(error);
