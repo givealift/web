@@ -1,8 +1,7 @@
 mat-card {
   margin-top: 30px;
+  min-width: 700px;
   border-radius: 25px;
-  width: 90%;
-  min-height: 600px;
 }
 
 mat-grid-tile .align-left {
@@ -19,7 +18,28 @@ mat-icon {
   border-top: 1px dashed gray;
 }
 
+.right-border {
+  border-right: 1px dashed gray;
+}
+
 mat-grid-tile .align-vertically {
   position: absolute;
   top: 10px;
+}
+
+/* mat-grid-tile {
+  border: dashed gray 1px;
+} */
+
+mat-form-field {
+  width: 200px !important;
+}
+
+.file-input {
+  width: 0.1px;
+  height: 0.1px;
+  	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
 }

@@ -27,9 +27,7 @@ import { registerLocaleData } from '@angular/common';
 import { MatIconRegistry } from '@angular/material';
 import { UserProfileComponent } from './user-profile/user_profile.component';
 import { UserInfoComponent } from './user-profile/user-info/user-info.component';
-import { PhotoComponent } from './user-profile/photo/photo.component';
 import { UserRouteComponent } from './user-profile/user-route/user-route.component';
-import { UserEditComponent } from './user-profile/user-edit/user-edit.component';
 import { UserEditFormComponent } from './user-profile/user-edit-form/user-edit-form.component';
 import { DataProviderService } from './_services/data-provider.service';
 
@@ -51,8 +49,6 @@ registerLocaleData(localePl);
     UserProfileComponent,
     UserRouteComponent,
     UserInfoComponent,
-    PhotoComponent,
-    UserEditComponent,
     UserEditFormComponent
   ],
   imports: [

@@ -10,7 +10,7 @@ import { AuthGuard } from "./_services/auth-guard.service";
 import { NewRouteComponent } from "./route/new-route/new-route.component";
 import { RouteListComponent } from "./route/route-list/route-list.component";
 import { UserRouteComponent } from "./user-profile/user-route/user-route.component";
-import { UserEditComponent } from "./user-profile/user-edit/user-edit.component";
+import { UserEditFormComponent } from "./user-profile/user-edit-form/user-edit-form.component";
 
 const routes: Routes = [
 
@@ -22,11 +22,10 @@ const routes: Routes = [
   { path: 'user/:id', component: UserInfoComponent },
   {
     path: 'profile', component: UserProfileComponent, children: [
-      { path: 'edit', component: UserEditComponent },
+      { path: 'edit', component: UserEditFormComponent },
       { path: 'routes', component: UserRouteComponent },
     ]
   },
-
   { path: '**', redirectTo: '' }
 ];
 

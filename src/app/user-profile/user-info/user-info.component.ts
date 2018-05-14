@@ -11,7 +11,6 @@ import { UserService } from '../../_services/user.service';
 })
 export class UserInfoComponent {
 
-  @Input()
   user: User = new User();
 
   userId: number;

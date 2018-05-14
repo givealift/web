@@ -1,9 +1,0 @@
-<mat-card>
-  <button mat-raised-button class="hoverable" type="button" (click)="enableForm()">
-    {{editOrCancel}}
-  </button>
-  <app-profile-info *ngIf="disableForm" [(user)]="userModel"></app-profile-info>
-  <app-user-edit-form *ngIf="!disableForm" [user]="userModel" (userChange)="onUserChange($event)"></app-user-edit-form>
-</mat-card>
-
-
