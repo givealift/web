@@ -14,16 +14,12 @@ import { City } from "../../_models/city";
 })
 export class RouteDetailsComponent implements OnInit {
 
-  @Input()
   routes: any = [];
 
-  @Input()
   routeDetails: Route = new Route();
 
-  @Input()
   userData: User;
 
-  @Input()
   numberOfStops: number = 0;
 
   private routeId;
