@@ -1,24 +1,15 @@
-<mat-grid-list cols="8" rows="11">
-  <div *ngIf="routes.length != 0">
-    <mat-grid-tile colspan="8" rowspan="8">
-      <div class="routeList">
-        <app-route *ngFor="let route of routes" [routeData]="route"></app-route>
+<div *ngIf="hasUserRoutes">
+  <app-route *ngFor="let route of routes" [routeData]="route"></app-route>
 
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="8" rowspan="3">
-      <app-pagination [elementsAmount]="routesAmount" (pageChange)="changePage($event)"></app-pagination>
-    </mat-grid-tile>
+  <div class="no-style">
+    <app-pagination class="align-center" [elementsAmount]="routesAmount" (pageChange)="changePage($event)"></app-pagination>
   </div>
+</div>
 
-
-  <mat-grid-tile colspan="8" rowspan="8" *ngIf="routes.length == 0">
-    <mat-card id="no-routes">
-      <h5>Nie dodałeś jeszcze żadnego przejazdu </h5> <br/>
-      <button mat-raised-button color="primary" routerLink="/new-route">Dodaj przejazd</button>
-    </mat-card>
-  </mat-grid-tile>
-
-
-</mat-grid-list>
-
+<div *ngIf="!hasUserRoutes">
+  <mat-card id="no-routes">
+    <h5>Nie dodałeś jeszcze żadnego przejazdu </h5>
+    <br/>
+    <button mat-raised-button color="primary" routerLink="/new-route">Dodaj przejazd</button>
+  </mat-card>
+</div>

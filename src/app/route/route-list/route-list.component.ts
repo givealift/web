@@ -12,19 +12,10 @@ export class RouteListComponent implements OnInit {
 
   routes: any = [];
 
-  constructor(private dataTransferService: DataProviderService){}
+  constructor(private dataTransferService: DataProviderService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.routes = this.dataTransferService.getData("route-list");
   }
-
-  // constructor(private httpClient: HttpClient) {
-
-    // Observable.interval(1000)
-    //   .switchMap(() => httpClient.get('/api/route/list'))
-    //   .subscribe(
-    //     (data) => {
-    //       this.routes = data;
-    //     });
 
 }

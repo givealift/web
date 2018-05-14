@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Route, User } from '../../_models';
 import { UserService } from '../../_services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-route',
@@ -13,8 +14,9 @@ export class RouteComponent implements OnInit {
   routeData: Route = new Route();
 
   userData: User;
+  userId: number; //for convenience
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
   }
 
   ngOnInit() {
@@ -25,8 +27,8 @@ export class RouteComponent implements OnInit {
     });
   }
 
-  onClick() {
-
+  goToUserPage() {
+    this.router.navigate(['user/' + this.userId]);
   }
 
 }

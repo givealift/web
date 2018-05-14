@@ -16,16 +16,23 @@ export class UserRouteComponent implements OnInit {
   page: number = 0;
   routesAmount: number = 25;
 
+  hasUserRoutes: boolean;
+
   constructor(private routeService: RouteService, private route: ActivatedRoute, private router: Router, private userService: UserService) {
-    let id = +localStorage.getItem("id");
-    let page = 0;
-    this.userService.getUserRides(id, page).subscribe(
-      data => this.routes = data
-    );
   }
 
   ngOnInit() {
-    this.changePage(this.page);
+    let id = +localStorage.getItem("id");
+    let page = 0;
+    this.userService.getUserRides(id, page).subscribe(
+      data => {
+        this.routes = data;
+        this.hasUserRoutes = true;
+      },
+      error => {
+        this.hasUserRoutes = false;
+      }
+    );
   }
 
   changePage(page: number) {

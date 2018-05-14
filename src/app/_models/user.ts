@@ -6,7 +6,7 @@ export class User {
     password: string;
     email: string;
     phone: string;
-  birthYear: number;
-  address: string;
-  rate: number;
+    birthYear: number;
+    address: string;
+    rate: number;
 }

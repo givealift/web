@@ -50,6 +50,7 @@ export class NewRouteComponent {
       city => this.routeModel.to.city = city
     );
 
+    this.routeModel.numberOfOccupiedSeats = 0;
     this.routeModel.stops = this.cityChips;
     this.showSpinner = true;
     const { token, id } = this.authService.getCredentials();
@@ -57,9 +58,10 @@ export class NewRouteComponent {
 
     this.routeService.create(this.routeModel).subscribe(
       () => {
-        this.router.navigate(['/route-list']);
+        this.router.navigate(['/profile/routes']);
       },
       error => {
+        console.log(error);
         this.showSpinner = false;
         this.router.navigate(['/home']);
       }
