@@ -19,6 +19,8 @@ export class UserEditFormComponent implements OnInit {
   userModel: User = new User();
   userCopyModel: User = new User();
 
+  today: Date = new Date();
+
   passConfirm: String;
 
   optionalInfo: any = {};
