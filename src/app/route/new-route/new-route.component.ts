@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouteService } from '../../_services/route.service';
-import { Route, Location } from '../../_models';
+import { Route, Location, City } from '../../_models';
 import * as moment from 'moment';
 import { AuthService } from '../../_services/auth.service';
+import { CityService } from '../../_services/city.service';
 
 @Component({
   selector: 'app-new-route',
@@ -30,12 +31,24 @@ export class NewRouteComponent {
 
   constructor(private router: Router,
     private routeService: RouteService,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private cityService: CityService) {
   }
 
   onSubmit() {
     this.routeModel.from.date = this.buildDepartureTimeString(this.routeModel.from.date, this.timeModel.from)
     this.routeModel.to.date = this.buildDepartureTimeString(this.routeModel.to.date, this.timeModel.to);
+
+    let fromCity: City;
+    let toCity: City;
+
+    this.cityService.searchCity(this.routeModel.from.city.name).subscribe(
+      city => this.routeModel.from.city = city
+    );
+
+    this.cityService.searchCity(this.routeModel.to.city.name).subscribe(
+      city => this.routeModel.to.city = city
+    );
 
     this.routeModel.numberOfOccupiedSeats = 0;
     this.routeModel.stops = this.cityChips;
@@ -45,9 +58,10 @@ export class NewRouteComponent {
 
     this.routeService.create(this.routeModel).subscribe(
       () => {
-        this.router.navigate(['/route-list']);
+        this.router.navigate(['/profile/routes']);
       },
       error => {
+        console.log(error);
         this.showSpinner = false;
         this.router.navigate(['/home']);
       }
@@ -76,6 +90,12 @@ export class NewRouteComponent {
 
   buildLocationFromChipModel(): Location {
     let newLocation = new Location();
+
+    let city: City;
+
+    this.cityService.searchCity(this.chipModel.name).subscribe(
+      city => this.chipModel.city = city
+    );
 
     let chipDateTime = this.buildDepartureTimeString(this.chipTimeModel.date, this.chipTimeModel.time)
     newLocation.date = chipDateTime;
