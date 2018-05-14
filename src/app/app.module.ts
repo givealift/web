@@ -26,7 +26,7 @@ import localePl from '@angular/common/locales/pl';
 import { registerLocaleData } from '@angular/common';
 import { MatIconRegistry } from '@angular/material';
 import { UserProfileComponent } from './user-profile/user_profile.component';
-import { UserInfoComponent } from './user-profile/user-info/user_info.component';
+import { UserInfoComponent } from './user-profile/user-info/user-info.component';
 import { PhotoComponent } from './user-profile/photo/photo.component';
 import { UserRouteComponent } from './user-profile/user-route/user-route.component';
 import { UserEditComponent } from './user-profile/user-edit/user-edit.component';

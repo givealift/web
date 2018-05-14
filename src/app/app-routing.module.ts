@@ -4,7 +4,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { HomeComponent } from "./home/home.component";
-import { UserInfoComponent } from "./user-profile/user-info/user_info.component";
+import { UserInfoComponent } from "./user-profile/user-info/user-info.component";
 import { UserProfileComponent } from "./user-profile/user_profile.component";
 import { AuthGuard } from "./_services/auth-guard.service";
 import { NewRouteComponent } from "./route/new-route/new-route.component";
