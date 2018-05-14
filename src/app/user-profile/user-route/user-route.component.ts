@@ -16,7 +16,7 @@ export class UserRouteComponent implements OnInit {
   page: number = 0;
   routesAmount: number = 25;
 
-  hasUserRoutes: boolean;
+  hasUserRoutes: boolean = true;
 
   constructor(private routeService: RouteService, private route: ActivatedRoute, private router: Router, private userService: UserService) {
   }
