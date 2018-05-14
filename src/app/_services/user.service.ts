@@ -59,7 +59,7 @@ export class UserService {
 
   upload(formData: FormData, id: number) {
     const body = { file: 'asd"' };
-    return this.http.post(this.ApiPath + "user/photo/" + id, formData);
+    return this.http.post(this.ApiPath + "/user/photo/" + id, formData);
   }
 
   saveLoggedUserData(id: number) {

@@ -7,11 +7,10 @@ import { UserService } from '../../_services/user.service';
 @Component({
   selector: 'app-profile-info',
   templateUrl: './user-info.component.html',
-  styleUrls: ['./user_info.component.css']
+  styleUrls: ['./user-info.component.css']
 })
 export class UserInfoComponent {
 
-  @Input()
   user: User = new User();
 
   userId: number;

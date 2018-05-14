@@ -6,6 +6,7 @@ import { MaterialModule } from '../../_modules/material.module';
 import { UserService } from '../../_services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { DataProviderService } from '../../_services/data-provider.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('RouteComponent', () => {
   let component: RouteComponent;
@@ -17,8 +18,9 @@ describe('RouteComponent', () => {
         RouteComponent
       ],
       imports: [
-        MaterialModule, 
-        HttpClientModule
+        MaterialModule,
+        HttpClientModule,
+        RouterTestingModule
       ],
       providers: [
         UserService,
