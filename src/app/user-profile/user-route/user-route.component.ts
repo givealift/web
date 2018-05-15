@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { RouteService } from '../../_services/route.service';
-import { UserService } from '../../_services/user.service';
-import { Route } from '../../_models';
-import { SpinnerProvider } from '../../_providers/spinner-provider';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {RouteService} from '../../_services/route.service';
+import {UserService} from '../../_services/user.service';
+import {Route} from '../../_models';
+import {SpinnerProvider} from '../../_providers/spinner-provider';
 
 
 @Component({
@@ -26,30 +26,43 @@ export class UserRouteComponent implements OnInit {
     private userService: UserService,
     private spinnerProvider: SpinnerProvider) {
 
-    let id = +localStorage.getItem("id");
-    let page = 0;
-    this.spinnerProvider.open();
-    this.userService.getUserRides(id, page).subscribe(
-      data => {
-        this.spinnerProvider.close();
-        this.routes = data;
-      },
-      error => {
-        this.spinnerProvider.close();
-      }
-    );
+    /*   let id = +localStorage.getItem("id");
+       this.spinnerProvider.open();
+       this.userService.countUserRides(id)
+         .subscribe(data=>this.routesAmount = data);
+       this.userService.getUserRides(id, this.page).subscribe(
+         data => {
+           this.spinnerProvider.close();
+           this.routes = data;
+         },
+         error => {
+           this.spinnerProvider.close();
+         }
+       );*/
   }
 
   ngOnInit() {
     let id = +localStorage.getItem("id");
+    this.spinnerProvider.open();
+    this.userService.countUserRides(id)
+      .subscribe(data => {
+        this.routesAmount = data;
+        if (data > 0) {
+          this.hasUserRoutes = true;
+        }
+        else {
+          this.hasUserRoutes = false;
+        }
+      });
     this.userService.getUserRides(id, this.page).subscribe(
       data => {
         this.routes = data;
-        this.hasUserRoutes = true;
-        this.routesAmount = this.routes.length;
+
+        this.spinnerProvider.close();
       },
       error => {
         this.hasUserRoutes = false;
+        this.spinnerProvider.close();
       }
     );
   }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, SimpleChange } from '@angular/core';
+import {Component, EventEmitter, Input, Output, SimpleChange} from '@angular/core';
 
 
 @Component({
@@ -17,7 +17,7 @@ export class PaginationComponent {
     elementsAmount: number;
 
     pageNumbers: Array<number> = [];
-    readonly applicationsOnPage = 10;
+  readonly applicationsOnPage = 3;
     currentPage: number = 1;
 
     constructor() {

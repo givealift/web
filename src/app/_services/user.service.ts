@@ -1,13 +1,12 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { environment } from "../../environments/environment";
-import { Route, User } from "../_models";
-import { DataProviderService } from "./data-provider.service";
-import { Observable } from "rxjs/Observable";
-import { tap } from "rxjs/operators/tap";
-import { catchError } from "rxjs/operators";
-import { map } from "rxjs/operators";
-import { of } from "rxjs/observable/of";
+import {Injectable} from "@angular/core";
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {environment} from "../../environments/environment";
+import {Route, User} from "../_models";
+import {DataProviderService} from "./data-provider.service";
+import {Observable} from "rxjs/Observable";
+import {tap} from "rxjs/operators/tap";
+import {catchError, map} from "rxjs/operators";
+import {of} from "rxjs/observable/of";
 
 
 @Injectable()
@@ -23,6 +22,10 @@ export class UserService {
   getUserRides(id: number, page: number) {
     let params = new HttpParams().set('page', (page - 1).toLocaleString());
     return this.http.get<Route[]>(this.ApiPath + "/user/route/" + id, { params: params });
+  }
+
+  countUserRides(id: number) {
+    return this.http.get<number>(this.ApiPath + "/user/count/route/" + id);
   }
 
   update(user: User, userId: number) {
