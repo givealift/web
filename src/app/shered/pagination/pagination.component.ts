@@ -26,7 +26,7 @@ export class PaginationComponent {
 
     changePageNumber(pageNum: any) {
         if (pageNum > 0 && pageNum <= this.pageAmount) {
-            this.pageChange.emit((pageNum - 1));
+            this.pageChange.emit((pageNum));
             this.currentPage = pageNum;
         }
     }

@@ -13,7 +13,7 @@ import { Route } from '../../_models';
 export class UserRouteComponent implements OnInit {
   userId: number = parseInt(localStorage.getItem("id"));
   routes: Route[] = [];
-  page: number = 0;
+  page: number = 1;
   routesAmount: number;
 
   hasUserRoutes: boolean = true;
@@ -23,8 +23,7 @@ export class UserRouteComponent implements OnInit {
 
   ngOnInit() {
     let id = +localStorage.getItem("id");
-    let page = 0;
-    this.userService.getUserRides(id, page).subscribe(
+    this.userService.getUserRides(id, this.page).subscribe(
       data => {
         this.routes = data;
         this.hasUserRoutes = true;
