@@ -22,10 +22,10 @@ export class RouteComponent implements OnInit {
   ngOnInit() {
     if (this.routeData.ownerId) {
       this.userId = this.routeData.ownerId;
-      let possibleUser = this.userService.getById(this.userId);
-      if (possibleUser !== null) {
-        this.userData = possibleUser;
-      }
+      this.userService.getById(this.userId).subscribe(
+        data => {
+          this.userData = data;
+        });
     } else {
       this.userData = this.routeData.galUserPublicResponse;
     }

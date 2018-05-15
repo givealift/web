@@ -1,8 +1,12 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { environment } from "../../environments/environment";
-import { Route, User } from "../_models";
-import { DataProviderService } from "./data-provider.service";
+import {Injectable} from "@angular/core";
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {environment} from "../../environments/environment";
+import {Route, User} from "../_models";
+import {DataProviderService} from "./data-provider.service";
+import {Observable} from "rxjs/Observable";
+import {tap} from "rxjs/operators/tap";
+import {catchError, map} from "rxjs/operators";
+import {of} from "rxjs/observable/of";
 
 
 @Injectable()
@@ -16,36 +20,35 @@ export class UserService {
   }
 
   getUserRides(id: number, page: number) {
-    let params = new HttpParams().set('page', page.toLocaleString());
+    let params = new HttpParams().set('page', (page - 1).toLocaleString());
     return this.http.get<Route[]>(this.ApiPath + "/user/route/" + id, { params: params });
+  }
 
+  countUserRides(id: number) {
+    return this.http.get<number>(this.ApiPath + "/user/count/route/" + id);
   }
 
   update(user: User, userId: number) {
     return this.http.put<User>(this.ApiPath + "/user/edit/" + userId, user);
   }
 
-  getById(id: number) {
-    let possibleUserData = this.dataProviderService.getUserData(id);
+  getById(id: number): Observable<User> {
+    let possibleUserData = this.dataProviderService.getData(`user/${id}`);
 
-    let user: User;
-
-    if (possibleUserData != null)
-      return possibleUserData;
-    else {
-      this.http.get<User>(this.ApiPath + "/user/" + id).subscribe(
-        data => {
-          this.dataProviderService.storeUserData(id, data);
-          console.log(data);
-          user = data;
-        },
-        error => {
-          user = null;
-        }
-      );
+    if (possibleUserData) {
+      return of(possibleUserData);
     }
-    console.log(user);
-    return user;
+
+    return this.http
+      .get<User>(`${this.ApiPath}/user/${id}`, { observe: 'response' })
+      .pipe(
+        map(res => res.status === 204 ? null : res.body),
+        tap(data => {
+          if (data) {
+            this.dataProviderService.storeData(`user/${id}`, data);
+          }
+        }),
+        catchError(_ => of(null)));
   }
 
   create(user: User) {
@@ -70,7 +73,7 @@ export class UserService {
   saveLoggedUserData(id: number) {
     this.http.get<User>(this.ApiPath + "/user/" + id).subscribe(
       data => {
-        this.dataProviderService.storeUserData(id, data);
+        this.dataProviderService.storeData('user/' + id, data);
       }
     );
   }

@@ -1,6 +1,18 @@
-.routeList {
+/* .routeList {
   margin-top: 40px;
   margin-left: 30%;
   margin-right: 30%;
   border: black 2px;
+} */
+
+mat-card {
+  margin-top: 30px;
+  border-radius: 25px;
+  min-width: 400px;
+  text-align: center;
+  min-height: 100px;
+}
+
+.no-style {
+  text-align: center;
 }

@@ -29,6 +29,7 @@ import { UserInfoComponent } from './user-profile/user-info/user-info.component'
 import { MatIconRegistry, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { UserRouteComponent } from './user-profile/user-route/user-route.component';
 import { UserEditFormComponent } from './user-profile/user-edit-form/user-edit-form.component';
+import { PaginationComponent } from './shered/pagination/pagination.component';
 import { FavouriteRoutesComponent } from './user-profile/favourite-routes/favourite-routes.component';
 import { RouteDetailsComponent } from './route/route-details/route-details.component';
 import { DataProviderService } from './_services/data-provider.service';
@@ -36,7 +37,6 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { SpinnerProvider } from './_providers/spinner-provider';
 
 registerLocaleData(localePl);
-
 
 @NgModule({
   declarations: [
@@ -54,6 +54,7 @@ registerLocaleData(localePl);
     UserRouteComponent,
     UserInfoComponent,
     UserEditFormComponent,
+    PaginationComponent,
     FavouriteRoutesComponent,
     RouteDetailsComponent,
     SpinnerComponent

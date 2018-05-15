@@ -94,12 +94,12 @@ export class NewRouteComponent {
     let city: City;
 
     this.cityService.searchCity(this.chipModel.name).subscribe(
-      city => this.chipModel.city = city
+      city => newLocation.city = city
     );
+
 
     let chipDateTime = this.buildDepartureTimeString(this.chipTimeModel.date, this.chipTimeModel.time)
     newLocation.date = chipDateTime;
-    newLocation.city.name = this.chipModel.name;
     newLocation.placeOfMeeting = this.chipModel.placeOfMeeting;
 
     return newLocation;
