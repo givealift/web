@@ -1,10 +1,10 @@
 <mat-card>
-  <mat-grid-list cols="8" rows="5" rowHeight="32px" gutterSize="0px">
+  <mat-grid-list cols="8" rows="5" rowHeight="33px" gutterSize="0px">
     <mat-grid-tile colspan="3" rowspan="1">
       <div class="align-vertically">
-        <h4>
-          {{userData?.firstName}} {{userData?.lastName}}
-        </h4>
+        <h5>
+          <strong>{{userData?.firstName}} {{userData?.lastName}}</strong>
+        </h5>
       </div>
     </mat-grid-tile>
     <mat-grid-tile colspan="4" rowspan="1" class="border-bottom">
@@ -30,7 +30,9 @@
       </div>
     </mat-grid-tile>
     <mat-grid-tile colspan="3" rowspan="3">
-      <img class="media-object" src="../../../assets/logo.png" height="64" width="64">
+      <a (click)="goToUserPage()">
+        <img class="media-object profile-hover" src="../../../assets/logo.png" height="100" width="100">
+      </a>
     </mat-grid-tile>
     <mat-grid-tile colspan="3" rowspan="1">
       <h5 class="text-truncate">
@@ -59,7 +61,7 @@
     <mat-grid-tile colspan="3" rowspan="1">
       <h6 class="text-primary">
         Ocena:
-        <strong>4.5/5.0</strong>
+        <strong>{{userData?.rate || 0}}/5.0</strong>
       </h6>
     </mat-grid-tile>
     <mat-grid-tile colspan="3" rowspan="1">

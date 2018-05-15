@@ -10,6 +10,8 @@ import { Route } from '../../_models/index';
 import { RouteComponent } from '../../route/route/route.component';
 import { RouteService } from '../../_services/route.service';
 import { HttpClientModule } from '@angular/common/http';
+import { CityService } from '../../_services/city.service';
+import { CitiesProvider } from '../../_providers/cities-provider';
 
 describe('FavouriteRoutesComponent', () => {
   let component: FavouriteRoutesComponent;
@@ -30,7 +32,9 @@ describe('FavouriteRoutesComponent', () => {
       providers: [
         UserService,
         DataProviderService,
-        RouteService
+        RouteService,
+        CityService,
+        CitiesProvider
       ]
 
     })

@@ -5,6 +5,7 @@ import { RouteService } from '../../_services/route.service';
 import { AuthService } from '../../_services/auth.service';
 import { UserService } from '../../_services/user.service';
 import { Route } from '../../_models';
+import { SpinnerProvider } from '../../_providers/spinner-provider';
 
 
 @Component({
@@ -17,11 +18,24 @@ export class UserRouteComponent implements OnInit {
   routes: Route[];
   page: number = 0;
 
-  constructor(private routeService: RouteService, private route: ActivatedRoute, private router: Router, private userService: UserService) {
+  constructor(
+    private routeService: RouteService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private userService: UserService,
+    private spinnerProvider: SpinnerProvider) {
+
     let id = +localStorage.getItem("id");
     let page = 0;
+    this.spinnerProvider.open();
     this.userService.getUserRides(id, page).subscribe(
-      data => this.routes = data
+      data => {
+        this.spinnerProvider.close();
+        this.routes = data;
+      },
+      error => {
+        this.spinnerProvider.close();
+      }
     );
   }
 

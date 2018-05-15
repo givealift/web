@@ -5,6 +5,16 @@ import { MaterialModule } from '../../_modules/material.module';
 import { RouteComponent } from '../route/route.component';
 import { DataProviderService } from '../../_services/data-provider.service';
 import { RouterTestingModule } from '@angular/router/testing';
+import { RouteService } from '../../_services/route.service';
+import { ActivatedRoute } from '@angular/router';
+import { CityService } from '../../_services/city.service';
+import { CitiesProvider } from '../../_providers/cities-provider';
+import { of } from 'rxjs/observable/of';
+
+const fakeActivatedRoute = {
+  snapshot: { data: {} },
+  queryParams: of({})
+}
 
 describe('RouteListComponent', () => {
   let component: RouteListComponent;
@@ -21,7 +31,13 @@ describe('RouteListComponent', () => {
         MaterialModule,
         RouterTestingModule
       ],
-      providers: [DataProviderService]
+      providers: [
+        DataProviderService,
+        RouteService,
+        CityService,
+        CitiesProvider,
+        { provide: ActivatedRoute, useValue: fakeActivatedRoute }
+      ]
     })
       .compileComponents();
   }));

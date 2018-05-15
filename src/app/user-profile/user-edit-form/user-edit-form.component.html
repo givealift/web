@@ -1,82 +1,101 @@
-<button mat-raised-button class="hoverable" type="submit" [disabled]="!form.valid" (click)="updateUser()">
-  Zapisz
-</button>
-<form #form="ngForm">
-  <mat-grid-list cols="8" rows="11" rowHeight="40px">
+<mat-card>
+  <form #form1="ngForm">
+    <mat-grid-list cols="3" rowHeight="35px" gutterSize="0px">
 
-    <mat-grid-tile colspan="2" rowspan="3">
-      <app-profile-photo></app-profile-photo>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="6" rowspan="2">
-      <h1>
-        <div class="row center">
-          <mat-form-field class="inline-form-field">
-            <input matInput [(ngModel)]="user.firstName" name="firstname" required #firstRef="ngModel" />
-            <mat-error *ngIf="firstRef.invalid ">Wpisz poprawne imię!</mat-error>
-          </mat-form-field>
-          <mat-form-field class="inline-form-field">
-            <input matInput [(ngModel)]="user.lastName" name="lastname" required #lastRef="ngModel" />
-            <mat-error *ngIf="lastRef.invalid ">Wpisz poprawne nazwisko!</mat-error>
-          </mat-form-field>
-        </div>
-      </h1>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="6" rowspan="1">
-      <h5 class="align-left">
-        <mat-icon>person</mat-icon>
-        22 lat/a
-      </h5>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="2" rowspan="1">
-      <h5 class="text-primary">
-        Ocena:
-        <strong>4.5/5</strong>
-      </h5>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="6" rowspan="1">
-      <h5 class="align-left">
-        <mat-icon>mail_outline</mat-icon>
+      <mat-grid-tile rowspan="4">
+        <!-- <img [src]="sanitizedPhoto" alt="" width="64px" height="64px" /> -->
+        <img src="../../../assets/logo-sm.png" width="100px" height="100px" />
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="2" class="right-border">
+        <h4>Dane osobowe</h4>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="2">
+        <h4>Dane logowania</h4>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="2" class="right-border">
         <mat-form-field>
-          <input matInput [(ngModel)]="user.email" name="mail" required email #mailRef="ngModel" />
-          <mat-error *ngIf="mailRef.invalid">Wpisz poprawnego maila!</mat-error>
+          <input matInput [(ngModel)]="userModel.firstName" name="firstName" required #firstNameRef="ngModel" placeholder="Imię" />
+          <mat-error *ngIf="firstNameRef.invalid">Wpisz poprawne imię!</mat-error>
         </mat-form-field>
-      </h5>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="2" rowspan="3">
-      <!-- empty -->
-    </mat-grid-tile>
-    <mat-grid-tile colspan="6" rowspan="1">
-      <h5 class="align-left">
-        <mat-icon>phone</mat-icon>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="2">
         <mat-form-field>
-          <input matInput [(ngModel)]="user.phone" name="phone" required #phoneRef="ngModel" pattern="^\+?[1-9]{1}[0-9]{3,14}$" />
-          <mat-error *ngIf="phoneRef.invalid">Wpisz poprawny numer telefonu!</mat-error>
+          <input matInput [(ngModel)]="userModel.email" name="email" required email #emailRef="ngModel" placeholder="Email" />
+          <mat-error *ngIf="emailRef.invalid">Wpisz poprawne imię!</mat-error>
         </mat-form-field>
-      </h5>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="6" rowspan="1">
-      <h5 class="align-left">
-        <mat-icon>gps_fixed</mat-icon>
-        Brody 184, Kalwaria Zebrzydowska
-      </h5>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="6" rowspan="1">
-      <h5 class="align-left">
-        <mat-icon>directions_car</mat-icon>
-        Fiat Multipla
-      </h5>
-    </mat-grid-tile>
+      </mat-grid-tile>
 
-    <mat-grid-tile colspan="8" rowspan="1" class="top-border">
-      <h4 class="align-vertically"> O sobie: </h4>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="8" rowspan="3">
-      <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis justo tellus. Sed leo erat, bibendum id turpis
-        vel, placerat dignissim justo. Morbi volutpat justo sit amet elit scelerisque, et faucibus lorem faucibus. Etiam
-        ac tellus euismod eros ultrices malesuada quis non nibh. Aenean placerat dui at enim mattis, in luctus lacus placerat.
-        Vivamus consectetur enim orci, sit amet ultrices nunc vehicula sed. Proin varius justo orci, eu mollis orci luctus
-        non. Quisque varius augue sit amet sagittis porttitor.</h6>
-    </mat-grid-tile>
+      <mat-grid-tile rowspan="2">
+        <input id="file" name="file" type="file" #fileInput placeholder="" class="file-input" (change)="onSelectFile($event)" />
+        <button mat-raised-button type="button">
+          <label class="pointer" for="file">Wybierz obraz</label>
+        </button>
+      </mat-grid-tile>
 
-  </mat-grid-list>
-</form>
+      <mat-grid-tile colspan="1" rowspan="2" class="right-border">
+        <mat-form-field>
+          <input matInput [(ngModel)]="userModel.lastName" name="lastName" required #lastNameRef="ngModel" placeholder="Nazwisko" />
+          <mat-error *ngIf="lastNameRef.invalid">Wpisz poprawne nazwisko!</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="2">
+        <mat-form-field>
+          <input matInput [(ngModel)]="userModel.password" name="password" type="password" #passRef="ngModel" placeholder="Hasło" />
+          <mat-error *ngIf="passRef.invalid">Wpisz poprawne hasło!</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile rowspan="2">
+        <button mat-raised-button class="hoverable" type="button" (click)="upload()">
+          Zmień
+        </button>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="2" class="right-border">
+        <mat-form-field>
+          <input matInput name="birthYear" [max]="today" [matDatepicker]="picker" placeholder="Data urodzenia" #dateRef="ngModel" [(ngModel)]="userModel.birthYear">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="dateRef.invalid">Wybierz datę!</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="2">
+        <mat-form-field>
+          <input matInput type="password" [(ngModel)]="passConfirm" name="passConfirm" #passConfirmRef="ngModel" placeholder="Potwierdź hasło"
+          />
+          <mat-error *ngIf="passConfirmRef.value != passRef.value">Wpisz poprawne hasło!</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile rowspan="2">
+
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="2" class="right-border">
+        <mat-form-field>
+          <input matInput [(ngModel)]="optionalInfo.car" name="car" #carRef="ngModel" placeholder="Samochód" />
+          <mat-error *ngIf="carRef.invalid">Wpisz poprawną nazwę!</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="2">
+        <button mat-raised-button [disabled]="!form1.valid" (click)="updateUser()">
+          Zapisz
+        </button>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan=" 3 " rowspan="6" class="top-border">
+        <mat-form-field appearance="outline" style="width: 85% !important">
+          <textarea name="bio" matInput class=".textarea" [(ngModel)]="optionalInfo.bio" rows="4" placeholder="Coś o sobie "></textarea>
+        </mat-form-field>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+  </form>
+</mat-card>
