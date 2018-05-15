@@ -59,7 +59,7 @@
         <p class="text-truncate bottom-border">
           <mat-icon class="icon-align" class="smallicon ">pin_drop</mat-icon>
           <span class="fontcolor-gray">
-            <strong class="text-info"> {{routeDetails?.from.city.name}} , ul. {{routeDetails?.from.city.placeOfMeeting}} </strong>
+            <strong class="text-info"> {{routeDetails?.from.city.name}} , ul. {{routeDetails?.from.placeOfMeeting}} </strong>
           </span>
         </p>
         <p class="text-truncate" class="smalltext" *ngFor="let stop of routeDetails?.stops">
@@ -71,13 +71,13 @@
         <p class="text-truncate" *ngIf="routeDetails.stops.length == 0">
           <mat-icon class="icon-align" class="smallicon">pin_drop</mat-icon>
           <span class="fontcolor-gray">
-            <strong class="text-info"> {{routeDetails?.to.city.name}} , ul. {{routeDetails?.to.city.placeOfMeeting}} </strong>
+            <strong class="text-info"> {{routeDetails?.to.city.name}} , ul. {{routeDetails?.to.placeOfMeeting}} </strong>
           </span>
         </p>
         <p class="text-truncate top-border" *ngIf="routeDetails.stops.length != 0">
           <mat-icon class="icon-align" class="smallicon">pin_drop</mat-icon>
           <span class="fontcolor-gray">
-            <strong class="text-info"> {{routeDetails?.to.city.name}} , ul. {{routeDetails?.to.city.placeOfMeeting}} </strong>
+            <strong class="text-info"> {{routeDetails?.to.city.name}} , ul. {{routeDetails?.to.placeOfMeeting}} </strong>
           </span>
         </p>
       </div>
@@ -118,13 +118,13 @@
     </mat-grid-tile>
 
     <mat-grid-tile colspan="2" rowspan="3" class="right-border">
-      <button mat-icon-button matTooltipShowDelay="100" matTooltip="Skontaktuj się" matTooltipPosition="top">
+      <button mat-icon-button matTooltipShowDelay="100" matTooltip="Skontaktuj się" matTooltipPosition="above">
         <mat-icon>phone_iphone</mat-icon>
       </button>
-      <button mat-icon-button matTooltipShowDelay="100" matTooltip="Zarezerwuj" matTooltipPosition="top">
+      <button mat-icon-button matTooltipShowDelay="100" matTooltip="Zarezerwuj" matTooltipPosition="above">
         <mat-icon>content_paste</mat-icon>
       </button>
-      <button mat-icon-button matTooltip="Dodaj do obserwowanych" matTooltipPosition="top">
+      <button mat-icon-button matTooltip="Dodaj do obserwowanych" matTooltipPosition="above">
         <mat-icon>favorite</mat-icon>
       </button>
     </mat-grid-tile>
