@@ -38,6 +38,15 @@ export class RouteService {
             })
     }
 
+    searchWithIds(from: number, to: number, date: Moment | string): Observable<Route[]> {
+        const params = new HttpParams()
+            .set("from", from.toString())
+            .set("to", to.toString())
+            .set("date", moment(date).format("YYYY-MM-DD"));
+
+        return this.http.get<Route[]>(`${this.url}/search`, { params: params });
+    }
+
     private lookForCity = (city: City): Observable<City | null> => this.cityService.searchCity(city.toString());
 
     update(route: Route) {
