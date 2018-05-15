@@ -22,7 +22,8 @@ import {
     , MatExpansionModule,
     MatStepperModule,
     MatChipsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSpinner
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
@@ -52,6 +53,7 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
         , MatStepperModule
         , MatChipsModule
         , MatDialogModule
+        , MatProgressSpinnerModule
     ],
     exports: [
         BrowserAnimationsModule
@@ -76,6 +78,7 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
         , MatStepperModule
         , MatChipsModule
         , MatDialogModule
+        , MatProgressSpinnerModule
     ],
 })
 export class MaterialModule { }
