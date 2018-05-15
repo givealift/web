@@ -9,7 +9,7 @@ import { UserService } from '../_services/user.service';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user_profile.component.css']
+  styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
 
@@ -29,6 +29,11 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    //this.userService.getById(this.userId)
+    //  .subscribe(user => {this.userModel = user; console.log(this.userModel)} );
+    // this.form.form.disable();
+    console.log(this.router.url);
+
   }
 
   enableForm() {
@@ -46,7 +51,17 @@ export class UserProfileComponent implements OnInit {
         console.log(error);
       }
     );
-
   }
+
+  //funkcja sprawdzajaca czy sciezka nalezy do /profile/favourites, czy tylko do /profile
+  //obsluzone tylko dla /profile/favourites, bo nie wiem czy chcecie zeby byl wyswietlany komponent user_profile dla
+  // innych sciezek powiazanych z /profile np. +/info
+  // isShowProfile() {
+  //   let response = true;
+
+  //   if (this.router.url === "/profile/favourite-routes") response = false;
+
+  //   return response;
+  // }
 
 }

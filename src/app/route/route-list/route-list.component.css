@@ -1,6 +1,8 @@
-.routeList {
+div {
     margin-top: 40px;
     margin-left: 20%;
     margin-right: 20%;
     border: black 2px;
+    min-height: 350px;
+    min-width: 700px;
 }

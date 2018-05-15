@@ -21,7 +21,7 @@ export class UserService {
   }
 
   getUserRides(id: number, page: number) {
-    let params = new HttpParams().set('page', (page-1).toLocaleString());
+    let params = new HttpParams().set('page', (page - 1).toLocaleString());
     return this.http.get<Route[]>(this.ApiPath + "/user/route/" + id, { params: params });
   }
 
@@ -74,4 +74,9 @@ export class UserService {
       }
     );
   }
+
+  getUserFavourites(userId: number) {
+    return this.http.get(this.ApiPath + '/user/favourites/' + userId);
+  }
+
 }
