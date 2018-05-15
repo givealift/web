@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '../../_modules/material.module';
 import { RouteComponent } from '../route/route.component';
 import { DataProviderService } from '../../_services/data-provider.service';
+import { RouterTestingModule } from '@angular/router/testing';
 import { RouteService } from '../../_services/route.service';
 import { ActivatedRoute } from '@angular/router';
 import { CityService } from '../../_services/city.service';
@@ -27,7 +28,8 @@ describe('RouteListComponent', () => {
       ],
       imports: [
         HttpClientModule,
-        MaterialModule
+        MaterialModule,
+        RouterTestingModule
       ],
       providers: [
         DataProviderService,

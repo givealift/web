@@ -32,10 +32,10 @@ export class RouteService {
                         .set("to", toCity.cityId.toString())
                         .set("date", moment(date).format("YYYY-MM-DD"));
 
-                    return this.http.get<Route[]>(`${this.url}/search`, { params: params })
+                    return this.http.get<Route[]>(`${this.url}/search`, { params: params });
                 }
                 return of([]);
-            })
+            });
     }
 
     searchWithIds(from: number, to: number, date: Moment | string): Observable<Route[]> {
@@ -54,7 +54,8 @@ export class RouteService {
     }
 
     getById(id: number) {
-        return this.http.get(this.url + id);
+        console.log("route.service.getById");
+        return this.http.get<Route>(this.url + '/' + id); // zmiana z: return this.http.get(this.url + routeId);
     }
 
     create(route: Route) {
@@ -69,5 +70,10 @@ export class RouteService {
     getAll() {
         return this.http.get<Route[]>(this.url + '/list');
     }
+
+    // getById(routeId: number) {
+    //   console.log("route.service.getById");
+    //   return this.getById( routeId ); // return this.http.get(this.url + '/' + routeId);
+    // }
 
 }

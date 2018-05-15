@@ -1,0 +1,112 @@
+mat-card {
+  min-width: 760px;
+  width: 860;
+  border-radius: 25px;
+  margin-top: 20px;
+  opacity: 1;
+  background: white;
+  color: black;
+}
+
+.align-left {
+  position: absolute;
+  text-align: left;
+}
+
+.show-on-hover button {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+mat-card:hover button {
+  display: block;
+  animation: fadeIn 0.25s;
+}
+
+mat-card:hover {
+  box-shadow: 0 5px 4px -4px black;
+}
+
+button {
+  transition: all 0.5s;
+}
+
+button:hover {
+  color: white;
+}
+
+.border-bottom {
+  border-bottom: dashed gray 1px;
+}
+
+.icon-align {
+  position: relative;
+  top: 3px;
+}
+
+.align-vertically {
+  margin-top: 5px;
+}
+
+p {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+p.smalltext {
+  color: black;
+  height: 10px;
+  line-height: 1.0em;
+  font-size: 1.0em;
+  text-align: left;
+  margin-top: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+
+p.mediumtext {
+  color:black;
+  height: 16px;
+  line-height: 16px;
+  font-size: 1.6em;
+  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+h6.mediumtext {
+  color: black;
+  height: 16px;
+  line-height: 16px;
+  font-size: 1.6em;
+  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.mat-icon.smallicon {
+  font-size: 14px;
+  height: 14px;
+  width: 14px;
+}
+
+.fontcolor-gray {
+  color: darkslategray;
+}
+
+.transparent-icon {
+  opacity: 0.0;
+}
+
+.bottom-border {
+  border-bottom: 1px dashed gray;
+}
+
+.top-border {
+  border-top: 1px dashed gray;
+}
+
+.right-border {
+  border-right: 1px dashed gray;
+}

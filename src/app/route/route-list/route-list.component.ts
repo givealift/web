@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
+import { Router } from "@angular/router";
 import { DataProviderService } from '../../_services/data-provider.service';
 import { ActivatedRoute } from '@angular/router';
 import { RouteService } from '../../_services/route.service';
@@ -12,7 +13,7 @@ import { RouteService } from '../../_services/route.service';
 })
 export class RouteListComponent implements OnInit {
 
-  routes: any = [];
+  @Input() routes: any = [];
 
   constructor(
     private dataTransferService: DataProviderService,

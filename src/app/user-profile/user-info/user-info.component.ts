@@ -24,9 +24,10 @@ export class UserInfoComponent {
     );
     let possibleUser = this.userService.getById(this.userId);
 
+    console.log(possibleUser);
+
     if (possibleUser != null) {
       this.user = possibleUser;
-      console.log(possibleUser);
     }
     else {
       this.router.navigate['home'];

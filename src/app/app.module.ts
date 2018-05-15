@@ -24,11 +24,13 @@ import { TokenProvider } from './_providers/token.interceptor';
 import { FakeBackendProvider } from './_providers/fake-backend';
 import localePl from '@angular/common/locales/pl';
 import { registerLocaleData } from '@angular/common';
-import { MatIconRegistry, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
-import { UserProfileComponent } from './user-profile/user_profile.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserInfoComponent } from './user-profile/user-info/user-info.component';
+import { MatIconRegistry, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { UserRouteComponent } from './user-profile/user-route/user-route.component';
 import { UserEditFormComponent } from './user-profile/user-edit-form/user-edit-form.component';
+import { FavouriteRoutesComponent } from './user-profile/favourite-routes/favourite-routes.component';
+import { RouteDetailsComponent } from './route/route-details/route-details.component';
 import { DataProviderService } from './_services/data-provider.service';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { SpinnerProvider } from './_providers/spinner-provider';
@@ -52,6 +54,8 @@ registerLocaleData(localePl);
     UserRouteComponent,
     UserInfoComponent,
     UserEditFormComponent,
+    FavouriteRoutesComponent,
+    RouteDetailsComponent,
     SpinnerComponent
   ],
   imports: [
@@ -79,6 +83,7 @@ registerLocaleData(localePl);
   entryComponents: [SpinnerComponent],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
   constructor(matIconRegistry: MatIconRegistry, domSanitizer: DomSanitizer) {
     matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('../assets/mdi.svg'));

@@ -28,19 +28,24 @@ export class UserService {
   getById(id: number) {
     let possibleUserData = this.dataProviderService.getUserData(id);
 
+    let user: User;
+
     if (possibleUserData != null)
       return possibleUserData;
     else {
       this.http.get<User>(this.ApiPath + "/user/" + id).subscribe(
         data => {
           this.dataProviderService.storeUserData(id, data);
-          return data;
+          console.log(data);
+          user = data;
         },
         error => {
-          return null;
+          user = null;
         }
       );
     }
+    console.log(user);
+    return user;
   }
 
   create(user: User) {
@@ -69,4 +74,9 @@ export class UserService {
       }
     );
   }
+
+  getUserFavourites(userId: number) {
+    return this.http.get(this.ApiPath + '/user/favourites/' + userId);
+  }
+
 }

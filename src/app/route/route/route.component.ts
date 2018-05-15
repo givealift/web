@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Route, User } from '../../_models';
-import { UserService } from '../../_services/user.service';
-import { Router } from '@angular/router';
+import { Router } from "@angular/router";
+import { UserService } from "../../_services/user.service";
 
 @Component({
   selector: 'app-route',
@@ -29,6 +29,10 @@ export class RouteComponent implements OnInit {
     } else {
       this.userData = this.routeData.galUserPublicResponse;
     }
+  }
+
+  redirectToRouteDetails() {
+    this.router.navigate(["/route/" + this.routeData.routeId]);
   }
 
   goToUserPage() {
