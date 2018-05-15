@@ -31,4 +31,7 @@ a.mat-menu-item > mat-icon {
     /* to line up the logout icon */
     margin-left: 2px;
 }
-  
+
+.spinner mat-dialog-container {
+    text-align: center;
+}
