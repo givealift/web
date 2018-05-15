@@ -6,6 +6,9 @@
         <a mat-tab-link routerLinkActive #rlaInfo="routerLinkActive" [active]="rlaInfo.isActive" routerLink='edit'>
             Edytuj profil
         </a>
+        <a mat-tab-link routerLinkActive #rlaFavouriteRoutes="routerLinkActive" [active]="rlaFavouriteRoutes.isActive" routerLink='fav-routes'>
+            Obserwowane przejazdy
+        </a>
     </nav>
 </mat-card>
 <router-outlet></router-outlet>

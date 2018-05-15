@@ -1,0 +1,13 @@
+<ul class="pagination modal-1">
+  <li><a (click)="changePageNumber(1)" class="prev"> first
+  </a></li>
+  <li><a (click)="changePageNumber(currentPage-1)" class="prev"> &laquo;</a></li>
+  <li>
+    <a *ngFor="let pnum of pageNumbers"
+       [ngClass]="{'active':currentPage==pnum}" (click)="changePageNumber(pnum)">{{pnum}}</a>
+    </li>
+  <li><a (click)="changePageNumber(currentPage+1)" class="next"> &raquo;</a></li>
+  <li><a (click)="changePageNumber(pageAmount)" class="next"
+  >last</a></li>
+</ul>
+

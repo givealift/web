@@ -22,30 +22,39 @@ export class RouteService {
 
         // passed argument may not be a city object but string
         const [fromStream, toStream] = [from, to]
-            .map(maybeCity => maybeCity.hasOwnProperty("cityId") ? Observable.of([maybeCity]) : this.lookForCity(maybeCity));
+            .map(maybeCity => maybeCity.hasOwnProperty("cityId") ? Observable.of(maybeCity) : this.lookForCity(maybeCity));
 
         return combineLatest(fromStream, toStream)
-            .flatMap(([[fromCity], [toCity]]) => {
+            .flatMap(([fromCity, toCity]) => {
                 if (fromCity && toCity) {
                     const params = new HttpParams()
-                        .set("from", fromCity.cityId)
-                        .set("to", toCity.cityId)
+                        .set("from", fromCity.cityId.toString())
+                        .set("to", toCity.cityId.toString())
                         .set("date", moment(date).format("YYYY-MM-DD"));
 
-                    return this.http.get<Route[]>(`${this.url}/search`, { params: params })
+                    return this.http.get<Route[]>(`${this.url}/search`, { params: params });
                 }
                 return of([]);
-            })
+            });
     }
 
-    private lookForCity = (city: City): Observable<City[]> => this.cityService.searchCity(city.toString(), 1);
+    searchWithIds(from: number, to: number, date: Moment | string): Observable<Route[]> {
+        const params = new HttpParams()
+            .set("from", from.toString())
+            .set("to", to.toString())
+            .set("date", moment(date).format("YYYY-MM-DD"));
+
+        return this.http.get<Route[]>(`${this.url}/search`, { params: params });
+    }
+
+    private lookForCity = (city: City): Observable<City | null> => this.cityService.searchCity(city.toString());
 
     update(route: Route) {
         return this.http.put<Route>(this.url + route.routeId, route);
     }
 
     getById(id: number) {
-        return this.http.get(this.url + id);
+        return this.http.get<Route>(this.url + '/' + id);
     }
 
     create(route: Route) {

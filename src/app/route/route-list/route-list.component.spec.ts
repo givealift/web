@@ -3,7 +3,18 @@ import { RouteListComponent } from './route-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '../../_modules/material.module';
 import { RouteComponent } from '../route/route.component';
-import { DataTransferService } from '../../_services/data-transfer.service';
+import { DataProviderService } from '../../_services/data-provider.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { RouteService } from '../../_services/route.service';
+import { ActivatedRoute } from '@angular/router';
+import { CityService } from '../../_services/city.service';
+import { CitiesProvider } from '../../_providers/cities-provider';
+import { of } from 'rxjs/observable/of';
+
+const fakeActivatedRoute = {
+  snapshot: { data: {} },
+  queryParams: of({})
+}
 
 describe('RouteListComponent', () => {
   let component: RouteListComponent;
@@ -11,10 +22,22 @@ describe('RouteListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [RouteListComponent, RouteComponent],
-      imports: [HttpClientModule,
-        MaterialModule],
-      providers: [DataTransferService]
+      declarations: [
+        RouteListComponent,
+        RouteComponent
+      ],
+      imports: [
+        HttpClientModule,
+        MaterialModule,
+        RouterTestingModule
+      ],
+      providers: [
+        DataProviderService,
+        RouteService,
+        CityService,
+        CitiesProvider,
+        { provide: ActivatedRoute, useValue: fakeActivatedRoute }
+      ]
     })
       .compileComponents();
   }));

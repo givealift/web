@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../_services/user.service';
 import { User } from "../_models";
 import { AuthService } from '../_services/auth.service';
+import { DataProviderService } from '../_services/data-provider.service';
 
 @Component({
   selector: 'app-register',
@@ -29,7 +30,8 @@ export class RegisterComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private dataProviderService: DataProviderService
   ) { }
 
   ngOnInit() {
@@ -47,6 +49,7 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['/login']);
       },
       error => {
+        console.log(error);
         this.showSpinner = false;
       }
     )

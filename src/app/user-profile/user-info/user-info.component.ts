@@ -7,11 +7,10 @@ import { UserService } from '../../_services/user.service';
 @Component({
   selector: 'app-profile-info',
   templateUrl: './user-info.component.html',
-  styleUrls: ['./user_info.component.css']
+  styleUrls: ['./user-info.component.css']
 })
 export class UserInfoComponent {
 
-  @Input()
   user: User = new User();
 
   userId: number;
@@ -23,15 +22,14 @@ export class UserInfoComponent {
       param => this.userId = param.id,
       error => this.router.navigate['home']
     );
-    this.userService.getById(this.userId).subscribe(
-      user => {
+    this.userService.getById(this.userId).subscribe(user => {
+      if (user != null) {
         this.user = user;
-        console.log(user);
-      },
-      error => {
+      }
+      else {
         this.router.navigate['home'];
       }
-    );
+    });
   }
 
 }

@@ -44,7 +44,7 @@
     <mat-step [stepControl]="form2">
       <ng-template matStepLabel>Użytkownik</ng-template>
       <form #form2="ngForm">
-        <mat-grid-list cols="2" rows="10" rowHeight="35px">
+        <mat-grid-list cols="2" rows="2" rowHeight="35px">
 
           <!-- <mat-grid-tile colspan="2" rowspan="2">
             <mat-radio-group [(ngModel)]="userModel.gender">
@@ -53,14 +53,14 @@
             </mat-radio-group>
           </mat-grid-tile> -->
 
-          <mat-grid-tile colspan="1" rowspan="2">
+          <mat-grid-tile colspan="2" rowspan="2">
             <mat-form-field class="inline-form-field">
               <input matInput [(ngModel)]="userModel.firstName" name="firstname" required #firstRef="ngModel" placeholder="Imię" />
               <mat-error *ngIf="firstRef.invalid ">Wpisz poprawne imię!</mat-error>
             </mat-form-field>
           </mat-grid-tile>
 
-          <mat-grid-tile colspan="1" rowspan="2">
+          <mat-grid-tile colspan="2" rowspan="2">
             <mat-form-field class="inline-form-field">
               <input matInput [(ngModel)]="userModel.lastName" name="lastname" required #lastRef="ngModel" placeholder="Nazwisko" />
               <mat-error *ngIf="lastRef.invalid ">Wpisz poprawne nazwisko!</mat-error>
@@ -70,7 +70,7 @@
           <mat-grid-tile colspan="2" rowspan="2">
             <mat-form-field>
               <input matInput name="date" [max]="today" [matDatepicker]="picker" required placeholder="Data urodzenia" #dateRef="ngModel"
-                [(ngModel)]="optionalInfo.date">
+                [(ngModel)]="userModel.birthYear">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
               <mat-error *ngIf="dateRef.invalid">Wybierz datę!</mat-error>
@@ -122,7 +122,7 @@
 
           <mat-grid-tile colspan="4" rowspan="2">
             <button mat-raised-button type="submit" [disabled]="!form2.valid || !form1.valid" (click)="onSubmit()">
-              Zaloguj
+              Zarejestruj
             </button>
           </mat-grid-tile>
 

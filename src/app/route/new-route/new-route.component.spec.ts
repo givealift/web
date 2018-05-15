@@ -11,6 +11,8 @@ import { CitiesProvider } from '../../_providers/cities-provider';
 
 import * as moment from 'moment';
 import { AuthService } from '../../_services/auth.service';
+import { DataProviderService } from '../../_services/data-provider.service';
+import { UserService } from '../../_services/user.service';
 
 describe('NewRouteComponent', () => {
   let component: NewRouteComponent;
@@ -32,12 +34,23 @@ describe('NewRouteComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NewRouteComponent],
-      imports: [FormsModule,
+      declarations: [
+        NewRouteComponent
+      ],
+      imports: [
+        FormsModule,
         RouterTestingModule,
         HttpClientModule,
-        MaterialModule],
-      providers: [RouteService, CityService, AuthService, CitiesProvider]
+        MaterialModule
+      ],
+      providers: [
+        RouteService,
+        CityService,
+        AuthService,
+        CitiesProvider,
+        DataProviderService,
+        UserService
+      ]
     })
       .compileComponents();
   }));

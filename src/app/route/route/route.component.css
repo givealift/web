@@ -1,8 +1,16 @@
+
+.profile-hover:hover {
+    cursor: pointer;
+}
+
 mat-card {
-    width: 100%;
+    min-width: 850px;
+    min-height: 205px;
     border-radius: 25px;
     margin-top: 20px;
     opacity: 1;
+    background: white;
+    color: black;
 }
 
 .align-left {
@@ -46,7 +54,6 @@ button:hover {
     position: relative;
     top: 3px;
 }
-
 
 .align-vertically {
     margin-top: 5px;

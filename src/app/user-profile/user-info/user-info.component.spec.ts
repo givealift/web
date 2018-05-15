@@ -10,9 +10,8 @@ import { CityService } from '../../_services/city.service';
 import { CitiesProvider } from '../../_providers/cities-provider';
 import { AuthService } from '../../_services/auth.service';
 import { UserService } from '../../_services/user.service';
-import { DataTransferService } from '../../_services/data-transfer.service';
-import { UserInfoComponent } from './user_info.component';
-import { PhotoComponent } from '../photo/photo.component';
+import { UserInfoComponent } from './user-info.component';
+import { DataProviderService } from '../../_services/data-provider.service';
 
 
 describe('UserInfoComponent', () => {
@@ -22,8 +21,7 @@ describe('UserInfoComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                UserInfoComponent,
-                PhotoComponent
+                UserInfoComponent
             ],
             imports: [
                 MaterialModule,
@@ -32,7 +30,8 @@ describe('UserInfoComponent', () => {
                 MaterialModule
             ],
             providers: [
-              UserService
+                UserService,
+                DataProviderService
             ]
         })
             .compileComponents();
