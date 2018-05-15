@@ -29,8 +29,6 @@ mat-card:hover button {
 
 mat-card:hover {
   box-shadow: 0 5px 4px -4px black;
-  transform: scale(1.025);
-  transition: all 0.25s;
 }
 
 button {
@@ -49,7 +47,6 @@ button:hover {
   position: relative;
   top: 3px;
 }
-
 
 .align-vertically {
   margin-top: 5px;
@@ -100,4 +97,16 @@ h6.mediumtext {
 
 .transparent-icon {
   opacity: 0.0;
+}
+
+.bottom-border {
+  border-bottom: 1px dashed gray;
+}
+
+.top-border {
+  border-top: 1px dashed gray;
+}
+
+.right-border {
+  border-right: 1px dashed gray;
 }

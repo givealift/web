@@ -55,7 +55,7 @@ export class RouteService {
 
     getById(id: number) {
         console.log("route.service.getById");
-        return this.http.get(this.url + '/' + id); // zmiana z: return this.http.get(this.url + routeId);
+        return this.http.get<Route>(this.url + '/' + id); // zmiana z: return this.http.get(this.url + routeId);
     }
 
     create(route: Route) {

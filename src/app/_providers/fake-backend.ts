@@ -38,8 +38,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 case (request.url.match(/api\/user\/favourites\/\d+/) && request.method === 'GET'):
                     return this.getUserFavourites(request);
 
-                case (request.url.match(/route\/\d+/) && request.method === 'GET'):
-                    return this.getById(request);
+                // case (request.url.match(/route\/\d+/) && request.method === 'GET'):
+                //     return this.getById(request);
 
                 // // create user
                 // case (request.url.endsWith('/api/user/') && request.method === 'POST'):
@@ -67,28 +67,28 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             .dematerialize();
     }
 
-    private getById(request: HttpRequest<any>) {
-        request.toString();
-        let RouteId: Array<number> = [-404];
-        let splittedUrl: string[] = request.url.split("\/");
-        for (let s of splittedUrl) {
-            console.log('fakebackend.s of splittedUrl=', s);
-        }
-        if (splittedUrl.length === 9) {
-            let RouteIdNumber: number = parseInt(splittedUrl[8]);
-            RouteId = [RouteIdNumber];
-        } else {
-            RouteId = [-404];
-        }
-        console.log('fakebackend.getById(', RouteId, ')');
-        let routeDetails = this.sampleroutes.filter(
-            route => {
-                return RouteId.indexOf(route.routeId) !== -1;
-            }
-        );
-        console.log('fakebackend.getById: routeDetals = ', routeDetails);
-        return Observable.of(new HttpResponse({ status: 200, body: routeDetails }));
-    }
+    // private getById(request: HttpRequest<any>) {
+    //     request.toString();
+    //     let RouteId: Array<number> = [-404];
+    //     let splittedUrl: string[] = request.url.split("\/");
+    //     for (let s of splittedUrl) {
+    //         console.log('fakebackend.s of splittedUrl=', s);
+    //     }
+    //     if (splittedUrl.length === 9) {
+    //         let RouteIdNumber: number = parseInt(splittedUrl[8]);
+    //         RouteId = [RouteIdNumber];
+    //     } else {
+    //         RouteId = [-404];
+    //     }
+    //     console.log('fakebackend.getById(', RouteId, ')');
+    //     let routeDetails = this.sampleroutes.filter(
+    //         route => {
+    //             return RouteId.indexOf(route.routeId) !== -1;
+    //         }
+    //     );
+    //     console.log('fakebackend.getById: routeDetals = ', routeDetails);
+    //     return Observable.of(new HttpResponse({ status: 200, body: routeDetails }));
+    // }
 
     private getUserFavourites(request) {
         let userFavouriteIds = [203, 212];
@@ -209,7 +209,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let to = request.params.get("to");
         let date = request.params.get("date");
 
-        let matching = this.sampleroutes.filter(obj => obj.from.city.cityId === +from && obj.to.city.cityId == +to && obj.departureTime.includes(date));
+        let matching = this.sampleroutes.filter(obj => obj.from.city.cityId === +from && obj.to.city.cityId == +to && obj.date.includes(date));
 
         return Observable.of(new HttpResponse({ status: 200, body: matching }));
     }
@@ -250,7 +250,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 "street": "string",
                 "buildingNumber": 0
             },
-            "departureTime": moment().format("YYYY-MM-DD hh:mm"),
+            "date": moment().format("YYYY-MM-DD hh:mm"),
             "numberOfSeats": 4,
             "numberOfOccupiedSeats": 1,
             "price": 10.0,
@@ -394,7 +394,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 "street": "string",
                 "buildingNumber": 0
             },
-            "departureTime": moment().format("YYYY-MM-DD hh:mm"),
+            "date": moment().format("YYYY-MM-DD hh:mm"),
             "numberOfSeats": 4,
             "numberOfOccupiedSeats": 1,
             "price": 10.0,
@@ -435,7 +435,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 "street": "string",
                 "buildingNumber": 0
             },
-            "departureTime": moment().add(1, "hour").format("YYYY-MM-DD hh:mm"),
+            "date": moment().add(1, "hour").format("YYYY-MM-DD hh:mm"),
             "numberOfSeats": 4,
             "numberOfOccupiedSeats": 1,
             "price": 10.0,
@@ -476,7 +476,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 "street": "string",
                 "buildingNumber": 4
             },
-            "departureTime": moment().add(1, "hour").format("YYYY-MM-DD hh:mm"),
+            "date": moment().add(1, "hour").format("YYYY-MM-DD hh:mm"),
             "numberOfSeats": 4,
             "numberOfOccupiedSeats": 1,
             "price": 10.0//, "stops": []

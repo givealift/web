@@ -1,164 +1,121 @@
-<mat-card>
-  <mat-grid-list cols="17" rowHeight="32px" gutterSize="0px">
+<mat-card *ngIf="isDataReady">
+  <mat-grid-list cols="7" rowHeight="35px" gutterSize="0px">
 
-    <mat-grid-tile colspan="2" rowspan="2">
-      <img class="media-object" src="../../../assets/logo.png" height="64" width="64">
+    <mat-grid-tile colspan="2" rowspan="4" class="right-border">
+      <img class="media-object" src="../../../assets/logo.png" height="100" width="100">
     </mat-grid-tile>
 
-    <mat-grid-tile colspan="3" rowspan="2">
-      <h6 *ngIf="(userData?.firstName!==null && userData?.lastName!==null)">
-        {{userData?.firstName}} {{userData?.lastName}}
-      </h6>
-      <h6 *ngIf="(userData?.firstName===null || userData?.lastName===null)">
-        Fake_name Fake_surname
-      </h6>
-    </mat-grid-tile>
-
-    <mat-grid-tile colspan="10" rowspan="1" class="border-bottom">
+    <mat-grid-tile colspan="3" rowspan="3" style="text-align: center;">
       <h4>
-        <h5 class="text-truncate">
-          <mat-icon class="icon-align">directions_car</mat-icon>
-          {{routeDetails?.from?.city?.name}} &#10145; {{routeDetails?.to?.city?.name}}
-        </h5>
+        Miejsca:
+        <br/>
+        <strong class=" text-primary "> {{routeDetails?.numberOfOccupiedSeats}} / {{routeDetails?.numberOfSeats}} </strong>
       </h4>
     </mat-grid-tile>
 
-    <mat-grid-tile colspan="2" rowspan="5">
-      <div class="show-on-hover">
-        <button mat-icon-button matTooltipShowDelay="100" matTooltip="Skontaktuj się" matTooltipPosition="right">
-          <mat-icon>phone_iphone</mat-icon>
-        </button>
-        <button mat-icon-button matTooltipShowDelay="100" matTooltip="Zarezerwuj" matTooltipPosition="right">
-          <mat-icon>content_paste</mat-icon>
-        </button>
-        <button mat-icon-button matTooltip="Dodaj do ulubionych" matTooltipPosition="right">
-          <mat-icon>favorite</mat-icon>
-        </button>
-        <button mat-icon-button matTooltip="Szczegóły" matTooltipPosition="right" (click)="redirectToRouteDetails()">
-          <mat-icon>info</mat-icon>
-        </button>
-      </div>
-    </mat-grid-tile>
-
-    <mat-grid-tile colspan="10" rowspan="2">
-      <h5>
-        <mat-icon class="icon-align">alarm</mat-icon>
-        <strong *ngIf="routeDetails?.from.date!==null">{{routeDetails?.from.date | date:'EEEE, d MMMM - H:mm':'':'pl'}}</strong>
-        <strong *ngIf="routeDetails?.from.date===null">{{ '2018-05-13T21:30:40+0000' | date:'EEEE, d MMMM - H:mm':'':'pl'}}</strong>
-        <!-- Jest undefined, ale wylapuje to w .ts -->
-      </h5>
-    </mat-grid-tile>
-
-    <mat-grid-tile colspan="5" rowspan="3">
-      <div clas="align-vertically">
-        <h6 *ngIf="userData?.email===null">
-          <mat-icon class="icon-align" class="smallicon">email</mat-icon> fake@email.ru
-        </h6>
-        <h6 *ngIf="userData?.email!==null">
-          <mat-icon class="icon-align" class="smallicon">email</mat-icon> {{userData?.email}}
-        </h6>
-
-        <h6 *ngIf="userData?.phone===null">
-          <mat-icon class="icon-align" class="smallicon">phone</mat-icon> 07008888
-        </h6>
-        <h6 *ngIf="userData?.phone!==null">
-          <mat-icon class="icon-align" class="smallicon">phone</mat-icon> {{userData?.phone}}
-        </h6>
-
-        <h6 *ngIf="userData?.gender===null">
-          <!--Płeć: Nie podano-->
-        </h6>
-        <h6 *ngIf="userData?.gender==='female'">Płeć: kobieta</h6>
-        <h6 *ngIf="userData?.gender==='male'">Płeć: meżczyzna</h6>
-        <!--<mat-icon class="icon-align" class="smallicon" *ngIf="userData?.gender===null">mdi-gender-transgender</mat-icon> mdi-gender-female mdi-gender-male-->
-      </div>
-    </mat-grid-tile>
-
-    <mat-grid-tile colspan="10" rowspan="2">
-
-      <h5> </h5>
-      <h5 class="text-truncate">
-        <mat-icon class="icon-align">pin_drop</mat-icon>
-        <strong>{{routeDetails?.from?.city?.name}}</strong>
-        <span *ngIf="routeDetails?.from?.placeOfMeeting!==null">, ul. {{routeDetails?.from?.placeOfMeeting}} </span>
-        <span *ngIf="routeDetails?.from?.placeOfMeeting===null">, ul. Krucza 44 </span>
+    <mat-grid-tile colspan="2 " rowspan="3 ">
+      <h4 style="text-align: center; ">
+        Cena:
         <br/>
-      </h5>
+        <strong class="text-primary "> {{routeDetails?.price}} zł</strong>
+      </h4>
     </mat-grid-tile>
 
-    <mat-grid-tile colspan="5" rowspan="{{numberOfStops+6}}">
+    <mat-grid-tile colspan="2 " rowspan="7 " class="top-border ">
       <div class="align-vertically">
-        <h5>
-          <mat-icon class="icon-align">stars</mat-icon>
-          <strong>4.5/5.0</strong>
-        </h5>
-        <h5>
-          Miejsca:
-          <strong> {{routeDetails?.numberOfOccupiedSeats}}/{{routeDetails?.numberOfSeats}} </strong>
-        </h5>
-        <h5>
-          Koszt:
-          <strong> {{routeDetails?.price}} </strong> zł
-        </h5>
-      </div>
-    </mat-grid-tile>
+        <h5 class="fontcolor-gray ">Czas </h5>
 
-    <mat-grid-tile colspan="12" rowspan="1" *ngIf="routeDetails?.stops===null">
-      <div class="align-vertically" *ngIf="routeDetails?.stops===null">
-        <!--<p class="fontcolor-gray"> Brak przystanków po drodze. </p>-->
-      </div>
-    </mat-grid-tile>
-
-    <mat-grid-tile colspan="4" rowspan="{{numberOfStops+1}}" *ngIf="routeDetails?.stops!==null">
-      <div class="align-vertically" *ngIf="routeDetails?.stops!==null">
-        <h5 class="fontcolor-gray">Czas </h5>
-        <p class="text-truncate" class="smalltext" *ngFor="let stop of routeDetails?.stops">
-          <mat-icon class="icon-align" class="smallicon">alarm</mat-icon>
-          <span class="fontcolor-gray" *ngIf="stop!==null">
-            {{stop.date | date:'d MMMM - H:mm':'':'pl'}}
+        <p class="text-truncate bottom-border ">
+          <mat-icon class="icon-align" class="smallicon ">alarm</mat-icon>
+          <span class="fontcolor-gray">
+            <strong class="text-primary "> {{routeDetails?.from.date | date:'d MMMM - H:mm':'':'pl'}} </strong>
           </span>
-          <span class="fontcolor-gray" *ngIf="stop===null">
-            {{'2018-05-13T21:55:00+0000' | date:'d MMMM - H:mm':'':'pl'}}
+        </p>
+        <p class="text-truncate" class="smalltext " *ngFor="let stop of routeDetails?.stops ">
+          <mat-icon class="icon-align" class="smallicon ">alarm</mat-icon>
+          <span class="fontcolor-gray">
+            <strong>{{stop.date | date:'d MMMM - H:mm':'':'pl'}}</strong>
+          </span>
+        </p>
+        <p class="text-truncate top-border ">
+          <mat-icon class="icon-align" class="smallicon ">alarm</mat-icon>
+          <span class="fontcolor-gray">
+            <strong class="text-primary"> {{routeDetails?.to.date | date:'d MMMM - H:mm':'':'pl'}} </strong>
           </span>
         </p>
       </div>
     </mat-grid-tile>
 
-    <mat-grid-tile colspan="8" rowspan="{{numberOfStops+1}}" *ngIf="routeDetails?.stops!==null">
-      <div class="align-vertically" *ngIf="routeDetails?.stops!==null">
-        <h5 class="fontcolor-gray">Przystanki </h5>
-        <p class="text-truncate" class="smalltext" *ngFor="let stop of routeDetails?.stops">
-          <mat-icon class="icon-align" class="smallicon">pin_drop</mat-icon>
-          <span class="fontcolor-gray" *ngIf="stop!==null">
-            <strong> {{stop.city.name}} </strong>, ul. {{stop.placeOfMeeting}}
+    <mat-grid-tile colspan="3 " rowspan="7 " class="top-border ">
+
+      <div class="align-vertically ">
+        <h5 class="fontcolor-gray ">Przystanki </h5>
+        <p class="text-truncate bottom-border ">
+          <mat-icon class="icon-align " class="smallicon ">pin_drop</mat-icon>
+          <span class="fontcolor-gray ">
+            <strong class="text-primary "> {{routeDetails?.from.city.name}} , ul. {{routeDetails?.from.city.placeOfMeeting}} </strong>
           </span>
-          <span class="fontcolor-gray" *ngIf="stop===null">
-            <strong> Fake_stop </strong>, ul. Fake_street 60
+        </p>
+        <p class="text-truncate " class="smalltext " *ngFor="let stop of routeDetails?.stops ">
+          <mat-icon class="icon-align " class="smallicon ">pin_drop</mat-icon>
+          <span class="fontcolor-gray ">
+            <strong> {{stop.city.name}} , ul. {{stop.placeOfMeeting}} </strong>
+          </span>
+        </p>
+        <p class="text-truncate top-border ">
+          <mat-icon class="icon-align " class="smallicon ">pin_drop</mat-icon>
+          <span class="fontcolor-gray ">
+            <strong class="text-primary "> {{routeDetails?.to.city.name}} , ul. {{routeDetails?.to.city.placeOfMeeting}} </strong>
           </span>
         </p>
       </div>
     </mat-grid-tile>
 
-    <mat-grid-tile colspan="10" rowspan="2">
+    <mat-grid-tile colspan="2 " rowspan="3 " style="text-align: center " class="right-border ">
       <h5>
-        <mat-icon class="icon-align">pin_drop</mat-icon>
-        <strong>{{routeDetails?.to?.city?.name}}</strong>
-        <span *ngIf="routeDetails?.to?.placeOfMeeting!==null">, ul. {{routeDetails?.to?.placeOfMeeting}} </span>
-        <span *ngIf="routeDetails?.to?.placeOfMeeting===null">, ul. Wiślana 60 </span>
+        {{userData?.firstName}} {{userData?.lastName}}
       </h5>
     </mat-grid-tile>
-    <mat-grid-tile colspan="10" rowspan="1" class="border-bottom">
+
+
+
+    <mat-grid-tile colspan="2 " rowspan="2 " class="right-border ">
       <h5>
-        <mat-icon class="icon-align">alarm</mat-icon>
-        <strong *ngIf="routeDetails?.to.date!==null">{{routeDetails?.to.date | date:'EEEE, d MMMM - H:mm':'':'pl'}}</strong>
-        <strong *ngIf="routeDetails?.to.date===null">{{ '2018-05-13T23:45:00+0000' | date:'EEEE, d MMMM - H:mm':'':'pl'}}</strong>
+        <mat-icon class="icon-align ">stars</mat-icon>
+        <strong>{{userData?.rate || 0}}/5.0</strong>
       </h5>
     </mat-grid-tile>
-    <mat-grid-tile colspan="10" rowspan="1">
-      <p class="fontcolor-gray">
-        <mat-icon class="icon-align" class="transparent-icon">alarm</mat-icon>
-        ( szacowany czas przyjazdu )
-      </p>
+
+    <mat-grid-tile colspan="2 " rowspan="2 " class="right-border ">
+      <h6>
+        <mat-icon class="icon-align " class="smallicon ">email</mat-icon> {{userData?.email}}
+      </h6>
     </mat-grid-tile>
+
+    <mat-grid-tile colspan="5 " rowspan="2 " class="top-border ">
+      <h4>Uwagi od kierowcy:</h4>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="2 " rowspan="2 " class="right-border ">
+      <h6 *ngIf="userData?.phone ">
+        <mat-icon class="icon-align " class="smallicon ">phone</mat-icon> {{userData?.phone}}
+      </h6>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="5 " rowspan="4 ">
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="2 " rowspan="3 " class="right-border ">
+      <button mat-icon-button matTooltipShowDelay="100 " matTooltip="Skontaktuj się" matTooltipPosition="top">
+        <mat-icon>phone_iphone</mat-icon>
+      </button>
+      <button mat-icon-button matTooltipShowDelay="100 " matTooltip="Zarezerwuj " matTooltipPosition="top">
+        <mat-icon>content_paste</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Dodaj do ulubionych " matTooltipPosition="top">
+        <mat-icon>favorite</mat-icon>
+      </button>
+    </mat-grid-tile>
+
   </mat-grid-list>
 </mat-card>
