@@ -32,8 +32,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 //     return this.createRoute(request);
 
                 // search route
-                case (request.url.match(/route\/search/) && request.method === 'GET'):
-                    return this.searchRoute(request);
+                // case (request.url.match(/route\/search/) && request.method === 'GET'):
+                //     return this.searchRoute(request);
 
                 // // create user
                 // case (request.url.endsWith('/api/user/') && request.method === 'POST'):

@@ -28,8 +28,8 @@ export class RouteService {
             .flatMap(([fromCity, toCity]) => {
                 if (fromCity && toCity) {
                     const params = new HttpParams()
-                        .set("from", fromCity.cityId)
-                        .set("to", toCity.cityId)
+                        .set("from", fromCity.cityId.toString())
+                        .set("to", toCity.cityId.toString())
                         .set("date", moment(date).format("YYYY-MM-DD"));
 
                     return this.http.get<Route[]>(`${this.url}/search`, { params: params })
