@@ -43,3 +43,7 @@ mat-form-field {
 	position: absolute;
 	z-index: -1;
 }
+
+.pointer {
+  cursor: pointer;
+}

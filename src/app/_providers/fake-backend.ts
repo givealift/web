@@ -32,8 +32,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 //     return this.createRoute(request);
 
                 // search route
-                case (request.url.match(/route\/search/) && request.method === 'GET'):
-                    return this.searchRoute(request);
+                // case (request.url.match(/route\/search/) && request.method === 'GET'):
+                //     return this.searchRoute(request);
 
                 // // create user
                 // case (request.url.endsWith('/api/user/') && request.method === 'POST'):
@@ -151,8 +151,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         newroute.routeId = mockRoutes.length + 1;
         let newDriver: User = JSON.parse(localStorage.getItem('currentUser'));
         newroute.ownerId = newDriver.id;
-        newroute.from.city.cityId = "19";
-        newroute.to.city.cityId = "1";
+        newroute.from.city.cityId = 19;
+        newroute.to.city.cityId = 1;
 
         mockRoutes.push(newroute);
         localStorage.setItem('mock-routes', JSON.stringify(mockRoutes));

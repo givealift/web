@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 import { DataProviderService } from '../../_services/data-provider.service';
+import { ActivatedRoute } from '@angular/router';
+import { RouteService } from '../../_services/route.service';
 
 @Component({
   selector: 'app-route-list',
@@ -12,19 +14,30 @@ export class RouteListComponent implements OnInit {
 
   routes: any = [];
 
-  constructor(private dataTransferService: DataProviderService){}
+  constructor(
+    private dataTransferService: DataProviderService,
+    private route: ActivatedRoute,
+    private routeService: RouteService) { }
 
-  ngOnInit(){
-    this.routes = this.dataTransferService.getData("route-list");
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      const from = params['from'];
+      const to = params['to'];
+      const date = params['date'];
+
+      const taggedResults = this.dataTransferService.taggedResults(from, to, date);
+
+      let routes = this.dataTransferService.getData(`route-list/${taggedResults}`);
+
+      if (!routes) {
+        this.routeService
+          .searchWithIds(+from, +to, date)
+          .subscribe(routes => {
+            this.routes = routes;
+          })
+      }
+
+      this.routes = routes;
+    });
   }
-
-  // constructor(private httpClient: HttpClient) {
-
-    // Observable.interval(1000)
-    //   .switchMap(() => httpClient.get('/api/route/list'))
-    //   .subscribe(
-    //     (data) => {
-    //       this.routes = data;
-    //     });
-
 }

@@ -1,11 +1,14 @@
-export class User {
-    id: number;
-    gender: string;
+export class PublicUser {
     firstName: string;
     lastName: string;
-    password: string;
     email: string;
     phone: string;
-    birthYear: Date;
+    gender: string;
     rate: number;
+    birthYear: Date
+}
+
+export class User extends PublicUser {
+    id?: number;
+    password?: string;
 }
