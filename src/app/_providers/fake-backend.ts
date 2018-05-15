@@ -151,8 +151,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         newroute.routeId = mockRoutes.length + 1;
         let newDriver: User = JSON.parse(localStorage.getItem('currentUser'));
         newroute.ownerId = newDriver.id;
-        newroute.from.city.cityId = "19";
-        newroute.to.city.cityId = "1";
+        newroute.from.city.cityId = 19;
+        newroute.to.city.cityId = 1;
 
         mockRoutes.push(newroute);
         localStorage.setItem('mock-routes', JSON.stringify(mockRoutes));
