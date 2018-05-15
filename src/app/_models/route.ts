@@ -1,7 +1,8 @@
 import { Location } from "./location";
-export class Route {
-    driver: any; // temp fix until views are not updated
+import { PublicUser } from "./user";
 
+export class Route {
+    galUserPublicResponse: PublicUser;
     routeId: number;
     ownerId: number;
     numberOfSeats: number;
