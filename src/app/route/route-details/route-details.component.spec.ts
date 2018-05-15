@@ -10,6 +10,7 @@ import { CityService } from '../../_services/city.service';
 import { CitiesProvider } from '../../_providers/cities-provider';
 import { RouterTestingModule } from '@angular/router/testing';
 import { DataProviderService } from '../../_services/data-provider.service';
+import { UserService } from '../../_services/user.service';
 
 describe('RouteDetailsComponent', () => {
   let component: RouteDetailsComponent;
@@ -19,8 +20,6 @@ describe('RouteDetailsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         RouteDetailsComponent,
-        RouteComponent, //to remove
-        RouteListComponent //to remove
       ],
       imports: [
         MaterialModule,
@@ -29,9 +28,10 @@ describe('RouteDetailsComponent', () => {
       ],
       providers: [
         RouteService,
+        UserService,
+        DataProviderService,
         CityService,
-        CitiesProvider,
-        DataProviderService
+        CitiesProvider
       ]
     })
       .compileComponents();

@@ -5,7 +5,6 @@ import { ActivatedRoute } from "@angular/router";
 import { User } from "../../_models";
 import { Route } from "../../_models";
 import { Router } from "@angular/router";
-import {City} from "../../_models/city";
 
 @Component({
   selector: 'app-route-details',
@@ -77,7 +76,7 @@ export class RouteDetailsComponent implements OnInit {
           this.numberOfStops = this.routeDetails.stops.length;
         }
 
-        if( this.routeDetails.stops !== null ) {
+        if ( this.routeDetails.stops !== null ) {
           for ( let stop of this.routeDetails.stops ) {
             if ( stop === undefined ) {
               stop = null;

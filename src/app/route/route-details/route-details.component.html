@@ -10,12 +10,19 @@
         <h5 *ngIf="(userData?.firstName!==null && userData?.lastName!==null)"> {{userData?.firstName}} {{userData?.lastName}} </h5>
         <h5 *ngIf="(userData?.firstName===null || userData?.lastName===null)"> Fake_name Fake_surname </h5>
 
-        <h5> <mat-icon class="icon-align">stars</mat-icon> <strong>4.5/5.0</strong> </h5>
+        <h5>
+          <mat-icon class="icon-align">stars</mat-icon>
+          <strong>4.5/5.0</strong>
+        </h5>
 
-        <p class="smalltext" *ngIf="userData?.email===null"> <mat-icon class="icon-align" class="smallicon">email</mat-icon> fake@email.ru </p>
-        <p class="smalltext" *ngIf="userData?.email!==null"> <mat-icon class="icon-align" class="smallicon">email</mat-icon> {{userData?.email}} </p>
-        <p class="smalltext" *ngIf="userData?.phone===null"> <mat-icon class="icon-align" class="smallicon">phone</mat-icon> 07008888 </p>
-        <p class="smalltext" *ngIf="userData?.phone!==null"> <mat-icon class="icon-align" class="smallicon">phone</mat-icon> {{userData?.phone}} </p>
+        <p class="smalltext" *ngIf="userData?.email===null">
+          <mat-icon class="icon-align" class="smallicon">email</mat-icon> fake@email.ru </p>
+        <p class="smalltext" *ngIf="userData?.email!==null">
+          <mat-icon class="icon-align" class="smallicon">email</mat-icon> {{userData?.email}} </p>
+        <p class="smalltext" *ngIf="userData?.phone===null">
+          <mat-icon class="icon-align" class="smallicon">phone</mat-icon> 07008888 </p>
+        <p class="smalltext" *ngIf="userData?.phone!==null">
+          <mat-icon class="icon-align" class="smallicon">phone</mat-icon> {{userData?.phone}} </p>
 
         <p *ngIf="userData?.gender===null">Płeć: Nie podano</p>
         <p *ngIf="userData?.gender==='female'">Płeć: kobieta</p>
@@ -81,8 +88,10 @@
         <h5> Przystanki: </h5>
         <p class="text-truncate" *ngFor="let stop of routeDetails?.stops">
           <mat-icon class="icon-align" class="smallicon">pin_drop</mat-icon>
-          <span *ngIf="stop!==null"> <strong> {{stop.city.name}} </strong>, ul. {{stop.placeOfMeeting}} </span>
-          <span *ngIf="stop===null"> <strong> Fake_stop </strong>, ul. Fake_street 60 </span>
+          <span *ngIf="stop!==null">
+            <strong> {{stop.city.name}} </strong>, ul. {{stop.placeOfMeeting}} </span>
+          <span *ngIf="stop===null">
+            <strong> Fake_stop </strong>, ul. Fake_street 60 </span>
         </p>
       </div>
       <div *ngIf="routeDetails?.stops===null">
