@@ -31,23 +31,21 @@
 
       <mat-grid-tile rowspan="2">
         <input id="file" name="file" type="file" #fileInput placeholder="" class="file-input" (change)="onSelectFile($event)" />
-        <button mat-raised-button class="hoverable" type="button">
-          <label for="file">Wybierz obraz</label>
+        <button mat-raised-button type="button">
+          <label class="pointer" for="file">Wybierz obraz</label>
         </button>
       </mat-grid-tile>
 
       <mat-grid-tile colspan="1" rowspan="2" class="right-border">
         <mat-form-field>
-          <input matInput [(ngModel)]="userModel.lastName" name="lastName"required #lastNameRef="ngModel" placeholder="Nazwisko"
-          />
+          <input matInput [(ngModel)]="userModel.lastName" name="lastName" required #lastNameRef="ngModel" placeholder="Nazwisko" />
           <mat-error *ngIf="lastNameRef.invalid">Wpisz poprawne nazwisko!</mat-error>
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile colspan="1" rowspan="2">
         <mat-form-field>
-          <input matInput [(ngModel)]="userModel.password" name="password" type="password" #passRef="ngModel" placeholder="Hasło"
-          />
+          <input matInput [(ngModel)]="userModel.password" name="password" type="password" #passRef="ngModel" placeholder="Hasło" />
           <mat-error *ngIf="passRef.invalid">Wpisz poprawne hasło!</mat-error>
         </mat-form-field>
       </mat-grid-tile>
@@ -60,8 +58,7 @@
 
       <mat-grid-tile colspan="1" rowspan="2" class="right-border">
         <mat-form-field>
-          <input matInput name="birthYear" [max]="today" [matDatepicker]="picker" placeholder="Data urodzenia" #dateRef="ngModel"
-            [(ngModel)]="userModel.birthYear">
+          <input matInput name="birthYear" [max]="today" [matDatepicker]="picker" placeholder="Data urodzenia" #dateRef="ngModel" [(ngModel)]="userModel.birthYear">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
           <mat-error *ngIf="dateRef.invalid">Wybierz datę!</mat-error>
