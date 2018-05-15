@@ -1,8 +1,6 @@
 mat-card {
   min-width: 760px;
-  min-height: 480px;
   width: 860;
-  height: 520px;
   border-radius: 25px;
   margin-top: 20px;
   opacity: 1;
@@ -91,7 +89,15 @@ h6.mediumtext {
 }
 
 .mat-icon.smallicon {
-  font-size: 16px;
-  height: 16px;
-  width: 16px;
+  font-size: 14px;
+  height: 14px;
+  width: 14px;
+}
+
+.fontcolor-gray {
+  color: darkslategray;
+}
+
+.transparent-icon {
+  opacity: 0.0;
 }

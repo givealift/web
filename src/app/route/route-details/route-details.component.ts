@@ -19,7 +19,7 @@ export class RouteDetailsComponent implements OnInit {
 
   userData: User;
 
-  numberOfStops: number = 0;
+  numberOfStops = 0;
 
   private routeId;
 
@@ -36,7 +36,7 @@ export class RouteDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.routeId = 203; //206
+    // this.routeId = 203; //203 - ma zamockowane stopy w fake-backend; 212
     console.log('route-details.ngOnInit(' + this.routeId + ') working... ');
 
     this.routeService.getById(this.routeId).subscribe(
@@ -56,6 +56,12 @@ export class RouteDetailsComponent implements OnInit {
         } else {
           console.log('from date: ' + this.routeDetails.from.date); }
 
+        if (this.routeDetails.to.date === undefined) {
+          console.log('to date===undefined: ' + this.routeDetails.to.date );
+          this.routeDetails.to.date = null;
+        } else {
+          console.log('to date: ' + this.routeDetails.from.date); }
+
         if (this.routeDetails.from.placeOfMeeting === undefined) {
           console.log('from placeOfMeeting===undefined: ' + this.routeDetails.from.placeOfMeeting );
           this.routeDetails.from.placeOfMeeting = null;
@@ -68,11 +74,14 @@ export class RouteDetailsComponent implements OnInit {
         } else {
           console.log('to placeOfMeeting: ' + this.routeDetails.to.placeOfMeeting ); }
 
-        if (this.routeDetails.stops === undefined) {
-          console.log('stops===undefined: ' + this.routeDetails.stops );
-          this.routeDetails.stops = null;
+        if ( this.routeDetails.stops === undefined ||
+          this.routeDetails.stops.length === 0 ||
+          this.routeDetails.stops === null ) {
+            console.log('stops=== [] || undefined || null : ' + this.routeDetails.stops );
+            this.routeDetails.stops = null;
+            this.numberOfStops = 0;
         } else {
-          console.log('stops: ' + this.routeDetails.stops );
+          console.log('stops: ', this.routeDetails.stops );
           this.numberOfStops = this.routeDetails.stops.length;
         }
 

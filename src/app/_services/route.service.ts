@@ -62,8 +62,8 @@ export class RouteService {
         return this.http.get<Route[]>(this.url + '/list');
     }
 
-    // getRouteDetailsById(routeId: number) {
-    //   console.log("route.service.getRouteDetailsById");
+    // getById(routeId: number) {
+    //   console.log("route.service.getById");
     //   return this.getById( routeId ); // return this.http.get(this.url + '/' + routeId);
     // }
 

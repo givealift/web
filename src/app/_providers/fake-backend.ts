@@ -39,7 +39,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return this.getUserFavourites(request);
 
                 case (request.url.match(/route\/\d+/) && request.method === 'GET'):
-                  return this.getRouteDetailsById(request);
+                  return this.getById(request);
 
                 // // create user
                 // case (request.url.endsWith('/api/user/') && request.method === 'POST'):
@@ -67,14 +67,26 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             .dematerialize();
     }
 
-    private getRouteDetailsById(request) {
+    private getById(request: HttpRequest<any>) {
       request.toString();
-      let RouteId = [203];
+      let RouteId: Array<number> = [-404];
+      let splittedUrl: string[] = request.url.split("\/");
+      for ( let s of splittedUrl ) {
+        console.log('fakebackend.s of splittedUrl=', s);
+      }
+      if ( splittedUrl.length === 9 ) {
+        let RouteIdNumber: number = parseInt( splittedUrl[8] );
+        RouteId = [ RouteIdNumber ];
+      } else {
+        RouteId = [ -404 ];
+      }
+      console.log('fakebackend.getById(', RouteId, ')');
       let routeDetails = this.sampleroutes.filter(
         route => {
           return RouteId.indexOf(route.routeId) !== -1;
         }
       );
+      console.log('fakebackend.getById: routeDetals = ', routeDetails );
       return Observable.of(new HttpResponse({ status: 200, body: routeDetails}));
     }
 
@@ -240,7 +252,111 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             "departureTime": moment().format("YYYY-MM-DD hh:mm"),
             "numberOfSeats": 4,
             "numberOfOccupiedSeats": 1,
-            "price": 10.0
+            "price": 10.0,
+            "stops": [
+              {
+                "buildingNumber": 11,
+                "city": {
+                  "cityId": "20",
+                  "name": "Częstochowa",
+                  "country": "powiat Katowice",
+                  "province": "śląskie",
+                  "cityInfo": {
+                    "cityInfoId": 20,
+                    "population": 304362,
+                    "citySize": 165
+                  }
+                },
+                "date": "2018-05-13T21:35:49+0000",
+                "localizationId": 201,
+                "placeOfMeeting": "Krzywa 4"
+              },
+              {
+                "buildingNumber": 16,
+                "city": {
+                  "cityId": "23",
+                  "name": "Radomkso",
+                  "country": "powiat Warszawa",
+                  "province": "mazowieckie",
+                  "cityInfo": {
+                    "cityInfoId": 2,
+                    "population": 1724404,
+                    "citySize": 517
+                  }
+                },
+                "date": "2018-05-13T21:55:00+0000",
+                "localizationId": 217,
+                "placeOfMeeting": "Wyszyńskiego 7"
+              },
+              {
+                "buildingNumber": 16,
+                "city": {
+                  "cityId": "23",
+                  "name": "Kamieńsk",
+                  "country": "powiat Warszawa",
+                  "province": "mazowieckie",
+                  "cityInfo": {
+                    "cityInfoId": 2,
+                    "population": 1724404,
+                    "citySize": 517
+                  }
+                },
+                "date": "2018-05-13T22:15:00+0000",
+                "localizationId": 217,
+                "placeOfMeeting": "Szkolna 17"
+              },
+              {
+                "buildingNumber": 16,
+                "city": {
+                  "cityId": "24",
+                  "name": "Pabianice",
+                  "country": "powiat Warszawa",
+                  "province": "mazowieckie",
+                  "cityInfo": {
+                    "cityInfoId": 2,
+                    "population": 1724404,
+                    "citySize": 517
+                  }
+                },
+                "date": "2018-05-13T22:35:00+0000",
+                "localizationId": 218,
+                "placeOfMeeting": "Orla 19"
+              },
+              {
+                "buildingNumber": 16,
+                "city": {
+                  "cityId": "21",
+                  "name": "Piotrków Trybunalski",
+                  "country": "powiat Warszawa",
+                  "province": "mazowieckie",
+                  "cityInfo": {
+                    "cityInfoId": 2,
+                    "population": 1724404,
+                    "citySize": 517
+                  }
+                },
+                "date": "2018-05-13T22:55:00+0000",
+                "localizationId": 219,
+                "placeOfMeeting": "Skrzywiona 4"
+              },
+              {
+                "buildingNumber": 16,
+                "city": {
+                  "cityId": "22",
+                  "name": "Łódź",
+                  "country": "powiat Warszawa",
+                  "province": "mazowieckie",
+                  "cityInfo": {
+                    "cityInfoId": 2,
+                    "population": 1724404,
+                    "citySize": 518
+                  }
+                },
+                "date": "2018-05-13T23:10:00+0000",
+                "localizationId": 221,
+                "placeOfMeeting": "Płynna 14"
+              },
+            ]
         },
         {
             "routeId": 212,
@@ -280,7 +396,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             "departureTime": moment().format("YYYY-MM-DD hh:mm"),
             "numberOfSeats": 4,
             "numberOfOccupiedSeats": 1,
-            "price": 10.0
+            "price": 10.0,
+            "stops": []
         },
         {
             "routeId": 215,
@@ -320,7 +437,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             "departureTime": moment().add(1, "hour").format("YYYY-MM-DD hh:mm"),
             "numberOfSeats": 4,
             "numberOfOccupiedSeats": 1,
-            "price": 10.0
+            "price": 10.0,
+            "stops": null
         },
         {
             "routeId": 218,
@@ -360,7 +478,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             "departureTime": moment().add(1, "hour").format("YYYY-MM-DD hh:mm"),
             "numberOfSeats": 4,
             "numberOfOccupiedSeats": 1,
-            "price": 10.0
+            "price": 10.0//, "stops": []
         }
     ];
 }
