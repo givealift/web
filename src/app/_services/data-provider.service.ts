@@ -5,7 +5,7 @@ import { UserService } from "./user.service";
 
 @Injectable()
 export class DataProviderService {
-    
+
     private dataMap: Map<String, any> = new Map();
 
     storeData(key: String, data: any) {
@@ -28,5 +28,7 @@ export class DataProviderService {
         else return null;
     }
 
-
+    taggedResults(fromCityId: number | string, toCityId: number | string, date: string) {
+        return `${fromCityId}:${toCityId}:${date}`
+    }
 }
