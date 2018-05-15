@@ -14,7 +14,7 @@ export class UserRouteComponent implements OnInit {
   userId: number = parseInt(localStorage.getItem("id"));
   routes: Route[] = [];
   page: number = 0;
-  routesAmount: number = 25;
+  routesAmount: number;
 
   hasUserRoutes: boolean = true;
 
@@ -28,6 +28,7 @@ export class UserRouteComponent implements OnInit {
       data => {
         this.routes = data;
         this.hasUserRoutes = true;
+        this.routesAmount = this.routes.length;
       },
       error => {
         this.hasUserRoutes = false;

@@ -1,13 +1,13 @@
 <div *ngIf="hasUserRoutes">
   <app-route *ngFor="let route of routes" [routeData]="route"></app-route>
 
-  <div class="no-style">
+  <div class="no-style" *ngIf="routesAmount > 0">
     <app-pagination class="align-center" [elementsAmount]="routesAmount" (pageChange)="changePage($event)"></app-pagination>
   </div>
 </div>
 
 <div *ngIf="!hasUserRoutes">
-  <mat-card id="no-routes">
+  <mat-card>
     <h5>Nie dodałeś jeszcze żadnego przejazdu </h5>
     <br/>
     <button mat-raised-button color="primary" routerLink="/new-route">Dodaj przejazd</button>
