@@ -20,14 +20,18 @@ export class RouteComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userId = this.routeData.ownerId;
-    let possibleUser = this.userService.getById(this.userId);
-    if (possibleUser != null)
-      this.userData = possibleUser;
+    if (this.routeData.ownerId) {
+      this.userId = this.routeData.ownerId;
+      let possibleUser = this.userService.getById(this.userId);
+      if (possibleUser !== null) {
+        this.userData = possibleUser;
+      }
+    } else {
+      this.userData = this.routeData.galUserPublicResponse;
+    }
   }
 
   goToUserPage() {
     this.router.navigate(['user/' + this.userId]);
   }
-
 }
