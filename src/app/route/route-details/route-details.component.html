@@ -9,11 +9,11 @@
       <h4>
         Miejsca:
         <br/>
-        <strong class=" text-primary "> {{routeDetails?.numberOfOccupiedSeats}} / {{routeDetails?.numberOfSeats}} </strong>
+        <strong class=" text-primary"> {{routeDetails?.numberOfOccupiedSeats}} / {{routeDetails?.numberOfSeats}} </strong>
       </h4>
     </mat-grid-tile>
 
-    <mat-grid-tile colspan="2 " rowspan="3 ">
+    <mat-grid-tile colspan="2 " rowspan="3">
       <h4 style="text-align: center; ">
         Cena:
         <br/>
@@ -21,23 +21,29 @@
       </h4>
     </mat-grid-tile>
 
-    <mat-grid-tile colspan="2 " rowspan="7 " class="top-border ">
+    <mat-grid-tile colspan="2" rowspan="7 " class="top-border">
       <div class="align-vertically">
         <h5 class="fontcolor-gray ">Czas </h5>
 
         <p class="text-truncate bottom-border ">
-          <mat-icon class="icon-align" class="smallicon ">alarm</mat-icon>
+          <mat-icon class="icon-align" class="smallicon">alarm</mat-icon>
           <span class="fontcolor-gray">
             <strong class="text-info "> {{routeDetails?.from.date | date:'d MMMM - H:mm':'':'pl'}} </strong>
           </span>
         </p>
         <p class="text-truncate" class="smalltext " *ngFor="let stop of routeDetails?.stops ">
-          <mat-icon class="icon-align" class="smallicon ">alarm</mat-icon>
+          <mat-icon class="icon-align" class="smallicon">alarm</mat-icon>
           <span class="fontcolor-gray">
             <strong>{{stop.date | date:'d MMMM - H:mm':'':'pl'}}</strong>
           </span>
         </p>
-        <p class="text-truncate top-border ">
+        <p class="text-truncate" *ngIf="routeDetails.stops.length == 0">
+          <mat-icon class="icon-align" class="smallicon ">alarm</mat-icon>
+          <span class="fontcolor-gray">
+            <strong class="text-info"> {{routeDetails?.to.date | date:'d MMMM - H:mm':'':'pl'}} </strong>
+          </span>
+        </p>
+        <p class="text-truncate top-border" *ngIf="routeDetails.stops.length != 0">
           <mat-icon class="icon-align" class="smallicon ">alarm</mat-icon>
           <span class="fontcolor-gray">
             <strong class="text-info"> {{routeDetails?.to.date | date:'d MMMM - H:mm':'':'pl'}} </strong>
@@ -46,32 +52,38 @@
       </div>
     </mat-grid-tile>
 
-    <mat-grid-tile colspan="3 " rowspan="7 " class="top-border ">
+    <mat-grid-tile colspan="3" rowspan="7" class="top-border ">
 
-      <div class="align-vertically ">
-        <h5 class="fontcolor-gray ">Przystanki </h5>
-        <p class="text-truncate bottom-border ">
-          <mat-icon class="icon-align " class="smallicon ">pin_drop</mat-icon>
-          <span class="fontcolor-gray ">
-            <strong class="text-info "> {{routeDetails?.from.city.name}} , ul. {{routeDetails?.from.city.placeOfMeeting}} </strong>
+      <div class="align-vertically">
+        <h5 class="fontcolor-gray">Przystanki </h5>
+        <p class="text-truncate bottom-border">
+          <mat-icon class="icon-align" class="smallicon ">pin_drop</mat-icon>
+          <span class="fontcolor-gray">
+            <strong class="text-info"> {{routeDetails?.from.city.name}} , ul. {{routeDetails?.from.city.placeOfMeeting}} </strong>
           </span>
         </p>
-        <p class="text-truncate " class="smalltext " *ngFor="let stop of routeDetails?.stops ">
-          <mat-icon class="icon-align " class="smallicon ">pin_drop</mat-icon>
-          <span class="fontcolor-gray ">
+        <p class="text-truncate" class="smalltext" *ngFor="let stop of routeDetails?.stops">
+          <mat-icon class="icon-align" class="smallicon">pin_drop</mat-icon>
+          <span class="fontcolor-gray">
             <strong> {{stop.city.name}} , ul. {{stop.placeOfMeeting}} </strong>
           </span>
         </p>
-        <p class="text-truncate top-border ">
-          <mat-icon class="icon-align " class="smallicon ">pin_drop</mat-icon>
-          <span class="fontcolor-gray ">
-            <strong class="text-info "> {{routeDetails?.to.city.name}} , ul. {{routeDetails?.to.city.placeOfMeeting}} </strong>
+        <p class="text-truncate" *ngIf="routeDetails.stops.length == 0">
+          <mat-icon class="icon-align" class="smallicon">pin_drop</mat-icon>
+          <span class="fontcolor-gray">
+            <strong class="text-info"> {{routeDetails?.to.city.name}} , ul. {{routeDetails?.to.city.placeOfMeeting}} </strong>
+          </span>
+        </p>
+        <p class="text-truncate top-border" *ngIf="routeDetails.stops.length != 0">
+          <mat-icon class="icon-align" class="smallicon">pin_drop</mat-icon>
+          <span class="fontcolor-gray">
+            <strong class="text-info"> {{routeDetails?.to.city.name}} , ul. {{routeDetails?.to.city.placeOfMeeting}} </strong>
           </span>
         </p>
       </div>
     </mat-grid-tile>
 
-    <mat-grid-tile colspan="2 " rowspan="3 " style="text-align: center " class="right-border ">
+    <mat-grid-tile colspan="2" rowspan="3" style="text-align: center" class="right-border">
       <h5>
         {{userData?.firstName}} {{userData?.lastName}}
       </h5>
@@ -79,40 +91,40 @@
 
 
 
-    <mat-grid-tile colspan="2 " rowspan="2 " class="right-border ">
+    <mat-grid-tile colspan="2" rowspan="2" class="right-border">
       <h5>
-        <mat-icon class="icon-align ">stars</mat-icon>
+        <mat-icon class="icon-align">stars</mat-icon>
         <strong>{{userData?.rate || 0}}/5.0</strong>
       </h5>
     </mat-grid-tile>
 
-    <mat-grid-tile colspan="2 " rowspan="2 " class="right-border ">
+    <mat-grid-tile colspan="2" rowspan="2" class="right-border">
       <h6>
-        <mat-icon class="icon-align " class="smallicon ">email</mat-icon> {{userData?.email}}
+        <mat-icon class="icon-align" class="smallicon">email</mat-icon> {{userData?.email}}
       </h6>
     </mat-grid-tile>
 
-    <mat-grid-tile colspan="5 " rowspan="2 " class="top-border ">
+    <mat-grid-tile colspan="5" rowspan="2" class="top-border">
       <h4>Uwagi od kierowcy:</h4>
     </mat-grid-tile>
 
-    <mat-grid-tile colspan="2 " rowspan="2 " class="right-border ">
+    <mat-grid-tile colspan="2" rowspan="2" class="right-border">
       <h6 *ngIf="userData?.phone ">
         <mat-icon class="icon-align " class="smallicon ">phone</mat-icon> {{userData?.phone}}
       </h6>
     </mat-grid-tile>
 
-    <mat-grid-tile colspan="5 " rowspan="4 ">
+    <mat-grid-tile colspan="5" rowspan="4">
     </mat-grid-tile>
 
-    <mat-grid-tile colspan="2 " rowspan="3 " class="right-border ">
-      <button mat-icon-button matTooltipShowDelay="100 " matTooltip="Skontaktuj się" matTooltipPosition="top">
+    <mat-grid-tile colspan="2" rowspan="3" class="right-border">
+      <button mat-icon-button matTooltipShowDelay="100" matTooltip="Skontaktuj się" matTooltipPosition="top">
         <mat-icon>phone_iphone</mat-icon>
       </button>
-      <button mat-icon-button matTooltipShowDelay="100 " matTooltip="Zarezerwuj " matTooltipPosition="top">
+      <button mat-icon-button matTooltipShowDelay="100" matTooltip="Zarezerwuj" matTooltipPosition="top">
         <mat-icon>content_paste</mat-icon>
       </button>
-      <button mat-icon-button matTooltip="Dodaj do obserwowanych " matTooltipPosition="top">
+      <button mat-icon-button matTooltip="Dodaj do obserwowanych" matTooltipPosition="top">
         <mat-icon>favorite</mat-icon>
       </button>
     </mat-grid-tile>
