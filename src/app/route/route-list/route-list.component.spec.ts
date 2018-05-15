@@ -8,10 +8,13 @@ import { RouteService } from '../../_services/route.service';
 import { ActivatedRoute } from '@angular/router';
 import { CityService } from '../../_services/city.service';
 import { CitiesProvider } from '../../_providers/cities-provider';
+import { of } from 'rxjs/observable/of';
 
 const fakeActivatedRoute = {
-  snapshot: { data: {} }
+  snapshot: { data: {} },
+  queryParams: of({})
 }
+
 describe('RouteListComponent', () => {
   let component: RouteListComponent;
   let fixture: ComponentFixture<RouteListComponent>;
