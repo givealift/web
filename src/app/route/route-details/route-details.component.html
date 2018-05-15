@@ -28,7 +28,7 @@
         <p class="text-truncate bottom-border ">
           <mat-icon class="icon-align" class="smallicon ">alarm</mat-icon>
           <span class="fontcolor-gray">
-            <strong class="text-primary "> {{routeDetails?.from.date | date:'d MMMM - H:mm':'':'pl'}} </strong>
+            <strong class="text-info "> {{routeDetails?.from.date | date:'d MMMM - H:mm':'':'pl'}} </strong>
           </span>
         </p>
         <p class="text-truncate" class="smalltext " *ngFor="let stop of routeDetails?.stops ">
@@ -40,7 +40,7 @@
         <p class="text-truncate top-border ">
           <mat-icon class="icon-align" class="smallicon ">alarm</mat-icon>
           <span class="fontcolor-gray">
-            <strong class="text-primary"> {{routeDetails?.to.date | date:'d MMMM - H:mm':'':'pl'}} </strong>
+            <strong class="text-info"> {{routeDetails?.to.date | date:'d MMMM - H:mm':'':'pl'}} </strong>
           </span>
         </p>
       </div>
@@ -53,7 +53,7 @@
         <p class="text-truncate bottom-border ">
           <mat-icon class="icon-align " class="smallicon ">pin_drop</mat-icon>
           <span class="fontcolor-gray ">
-            <strong class="text-primary "> {{routeDetails?.from.city.name}} , ul. {{routeDetails?.from.city.placeOfMeeting}} </strong>
+            <strong class="text-info "> {{routeDetails?.from.city.name}} , ul. {{routeDetails?.from.city.placeOfMeeting}} </strong>
           </span>
         </p>
         <p class="text-truncate " class="smalltext " *ngFor="let stop of routeDetails?.stops ">
@@ -65,7 +65,7 @@
         <p class="text-truncate top-border ">
           <mat-icon class="icon-align " class="smallicon ">pin_drop</mat-icon>
           <span class="fontcolor-gray ">
-            <strong class="text-primary "> {{routeDetails?.to.city.name}} , ul. {{routeDetails?.to.city.placeOfMeeting}} </strong>
+            <strong class="text-info "> {{routeDetails?.to.city.name}} , ul. {{routeDetails?.to.city.placeOfMeeting}} </strong>
           </span>
         </p>
       </div>
@@ -112,7 +112,7 @@
       <button mat-icon-button matTooltipShowDelay="100 " matTooltip="Zarezerwuj " matTooltipPosition="top">
         <mat-icon>content_paste</mat-icon>
       </button>
-      <button mat-icon-button matTooltip="Dodaj do ulubionych " matTooltipPosition="top">
+      <button mat-icon-button matTooltip="Dodaj do obserwowanych " matTooltipPosition="top">
         <mat-icon>favorite</mat-icon>
       </button>
     </mat-grid-tile>

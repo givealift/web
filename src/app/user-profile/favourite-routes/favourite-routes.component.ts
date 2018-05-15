@@ -8,22 +8,24 @@ import { UserService } from '../../_services/user.service';
 })
 export class FavouriteRoutesComponent implements OnInit {
 
+  userId: number;
+
   constructor(
     private userService: UserService
   ) { }
 
   public favouriteRoutes;
-  public isThisFavouriteRoutes_var: boolean = false;
 
   ngOnInit() {
-    this.userService.getUserFavourites(1).subscribe(
+    this.userId = parseInt(localStorage.getItem("id"));
+
+    this.userService.getUserFavourites(this.userId).subscribe(
       routes => {
         console.log('getUserFavourites - worked: ', routes);
         this.favouriteRoutes = routes;
       }
     );
 
-    this.isThisFavouriteRoutes_var = true;
   }
 
 }
