@@ -45,11 +45,11 @@ export class RegisterComponent implements OnInit {
     this.showSpinner = true;
     this.userService.create(this.userModel).subscribe(
       id => {
-
         localStorage.setItem("id", id.toLocaleString());
         this.router.navigate(['/login']);
       },
       error => {
+        console.log(error);
         this.showSpinner = false;
       }
     )
