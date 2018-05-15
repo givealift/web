@@ -83,59 +83,110 @@ export class RouteDetailsComponent implements OnInit {
           // date: any;
           // localizationId: number;
           // placeOfMeeting: string;
-          // this.routeDetails.stops = [
-          //   {
-          //     "buildingNumber": 11,
-          //     "city": {
-          //       "cityId": "20",
-          //       "name": "Częstochowa",
-          //       "country": "powiat Katowice",
-          //       "province": "śląskie",
-          //       "cityInfo": {
-          //         "cityInfoId": 20,
-          //         "population": 304362,
-          //         "citySize": 165
-          //       }
-          //     },
-          //     "date": "2018-05-13T23:42:49+0000",
-          //     "localizationId": 201,
-          //     "placeOfMeeting": "Krzywa 4"
-          //   },
-          //   {
-          //     "buildingNumber": 16,
-          //     "city": {
-          //       "cityId": "21",
-          //       "name": "Piotrków Trybunalski",
-          //       "country": "powiat Warszawa",
-          //       "province": "mazowieckie",
-          //       "cityInfo": {
-          //         "cityInfoId": 2,
-          //         "population": 1724404,
-          //         "citySize": 517
-          //       }
-          //     },
-          //     "date": "2018-05-14T03:50:00+0000",
-          //     "localizationId": 214,
-          //     "placeOfMeeting": "Skrzywiona 4"
-          //   },
-          //   {
-          //     "buildingNumber": 16,
-          //     "city": {
-          //       "cityId": "22",
-          //       "name": "Łódź",
-          //       "country": "powiat Warszawa",
-          //       "province": "mazowieckie",
-          //       "cityInfo": {
-          //         "cityInfoId": 2,
-          //         "population": 1724404,
-          //         "citySize": 517
-          //       }
-          //     },
-          //     "date": "2018-05-14T03:50:00+0000",
-          //     "localizationId": 214,
-          //     "placeOfMeeting": "Płynna 14"
-          //   }
-          // ];
+          this.routeDetails.stops = [
+            {
+              "buildingNumber": 11,
+              "city": {
+                "cityId": "20",
+                "name": "Częstochowa",
+                "country": "powiat Katowice",
+                "province": "śląskie",
+                "cityInfo": {
+                  "cityInfoId": 20,
+                  "population": 304362,
+                  "citySize": 165
+                }
+              },
+              "date": "2018-05-13T23:42:49+0000",
+              "localizationId": 201,
+              "placeOfMeeting": "Krzywa 4"
+            },
+            {
+              "buildingNumber": 16,
+              "city": {
+                "cityId": "23",
+                "name": "Radomkso",
+                "country": "powiat Warszawa",
+                "province": "mazowieckie",
+                "cityInfo": {
+                  "cityInfoId": 2,
+                  "population": 1724404,
+                  "citySize": 517
+                }
+              },
+              "date": "2018-05-14T03:50:00+0000",
+              "localizationId": 217,
+              "placeOfMeeting": "Wyszyńskiego 7"
+            },
+            {
+              "buildingNumber": 16,
+              "city": {
+                "cityId": "23",
+                "name": "Kamieńsk",
+                "country": "powiat Warszawa",
+                "province": "mazowieckie",
+                "cityInfo": {
+                  "cityInfoId": 2,
+                  "population": 1724404,
+                  "citySize": 517
+                }
+              },
+              "date": "2018-05-14T03:50:00+0000",
+              "localizationId": 217,
+              "placeOfMeeting": "Szkolna 17"
+            },
+            {
+              "buildingNumber": 16,
+              "city": {
+                "cityId": "24",
+                "name": "Pabianice",
+                "country": "powiat Warszawa",
+                "province": "mazowieckie",
+                "cityInfo": {
+                  "cityInfoId": 2,
+                  "population": 1724404,
+                  "citySize": 517
+                }
+              },
+              "date": "2018-05-14T03:50:00+0000",
+              "localizationId": 218,
+              "placeOfMeeting": "Orla 19"
+            },
+            {
+              "buildingNumber": 16,
+              "city": {
+                "cityId": "21",
+                "name": "Piotrków Trybunalski",
+                "country": "powiat Warszawa",
+                "province": "mazowieckie",
+                "cityInfo": {
+                  "cityInfoId": 2,
+                  "population": 1724404,
+                  "citySize": 517
+                }
+              },
+              "date": "2018-05-14T03:50:00+0000",
+              "localizationId": 219,
+              "placeOfMeeting": "Skrzywiona 4"
+            },
+            {
+              "buildingNumber": 16,
+              "city": {
+                "cityId": "22",
+                "name": "Łódź",
+                "country": "powiat Warszawa",
+                "province": "mazowieckie",
+                "cityInfo": {
+                  "cityInfoId": 2,
+                  "population": 1724404,
+                  "citySize": 518
+                }
+              },
+              "date": "2018-05-14T03:50:00+0000",
+              "localizationId": 221,
+              "placeOfMeeting": "Płynna 14"
+            },
+          ];
 
         if (this.routeDetails.stops === undefined) {
           console.log('stops===undefined: ' + this.routeDetails.stops );
