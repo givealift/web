@@ -30,6 +30,8 @@ import { UserInfoComponent } from './user-profile/user-info/user-info.component'
 import { UserRouteComponent } from './user-profile/user-route/user-route.component';
 import { UserEditFormComponent } from './user-profile/user-edit-form/user-edit-form.component';
 import { DataProviderService } from './_services/data-provider.service';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { SpinnerProvider } from './_providers/spinner-provider';
 
 registerLocaleData(localePl);
 
@@ -49,7 +51,8 @@ registerLocaleData(localePl);
     UserProfileComponent,
     UserRouteComponent,
     UserInfoComponent,
-    UserEditFormComponent
+    UserEditFormComponent,
+    SpinnerComponent
   ],
   imports: [
     FormsModule,
@@ -69,9 +72,11 @@ registerLocaleData(localePl);
     RouteService,
     CitiesProvider,
     DataProviderService,
+    SpinnerProvider,
     { provide: APP_INITIALIZER, useFactory: citiesProviderFactory, deps: [CitiesProvider], multi: true },
     { provide: MAT_DATE_LOCALE, useValue: 'pl' }
   ],
+  entryComponents: [SpinnerComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {
