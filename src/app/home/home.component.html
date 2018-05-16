@@ -15,6 +15,6 @@
   <mat-spinner class="spinner" [diameter]="20" [style.display]="showSpinner ? 'inline' : 'none'"></mat-spinner>
 </div>
 
-<mat-card *ngIf="foundRoutes">
-  <pre>{{foundRoutes | json}}</pre>
+<mat-card *ngIf="foundNothing">
+  <p>Niestety nic nie znalazłem.</p>
 </mat-card>
