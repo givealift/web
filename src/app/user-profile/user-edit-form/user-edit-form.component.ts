@@ -31,15 +31,13 @@ export class UserEditFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    let possibleUser = this.userService.getById(this.userId);
+    this.userService.getById(this.userId).subscribe(user => {
+      if (user)
+        this.userModel = user;
+      else
+        this.router.navigate[''];
+    });
 
-    if (possibleUser != null) {
-      this.userModel = possibleUser;
-      this.userCopyModel = Object.assign({}, this.userModel);
-    }
-    else {
-      this.router.navigate[''];
-    }
 
     this.userService.getPhoto(parseInt(localStorage.getItem("id")))
       .subscribe(photo => {

@@ -5,28 +5,21 @@ import { UserService } from "./user.service";
 
 @Injectable()
 export class DataProviderService {
-    
-    private dataMap: Map<String, any> = new Map();
 
-    storeData(key: String, data: any) {
+    private dataMap: Map<string, any> = new Map();
+
+    storeData(key: string, data: any) {
         this.dataMap.set(key, data);
     }
 
-    getData(key: String) {
+    getData(key: string) {
         if (this.dataMap.has(key))
             return this.dataMap.get(key);
+
         else return null;
     }
 
-    storeUserData(id: number, userData: User) {
-        this.dataMap.set('user/' + id, userData);
+    taggedResults(fromCityId: number | string, toCityId: number | string, date: string) {
+        return `${fromCityId}:${toCityId}:${date}`
     }
-
-    getUserData(id: number) {
-        if (this.dataMap.has('user/' + id))
-            return this.dataMap.get('user/' + id);
-        else return null;
-    }
-
-
 }

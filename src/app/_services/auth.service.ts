@@ -40,7 +40,7 @@ export class AuthService {
     return {
       token: localStorage.getItem("token"),
       id: localStorage.getItem("id")
-    }
+    };
   }
 
   public removeCredentials() {

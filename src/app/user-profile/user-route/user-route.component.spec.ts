@@ -11,7 +11,12 @@ import { CityService } from '../../_services/city.service';
 import { CitiesProvider } from '../../_providers/cities-provider';
 import { AuthService } from '../../_services/auth.service';
 import { UserService } from '../../_services/user.service';
+import { PaginationComponent } from '../../shered/pagination/pagination.component';
 import { DataProviderService } from '../../_services/data-provider.service';
+import { SpinnerProvider } from '../../_providers/spinner-provider';
+import { MatDialogModule } from '@angular/material';
+import { SpinnerComponent } from '../../spinner/spinner.component';
+import { NgModule } from '@angular/core';
 
 
 describe('UserRouteComponent', () => {
@@ -23,19 +28,22 @@ describe('UserRouteComponent', () => {
             declarations: [
                 UserRouteComponent,
                 RouteListComponent,
-                RouteComponent
+                RouteComponent,
+                PaginationComponent
             ],
             imports: [
                 HttpClientModule,
                 RouterTestingModule,
-                MaterialModule
+                MaterialModule,
+                DialogTestModule,
             ],
             providers: [
                 RouteService,
                 CityService,
                 CitiesProvider,
                 UserService,
-                DataProviderService
+                DataProviderService,
+                SpinnerProvider
             ]
         })
             .compileComponents();
@@ -51,3 +59,15 @@ describe('UserRouteComponent', () => {
         expect(component).toBeTruthy();
     });
 });
+
+@NgModule({
+    declarations: [SpinnerComponent],
+    imports: [
+        MatDialogModule,
+        MaterialModule
+    ],
+    entryComponents: [
+        SpinnerComponent
+    ],
+})
+class DialogTestModule { }

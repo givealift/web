@@ -9,6 +9,8 @@ mat-card {
     border-radius: 25px;
     margin-top: 20px;
     opacity: 1;
+    background: white;
+    color: black;
 }
 
 .align-left {

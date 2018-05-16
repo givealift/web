@@ -32,8 +32,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 //     return this.createRoute(request);
 
                 // search route
-                case (request.url.match(/route\/search/) && request.method === 'GET'):
-                    return this.searchRoute(request);
+                // case (request.url.match(/route\/search/) && request.method === 'GET'):
+                //     return this.searchRoute(request);
+
+                case (request.url.match(/api\/user\/favourites\/\d+/) && request.method === 'GET'):
+                    return this.getUserFavourites(request);
+
+                // case (request.url.match(/route\/\d+/) && request.method === 'GET'):
+                //     return this.getById(request);
 
                 // // create user
                 // case (request.url.endsWith('/api/user/') && request.method === 'POST'):
@@ -61,23 +67,56 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             .dematerialize();
     }
 
-    // private createUser(request: HttpRequest<any>) {
-
-    //     let newUser = request.body;
-
-    //     // check if username already taken
-    //     let duplicateUser = mockUsers.filter(user => user.login === newUser.login).length;
-    //     if (duplicateUser) {
-    //         return Observable.throw(`login "${newUser.login}" is already taken`);
+    // private getById(request: HttpRequest<any>) {
+    //     request.toString();
+    //     let RouteId: Array<number> = [-404];
+    //     let splittedUrl: string[] = request.url.split("\/");
+    //     for (let s of splittedUrl) {
+    //         console.log('fakebackend.s of splittedUrl=', s);
     //     }
-
-    //     // save new user
-    //     newUser.id = mockUsers.length + 1;
-    //     mockUsers.push(newUser);
-    //     localStorage.setItem('mock-users', JSON.stringify(mockUsers));
-
-    //     return Observable.of(new HttpResponse({ status: 200 }));
+    //     if (splittedUrl.length === 9) {
+    //         let RouteIdNumber: number = parseInt(splittedUrl[8]);
+    //         RouteId = [RouteIdNumber];
+    //     } else {
+    //         RouteId = [-404];
+    //     }
+    //     console.log('fakebackend.getById(', RouteId, ')');
+    //     let routeDetails = this.sampleroutes.filter(
+    //         route => {
+    //             return RouteId.indexOf(route.routeId) !== -1;
+    //         }
+    //     );
+    //     console.log('fakebackend.getById: routeDetals = ', routeDetails);
+    //     return Observable.of(new HttpResponse({ status: 200, body: routeDetails }));
     // }
+
+    private getUserFavourites(request) {
+        let userFavouriteIds = [203, 212];
+        let favRoutes = this.sampleroutes.filter(
+            route => {
+                return userFavouriteIds.indexOf(route.routeId) !== -1;
+            }
+        );
+        return Observable.of(new HttpResponse({ status: 200, body: favRoutes }));
+    }
+
+    private createUser(request: HttpRequest<any>) {
+
+        //     let newUser = request.body;
+
+        //     // check if username already taken
+        //     let duplicateUser = mockUsers.filter(user => user.login === newUser.login).length;
+        //     if (duplicateUser) {
+        //         return Observable.throw(`login "${newUser.login}" is already taken`);
+        //     }
+
+        //     // save new user
+        //     newUser.id = mockUsers.length + 1;
+        //     mockUsers.push(newUser);
+        //     localStorage.setItem('mock-users', JSON.stringify(mockUsers));
+
+        //     return Observable.of(new HttpResponse({ status: 200 }));
+    }
 
     private updateUser(request: HttpRequest<any>) {
 
@@ -151,12 +190,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         newroute.routeId = mockRoutes.length + 1;
         let newDriver: User = JSON.parse(localStorage.getItem('currentUser'));
         newroute.ownerId = newDriver.id;
-        newroute.from.city.cityId = "19";
-        newroute.to.city.cityId = "1";
-
-        mockRoutes.push(newroute);
-        localStorage.setItem('mock-routes', JSON.stringify(mockRoutes));
+        newroute.from.city.cityId = 19;
+        newroute.to.city.cityId = 1;
     }
+
+    //     mockRoutes.push(newroute);
+    //     localStorage.setItem('mock-routes', JSON.stringify(mockRoutes));
+    // }
 
     private getRoutesList(request: HttpRequest<any>) {
         return Observable.of(new HttpResponse({
@@ -169,7 +209,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let to = request.params.get("to");
         let date = request.params.get("date");
 
-        let matching = this.sampleroutes.filter(obj => obj.from.city.cityId == +from && obj.to.city.cityId == +to && obj.departureTime.includes(date));
+        let matching = this.sampleroutes.filter(obj => obj.from.city.cityId === +from && obj.to.city.cityId == +to && obj.date.includes(date));
 
         return Observable.of(new HttpResponse({ status: 200, body: matching }));
     }
@@ -210,10 +250,114 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 "street": "string",
                 "buildingNumber": 0
             },
-            "departureTime": moment().format("YYYY-MM-DD hh:mm"),
+            "date": moment().format("YYYY-MM-DD hh:mm"),
             "numberOfSeats": 4,
             "numberOfOccupiedSeats": 1,
-            "price": 10.0
+            "price": 10.0,
+            "stops": [
+                {
+                    "buildingNumber": 11,
+                    "city": {
+                        "cityId": "20",
+                        "name": "Częstochowa",
+                        "country": "powiat Katowice",
+                        "province": "śląskie",
+                        "cityInfo": {
+                            "cityInfoId": 20,
+                            "population": 304362,
+                            "citySize": 165
+                        }
+                    },
+                    "date": "2018-05-13T21:35:49+0000",
+                    "localizationId": 201,
+                    "placeOfMeeting": "Krzywa 4"
+                },
+                {
+                    "buildingNumber": 16,
+                    "city": {
+                        "cityId": "23",
+                        "name": "Radomkso",
+                        "country": "powiat Warszawa",
+                        "province": "mazowieckie",
+                        "cityInfo": {
+                            "cityInfoId": 2,
+                            "population": 1724404,
+                            "citySize": 517
+                        }
+                    },
+                    "date": "2018-05-13T21:55:00+0000",
+                    "localizationId": 217,
+                    "placeOfMeeting": "Wyszyńskiego 7"
+                },
+                {
+                    "buildingNumber": 16,
+                    "city": {
+                        "cityId": "23",
+                        "name": "Kamieńsk",
+                        "country": "powiat Warszawa",
+                        "province": "mazowieckie",
+                        "cityInfo": {
+                            "cityInfoId": 2,
+                            "population": 1724404,
+                            "citySize": 517
+                        }
+                    },
+                    "date": "2018-05-13T22:15:00+0000",
+                    "localizationId": 217,
+                    "placeOfMeeting": "Szkolna 17"
+                },
+                {
+                    "buildingNumber": 16,
+                    "city": {
+                        "cityId": "24",
+                        "name": "Pabianice",
+                        "country": "powiat Warszawa",
+                        "province": "mazowieckie",
+                        "cityInfo": {
+                            "cityInfoId": 2,
+                            "population": 1724404,
+                            "citySize": 517
+                        }
+                    },
+                    "date": "2018-05-13T22:35:00+0000",
+                    "localizationId": 218,
+                    "placeOfMeeting": "Orla 19"
+                },
+                {
+                    "buildingNumber": 16,
+                    "city": {
+                        "cityId": "21",
+                        "name": "Piotrków Trybunalski",
+                        "country": "powiat Warszawa",
+                        "province": "mazowieckie",
+                        "cityInfo": {
+                            "cityInfoId": 2,
+                            "population": 1724404,
+                            "citySize": 517
+                        }
+                    },
+                    "date": "2018-05-13T22:55:00+0000",
+                    "localizationId": 219,
+                    "placeOfMeeting": "Skrzywiona 4"
+                },
+                {
+                    "buildingNumber": 16,
+                    "city": {
+                        "cityId": "22",
+                        "name": "Łódź",
+                        "country": "powiat Warszawa",
+                        "province": "mazowieckie",
+                        "cityInfo": {
+                            "cityInfoId": 2,
+                            "population": 1724404,
+                            "citySize": 518
+                        }
+                    },
+                    "date": "2018-05-13T23:10:00+0000",
+                    "localizationId": 221,
+                    "placeOfMeeting": "Płynna 14"
+                },
+            ]
         },
         {
             "routeId": 212,
@@ -250,10 +394,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 "street": "string",
                 "buildingNumber": 0
             },
-            "departureTime": moment().format("YYYY-MM-DD hh:mm"),
+            "date": moment().format("YYYY-MM-DD hh:mm"),
             "numberOfSeats": 4,
             "numberOfOccupiedSeats": 1,
-            "price": 10.0
+            "price": 10.0,
+            "stops": []
         },
         {
             "routeId": 215,
@@ -290,10 +435,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 "street": "string",
                 "buildingNumber": 0
             },
-            "departureTime": moment().add(1, "hour").format("YYYY-MM-DD hh:mm"),
+            "date": moment().add(1, "hour").format("YYYY-MM-DD hh:mm"),
             "numberOfSeats": 4,
             "numberOfOccupiedSeats": 1,
-            "price": 10.0
+            "price": 10.0,
+            "stops": null
         },
         {
             "routeId": 218,
@@ -330,92 +476,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 "street": "string",
                 "buildingNumber": 4
             },
-            "departureTime": moment().add(1, "hour").format("YYYY-MM-DD hh:mm"),
+            "date": moment().add(1, "hour").format("YYYY-MM-DD hh:mm"),
             "numberOfSeats": 4,
             "numberOfOccupiedSeats": 1,
-            "price": 10.0
-        },
-        {
-            "routeId": 203,
-            "ownerId": 601,
-            "from": {
-                "localizationId": 201,
-                "city": {
-                    "cityId": 19,
-                    "name": "Katowice",
-                    "country": "powiat Katowice",
-                    "province": "śląskie",
-                    "cityInfo": {
-                        "cityInfoId": 20,
-                        "population": 304362,
-                        "citySize": 165
-                    }
-                },
-                "street": "krzywa",
-                "buildingNumber": 4
-            },
-            "to": {
-                "localizationId": 202,
-                "city": {
-                    "cityId": 1,
-                    "name": "Warszawa",
-                    "country": "powiat Warszawa",
-                    "province": "mazowieckie",
-                    "cityInfo": {
-                        "cityInfoId": 2,
-                        "population": 1724404,
-                        "citySize": 517
-                    }
-                },
-                "street": "string",
-                "buildingNumber": 0
-            },
-            "departureTime": moment().format("YYYY-MM-DD hh:mm"),
-            "numberOfSeats": 4,
-            "numberOfOccupiedSeats": 1,
-            "price": 10.0
-        },
-        {
-            "routeId": 203,
-            "ownerId": 601,
-            "from": {
-                "localizationId": 201,
-                "city": {
-                    "cityId": 19,
-                    "name": "Katowice",
-                    "country": "powiat Katowice",
-                    "province": "śląskie",
-                    "cityInfo": {
-                        "cityInfoId": 20,
-                        "population": 304362,
-                        "citySize": 165
-                    }
-                },
-                "street": "krzywa",
-                "buildingNumber": 4
-            },
-            "to": {
-                "localizationId": 202,
-                "city": {
-                    "cityId": 1,
-                    "name": "Warszawa",
-                    "country": "powiat Warszawa",
-                    "province": "mazowieckie",
-                    "cityInfo": {
-                        "cityInfoId": 2,
-                        "population": 1724404,
-                        "citySize": 517
-                    }
-                },
-                "street": "string",
-                "buildingNumber": 0
-            },
-            "departureTime": moment().format("YYYY-MM-DD hh:mm"),
-            "numberOfSeats": 4,
-            "numberOfOccupiedSeats": 1,
-            "price": 10.0
-        },
-    ]
+            "price": 10.0//, "stops": []
+        }
+    ];
 }
 
 export const FakeBackendProvider = {

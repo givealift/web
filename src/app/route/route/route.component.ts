@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Route, User } from '../../_models';
-import { UserService } from '../../_services/user.service';
-import { Router } from '@angular/router';
+import { Router } from "@angular/router";
+import { UserService } from "../../_services/user.service";
 
 @Component({
   selector: 'app-route',
@@ -20,14 +20,22 @@ export class RouteComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userId = this.routeData.ownerId;
-    let possibleUser = this.userService.getById(this.userId);
-    if (possibleUser != null)
-      this.userData = possibleUser;
+    if (this.routeData.ownerId) {
+      this.userId = this.routeData.ownerId;
+      this.userService.getById(this.userId).subscribe(
+        data => {
+          this.userData = data;
+        });
+    } else {
+      this.userData = this.routeData.galUserPublicResponse;
+    }
+  }
+
+  redirectToRouteDetails() {
+    this.router.navigate(["/route/" + this.routeData.routeId]);
   }
 
   goToUserPage() {
     this.router.navigate(['user/' + this.userId]);
   }
-
 }
