@@ -1,8 +1,9 @@
-import { EventEmitter, Injectable, Output } from "@angular/core";
-import { HttpClient } from '@angular/common/http';
-import { environment } from "../../environments/environment";
-import { Authentication } from "../_models/authentication";
-import { UserService } from "./user.service";
+import {EventEmitter, Injectable, Output} from "@angular/core";
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {environment} from "../../environments/environment";
+import {Authentication} from "../_models/authentication";
+import {UserService} from "./user.service";
+import {Route} from "../_models";
 
 
 @Injectable()
@@ -47,4 +48,16 @@ export class AuthService {
     localStorage.removeItem("token");
     localStorage.removeItem("id");
   }
+
+  resetPassword(email: string) {
+    return this.http.post(this.authUrl + "/user/send-reset-email/" + email, {});
+  }
+
+  changePassword(id: string, token: string, password: string) {
+    let params = new HttpParams().set('id', id.toLocaleString()).set('token', token.toLocaleString());
+    // params.append('id', id.toLocaleString());
+    //params.append('token', token.toLocaleString());
+    return this.http.put<Route[]>(this.authUrl + "/user/edit/password", password, {params: params});
+  }
+
 }

@@ -1,9 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { AuthService } from '../_services/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { User } from "../_models";
-import { UserService } from '../_services/user.service';
+import {Component, ViewChild} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {AuthService} from '../_services/auth.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {User} from "../_models";
+import {UserService} from '../_services/user.service';
 
 
 @Component({
@@ -53,4 +53,12 @@ export class LoginComponent {
   private routeToPath(routePath: string) {
     this.router.navigate([routePath]);
   }
+
+  passReset() {
+    this.authService.resetPassword(this.userModel.email).subscribe();
+
+
+  }
+
+
 }
