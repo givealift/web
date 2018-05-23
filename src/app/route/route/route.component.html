@@ -30,8 +30,9 @@
       </div>
     </mat-grid-tile>
     <mat-grid-tile colspan="3" rowspan="3">
-      <a (click)="goToUserPage()">
-        <img class="media-object profile-hover" src="../../../assets/logo.png" height="100" width="100">
+      <a (click)="goToUserPage()" class="profile-hover">
+        <img class="img-circle" *ngIf="sanitizedPhoto" [src]="sanitizedPhoto" width="90px" height="90px" />
+        <img class="img-circle" *ngIf="!sanitizedPhoto" src="../../../assets/logo-sm.png" width="100px" height="100px" />
       </a>
     </mat-grid-tile>
     <mat-grid-tile colspan="3" rowspan="1">

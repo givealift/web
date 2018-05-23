@@ -3,8 +3,8 @@
     <mat-grid-list cols="3" rowHeight="35px" gutterSize="0px">
 
       <mat-grid-tile rowspan="4">
-        <img *ngIf="sanitizedPhoto" [src]="sanitizedPhoto" alt="" width="124px" height="124px"/>
-        <img *ngIf="!sanitizedPhoto" src="../../../assets/logo-sm.png" width="100px" height="100px"/>
+        <img class="img-circle" *ngIf="sanitizedPhoto" [src]="sanitizedPhoto" alt="" width="100px" height="100px"/>
+        <img class="img-circle" *ngIf="!sanitizedPhoto" src="../../../assets/logo-sm.png" width="100px" height="100px"/>
       </mat-grid-tile>
 
       <mat-grid-tile colspan="1" rowspan="2" class="right-border">

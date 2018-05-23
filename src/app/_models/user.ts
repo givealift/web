@@ -5,10 +5,10 @@ export class PublicUser {
     phone: string;
     gender: string;
     rate: number;
-    birthYear: Date
+    birthYear: Date;
+    userId: number;
 }
 
 export class User extends PublicUser {
-    id?: number;
     password?: string;
 }
