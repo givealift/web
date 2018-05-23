@@ -31,8 +31,8 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="3" rowspan="3">
       <a (click)="goToUserPage()" class="profile-hover">
-        <img *ngIf="sanitizedPhoto" [src]="sanitizedPhoto" width="124px" height="124px" />
-        <img *ngIf="!sanitizedPhoto" src="../../../assets/logo-sm.png" width="100px" height="100px" />
+        <img class="img-circle" *ngIf="sanitizedPhoto" [src]="sanitizedPhoto" width="90px" height="90px" />
+        <img class="img-circle" *ngIf="!sanitizedPhoto" src="../../../assets/logo-sm.png" width="100px" height="100px" />
       </a>
     </mat-grid-tile>
     <mat-grid-tile colspan="3" rowspan="1">

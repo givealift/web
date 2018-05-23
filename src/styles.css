@@ -35,3 +35,7 @@ a.mat-menu-item > mat-icon {
 .spinner mat-dialog-container {
     text-align: center;
 }
+
+.img-circle {
+    border-radius: 50%;
+}
