@@ -27,17 +27,19 @@ export class RouteComponent implements OnInit {
       this.userId = this.routeData.ownerId;
       this.userService.getById(this.userId).subscribe(
         data => {
+          console.log(data);
           this.userData = data;
+          this.getPhoto();
         });
-    } else {
+    } else if (this.routeData.galUserPublicResponse) {
       this.userData = this.routeData.galUserPublicResponse;
+      this.userId = this.userData.userId;
+      console.log(this.userData);
+      this.getPhoto();
     }
-
-    this.userService.getPhoto(this.userId)
-      .subscribe(photo => {
-        let urlCreator = window.URL;
-        this.sanitizedPhoto = this.sanitizer.bypassSecurityTrustUrl(urlCreator.createObjectURL(photo));
-      })
+    else {
+      this.router.navigate(['']);
+    }
   }
 
   redirectToRouteDetails() {
@@ -46,5 +48,13 @@ export class RouteComponent implements OnInit {
 
   goToUserPage() {
     this.router.navigate(['user/' + this.userId]);
+  }
+
+  getPhoto() {
+    this.userService.getPhoto(this.userId)
+      .subscribe(photo => {
+        let urlCreator = window.URL;
+        this.sanitizedPhoto = this.sanitizer.bypassSecurityTrustUrl(urlCreator.createObjectURL(photo));
+      })
   }
 }

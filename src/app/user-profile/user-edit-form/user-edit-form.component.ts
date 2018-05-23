@@ -13,7 +13,6 @@ export class UserEditFormComponent implements OnInit {
 
   @ViewChild('fileInput') fileInput;
 
-  photo;
   sanitizedPhoto;
 
   userModel: User = new User();
@@ -32,19 +31,18 @@ export class UserEditFormComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getById(this.userId).subscribe(user => {
-      if (user)
+      if (user) {
         this.userModel = user;
+        console.log(user);
+        this.userService.getPhoto(this.userId)
+          .subscribe(photo => {
+            let urlCreator = window.URL;
+            this.sanitizedPhoto = this.sanitizer.bypassSecurityTrustUrl(urlCreator.createObjectURL(photo));
+          })
+      }
       else
         this.router.navigate[''];
     });
-
-    this.userService.getPhoto(this.userId)
-      .subscribe(photo => {
-        this.photo = photo;
-        let urlCreator = window.URL;
-        this.sanitizedPhoto = this.sanitizer.bypassSecurityTrustUrl(urlCreator.createObjectURL(this.photo));
-      })
-
   }
 
   updateUser() {

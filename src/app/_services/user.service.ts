@@ -73,9 +73,7 @@ export class UserService {
         map(res => res.status === 204 ? null : res.body),
         tap(data => {
           if (data) {
-            let urlCreator = window.URL;
-            data = this.sanitizer.bypassSecurityTrustUrl(urlCreator.createObjectURL(data));
-            this.dataProviderService.storeData(`user/${id}`, data);
+            this.dataProviderService.storeData(`photo/${id}`, data);
           }
         })
       )
