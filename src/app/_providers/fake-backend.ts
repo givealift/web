@@ -124,7 +124,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let urlParts = request.url.split('/');
         let id = +urlParts[urlParts.length - 1];
 
-        let index = mockUsers.findIndex(user => user.id === id);
+        let index = mockUsers.findIndex(user => user.userId === id);
 
         if (index > -1) {
             let oldUserData = mockUsers[index];
@@ -143,7 +143,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             let urlParts = request.url.split('/');
             let id = +urlParts[urlParts.length - 1];
 
-            let index = mockUsers.findIndex(user => user.id === id);
+            let index = mockUsers.findIndex(user => user.userId === id);
 
             mockUsers.splice(index, 1);
             localStorage.setItem('mock-users', JSON.stringify(mockUsers));
@@ -189,7 +189,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let newroute: Route = new Route();
         newroute.routeId = mockRoutes.length + 1;
         let newDriver: User = JSON.parse(localStorage.getItem('currentUser'));
-        newroute.ownerId = newDriver.id;
+        newroute.ownerId = newDriver.userId;
         newroute.from.city.cityId = 19;
         newroute.to.city.cityId = 1;
     }

@@ -38,8 +38,7 @@ export class UserEditFormComponent implements OnInit {
         this.router.navigate[''];
     });
 
-
-    this.userService.getPhoto(parseInt(localStorage.getItem("id")))
+    this.userService.getPhoto(this.userId)
       .subscribe(photo => {
         this.photo = photo;
         let urlCreator = window.URL;

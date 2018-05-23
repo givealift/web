@@ -5,6 +5,7 @@ import { ActivatedRoute } from "@angular/router";
 import { User } from "../../_models";
 import { Route } from "../../_models";
 import { Router } from "@angular/router";
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-route-details',
@@ -12,6 +13,8 @@ import { Router } from "@angular/router";
   styleUrls: ['./route-details.component.css']
 })
 export class RouteDetailsComponent implements OnInit {
+
+  sanitizedPhoto;
 
   routeDetails: Route = new Route();
 
@@ -25,7 +28,8 @@ export class RouteDetailsComponent implements OnInit {
     private routeService: RouteService,
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private sanitizer: DomSanitizer
   ) {
     this.activatedRoute.params.subscribe(res => {
       this.routeId = res.routeId;
@@ -33,12 +37,15 @@ export class RouteDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-
-
     this.routeService.getById(this.routeId).subscribe(
       route => {
         this.routeDetails = route;
         this.userData = route.galUserPublicResponse;
+        this.userService.getPhoto(this.userData.userId)
+          .subscribe(photo => {
+            let urlCreator = window.URL;
+            this.sanitizedPhoto = this.sanitizer.bypassSecurityTrustUrl(urlCreator.createObjectURL(photo));
+          })
         this.isDataReady = true;
       },
       error => {
