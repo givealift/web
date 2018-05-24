@@ -1,0 +1,15 @@
+mat-card {
+    width: 250px;
+    border-bottom: 1px solid black;
+    margin-top: 0px;
+    margin-bottom: 3px;
+    height: 80px;
+    padding-top: 1px;
+    padding-bottom: 0px;
+}
+
+mat-card:hover{
+    box-shadow: 0 3px 4px -1px black;
+    transition: 0.25s all;
+    cursor: pointer;
+}

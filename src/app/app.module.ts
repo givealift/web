@@ -37,6 +37,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { SpinnerProvider } from './_providers/spinner-provider';
 import { NotificationsModule } from 'angular-notice';
 import { NativeNotificationService } from 'angular-notice/lib/native-notification.service';
+import { NotificationComponent } from './notification/notification.component';
 
 registerLocaleData(localePl);
 
@@ -59,7 +60,8 @@ registerLocaleData(localePl);
     PaginationComponent,
     FavouriteRoutesComponent,
     RouteDetailsComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    NotificationComponent
   ],
   imports: [
     FormsModule,

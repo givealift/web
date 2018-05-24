@@ -2,6 +2,14 @@
     flex: 1 1 auto;
 }
 
+.nav-secondary-spacer {
+    width: 20px;
+}
+
+.white-icon {
+  color: white;
+}
+
 .spinner {
   margin-top: 30px;
   margin-bottom: 30px;

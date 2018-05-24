@@ -13,6 +13,8 @@ export class NavComponent implements OnInit {
   userId: number;
   loggedIn: boolean;
 
+  notifications = new Array<any>();
+
   constructor(private authService: AuthService, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
@@ -20,6 +22,11 @@ export class NavComponent implements OnInit {
     this.authService.loggedInStatus.subscribe(loggedIn => {
       this.loggedIn = loggedIn
     });
+
+    this.notifications.push('a');
+    this.notifications.push('a');
+    this.notifications.push('a');
+    this.notifications.push('a');
   }
 
   logout(): void {
