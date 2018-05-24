@@ -35,6 +35,8 @@ import { RouteDetailsComponent } from './route/route-details/route-details.compo
 import { DataProviderService } from './_services/data-provider.service';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { SpinnerProvider } from './_providers/spinner-provider';
+import { NotificationsModule } from 'angular-notice';
+import { NativeNotificationService } from 'angular-notice/lib/native-notification.service';
 
 registerLocaleData(localePl);
 
@@ -66,6 +68,7 @@ registerLocaleData(localePl);
     AppRoutingModule,
     HttpClientModule,
     MaterialModule,
+    NotificationsModule
   ],
   providers: [
     AuthService,
@@ -78,6 +81,7 @@ registerLocaleData(localePl);
     CitiesProvider,
     DataProviderService,
     SpinnerProvider,
+    NativeNotificationService,
     { provide: APP_INITIALIZER, useFactory: citiesProviderFactory, deps: [CitiesProvider], multi: true },
     { provide: MAT_DATE_LOCALE, useValue: 'pl' },
   ],

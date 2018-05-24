@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { City, Route } from '../_models';
 import { Router } from '@angular/router';
 import { DataProviderService } from '../_services/data-provider.service';
-
+import { NativeNotificationService } from 'angular-notice/lib/native-notification.service';
 
 @Component({
   selector: 'app-home',
@@ -36,10 +36,21 @@ export class HomeComponent implements OnInit {
     private cityService: CityService,
     private routeService: RouteService,
     private router: Router,
-    private dataTransferService: DataProviderService) { }
+    private dataTransferService: DataProviderService,
+    private notificationService: NativeNotificationService) { }
 
   ngOnInit() {
     this.authService.loggedInStatus.subscribe(loggedIn => this.loggedIn = loggedIn);
+
+    const options = {
+      title: 'test',
+      body: 'Zalogowałeś się!',
+      icon: '../../assets/logo.png',
+      tag: 'notice',
+      closeDelay: 2000
+    };
+
+    this.notificationService.notify(options);
   }
 
   onEnter() {
