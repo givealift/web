@@ -7,6 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { UserService } from '../_services/user.service';
 import { MaterialModule } from '../_modules/material.module';
 import { DataProviderService } from '../_services/data-provider.service';
+import { NotificationComponent } from '../notification/notification.component';
 
 describe('NavComponent', () => {
   let component: NavComponent;
@@ -15,15 +16,16 @@ describe('NavComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        NavComponent
+        NavComponent,
+        NotificationComponent
       ],
       imports: [
-        HttpClientModule, 
+        HttpClientModule,
         RouterTestingModule,
         MaterialModule
       ],
       providers: [
-        AuthService, 
+        AuthService,
         UserService,
         DataProviderService
       ]

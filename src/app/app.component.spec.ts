@@ -16,6 +16,7 @@ import { CitySearchComponent } from './city-search/city-search.component';
 import { UserService } from './_services/user.service';
 import { MaterialModule } from './_modules/material.module';
 import { DataProviderService } from './_services/data-provider.service';
+import { NotificationComponent } from './notification/notification.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -33,7 +34,8 @@ describe('AppComponent', () => {
         LoginComponent,
         RegisterComponent,
         NewRouteComponent,
-        CitySearchComponent
+        CitySearchComponent,
+        NotificationComponent
       ],
       imports: [
         RouterModule.forRoot(appRoutes),
