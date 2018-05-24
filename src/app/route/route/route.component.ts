@@ -56,5 +56,5 @@ export class RouteComponent implements OnInit {
         let urlCreator = window.URL;
         this.sanitizedPhoto = this.sanitizer.bypassSecurityTrustUrl(urlCreator.createObjectURL(photo));
       })
-  }
+  }  
 }
