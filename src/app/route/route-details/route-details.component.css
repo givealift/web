@@ -1,6 +1,5 @@
 mat-card {
-  min-width: 760px;
-  width: 860;
+  min-width: 800px;
   border-radius: 25px;
   margin-top: 20px;
   opacity: 1;
@@ -8,9 +7,9 @@ mat-card {
   color: black;
 }
 
-.align-left {
+mat-grid-tile .align-left {
   position: absolute;
-  text-align: left;
+  left: 5px;
 }
 
 .show-on-hover button {
@@ -23,7 +22,6 @@ mat-card {
 }
 
 mat-card:hover button {
-  display: block;
   animation: fadeIn 0.25s;
 }
 
@@ -39,7 +37,7 @@ button:hover {
   color: white;
 }
 
-.border-bottom {
+.bottom-border {
   border-bottom: dashed gray 1px;
 }
 

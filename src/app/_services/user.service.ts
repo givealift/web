@@ -1,12 +1,13 @@
-import {Injectable} from "@angular/core";
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {environment} from "../../environments/environment";
-import {Route, User} from "../_models";
-import {DataProviderService} from "./data-provider.service";
-import {Observable} from "rxjs/Observable";
-import {tap} from "rxjs/operators/tap";
-import {catchError, map} from "rxjs/operators";
-import {of} from "rxjs/observable/of";
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { environment } from "../../environments/environment";
+import { Route, User } from "../_models";
+import { DataProviderService } from "./data-provider.service";
+import { Observable } from "rxjs/Observable";
+import { tap } from "rxjs/operators/tap";
+import { catchError, map } from "rxjs/operators";
+import { of } from "rxjs/observable/of";
+import { DomSanitizer } from "@angular/platform-browser";
 
 
 @Injectable()
@@ -16,7 +17,7 @@ export class UserService {
 
   // split into smaller services if it gets too big?
 
-  constructor(private http: HttpClient, private dataProviderService: DataProviderService) {
+  constructor(private http: HttpClient, private dataProviderService: DataProviderService, private sanitizer: DomSanitizer) {
   }
 
   getUserRides(id: number, page: number) {
@@ -60,9 +61,22 @@ export class UserService {
     return this.http.delete(this.ApiPath + "/" + id);
   }
 
-  getPhoto(id: number) {
-    return this.http.get(this.ApiPath + "/user/photo/" + id, { responseType: "blob" });
-    //  .map(res => res.blob());
+  getPhoto(id: number): Observable<any> {
+    let possiblePhoto = this.dataProviderService.getData(`photo/${id}`);
+
+    if (possiblePhoto) {
+      return of(possiblePhoto);
+    }
+
+    return this.http.get(`${this.ApiPath}/user/photo/${id}`, { responseType: "blob", observe: "response" })
+      .pipe(
+        map(res => res.status === 204 ? null : res.body),
+        tap(data => {
+          if (data) {
+            this.dataProviderService.storeData(`photo/${id}`, data);
+          }
+        })
+      )
   }
 
   upload(formData: FormData, id: number) {

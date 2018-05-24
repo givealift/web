@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {RouteService} from '../../_services/route.service';
-import {UserService} from '../../_services/user.service';
-import {Route} from '../../_models';
-import {SpinnerProvider} from '../../_providers/spinner-provider';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { RouteService } from '../../_services/route.service';
+import { UserService } from '../../_services/user.service';
+import { Route } from '../../_models';
+import { SpinnerProvider } from '../../_providers/spinner-provider';
 
 
 @Component({
@@ -43,7 +43,7 @@ export class UserRouteComponent implements OnInit {
 
   ngOnInit() {
     let id = +localStorage.getItem("id");
-    this.spinnerProvider.open();
+    setTimeout(() => this.spinnerProvider.open());
     this.userService.countUserRides(id)
       .subscribe(data => {
         this.routesAmount = data;
