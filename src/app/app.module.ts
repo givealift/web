@@ -35,6 +35,7 @@ import { RouteDetailsComponent } from './route/route-details/route-details.compo
 import { DataProviderService } from './_services/data-provider.service';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { SpinnerProvider } from './_providers/spinner-provider';
+import { MessagingService } from './_services/messaging.service';
 
 registerLocaleData(localePl);
 
@@ -78,6 +79,7 @@ registerLocaleData(localePl);
     CitiesProvider,
     DataProviderService,
     SpinnerProvider,
+    MessagingService,
     { provide: APP_INITIALIZER, useFactory: citiesProviderFactory, deps: [CitiesProvider], multi: true },
     { provide: MAT_DATE_LOCALE, useValue: 'pl' },
   ],
