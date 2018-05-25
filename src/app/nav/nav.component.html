@@ -8,7 +8,7 @@
 
     <button mat-button [matMenuTriggerFor]="notificationMenu" *ngIf="loggedIn">
       <mat-icon class="white-icon">notifications</mat-icon>
-      <span class="badge badge-pill badge-light">6</span>
+      <span *ngIf="notifications.length > 0" class="badge badge-pill badge-light">{{notifications.length}}</span>
     </button>
 
     <mat-menu #notificationMenu="matMenu" yPosition="below" overlapTrigger="false">

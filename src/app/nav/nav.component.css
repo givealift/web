@@ -34,3 +34,7 @@
     width: 35px;
     margin-right: 5px;
 }
+
+::ng-deep .mat-menu {
+  padding-top: 0px;
+}
