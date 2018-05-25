@@ -1,18 +1,23 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { GalNotification } from '../_models/gal-notification';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.css']
 })
-export class NotificationComponent implements OnInit {
+export class NotificationComponent {
 
   @Input()
-  notification: any = {};
+  notification: GalNotification;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  ngOnInit() {
+
+  routeToUrl() {
+    if (this.notification)
+      this.router.navigate([`/route/${this.notification.routeId}`]);
   }
 
 }
