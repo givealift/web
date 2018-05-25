@@ -12,6 +12,7 @@ import { CityService } from '../_services/city.service';
 import { RouteService } from '../_services/route.service';
 import { CitiesProvider } from '../_providers/cities-provider';
 import { DataProviderService } from '../_services/data-provider.service';
+import { MessagingService } from '../_services/messaging.service';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -35,6 +36,7 @@ describe('HomeComponent', () => {
         CityService,
         RouteService,
         CitiesProvider,
+        MessagingService,
         DataProviderService
       ]
     })

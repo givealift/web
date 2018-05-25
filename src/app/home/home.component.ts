@@ -8,6 +8,8 @@ import { Observable } from 'rxjs/Observable';
 import { City, Route } from '../_models';
 import { Router } from '@angular/router';
 import { DataProviderService } from '../_services/data-provider.service';
+import { MessagingService } from '../_services/messaging.service';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -31,15 +33,21 @@ export class HomeComponent implements OnInit {
   showSpinner = false;
   foundNothing = false;
 
+  message$: Subject<any>;
+
   constructor(
     private authService: AuthService,
     private cityService: CityService,
     private routeService: RouteService,
+
     private router: Router,
-    private dataTransferService: DataProviderService) { }
+    private dataTransferService: DataProviderService,
+    private msgService: MessagingService) { }
 
   ngOnInit() {
     this.authService.loggedInStatus.subscribe(loggedIn => this.loggedIn = loggedIn);
+    this.msgService.receiveMessages();
+    this.message$ = this.msgService.incomingMessenge;
   }
 
   onEnter() {

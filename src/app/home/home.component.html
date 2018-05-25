@@ -15,6 +15,11 @@
   <mat-spinner class="spinner" [diameter]="20" [style.display]="showSpinner ? 'inline' : 'none'"></mat-spinner>
 </div>
 
+
+<mat-card>
+  <pre>{{message$ | async | json}}</pre>
+</mat-card>
+
 <mat-card *ngIf="foundNothing">
   <p>Niestety nic nie znalazłem.</p>
 </mat-card>
