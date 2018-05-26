@@ -49,15 +49,15 @@ export class AuthService {
     localStorage.removeItem("id");
   }
 
-  resetPassword(email: string) {
-    return this.http.post(this.authUrl + "/user/send-reset-email/" + email, {});
+  sendResetEmail(email: string) {
+    return this.http.post(this.authUrl + "/user/send-reset-email/" + email, {}, {responseType: "text"});
   }
 
-  changePassword(id: string, token: string, password: string) {
+  resetPassword(id: string, token: string, password: string) {
     let params = new HttpParams().set('id', id.toLocaleString()).set('token', token.toLocaleString());
-    // params.append('id', id.toLocaleString());
-    //params.append('token', token.toLocaleString());
-    return this.http.put<Route[]>(this.authUrl + "/user/edit/password", password, {params: params});
+    return this.http.put<Route[]>(this.authUrl + "/user/reset/password", password, {params: params});
   }
+
+
 
 }

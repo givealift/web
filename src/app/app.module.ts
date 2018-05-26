@@ -26,7 +26,7 @@ import localePl from '@angular/common/locales/pl';
 import {registerLocaleData} from '@angular/common';
 import {UserProfileComponent} from './user-profile/user-profile.component';
 import {UserInfoComponent} from './user-profile/user-info/user-info.component';
-import {MatIconRegistry} from '@angular/material';
+import {MatIconRegistry, MatSnackBarModule} from '@angular/material';
 import {UserRouteComponent} from './user-profile/user-route/user-route.component';
 import {UserEditFormComponent} from './user-profile/user-edit-form/user-edit-form.component';
 import {PaginationComponent} from './shered/pagination/pagination.component';
@@ -64,6 +64,7 @@ registerLocaleData(localePl);
   imports: [
     FormsModule,
     ReactiveFormsModule,
+    MatSnackBarModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

@@ -4,6 +4,7 @@ import {AuthService} from '../_services/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {User} from "../_models";
 import {UserService} from '../_services/user.service';
+import {MatSnackBar, MatSnackBarConfig} from "@angular/material";
 
 
 @Component({
@@ -19,11 +20,15 @@ export class LoginComponent {
   userModel: User = new User();
   returnUrl: string;
   showSpinner = false;
+  config = new MatSnackBarConfig();
+
+
 
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
     private router: Router,
+    public snackBar: MatSnackBar,
     private userService: UserService) { }
 
   ngOnInit() {
@@ -31,6 +36,9 @@ export class LoginComponent {
     if (this.authService.isAuthenticated()) {
       this.router.navigate([this.returnUrl]);
     }
+    this.config.extraClasses = ['gal-snack'];
+    this.config.duration = 500;
+
   }
 
   onSubmit() {
@@ -55,9 +63,19 @@ export class LoginComponent {
   }
 
   passReset() {
-    this.authService.resetPassword(this.userModel.email).subscribe();
-
-
+    if (!this.userModel.email) {
+      this.snackBar.open("Wpisz swój adres email", "", this.config);
+    } else {
+      this.authService.sendResetEmail(this.userModel.email).subscribe(
+        data => this.snackBar.open('Sprawdż skrzynke email', "", this.config),
+        error => {
+          if (error.status == 401) {
+            this.snackBar.open("Niepoprawny adres email", "", this.config);
+          } else
+            this.snackBar.open('OOOOPS coś poszło nie tak', "", this.config);
+        }
+      );
+    }
   }
 
 
