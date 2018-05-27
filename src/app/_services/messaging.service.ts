@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import firebase, { Messaging } from '../_providers/firebase-provider';
+import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class MessagingService {
 
@@ -8,7 +9,7 @@ export class MessagingService {
   private messaging: Messaging;
   incomingMessenge = new Subject();
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
     this.setup();
   }
 
