@@ -36,7 +36,9 @@ import {DataProviderService} from './_services/data-provider.service';
 import {SpinnerComponent} from './spinner/spinner.component';
 import {SpinnerProvider} from './_providers/spinner-provider';
 import {ChangePasswordComponent} from './change-password/change-password.component';
-import { SubscriptionsListComponent } from './user-profile/subscriptions-list/subscriptions-list.component';
+import { SubscriptionsListComponent } from './subscription/subscriptions-list/subscriptions-list.component';
+import { SubscriptionComponent } from './subscription/subscription/subscription.component';
+import { UserSubscriptionsComponent } from './user-profile/user-subscriptions/user-subscriptions.component';
 
 registerLocaleData(localePl);
 
@@ -61,7 +63,9 @@ registerLocaleData(localePl);
     RouteDetailsComponent,
     SpinnerComponent,
     ChangePasswordComponent,
-    SubscriptionsListComponent
+    SubscriptionsListComponent,
+    SubscriptionComponent,
+    UserSubscriptionsComponent
   ],
   imports: [
     FormsModule,

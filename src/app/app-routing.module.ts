@@ -9,11 +9,13 @@ import {NewRouteComponent} from "./route/new-route/new-route.component";
 import {RouteListComponent} from "./route/route-list/route-list.component";
 import {UserRouteComponent} from "./user-profile/user-route/user-route.component";
 import {UserEditFormComponent} from "./user-profile/user-edit-form/user-edit-form.component";
-import { FavouriteRoutesComponent } from "./user-profile/favourite-routes/favourite-routes.component";
-import { RouteDetailsComponent } from "./route/route-details/route-details.component";
-import { UserProfileComponent } from "./user-profile/user-profile.component";
+import {FavouriteRoutesComponent} from "./user-profile/favourite-routes/favourite-routes.component";
+import {RouteDetailsComponent} from "./route/route-details/route-details.component";
+import {UserProfileComponent} from "./user-profile/user-profile.component";
 import {ChangePasswordComponent} from "./change-password/change-password.component";
-import {SubscriptionsListComponent} from "./user-profile/subscriptions-list/subscriptions-list.component";
+import {SubscriptionComponent} from "./subscription/subscription/subscription.component";
+import {SubscriptionsListComponent} from "./subscription/subscriptions-list/subscriptions-list.component";
+import {UserSubscriptionsComponent} from "./user-profile/user-subscriptions/user-subscriptions.component";
 
 
 const routes: Routes = [
@@ -31,7 +33,7 @@ const routes: Routes = [
       { path: 'edit', component: UserEditFormComponent },
       { path: 'routes', component: UserRouteComponent },
       { path: 'fav-routes', component: FavouriteRoutesComponent },
-      { path: 'subs-list', component: SubscriptionsListComponent }
+      { path: 'subs', component: UserSubscriptionsComponent }
     ]
   },
   { path: 'route/:routeId', component: RouteDetailsComponent },
