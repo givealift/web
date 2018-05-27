@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit {
     button.click();
   }
 
-  search(fromCity: City, toCity: City) {
+  search(fromCity: string, toCity: string) {
     this.showSpinner = true;
     this.foundRoutes = null;
     this.routeService
@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
         } else {
           this.foundRoutes = routes;
           const dateString = moment(this.date.value).format('YYYY-MM-DD');
-          const resultsTag = this.dataTransferService.taggedResults(fromCity.cityId, toCity.cityId, dateString);
+          const resultsTag = this.dataTransferService.taggedResults(routes[0].from.date.cityId, routes[0].to.date.cityId, dateString);
 
           this.dataTransferService.storeData(`route-list/${resultsTag}`, routes);
           this.router.navigate([`/route-list`], { queryParams: { from: routes[0].from.city.cityId, to: routes[0].to.city.cityId, date: dateString } });
