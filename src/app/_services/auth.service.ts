@@ -47,4 +47,8 @@ export class AuthService {
     localStorage.removeItem("token");
     localStorage.removeItem("id");
   }
+
+  public getCurrentUserId(): string | null {
+    return localStorage.getItem("id");
+  }
 }
