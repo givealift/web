@@ -18,11 +18,9 @@ export class RouteService {
     constructor(private http: HttpClient, private cityService: CityService) {
     }
 
-    search(from: City, to: City, date: Moment): Observable<Route[]> {
+    search(from: string, to: string, date: Moment): Observable<Route[]> {
 
-        // passed argument may not be a city object but string
-        const [fromStream, toStream] = [from, to]
-            .map(maybeCity => maybeCity.hasOwnProperty("cityId") ? Observable.of(maybeCity) : this.lookForCity(maybeCity));
+        const [fromStream, toStream] = [from, to].map(this.lookForCity);
 
         return combineLatest(fromStream, toStream)
             .flatMap(([fromCity, toCity]) => {
@@ -47,7 +45,7 @@ export class RouteService {
         return this.http.get<Route[]>(`${this.url}/search`, { params: params });
     }
 
-    private lookForCity = (city: City): Observable<City | null> => this.cityService.searchCity(city.toString());
+    private lookForCity = (city: string): Observable<City | null> => this.cityService.searchCity(city);
 
     update(route: Route) {
         return this.http.put<Route>(this.url + route.routeId, route);
