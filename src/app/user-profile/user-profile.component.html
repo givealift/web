@@ -9,6 +9,9 @@
         <a mat-tab-link routerLinkActive #rlaFavouriteRoutes="routerLinkActive" [active]="rlaFavouriteRoutes.isActive" routerLink='fav-routes'>
             Obserwowane przejazdy
         </a>
+        <a mat-tab-link routerLinkActive #rlaSubscriptionsList="routerLinkActive" [active]="rlaSubscriptionsList.isActive" routerLink='subs-list'>
+            Obserwowane połączenia
+        </a>
     </nav>
 </mat-card>
 <router-outlet></router-outlet>

@@ -35,6 +35,7 @@ import { RouteDetailsComponent } from './route/route-details/route-details.compo
 import { DataProviderService } from './_services/data-provider.service';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { SpinnerProvider } from './_providers/spinner-provider';
+import { SubscriptionsListComponent } from './user-profile/subscriptions-list/subscriptions-list.component';
 
 registerLocaleData(localePl);
 
@@ -57,7 +58,8 @@ registerLocaleData(localePl);
     PaginationComponent,
     FavouriteRoutesComponent,
     RouteDetailsComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    SubscriptionsListComponent
   ],
   imports: [
     FormsModule,

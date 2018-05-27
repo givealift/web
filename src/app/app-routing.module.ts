@@ -14,6 +14,7 @@ import { UserEditFormComponent } from "./user-profile/user-edit-form/user-edit-f
 import { FavouriteRoutesComponent } from "./user-profile/favourite-routes/favourite-routes.component";
 import { RouteDetailsComponent } from "./route/route-details/route-details.component";
 import { UserProfileComponent } from "./user-profile/user-profile.component";
+import {SubscriptionsListComponent} from "./user-profile/subscriptions-list/subscriptions-list.component";
 
 const routes: Routes = [
 
@@ -28,7 +29,8 @@ const routes: Routes = [
       { path: 'info', component: UserInfoComponent },
       { path: 'edit', component: UserEditFormComponent },
       { path: 'routes', component: UserRouteComponent },
-      { path: 'fav-routes', component: FavouriteRoutesComponent }
+      { path: 'fav-routes', component: FavouriteRoutesComponent },
+      { path: 'subs-list', component: SubscriptionsListComponent }
     ]
   },
   { path: 'route/:routeId', component: RouteDetailsComponent },

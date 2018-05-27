@@ -1,10 +1,10 @@
 mat-card {
     margin-top: 0px;
     padding-top: 0px;
-    width: 660px;
+    width: 863px;
     height: 55px;
     min-width: 250px;
-    min-height: 50px;
+    min-height: 55px;
 }
 
 a.mat-tab-link {
