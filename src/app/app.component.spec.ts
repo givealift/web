@@ -17,6 +17,7 @@ import { UserService } from './_services/user.service';
 import { MaterialModule } from './_modules/material.module';
 import { DataProviderService } from './_services/data-provider.service';
 import { MessagingService } from './_services/messaging.service';
+import { SubscribeComponent } from './subscribe/subscribe.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -34,7 +35,8 @@ describe('AppComponent', () => {
         LoginComponent,
         RegisterComponent,
         NewRouteComponent,
-        CitySearchComponent
+        CitySearchComponent,
+        SubscribeComponent
       ],
       imports: [
         RouterModule.forRoot(appRoutes),
