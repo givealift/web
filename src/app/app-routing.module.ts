@@ -13,8 +13,6 @@ import {FavouriteRoutesComponent} from "./user-profile/favourite-routes/favourit
 import {RouteDetailsComponent} from "./route/route-details/route-details.component";
 import {UserProfileComponent} from "./user-profile/user-profile.component";
 import {ChangePasswordComponent} from "./change-password/change-password.component";
-import {SubscriptionComponent} from "./subscription/subscription/subscription.component";
-import {SubscriptionsListComponent} from "./subscription/subscriptions-list/subscriptions-list.component";
 import {UserSubscriptionsComponent} from "./user-profile/user-subscriptions/user-subscriptions.component";
 
 

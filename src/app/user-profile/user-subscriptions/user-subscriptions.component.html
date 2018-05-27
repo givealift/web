@@ -1,1 +1,3 @@
-<app-subscriptions-list [subscriptionsList]="userSubs"></app-subscriptions-list>
+<div>
+  <app-subscription *ngFor="let sub of userSubs" [subData]="sub"></app-subscription>
+</div>
