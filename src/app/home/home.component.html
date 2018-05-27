@@ -17,4 +17,6 @@
 
 <mat-card *ngIf="foundNothing">
   <p>Niestety nic nie znalazłem.</p>
+  <p *ngIf="!LoggedIn">Subskrybuj [{{LoggedIn}}]</p>
+  <p *ngIf="LoggedIn">Zaloguj/Rejestruj [{{LoggedIn}}]</p>
 </mat-card>
