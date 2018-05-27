@@ -46,7 +46,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.authService.loggedInStatus.subscribe(loggedIn => this.loggedIn = loggedIn);
-    this.msgService.receiveMessages();
     this.message$ = this.msgService.incomingMessenge;
   }
 

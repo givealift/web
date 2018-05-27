@@ -4,6 +4,7 @@ import firebase, { Messaging } from '../_providers/firebase-provider';
 @Injectable()
 export class MessagingService {
 
+  private readonly FIREBASE_TOKEN_SENT = "firebase_token_sent_to_server"; 
   private messaging: Messaging;
   incomingMessenge = new Subject();
 
@@ -16,6 +17,7 @@ export class MessagingService {
     this.messaging = firebase.messaging();
     await this.getPermission();
     await this.getToken();
+    this.startReceivingMessages();
     this.monitorToken();
   }
 
@@ -61,14 +63,14 @@ export class MessagingService {
   }
 
   set tokenSentToServer(sent: boolean) {
-    localStorage.setItem("token_sent_to_server", sent ? '1' : '0');
+    localStorage.setItem(this.FIREBASE_TOKEN_SENT, sent ? '1' : '0');
   }
 
   get tokenSentToServer() {
-    return localStorage.getItem('token_sent_to_server') === '1';
+    return localStorage.getItem(this.FIREBASE_TOKEN_SENT) === '1';
   }
 
-  receiveMessages() {
+  startReceivingMessages() {
     this.messaging.onMessage(payload => {
       console.log("Message received. ", payload);
       this.incomingMessenge.next(payload);
