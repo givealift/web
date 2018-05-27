@@ -1,0 +1,9 @@
+<mat-card class="subscription">
+  <h3>Niestety nic nie znalazłem.</h3>
+  <h4>Chcesz otrzymać powiadomienie kiedy pojawi się przejazd na tej trasie?</h4>
+  <div>
+    <button *ngIf="!showSpinner" mat-button class="btn-search" color="primary" mat-raised-button (click)="subscribe()">Tak</button>
+
+    <button *ngIf="!showSpinner" mat-button class="btn-search" color="secondary" mat-raised-button (click)="cancel()">Nie</button>
+  </div>
+</mat-card>

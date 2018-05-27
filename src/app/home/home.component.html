@@ -16,10 +16,4 @@
 </div>
 
 
-<mat-card>
-  <pre>{{message$ | async | json}}</pre>
-</mat-card>
-
-<mat-card *ngIf="foundNothing">
-  <p>Niestety nic nie znalazłem.</p>
-</mat-card>
+<app-subscribe *ngIf="foundNothing" [fromCity]="fromCity.selectedCity" [toCity]="toCity.selectedCity" [date]="date.value"></app-subscribe>

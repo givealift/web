@@ -36,6 +36,8 @@ import { DataProviderService } from './_services/data-provider.service';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { SpinnerProvider } from './_providers/spinner-provider';
 import { MessagingService } from './_services/messaging.service';
+import { SubscribeComponent } from './subscribe/subscribe.component';
+import { SubscriptionService } from './_services/subscription.service';
 
 registerLocaleData(localePl);
 
@@ -58,7 +60,8 @@ registerLocaleData(localePl);
     PaginationComponent,
     FavouriteRoutesComponent,
     RouteDetailsComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    SubscribeComponent
   ],
   imports: [
     FormsModule,
@@ -80,6 +83,7 @@ registerLocaleData(localePl);
     DataProviderService,
     SpinnerProvider,
     MessagingService,
+    SubscriptionService,
     { provide: APP_INITIALIZER, useFactory: citiesProviderFactory, deps: [CitiesProvider], multi: true },
     { provide: MAT_DATE_LOCALE, useValue: 'pl' },
   ],
