@@ -4,7 +4,7 @@ import firebase, { Messaging } from '../_providers/firebase-provider';
 @Injectable()
 export class MessagingService {
 
-  private readonly FIREBASE_TOKEN_SENT = "firebase_token_sent_to_server"; 
+  private readonly FIREBASE_TOKEN_SENT = "firebase_token_sent_to_server";
   private messaging: Messaging;
   incomingMessenge = new Subject();
 
@@ -35,9 +35,9 @@ export class MessagingService {
     try {
       let token = await this.messaging.getToken();
       console.log("token", token);
-      if (token && !this.tokenSentToServer) {
+      if (token && this.tokenSentToServer !== token) {
         await this.sendTokenToServer(token);
-        this.tokenSentToServer = true;
+        this.tokenSentToServer = token;
       }
     } catch (err) {
       console.log('Unable to get token.', err);
@@ -49,7 +49,7 @@ export class MessagingService {
     let self = this;
     messaging.onTokenRefresh(async () => {
       try {
-        self.sendTokenToServer(false);
+        self.tokenSentToServer = false;
         await self.getToken();
       } catch (error) {
         console.log('Unable to retrieve refreshed token ', error);
@@ -62,12 +62,15 @@ export class MessagingService {
     // TODO: sent token to server with user id
   }
 
-  set tokenSentToServer(sent: boolean) {
-    localStorage.setItem(this.FIREBASE_TOKEN_SENT, sent ? '1' : '0');
+  set tokenSentToServer(token: string | boolean) {
+    if (typeof token === "string") {
+      localStorage.setItem(this.FIREBASE_TOKEN_SENT, token);
+    }
+    localStorage.removeItem(this.FIREBASE_TOKEN_SENT);
   }
 
-  get tokenSentToServer() {
-    return localStorage.getItem(this.FIREBASE_TOKEN_SENT) === '1';
+  get tokenSentToServer(): string | boolean {
+    return localStorage.getItem(this.FIREBASE_TOKEN_SENT) || false;
   }
 
   startReceivingMessages() {
