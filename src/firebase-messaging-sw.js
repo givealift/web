@@ -12,3 +12,23 @@ var config = {
 
 firebase.initializeApp(config);
 const messaging = firebase.messaging();
+
+messaging.setBackgroundMessageHandler(function (payload) {
+  console.log('[firebase-messaging-sw.js] Received background message ', payload);
+
+  var notificationTitle = `Nowy przejazd na trasie ${payload.data.fromCityName} - ${payload.data.toCityName}`;
+  var notificationOptions = {
+    body: 'Pojawił się nowy przejazd na trasie którą obserwujesz. \nKliknij po szczegóły.'
+  };
+
+  self.addEventListener('notificationclick', function (event) {
+    const clickedNotification = event.notification;
+    clickedNotification.close();
+    const detailsPage = `https://givealift.herokuapp.com/route/${payload.data.routeId}`;
+
+    const promiseChain = clients.openWindow(detailsPage);
+    event.waitUntil(promiseChain);
+  });
+
+  return self.registration.showNotification(notificationTitle, notificationOptions);
+});
