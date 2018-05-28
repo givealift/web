@@ -1,9 +1,23 @@
-<mat-card class="subscription">
-  <h3>Niestety nic nie znalazłem.</h3>
-  <h4>Chcesz otrzymać powiadomienie kiedy pojawi się przejazd na tej trasie?</h4>
-  <div>
-    <button *ngIf="!showSpinner" mat-button class="btn-search" color="primary" mat-raised-button (click)="subscribe()">Tak</button>
-
-    <button *ngIf="!showSpinner" mat-button class="btn-search" color="secondary" mat-raised-button (click)="cancel()">Nie</button>
+<mat-card class="subscription" *ngIf="!alreadySubscribed && !dismissed">
+  <div class="subscription" *ngIf="!showSpinner">
+    <h3>Niestety nic nie znalazłem.</h3>
+    <h4>Chcesz otrzymać powiadomienie kiedy pojawi się przejazd na tej trasie?</h4>
+    <div id="sub-btn-wrapper">
+      <button mat-button class="btn-search" color="primary" mat-raised-button (click)="subscribe()">Tak</button>
+      <button mat-button class="btn-search" color="secondary" mat-raised-button (click)="dismiss()">Nie</button>
+    </div>
   </div>
+  <h4 *ngIf="showSpinner">Zapisuję...</h4>
+  <mat-spinner class="spinner" [diameter]="20" [style.display]="showSpinner ? 'inline' : 'none'"></mat-spinner>
+</mat-card>
+<mat-card *ngIf="showInfo" class="subscription">
+  <h3>Zapisany!</h3>
+  <h4>Powiadomię Cię jak tylko pojawi się przejazd.</h4>
+  <button mat-button class="btn-search" color="secondary" mat-raised-button (click)="closeInfo()">Ok</button>
+</mat-card>
+<!-- TODO: check if user already subscribed for this route -->
+<mat-card *ngIf="alreadySubscribed && !alreadySubscribedClosed">
+    <h3>Niestety nic nie znalazłem.</h3>
+    <h4>Pamiętam, żeby Cię powiadomić jeśli pojawi się przejazd.</h4>
+  <button mat-button class="btn-search" color="secondary" mat-raised-button (click)="closeAlreadySubscribed()">Ok</button>
 </mat-card>

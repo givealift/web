@@ -56,8 +56,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // // authenticate
                 // case (request.url.endsWith('/api/authenticate') && request.method === 'POST'):
                 //     return this.authenticate(request);
-                case (request.url.endsWith('/subscription') && request.method === 'POST'):
-                    return Observable.of(new HttpResponse({ status: 200 }));
             }
 
             // pass through any requests not handled above

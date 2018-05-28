@@ -7,11 +7,11 @@
     max-width: 700pt;   
 }
 
-.subscription div {
+.subscription #sub-btn-wrapper {
     display: flex;
 }
 
-.subscription div button {
+.subscription #sub-btn-wrapper button {
     margin: 10px;
 }
 

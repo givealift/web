@@ -2,6 +2,8 @@ import { Injectable, Inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import firebase, { Messaging } from '../_providers/firebase-provider';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { AuthService } from './auth.service';
 @Injectable()
 export class MessagingService {
 
@@ -9,7 +11,7 @@ export class MessagingService {
   private messaging: Messaging;
   incomingMessenge = new Subject();
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private authService: AuthService) {
     this.setup();
   }
 
@@ -33,15 +35,18 @@ export class MessagingService {
   }
 
   async getToken() {
+    let token;
     try {
-      let token = await this.messaging.getToken();
+      token = await this.messaging.getToken();
       console.log("token", token);
-      if (token && this.tokenSentToServer !== token) {
-        await this.sendTokenToServer(token);
-        this.tokenSentToServer = token;
-      }
     } catch (err) {
       console.log('Unable to get token.', err);
+    }
+
+    if (token && this.tokenSentToServer !== token) {
+      await this.sendTokenToServer(token);
+      console.log("Token sent to server");
+      this.tokenSentToServer = token;
     }
   }
 
@@ -61,13 +66,21 @@ export class MessagingService {
   async sendTokenToServer(token) {
     console.log("sending token to server...", token);
     // TODO: sent token to server with user id
+    const url = `${environment.apiUrl}/notification`;
+    const body = {
+      deviceType: "WEB",
+      pushToken: token,
+      userId: +this.authService.getCurrentUserId()
+    }
+    return this.httpClient.post(url, body).toPromise();
   }
 
   set tokenSentToServer(token: string | boolean) {
     if (typeof token === "string") {
       localStorage.setItem(this.FIREBASE_TOKEN_SENT, token);
+    } else {
+      localStorage.removeItem(this.FIREBASE_TOKEN_SENT);
     }
-    localStorage.removeItem(this.FIREBASE_TOKEN_SENT);
   }
 
   get tokenSentToServer(): string | boolean {

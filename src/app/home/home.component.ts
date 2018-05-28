@@ -57,6 +57,7 @@ export class HomeComponent implements OnInit {
   search(fromCity: string, toCity: string) {
     this.showSpinner = true;
     this.foundRoutes = null;
+    this.foundNothing = false;
     this.routeService
       .search(fromCity, toCity, this.date.value)
       .subscribe(routes => {

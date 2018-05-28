@@ -15,18 +15,36 @@ export class SubscribeComponent implements OnInit {
   toCity: string;
   @Input()
   date: Moment;
-  
-  
+
+  // html elements togglers
+  dismissed = false; showSpinner = false; showInfo = false;
+  alreadySubscribed = false; showAlreadySubscribed = true;
+
+
   constructor(private subscripitionService: SubscriptionService) { }
 
   ngOnInit() {
   }
 
   subscribe() {
-    console.log(this.fromCity, this.toCity, this.date);
+    this.resetState();
+    this.showSpinner = true;
+    this.subscripitionService
+      .subscribeForNotification(this.fromCity, this.toCity, this.date)
+      .subscribe(response => {
+        console.log(response);
+        this.showSpinner = false;
+        this.showInfo = true;
+        this.dismiss();
+      })
   }
 
-  cancel() {
+  resetState() {
+    this.dismissed = false;
+    this.showInfo = false;
   }
 
+  dismiss = () => this.dismissed = true;
+  closeInfo = () => this.showInfo = false;
+  closeAlreadySubscribed = () => this.showAlreadySubscribed = false;
 }
