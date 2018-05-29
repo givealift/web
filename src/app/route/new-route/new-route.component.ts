@@ -53,8 +53,8 @@ export class NewRouteComponent {
     this.routeModel.numberOfOccupiedSeats = 0;
     this.routeModel.stops = this.cityChips;
     this.showSpinner = true;
-    const { token, id } = this.authService.getCredentials();
-    this.routeModel.ownerId = +id;
+    const id: number = +this.authService.getCurrentUserId();
+    this.routeModel.ownerId = id;
 
     this.routeService.create(this.routeModel).subscribe(
       () => {
