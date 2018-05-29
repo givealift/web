@@ -12,7 +12,8 @@ import { CityService } from '../_services/city.service';
 import { RouteService } from '../_services/route.service';
 import { CitiesProvider } from '../_providers/cities-provider';
 import { DataProviderService } from '../_services/data-provider.service';
-import { NativeNotificationService } from 'angular-notice/lib/native-notification.service';
+import { MessagingService } from '../_services/messaging.service';
+import { SubscribeComponent } from '../subscribe/subscribe.component';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -22,7 +23,8 @@ describe('HomeComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         HomeComponent,
-        CitySearchComponent
+        CitySearchComponent,
+        SubscribeComponent
       ],
       imports: [
         HttpClientModule,
@@ -37,8 +39,8 @@ describe('HomeComponent', () => {
         CityService,
         RouteService,
         CitiesProvider,
-        DataProviderService,
-        NativeNotificationService
+        MessagingService,
+        DataProviderService
       ]
     })
       .compileComponents();

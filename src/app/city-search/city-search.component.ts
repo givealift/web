@@ -21,7 +21,7 @@ export class CitySearchComponent implements OnInit {
 
   @Output() enterPressed = new EventEmitter();
 
-  selectedCity = new City();
+  selectedCity: string;
   filteredCities$: Observable<City[]>;
   private searchTerms = new Subject<string>();
 
@@ -42,9 +42,4 @@ export class CitySearchComponent implements OnInit {
       switchMap((term: string) => this.cityService.searchCities(term))
     );
   }
-
-  formatDisplayName(city?: City): string | undefined {
-    return city ? city.name : undefined;
-  }
-
 }

@@ -8,7 +8,9 @@ import { Observable } from 'rxjs/Observable';
 import { City, Route } from '../_models';
 import { Router } from '@angular/router';
 import { DataProviderService } from '../_services/data-provider.service';
-import { NativeNotificationService } from 'angular-notice/lib/native-notification.service';
+import { MessagingService } from '../_services/messaging.service';
+import { Subject } from 'rxjs';
+
 
 @Component({
   selector: 'app-home',
@@ -31,26 +33,20 @@ export class HomeComponent implements OnInit {
   showSpinner = false;
   foundNothing = false;
 
+  message$: Subject<any>;
+
   constructor(
     private authService: AuthService,
     private cityService: CityService,
     private routeService: RouteService,
+
     private router: Router,
     private dataTransferService: DataProviderService,
-    private notificationService: NativeNotificationService) { }
+    private msgService: MessagingService) { }
 
   ngOnInit() {
     this.authService.loggedInStatus.subscribe(loggedIn => this.loggedIn = loggedIn);
-
-    const options = {
-      title: 'test',
-      body: 'Zalogowałeś się!',
-      icon: '../../assets/logo.png',
-      tag: 'notice',
-      closeDelay: 2000
-    };
-
-    this.notificationService.notify(options);
+    this.message$ = this.msgService.incomingMessenge;
   }
 
   onEnter() {
@@ -58,9 +54,10 @@ export class HomeComponent implements OnInit {
     button.click();
   }
 
-  search(fromCity: City, toCity: City) {
+  search(fromCity: string, toCity: string) {
     this.showSpinner = true;
     this.foundRoutes = null;
+    this.foundNothing = false;
     this.routeService
       .search(fromCity, toCity, this.date.value)
       .subscribe(routes => {
@@ -72,7 +69,7 @@ export class HomeComponent implements OnInit {
         } else {
           this.foundRoutes = routes;
           const dateString = moment(this.date.value).format('YYYY-MM-DD');
-          const resultsTag = this.dataTransferService.taggedResults(fromCity.cityId, toCity.cityId, dateString);
+          const resultsTag = this.dataTransferService.taggedResults(routes[0].from.date.cityId, routes[0].to.date.cityId, dateString);
 
           this.dataTransferService.storeData(`route-list/${resultsTag}`, routes);
           this.router.navigate([`/route-list`], { queryParams: { from: routes[0].from.city.cityId, to: routes[0].to.city.cityId, date: dateString } });

@@ -15,6 +15,5 @@
   <mat-spinner class="spinner" [diameter]="20" [style.display]="showSpinner ? 'inline' : 'none'"></mat-spinner>
 </div>
 
-<mat-card *ngIf="foundNothing">
-  <p>Niestety nic nie znalazłem.</p>
-</mat-card>
+
+<app-subscribe *ngIf="foundNothing" [fromCity]="fromCity.selectedCity" [toCity]="toCity.selectedCity" [date]="date.value"></app-subscribe>

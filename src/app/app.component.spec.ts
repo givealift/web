@@ -17,6 +17,8 @@ import { UserService } from './_services/user.service';
 import { MaterialModule } from './_modules/material.module';
 import { DataProviderService } from './_services/data-provider.service';
 import { NotificationComponent } from './notification/notification.component';
+import { MessagingService } from './_services/messaging.service';
+import { SubscribeComponent } from './subscribe/subscribe.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -35,7 +37,8 @@ describe('AppComponent', () => {
         RegisterComponent,
         NewRouteComponent,
         CitySearchComponent,
-        NotificationComponent
+        NotificationComponent,
+        SubscribeComponent
       ],
       imports: [
         RouterModule.forRoot(appRoutes),
@@ -47,7 +50,8 @@ describe('AppComponent', () => {
         { provide: APP_BASE_HREF, useValue: "/" },
         AuthService,
         UserService,
-        DataProviderService
+        DataProviderService,
+        MessagingService
       ]
     }).compileComponents();
   }));

@@ -26,7 +26,7 @@ import localePl from '@angular/common/locales/pl';
 import { registerLocaleData } from '@angular/common';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserInfoComponent } from './user-profile/user-info/user-info.component';
-import { MatIconRegistry, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
+import { MatIconRegistry, MatSnackBarModule } from '@angular/material';
 import { UserRouteComponent } from './user-profile/user-route/user-route.component';
 import { UserEditFormComponent } from './user-profile/user-edit-form/user-edit-form.component';
 import { PaginationComponent } from './shered/pagination/pagination.component';
@@ -35,9 +35,11 @@ import { RouteDetailsComponent } from './route/route-details/route-details.compo
 import { DataProviderService } from './_services/data-provider.service';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { SpinnerProvider } from './_providers/spinner-provider';
-import { NotificationsModule } from 'angular-notice';
-import { NativeNotificationService } from 'angular-notice/lib/native-notification.service';
 import { NotificationComponent } from './notification/notification.component';
+import { MessagingService } from './_services/messaging.service';
+import { SubscribeComponent } from './subscribe/subscribe.component';
+import { SubscriptionService } from './_services/subscription.service';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 registerLocaleData(localePl);
 
@@ -61,16 +63,18 @@ registerLocaleData(localePl);
     FavouriteRoutesComponent,
     RouteDetailsComponent,
     SpinnerComponent,
-    NotificationComponent
+    NotificationComponent,
+    SubscribeComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     FormsModule,
     ReactiveFormsModule,
+    MatSnackBarModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     MaterialModule,
-    NotificationsModule
   ],
   providers: [
     AuthService,
@@ -83,7 +87,8 @@ registerLocaleData(localePl);
     CitiesProvider,
     DataProviderService,
     SpinnerProvider,
-    NativeNotificationService,
+    MessagingService,
+    SubscriptionService,
     { provide: APP_INITIALIZER, useFactory: citiesProviderFactory, deps: [CitiesProvider], multi: true },
     { provide: MAT_DATE_LOCALE, useValue: 'pl' },
   ],
