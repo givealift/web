@@ -16,7 +16,7 @@
   <button mat-button class="btn-search" color="secondary" mat-raised-button (click)="closeInfo()">Ok</button>
 </mat-card>
 <!-- TODO: check if user already subscribed for this route -->
-<mat-card *ngIf="alreadySubscribed && !alreadySubscribedClosed">
+<mat-card *ngIf="alreadySubscribed && !showAlreadySubscribed">
     <h3>Niestety nic nie znalazłem.</h3>
     <h4>Pamiętam, żeby Cię powiadomić jeśli pojawi się przejazd.</h4>
   <button mat-button class="btn-search" color="secondary" mat-raised-button (click)="closeAlreadySubscribed()">Ok</button>
