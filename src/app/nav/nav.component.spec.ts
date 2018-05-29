@@ -8,6 +8,8 @@ import { UserService } from '../_services/user.service';
 import { MaterialModule } from '../_modules/material.module';
 import { DataProviderService } from '../_services/data-provider.service';
 import { NotificationComponent } from '../notification/notification.component';
+import { Title } from '@angular/platform-browser';
+import { MessagingService } from '../_services/messaging.service';
 
 describe('NavComponent', () => {
   let component: NavComponent;
@@ -27,7 +29,9 @@ describe('NavComponent', () => {
       providers: [
         AuthService,
         UserService,
-        DataProviderService
+        DataProviderService,
+        Title,
+        MessagingService
       ]
     })
       .compileComponents();

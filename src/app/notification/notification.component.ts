@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class NotificationComponent {
 
   @Input()
-  notification: GalNotification;
+  notification: GalNotification = new GalNotification();
 
   constructor(private router: Router) { }
 
