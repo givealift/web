@@ -6,6 +6,8 @@ import { UserService } from '../_services/user.service';
 import { GalNotification, NewRouteNotification, ReservationNotification } from '../_models/gal-notification';
 import { CitiesProvider } from '../_providers/cities-provider';
 import { CityService } from '../_services/city.service';
+import { MessagingService } from '../_services/messaging.service';
+import { subscribeOn } from 'rxjs/operator/subscribeOn';
 
 @Component({
   selector: 'app-nav',
@@ -21,7 +23,8 @@ export class NavComponent implements OnInit {
   constructor(private authService: AuthService,
     private userService: UserService,
     private router: Router,
-    private cityService: CityService
+    private cityService: CityService,
+    private messageService: MessagingService
   ) { }
 
   ngOnInit() {
@@ -29,10 +32,11 @@ export class NavComponent implements OnInit {
     this.authService.loggedInStatus.subscribe(loggedIn => {
       this.loggedIn = loggedIn
     });
+    this.messageService.incomingMessenge.asObservable().subscribe(
+      message => this.addNotification(message)
+    );
 
-    this.addNewRouteNotification();
     this.addReservationNotification();
-    this.addNewRouteNotification();
   }
 
   logout(): void {
@@ -40,16 +44,22 @@ export class NavComponent implements OnInit {
     this.router.navigate(["/"]);
   }
 
-  addNewRouteNotification() {
+  addNotification(message: any) {
+    if (message.data.fromCityId && message.data.toCityId)
+      this.addNewRouteNotification(message);
+    else if (message.data.userId)
+      this.addReservationNotification();
+  }
+
+  addNewRouteNotification(message: any) {
     let notification = new GalNotification();
-    notification.routeId = 112;
+    notification.routeId = message.data.routeId;
     let body = new NewRouteNotification;
-    this.cityService.searchCity("Warszawa").subscribe(
-      city => body.from = city
-    );
-    this.cityService.searchCity("Kraków").subscribe(
-      city => body.to = city
-    );
+    body.from.cityId = message.data.fromCityId;
+    body.to.cityId = message.data.toCityId;
+    body.from.name = message.data.fromCityName;
+    body.to.name = message.data.toCityName;
+
     body.date = new Date();
     notification.newRoute = body;
 
