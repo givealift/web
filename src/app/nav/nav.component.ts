@@ -8,6 +8,7 @@ import { CitiesProvider } from '../_providers/cities-provider';
 import { CityService } from '../_services/city.service';
 import { MessagingService } from '../_services/messaging.service';
 import { subscribeOn } from 'rxjs/operator/subscribeOn';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-nav',
@@ -18,13 +19,16 @@ export class NavComponent implements OnInit {
   userId: number;
   loggedIn: boolean;
 
+  notificationSound = new Audio("../../assets/light.ogg");
+
   notifications = new Array<GalNotification>();
 
   constructor(private authService: AuthService,
     private userService: UserService,
     private router: Router,
     private cityService: CityService,
-    private messageService: MessagingService
+    private messageService: MessagingService,
+    private titleService: Title
   ) { }
 
   ngOnInit() {
@@ -49,6 +53,25 @@ export class NavComponent implements OnInit {
       this.addNewRouteNotification(message);
     else if (message.data.userId)
       this.addReservationNotification();
+
+    let title: string = this.titleService.getTitle();
+
+    let newTitle: string;
+
+    if (title.includes('(')) {
+      let notificationCount: number = parseInt(title.charAt(1));
+      notificationCount++;
+      newTitle = '(' + notificationCount + ') GiveALift';
+    }
+    else {
+      newTitle = '(1) GiveALift';
+    }
+
+
+    this.titleService.setTitle(newTitle);
+    this.notificationSound.load();
+    this.notificationSound.play();
+
   }
 
   addNewRouteNotification(message: any) {
@@ -74,5 +97,9 @@ export class NavComponent implements OnInit {
     notification.reservation = body;
 
     this.notifications.push(notification);
+  }
+
+  resetTitle() {
+    this.titleService.setTitle('GiveALift');
   }
 }
