@@ -3,8 +3,8 @@
     <mat-grid-list cols="3" rowHeight="35px" gutterSize="0px">
 
       <mat-grid-tile rowspan="4">
-        <img class="img-circle" *ngIf="sanitizedPhoto" [src]="sanitizedPhoto" alt="" width="100px" height="100px"/>
-        <img class="img-circle" *ngIf="!sanitizedPhoto" src="../../../assets/logo-sm.png" width="100px" height="100px"/>
+        <img class="img-circle" *ngIf="sanitizedPhoto" [src]="sanitizedPhoto" alt="" width="100px" height="100px" />
+        <img class="img-circle" *ngIf="!sanitizedPhoto" src="../../../assets/logo-sm.png" width="100px" height="100px" />
       </mat-grid-tile>
 
       <mat-grid-tile colspan="1" rowspan="2" class="right-border">
@@ -24,7 +24,7 @@
 
       <mat-grid-tile colspan="1" rowspan="2">
         <mat-form-field>
-          <input matInput [(ngModel)]="oldPass" name="oldPass" type="password" placeholder="Stare hasło"/>
+          <input matInput [(ngModel)]="oldPass" name="oldPass" type="password" placeholder="Stare hasło" />
           <mat-error *ngIf="!oldPass">Wpisz poprawne imię!</mat-error>
         </mat-form-field>
       </mat-grid-tile>
@@ -45,18 +45,17 @@
 
       <mat-grid-tile colspan="1" rowspan="2">
         <mat-form-field>
-          <input matInput [(ngModel)]="newPass" name="password" type="password" #passRef="ngModel"
-                 placeholder="Nowe hasło"/>
+          <input matInput [(ngModel)]="newPass" name="password" type="password" #passRef="ngModel" placeholder="Nowe hasło" />
           <mat-error *ngIf="!newPass">Wpisz poprawne hasło!</mat-error>
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile rowspan="2">
         <button mat-raised-button class="hoverable" type="button" (click)="upload()">
-          Zmień Dane
+          Zapisz
         </button>
-        <button mat-raised-button class="hoverable" type="button" (click)="changePassword()">
-          Zmień Hasło
+        <button mat-raised-button [disabled]="!form1.valid" (click)="updateUser()">
+          Zapisz dane
         </button>
       </mat-grid-tile>
 
@@ -71,8 +70,7 @@
 
       <mat-grid-tile colspan="1" rowspan="2">
         <mat-form-field>
-          <input matInput type="password" [(ngModel)]="passConfirm" name="passConfirm" #passConfirmRef="ngModel"
-                 placeholder="Potwierdź nowe hasło"
+          <input matInput type="password" [(ngModel)]="passConfirm" name="passConfirm" #passConfirmRef="ngModel" placeholder="Potwierdź nowe hasło"
           />
           <mat-error *ngIf="passConfirm != newPass">Wpisz poprawne hasło!</mat-error>
         </mat-form-field>
@@ -90,11 +88,7 @@
       </mat-grid-tile>
 
       <mat-grid-tile colspan="1" rowspan="2">
-        <button mat-raised-button [disabled]="!form1.valid" (click)="updateUser()">
-          Zapisz
-        </button>
-        <button mat-raised-button [disabled]="!newPass || !oldPass ||  (passConfirm != newPass)"
-                (click)="changePassword()">
+        <button mat-raised-button [disabled]="!newPass || !oldPass ||  (passConfirm != newPass)" (click)="changePassword()">
           Zmień hasło
         </button>
       </mat-grid-tile>
