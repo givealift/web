@@ -26,7 +26,7 @@ import localePl from '@angular/common/locales/pl';
 import { registerLocaleData } from '@angular/common';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserInfoComponent } from './user-profile/user-info/user-info.component';
-import { MatIconRegistry, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
+import { MatIconRegistry, MatSnackBarModule } from '@angular/material';
 import { UserRouteComponent } from './user-profile/user-route/user-route.component';
 import { UserEditFormComponent } from './user-profile/user-edit-form/user-edit-form.component';
 import { PaginationComponent } from './shered/pagination/pagination.component';
@@ -38,6 +38,7 @@ import { SpinnerProvider } from './_providers/spinner-provider';
 import { MessagingService } from './_services/messaging.service';
 import { SubscribeComponent } from './subscribe/subscribe.component';
 import { SubscriptionService } from './_services/subscription.service';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 registerLocaleData(localePl);
 
@@ -61,11 +62,13 @@ registerLocaleData(localePl);
     FavouriteRoutesComponent,
     RouteDetailsComponent,
     SpinnerComponent,
-    SubscribeComponent
+    SubscribeComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     FormsModule,
     ReactiveFormsModule,
+    MatSnackBarModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
