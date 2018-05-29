@@ -24,6 +24,8 @@ export class RouteDetailsComponent implements OnInit {
 
   isDataReady: boolean = false;
 
+  isOwner: boolean = false;
+
   constructor(
     private routeService: RouteService,
     private userService: UserService,
@@ -41,6 +43,9 @@ export class RouteDetailsComponent implements OnInit {
       route => {
         this.routeDetails = route;
         this.userData = route.galUserPublicResponse;
+
+        this.isOwner = (this.userData.userId == parseInt(localStorage.getItem('id')));
+
         this.userService.getPhoto(this.userData.userId)
           .subscribe(photo => {
             let urlCreator = window.URL;
@@ -52,6 +57,17 @@ export class RouteDetailsComponent implements OnInit {
         this.router.navigate['user-routes'];
       }
     );
+  }
+
+  reserve() {
+    this.routeService.reserve(this.routeDetails.routeId, this.userData.userId).subscribe(
+      () => {
+        console.log("success!");
+      },
+      error => {
+        console.log(error);
+      }
+    )
   }
 
 }
