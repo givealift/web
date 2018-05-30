@@ -58,3 +58,9 @@ button:hover {
 .align-vertically {
   margin-top: 5px;
 }
+
+.mat-icon.bigIcon {
+  font-size: 28px;
+  height: 28px;
+  width: 28px;
+}

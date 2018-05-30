@@ -22,6 +22,7 @@ mat-grid-tile .align-left {
 }
 
 mat-card:hover button {
+  display: block;
   animation: fadeIn 0.25s;
 }
 
