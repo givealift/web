@@ -16,6 +16,8 @@ import { CitySearchComponent } from './city-search/city-search.component';
 import { UserService } from './_services/user.service';
 import { MaterialModule } from './_modules/material.module';
 import { DataProviderService } from './_services/data-provider.service';
+import { MessagingService } from './_services/messaging.service';
+import { SubscribeComponent } from './subscribe/subscribe.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -33,7 +35,8 @@ describe('AppComponent', () => {
         LoginComponent,
         RegisterComponent,
         NewRouteComponent,
-        CitySearchComponent
+        CitySearchComponent,
+        SubscribeComponent
       ],
       imports: [
         RouterModule.forRoot(appRoutes),
@@ -45,7 +48,8 @@ describe('AppComponent', () => {
         { provide: APP_BASE_HREF, useValue: "/" },
         AuthService,
         UserService,
-        DataProviderService
+        DataProviderService,
+        MessagingService
       ]
     }).compileComponents();
   }));

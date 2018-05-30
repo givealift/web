@@ -1,0 +1,29 @@
+.subscription {
+    display: flex;
+    flex-direction: column;    
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 700pt;   
+}
+
+.subscription #sub-btn-wrapper {
+    display: flex;
+}
+
+.subscription #sub-btn-wrapper button {
+    margin: 10px;
+}
+
+mat-card {
+    width: 60%;
+    border-radius: 25px;
+}
+
+.btn-search {
+    border-radius: 10px;
+    max-width: 90px;
+    width: 100%;
+    padding: 5px;
+    margin: 15px;
+}

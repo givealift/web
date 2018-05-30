@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-// const compression = require('compression');
+const compression = require('compression');
 const app = express();
 
 /**
@@ -24,7 +24,7 @@ const forceSSL = function() {
 /**
  * Gzip - should reduce page loads time by 15-20%
  */
-// app.use(compression());
+app.use(compression());
 
 app.use(forceSSL());
 
