@@ -19,6 +19,14 @@ export class CityService {
     constructor(private http: HttpClient, private citiesProvider: CitiesProvider) {
     }
 
+    getAll(): City[] {
+        return this.citiesProvider.getCities();
+    }
+
+    get(cityId: number): City | null {
+        return this.citiesProvider.getCities().find(city => city.cityId === cityId) || null;
+    }
+
     searchCity(cityName: string): Observable<City | null> {
         return this.searchCities(cityName, 1)
             .mergeMap(cities => {
