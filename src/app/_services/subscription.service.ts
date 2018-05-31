@@ -54,5 +54,9 @@ export class SubscriptionService {
   getUserSubscriptions(userId: string = this.authService.getCurrentUserId()) {
     return this.getAll()
       .map(data => data.filter(s => s.subscriber === userId));
-  };
-}
+  }
+
+  deleteSubscription( subscriptionId: String = "" ) {
+
+  }
+};
