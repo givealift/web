@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../_models';
 import { UserService } from '../../_services/user.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { RatingProvider } from '../../_providers/rating-provider';
 
 @Component({
   selector: 'app-profile-info',
@@ -23,7 +24,9 @@ export class UserInfoComponent {
 
   @ViewChild('form') form: NgForm;
 
-  constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private sanitizer: DomSanitizer) {
+  constructor(private route: ActivatedRoute,
+    private router: Router, private userService: UserService,
+    private sanitizer: DomSanitizer, private ratingProvider: RatingProvider) {
     this.route.params.subscribe(
       param => this.userId = param.id,
       error => this.router.navigate['home']
@@ -31,6 +34,7 @@ export class UserInfoComponent {
     this.userService.getById(this.userId).subscribe(user => {
       if (user != null) {
         this.user = user;
+        this.user.userId = this.userId;
         this.userService.getPhoto(this.userId)
           .subscribe(photo => {
             let urlCreator = window.URL;
@@ -42,6 +46,10 @@ export class UserInfoComponent {
         this.router.navigate['home'];
       }
     });
+  }
+
+  rateUser() {
+    this.ratingProvider.open(this.sanitizedPhoto, this.user);
   }
 
 }

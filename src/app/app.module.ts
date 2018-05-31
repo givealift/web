@@ -40,6 +40,8 @@ import { MessagingService } from './_services/messaging.service';
 import { SubscribeComponent } from './subscribe/subscribe.component';
 import { SubscriptionService } from './_services/subscription.service';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { RatingComponent } from './rating/rating.component';
+import { RatingProvider } from './_providers/rating-provider';
 
 registerLocaleData(localePl);
 
@@ -66,6 +68,7 @@ registerLocaleData(localePl);
     NotificationComponent,
     SubscribeComponent,
     ChangePasswordComponent,
+    RatingComponent,
   ],
   imports: [
     FormsModule,
@@ -89,10 +92,11 @@ registerLocaleData(localePl);
     SpinnerProvider,
     MessagingService,
     SubscriptionService,
+    RatingProvider,
     { provide: APP_INITIALIZER, useFactory: citiesProviderFactory, deps: [CitiesProvider], multi: true },
     { provide: MAT_DATE_LOCALE, useValue: 'pl' },
   ],
-  entryComponents: [SpinnerComponent],
+  entryComponents: [SpinnerComponent, RatingComponent],
   bootstrap: [AppComponent]
 })
 

@@ -39,3 +39,7 @@ a.mat-menu-item > mat-icon {
 .img-circle {
     border-radius: 50%;
 }
+
+.rating {
+    text-align: center;
+}
