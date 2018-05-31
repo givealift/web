@@ -26,14 +26,7 @@
     <mat-grid-tile colspan="8" rowspan="1">
       <div class="align-vertically">
         <h5>
-          <strong>{{subData?.fromCityName}}</strong>
-        </h5>
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="8" rowspan="1">
-      <div class="align-vertically">
-        <h5>
-          <strong>{{subData?.toCityName}}</strong>
+          <strong>{{subData?.fromCityName}}</strong> &#10145; <strong>{{subData?.toCityName}}</strong>
         </h5>
       </div>
     </mat-grid-tile>
@@ -41,14 +34,8 @@
       <div class="align-vertically">
         <h5>
           <strong>{{subData?.notificationType}}</strong>
-        </h5>
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="5" rowspan="1">
-      <div class="align-vertically">
-        <h5>
-          <strong *ngIf="notificationType==='BOT'">Aplikacja iOS</strong>
-          <strong *ngIf="notificationType==='PUSH'">Email</strong>
+          <strong *ngIf="notificationType=='BOT'">Aplikacja iOS</strong>
+          <strong *ngIf="notificationType=='PUSH'">Email</strong>
         </h5>
       </div>
     </mat-grid-tile>

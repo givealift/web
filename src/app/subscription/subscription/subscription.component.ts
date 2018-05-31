@@ -41,7 +41,8 @@ export class SubscriptionComponent implements OnInit {
     if ( this.subData!== null && this.subData !== []
       && this.subData.subscriber!== undefined
       && this.subData.fromCityId !== undefined && this.subData.toCityId !== undefined
-      && this.subData.fromCityName !== undefined && this.subData.toCityName !== undefined )
+      && this.subData.fromCityName !== undefined && this.subData.toCityName !== undefined
+      && ( this.subData.notificationType !== 'PUSH' || this.subData.notificationType === 'BOT' ) )
     {
       this.isDataReady = true;
     }

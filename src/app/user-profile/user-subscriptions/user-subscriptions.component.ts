@@ -42,10 +42,10 @@ export class UserSubscriptionsComponent implements OnInit {
      * TO DO: usunac
      * **/
     this.usersSubs = [
-      {'date':"2018-06-25T23:30:00.259Z", 'email': "user1@gmail.pl", 'fromCityId': 1, 'notificationyType':"POST", 'subscriber':"101", 'toCityId':2},
-      {'date':"2018-06-25T23:30:00.259Z", 'email': "user1@gmail.pl", 'fromCityId': 1, 'notificationyType':"BOT", 'subscriber':"101", 'toCityId':2},
-      {'date':"2018-06-26T23:45:00.259Z", 'email': "user2@gmail.pl", 'fromCityId': 3, 'notificationyType':"POST", 'subscriber':"101", 'toCityId':4},
-      {'date':"2018-06-26T23:45:00.259Z", 'email': "user2@gmail.pl", 'fromCityId': 3, 'notificationyType':"BOT", 'subscriber':"101", 'toCityId':4}
+      {'date':"2018-06-25T23:30:00.259Z", 'email': "user1@gmail.pl", 'fromCityId': 1, 'notificationType':"POST", 'subscriber':"101", 'toCityId':2},
+      {'date':"2018-06-25T23:30:00.259Z", 'email': "user1@gmail.pl", 'fromCityId': 1, 'notificationType':"BOT", 'subscriber':"101", 'toCityId':2},
+      {'date':"2018-06-26T23:45:00.259Z", 'email': "user2@gmail.pl", 'fromCityId': 3, 'notificationType':"POST", 'subscriber':"101", 'toCityId':4},
+      {'date':"2018-06-26T23:45:00.259Z", 'email': "user2@gmail.pl", 'fromCityId': 3, 'notificationType':"BOT", 'subscriber':"101", 'toCityId':4}
     ];
     console.log("STILL MOCKUP\nuserSubs = mockup");
     console.log("userSubs = ", this.usersSubs);
