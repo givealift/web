@@ -21,6 +21,8 @@ export class UserInfoComponent {
 
   isDataReady: boolean = false;
 
+  isHimself: boolean;
+
 
   @ViewChild('form') form: NgForm;
 
@@ -35,6 +37,7 @@ export class UserInfoComponent {
       if (user != null) {
         this.user = user;
         this.user.userId = this.userId;
+        this.isHimself = (parseInt(localStorage.getItem('id')) == this.userId);
         this.userService.getPhoto(this.userId)
           .subscribe(photo => {
             let urlCreator = window.URL;
@@ -48,7 +51,7 @@ export class UserInfoComponent {
     });
   }
 
-  rateUser() {
+  openRateWindow() {
     this.ratingProvider.open(this.sanitizedPhoto, this.user);
   }
 

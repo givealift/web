@@ -28,7 +28,7 @@
       </h5>
     </mat-grid-tile>
     <mat-grid-tile colspan="2" rowspan="1">
-      <button mat-raised-button (click)="rateUser()">
+      <button *ngIf="!isHimself" mat-raised-button (click)="openRateWindow()">
         Oceń użytkownika
       </button>
     </mat-grid-tile>
