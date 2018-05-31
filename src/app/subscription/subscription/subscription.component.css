@@ -4,8 +4,8 @@
 }
 
 mat-card {
-  min-width: 850px;
-  min-height: 205px;
+  min-width: 350px;
+  min-height: 175px;
   border-radius: 25px;
   margin-top: 20px;
   opacity: 1;

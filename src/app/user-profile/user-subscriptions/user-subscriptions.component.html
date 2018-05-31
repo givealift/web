@@ -1,3 +1,3 @@
 <div>
-    <app-subscription *ngFor="let sub of usersSubs" [subData]="sub"></app-subscription>
+    <app-subscription *ngFor="let sub of usersSubs; let i = index" [subData]="sub" [isThisMockUp]="isThisMockUp[i]"></app-subscription>
 </div>

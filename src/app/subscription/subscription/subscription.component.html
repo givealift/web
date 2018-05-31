@@ -1,16 +1,16 @@
 <mat-card *ngIf="isDataReady">
   <mat-grid-list cols="10" rows="6" rowHeight="33px" gutterSize="0px">
     <mat-grid-tile colspan="10" rows="2">
-      <h4>
+      <h6>
         <mat-icon class="icon-align">alarm</mat-icon>
         <strong>{{subData?.date | date:'EEEE, d MMMM':'':'pl'}}</strong>
-      </h4>
+      </h6>
     </mat-grid-tile>
     <mat-grid-tile colspan="8" rowspan="1">
       <div class="align-vertically">
-        <h5>
+        <p>
           <strong>{{subData?.subscriber}}</strong>
-        </h5>
+        </p>
       </div>
     </mat-grid-tile>
     <mat-grid-tile colspan="2" rowspan="4" class="right-border">
@@ -25,18 +25,18 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="8" rowspan="1">
       <div class="align-vertically">
-        <h5>
-          <strong>{{subData?.fromCityName}}</strong> &#10145; <strong>{{subData?.toCityName}}</strong>
-        </h5>
+        <p>
+          <strong>{{subData?.from?.name}}</strong> &#10145; <strong>{{subData?.to?.name}}</strong>
+        </p>
       </div>
     </mat-grid-tile>
-    <mat-grid-tile colspan="3" rowspan="1">
+    <mat-grid-tile colspan="8" rowspan="1">
       <div class="align-vertically">
-        <h5>
-          <strong>{{subData?.notificationType}}</strong>
-          <strong *ngIf="notificationType=='BOT'">Bot messengerowy</strong>
-          <strong *ngIf="notificationType=='PUSH'">Web i Aplikacja iOS</strong>
-        </h5>
+        <p>
+          <strong>{{subData?.notificationType}}, czyli: </strong>
+          <strong *ngIf="subData?.notificationType==='BOT'">Bot messengerowy</strong>
+          <strong *ngIf="subData?.notificationType==='PUSH'">Web i Aplikacja iOS</strong>
+        </p>
       </div>
     </mat-grid-tile>
   </mat-grid-list>

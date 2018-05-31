@@ -13,17 +13,33 @@ mat-grid-tile .align-left {
 }
 
 .show-on-hover button {
-  /*display: none;*/
+  display: block;
 }
 
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
+
 @keyframes fadeIn {
-  from { opacity: 1; }
-  to { opacity: 0.75; }
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 mat-card:hover button {
   display: block;
-  animation: fadeIn 0.25s;
+  animation:
+      fadeOut 1s 0s 1,
+      fadeIn 1s 1s 1;
 }
 
 mat-card:hover {
@@ -31,11 +47,12 @@ mat-card:hover {
 }
 
 button {
-  transition: all 0.5s;
+  transition: all 5s;
 }
 
 button:hover {
-  color: white;
+  color: dimgrey;
+
 }
 
 .bottom-border {
