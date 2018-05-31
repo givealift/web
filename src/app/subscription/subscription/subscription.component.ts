@@ -11,9 +11,10 @@ export class SubscriptionComponent implements OnInit {
   subData: any;
   isDataReady: boolean = false;
 
-  constructor() { }
+  constructor() { this.isDataReady = false; }
 
   ngOnInit() {
+
     //getFromCity, getToCity //byId
     //date
     //notificationType
@@ -24,19 +25,27 @@ export class SubscriptionComponent implements OnInit {
      *
      * **/
 
-    if( this.subData.fromCityId == 1 ) { this.subData.setParameter("fromCityName", "Kraków"); }
-    if( this.subData.fromCityId == 2 ) { this.subData.setParameter("fromCityName", "Warszawa"); }
-    if( this.subData.fromCityId == 3 ) { this.subData.setParameter("fromCityName", "Łódź"); }
-    if( this.subData.fromCityId == 4 ) { this.subData.setParameter("fromCityName", "Katowice"); }
+    if ( this.subData.fromCityId === 1 ) { this.subData.fromCityName = "Kraków"; }
+    if ( this.subData.fromCityId === 2 ) { this.subData.fromCityName = "Warszawa"; }
+    if ( this.subData.fromCityId === 3 ) { this.subData.fromCityName = "Łódź"; }
+    if ( this.subData.fromCityId === 4 ) { this.subData.fromCityName = "Katowice"; }
 
-    if( this.subData.toCityId == 1 ) { this.subData.setParameter("toCityName", "Kraków"); }
-    if( this.subData.toCityId == 2 ) { this.subData.setParameter("toCityName", "Warszawa"); }
-    if( this.subData.toCityId == 3 ) { this.subData.setParameter("toCityName", "Łódź"); }
-    if( this.subData.toCityId == 4 ) { this.subData.setParameter("toCityName", "Katowice"); }
+    if ( this.subData.toCityId === 1 ) { this.subData.toCityName = "Kraków"; }
+    if ( this.subData.toCityId === 2 ) { this.subData.toCityName = "Warszawa"; }
+    if ( this.subData.toCityId === 3 ) { this.subData.toCityName = "Łódź"; }
+    if ( this.subData.toCityId === 4 ) { this.subData.toCityName = "Katowice"; }
 
-    this.subData.setParameter("subscriber", "Nazwisko Imie"); //Znalezc nazwe uzytkownika po Id?
+    if( this.subData!== null && this.subData.subscriber !== undefined ) this.subData.subscriber = "Nazwisko Imie";
+    //Znalezc nazwe uzytkownika po Id?
 
-    this.isDataReady = true;
+    if ( this.subData!== null && this.subData !== []
+      && this.subData.subscriber!== undefined
+      && this.subData.fromCityId !== undefined && this.subData.toCityId !== undefined
+      && this.subData.fromCityName !== undefined && this.subData.toCityName !== undefined )
+    {
+      this.isDataReady = true;
+    }
+
     console.log("subData = ", this.subData);
 
   }
