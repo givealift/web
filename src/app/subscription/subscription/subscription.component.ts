@@ -53,7 +53,7 @@ export class SubscriptionComponent implements OnInit {
 
     this.setupMockData();
     this.verifyData();
-    this.debugLogging( true );
+    this.debugLogging();
 
   }
 
@@ -83,12 +83,6 @@ export class SubscriptionComponent implements OnInit {
   }
 
   buttonSearchBasedOnSubscription() {
-    /**
-     * TO DO: dodać przekierowanie z parametrami
-     * **/
-    console.log("TO DO: zaimplementować search - przekierowanie z parametrami");
-    // this.router.navigate( "/route-list?from=" + this.subData.from.cityId.toString()
-    //     + "&to=" + this.subData.to.cityId.toString() + "&date=" + this.subData.date );
     this.searchConnections();
   }
 
@@ -110,7 +104,7 @@ export class SubscriptionComponent implements OnInit {
               if ( isNullOrUndefined(routes) || routes.length === 0 ) {
                   this.foundNothing = true;
                   this.showSpinner = false;
-                  this.debugLoggingSearch( true );
+                  this.debugLoggingSearch();
                   return;
               } else {
                   const dateString = moment(this.date.value).format('YYYY-MM-DD');
@@ -119,7 +113,7 @@ export class SubscriptionComponent implements OnInit {
                   this.dataTransferService.storeData(`route-list/${resultsTag}`, routes);
                   this.router.navigate([`/route-list`], { queryParams: { from: routes[0].from.city.cityId, to: routes[0].to.city.cityId, date: dateString } });
                   this.showSpinner = false;
-                  this.debugLoggingSearch( true );
+                  this.debugLoggingSearch();
               }
           }, err => {
             this.showSpinner = false;
@@ -127,7 +121,7 @@ export class SubscriptionComponent implements OnInit {
   }
 
   debugLoggingSearch( isLoggingOn: boolean = false ) {
-      /** logging **/
+      /** debug logging **/
       if( isLoggingOn ) {
           if( this.foundNothing ) { console.log("foundNoConnections\nfoundRoutes = ", this.foundRoutes); }
           else { console.log("foundSomeConnections\nfoundRoutes = ", this.foundRoutes); }
@@ -137,7 +131,7 @@ export class SubscriptionComponent implements OnInit {
   }
 
   debugLogging( isLoggingOn: boolean = false ) {
-      /** DEBUG **/
+      /** DEBUG logging **/
       if (isNullOrUndefined(this.subData)) {
         console.log("FALSE: subData=undefined/null=", this.subData);
       }
@@ -163,7 +157,7 @@ export class SubscriptionComponent implements OnInit {
       }
       console.log("isDataReady = ", this.isDataReady);
       console.log("subData = ", this.subData);
-      /** koniec DEBUGu **/
+      /** **/
   }
 
   setupMockData() {
