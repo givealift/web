@@ -4,12 +4,12 @@
 }
 
 mat-card {
-  min-width: 280px;
-  min-height: 72px;
-  border-radius: 25px;
+  min-width: 750px;
+  min-height: 36px;
+  border-radius: 5px;
   margin-top: 5px;
   opacity: 1;
-  background: white;
+  background: #efefef;
   color: black;
 }
 
@@ -20,6 +20,10 @@ mat-card {
 
 .show-on-hover button {
   display: none;
+  size: 36px;
+  font-size: 36px;
+  height: 36px;
+  width: 36px
 }
 
 @keyframes fadeIn {
@@ -33,9 +37,17 @@ mat-card:hover button {
 }
 
 mat-card:hover {
-  box-shadow: 0 5px 4px -4px black;
+  box-shadow: 0px 5px 20px -5px black;
   transform: scale(1.025);
   transition: all 0.25s;
+}
+
+mat-card.elevationTransition {
+    @include mat-elevation(10);
+    @include mat-elevation-transition;
+    &:active {
+        @include mat-elevation(8);
+    }
 }
 
 button {
@@ -70,7 +82,7 @@ button:hover {
   width: 28px;
 }
 
-p.smalltext {
+.smalltext {
   font-size: 9px;
   height: 9px;
   color: #495057;
