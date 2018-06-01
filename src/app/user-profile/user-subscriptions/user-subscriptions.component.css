@@ -9,7 +9,7 @@ div {
 
 mat-card {
   min-width: 800px;
-  min-height: 600px;
+  min-height: 36px;
   border-radius: 25px;;
   background: white;
   margin-top: 5px;
