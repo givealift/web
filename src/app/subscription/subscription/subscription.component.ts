@@ -2,6 +2,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { RouteSubscription, IRouteSubscription } from "../../_models/route-subscription";
 import { isNullOrUndefined } from "util";
 import { SubscriptionService } from "../../_services/subscription.service";
+import { Router } from "@angular/router";
+import { RouteService } from "../../_services/route.service";
+import { Route } from "../../_models";
+import * as moment from "moment";
+import { FormControl, Validators } from "@angular/forms";
+import { DataProviderService } from "../../_services/data-provider.service";
 
 @Component({
   selector: 'app-subscription',
@@ -14,12 +20,33 @@ export class SubscriptionComponent implements OnInit {
   subData: IRouteSubscription;
   isDataReady: boolean = false;
 
+  /**Copied from HomeComponent - potrzebne do searchConnections()**/
+  showSpinner: boolean;
+  foundRoutes: Array<Route>;
+  foundNothing: boolean;
+  date: FormControl;
+  //routeService w constructorze
+  /** **/
+
+
   /**mockup do usuniecie*/
   @Input()
   isThisMockUp: boolean;
 
-  constructor( private subService: SubscriptionService ) {
+  constructor( private subService: SubscriptionService,
+               private router: Router,
+               private routeService: RouteService,
+               /** **/
+               private dataTransferService: DataProviderService )
+               /** **/
+  {
       this.isDataReady = false;
+      /**Copied from HomeComponent - potrzebne do searchConnections()**/
+      this.showSpinner = false;
+      this.foundRoutes = null;
+      this.foundNothing = false;
+      this.date = null;
+      /** **/
   }
 
   ngOnInit() {
@@ -60,7 +87,53 @@ export class SubscriptionComponent implements OnInit {
      * TO DO: dodać przekierowanie z parametrami
      * **/
     console.log("TO DO: zaimplementować search - przekierowanie z parametrami");
-    //przekierowanie
+    // this.router.navigate( "/route-list?from=" + this.subData.from.cityId.toString()
+    //     + "&to=" + this.subData.to.cityId.toString() + "&date=" + this.subData.date );
+    this.searchConnections();
+  }
+
+  searchConnections() {
+      /** Copied from HomeComponent **/
+      let fromCity: string = this.subData.from.name;
+      let toCity: string = this.subData.to.name;
+      this.date = new FormControl(this.subData.date, [Validators.required]);
+      /** koniec podstawianych na twardo parametrów **/
+
+      this.showSpinner = true;
+      this.foundRoutes = null;
+      this.foundNothing = false;
+      this.routeService
+          .search(fromCity, toCity, this.date.value)
+          .subscribe(routes => {
+              this.foundRoutes = routes;
+              console.log("routes = ", routes);
+              if ( isNullOrUndefined(routes) || routes.length === 0 ) {
+                  this.foundNothing = true;
+                  this.showSpinner = false;
+                  this.debugLoggingSearch( true );
+                  return;
+              } else {
+                  const dateString = moment(this.date.value).format('YYYY-MM-DD');
+                  const resultsTag = this.dataTransferService.taggedResults(routes[0].from.date.cityId, routes[0].to.date.cityId, dateString);
+
+                  this.dataTransferService.storeData(`route-list/${resultsTag}`, routes);
+                  this.router.navigate([`/route-list`], { queryParams: { from: routes[0].from.city.cityId, to: routes[0].to.city.cityId, date: dateString } });
+                  this.showSpinner = false;
+                  this.debugLoggingSearch( true );
+              }
+          }, err => {
+            this.showSpinner = false;
+          });
+  }
+
+  debugLoggingSearch( isLoggingOn: boolean = false ) {
+      /** logging **/
+      if( isLoggingOn ) {
+          if( this.foundNothing ) { console.log("foundNoConnections\nfoundRoutes = ", this.foundRoutes); }
+          else { console.log("foundSomeConnections\nfoundRoutes = ", this.foundRoutes); }
+          console.log("dateString = ", moment(this.date.value).format('YYYY-MM-DD') );
+      }
+      /** **/
   }
 
   debugLogging( isLoggingOn: boolean = false ) {

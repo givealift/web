@@ -1,26 +1,32 @@
 <mat-card *ngIf="isDataReady">
-    <mat-grid-list cols="10" rows="3" rowHeight="36px" gutterSize="0px">
-        <mat-grid-tile colspan="8" rows="1" class="border-bottom">
+    <mat-grid-list cols="10" rowHeight="18px" gutterSize="0px">
+        <mat-grid-tile colspan="8" rowspan="2" class="border-bottom">
             <h6>
                 <mat-icon class="icon-align">alarm</mat-icon>
                 <strong>{{subData?.date | date:'EEEE, d MMMM':'':'pl'}}</strong>
             </h6>
         </mat-grid-tile>
-        <mat-grid-tile colspan="2" rowspan="2" class="right-border">
+        <mat-grid-tile colspan="2" rowspan="5" class="right-border">
             <div class="align-left" class="show-on-hover">
-                <button mat-icon-button matTooltipShowDelay="100" matTooltip="Sprawdź trasy" matTooltipPosition="right" (click)="buttonSearchBasedOnSubscription()">
+                <button *ngIf="!showSpinner" mat-icon-button matTooltipShowDelay="100" matTooltip="Sprawdź trasy" matTooltipPosition="right" (click)="buttonSearchBasedOnSubscription()">
                     <mat-icon class="bigIcon">youtube_searched_for</mat-icon>
                 </button>
+                <mat-spinner class="spinner" [diameter]="28" [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
                 <button mat-icon-button matTooltipShowDelay="100" matTooltip="Anuluj obserwację" matTooltipPosition="right" (click)="buttonRemoveSubscription()">
                     <mat-icon class="bigIcon">delete_forever</mat-icon>
                 </button>
             </div>
         </mat-grid-tile>
-        <mat-grid-tile colspan="8" rowspan="1">
+        <mat-grid-tile colspan="8" rowspan="2">
             <div class="align-vertically">
                 <mat-icon class="icon-align">directions_car</mat-icon>
                 <strong>{{subData?.from?.name}}</strong> &#10145; <strong>{{subData?.to?.name}}</strong>
             </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="8" rowspan="2" class="border-top" *ngIf="foundNothing">
+            <p class="smalltext">
+              Nie znaleźliśmy żadnego połączenia.
+            </p>
         </mat-grid-tile>
     </mat-grid-list>
 </mat-card>

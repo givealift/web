@@ -55,6 +55,11 @@ button:hover {
   top: 3px;
 }
 
+.spinner-align {
+  position: relative;
+  top: 8px;
+}
+
 .align-vertically {
   margin-top: 5px;
 }
@@ -63,4 +68,10 @@ button:hover {
   font-size: 28px;
   height: 28px;
   width: 28px;
+}
+
+p.smalltext {
+  font-size: 9px;
+  height: 9px;
+  color: #495057;
 }

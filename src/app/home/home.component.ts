@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { DataProviderService } from '../_services/data-provider.service';
 import { MessagingService } from '../_services/messaging.service';
 import { Subject } from 'rxjs';
+import {isNullOrUndefined} from "util";
 
 
 @Component({
@@ -62,7 +63,7 @@ export class HomeComponent implements OnInit {
       .search(fromCity, toCity, this.date.value)
       .subscribe(routes => {
 
-        if (routes.length === 0) {
+        if ( isNullOrUndefined(routes) || routes.length === 0 ) {
           this.foundNothing = true;
           this.showSpinner = false;
           return;
