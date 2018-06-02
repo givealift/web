@@ -11,6 +11,7 @@ import { CityService } from '../../_services/city.service';
 import { CitiesProvider } from '../../_providers/cities-provider';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RouteService } from '../../_services/route.service';
+import { RouteSubscription } from '../../_models/route-subscription';
 
 describe('SubscriptionComponent', () => {
   let component: SubscriptionComponent;
@@ -42,6 +43,7 @@ describe('SubscriptionComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SubscriptionComponent);
     component = fixture.componentInstance;
+    component.subData = new RouteSubscription();
     fixture.detectChanges();
   });
 
