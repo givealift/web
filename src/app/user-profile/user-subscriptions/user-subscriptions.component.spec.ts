@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserSubscriptionsComponent } from './user-subscriptions.component';
-import { SubscriptionComponent } from '../../subscription/subscription/subscription.component';
+import { SubscriptionComponent } from '../../subscription/subscription.component';
 import { MaterialModule } from '../../_modules/material.module';
 import { SubscriptionService } from '../../_services/subscription.service';
 import { HttpClientModule } from '@angular/common/http';
