@@ -115,6 +115,17 @@ export class UserSubscriptionsComponent implements OnInit {
           this.usersSubs.push( this.tmpSub );
           this.isThisMockUp.push( true );                /** do usuniecia **/
 
+          this.tmpSub = new RouteSubscription();
+          this.tmpSub.date = null;
+          this.tmpSub.email = "user1@gmail.pl";
+          this.tmpSub.from.cityId = 1;
+          this.tmpSub.to.cityId = 4;
+          this.tmpSub.notificationType = "PUSH";
+          this.tmpSub.subscriber = "#idSubskrybenta";
+          //this.tmpSub.routeId = 105;
+          this.usersSubs.push( this.tmpSub );
+          this.isThisMockUp.push( true );                /** do usuniecia **/
+
           console.log("STILL MOCKUP\nuserSubs = mockup");
           console.log("userSubs = ", this.usersSubs);
       }

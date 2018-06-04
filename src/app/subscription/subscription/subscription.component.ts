@@ -19,6 +19,7 @@ export class SubscriptionComponent implements OnInit {
   @Input()
   subData: IRouteSubscription;
   isDataReady: boolean = false;
+  frontDate: string = null;
 
   /**Copied from HomeComponent - potrzebne do searchConnections()**/
   showSpinner: boolean;
@@ -54,19 +55,28 @@ export class SubscriptionComponent implements OnInit {
     this.setupMockData();
     this.verifyData();
     this.debugLogging();
-
   }
 
   verifyData() {
-      if (!isNullOrUndefined(this.subData)
+      if ( !isNullOrUndefined(this.subData)
         && !isNullOrUndefined(this.subData.subscriber)
         && !isNullOrUndefined(this.subData.from.cityId) && !isNullOrUndefined(this.subData.to.cityId)
         && !isNullOrUndefined(this.subData.from.name) && !isNullOrUndefined(this.subData.to.name)
-        && this.subData.notificationType === "PUSH") {
-            this.isDataReady = true;
+        && this.subData.notificationType === "PUSH"
+        && this.subData.date !== undefined )
+      {
+          if ( this.subData.date === null ) {
+              // new FormControl(moment(), [Validators.required])
+              this.frontDate = moment().format('YYYY-MM-DD');
+          }
+          else {
+              this.frontDate = this.subData.date;
+          }
+
+          this.isDataReady = true;
       }
       else {
-        this.isDataReady = false;
+          this.isDataReady = false;
       }
   }
 
@@ -90,7 +100,12 @@ export class SubscriptionComponent implements OnInit {
       /** Copied from HomeComponent **/
       let fromCity: string = this.subData.from.name;
       let toCity: string = this.subData.to.name;
-      this.date = new FormControl(this.subData.date, [Validators.required]);
+      if ( this.subData.date === null ) {
+          this.date = new FormControl(moment(), [Validators.required]);
+      }
+      else {
+          this.date = new FormControl(this.subData.date, [Validators.required]);
+      }
       /** koniec podstawianych na twardo parametrów **/
 
       this.showSpinner = true;
@@ -123,8 +138,15 @@ export class SubscriptionComponent implements OnInit {
   debugLoggingSearch( isLoggingOn: boolean = false ) {
       /** debug logging **/
       if( isLoggingOn ) {
-          if( this.foundNothing ) { console.log("foundNoConnections\nfoundRoutes = ", this.foundRoutes); }
-          else { console.log("foundSomeConnections\nfoundRoutes = ", this.foundRoutes); }
+          if ( this.subData.date === null ) {
+            console.log("subData.date === ", this.subData.date, "\n==>\ndate=", this.date);
+          }
+          if( this.foundNothing ) {
+            console.log("foundNoConnections\nfoundRoutes = ", this.foundRoutes);
+          }
+          else {
+            console.log("foundSomeConnections\nfoundRoutes = ", this.foundRoutes);
+          }
           console.log("dateString = ", moment(this.date.value).format('YYYY-MM-DD') );
       }
       /** **/
@@ -154,6 +176,9 @@ export class SubscriptionComponent implements OnInit {
       }
       else {
         console.log("FALSE: notificationType!=\"PUSH\"=", this.subData.notificationType);
+      }
+      if (this.subData.date === undefined ) {
+        console.log("FALSE: date=undefined", this.subData.date);
       }
       console.log("isDataReady = ", this.isDataReady);
       console.log("subData = ", this.subData);
