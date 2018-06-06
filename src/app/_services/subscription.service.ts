@@ -29,8 +29,6 @@ export class SubscriptionService {
       return;
     }
 
-    date = date !== null ? date : moment();
-
     const [fromStream, toStream] = [from, to].map(city => this.cityService.searchCity(city));
 
     return combineLatest(fromStream, toStream)
@@ -41,7 +39,7 @@ export class SubscriptionService {
             subscriber: +this.authService.getCurrentUserId(),
             fromCityId: fromCity.cityId,
             toCityId: toCity.cityId,
-            date: date.format("YYYY-MM-DD")
+            date: date ? date.format("YYYY-MM-DD") : null
           }
           return this.httpClient.post(this.url, body);
         }
