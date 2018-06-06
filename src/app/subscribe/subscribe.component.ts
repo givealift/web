@@ -26,6 +26,11 @@ export class SubscribeComponent implements OnInit {
   ngOnInit() {
   }
 
+  subscribeForAll() {
+    this.date = null;
+    this.subscribe();
+  }
+  
   subscribe() {
     this.resetState();
     this.showSpinner = true;
