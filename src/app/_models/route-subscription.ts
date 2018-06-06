@@ -9,6 +9,7 @@ export interface IRouteSubscriptionRequest {
 }
 
 export interface IRouteSubscription {
+    subscriptionId: number;
     notificationType: string;
     subscriber: string;
     email: string;

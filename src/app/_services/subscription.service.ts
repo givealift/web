@@ -47,12 +47,18 @@ export class SubscriptionService {
       });
   }
 
-  getAll = () => this.httpClient
-    .get<IRouteSubscription[]>(`${this.url}/all`)
-    .map(data => data.filter(s => moment(s.date).isSameOrAfter() || s.date === null));
+  getAll() {
+    return this.httpClient
+      .get<IRouteSubscription[]>(`${this.url}/all`)
+      .map(data => data.filter(s => moment(s.date).isSameOrAfter() || s.date === null));
+  }
 
   getUserSubscriptions(userId: string = this.authService.getCurrentUserId()) {
     return this.getAll()
       .map(data => data.filter(s => s.subscriber === userId));
+  }
+
+  delete(subscriptionId: number) {
+    return this.httpClient.delete(`${this.url}/${subscriptionId}`)
   }
 }
