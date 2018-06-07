@@ -2,5 +2,9 @@
     <app-subscription *ngFor="let sub of usersSubs; let i = index" [subData]="sub" [isThisMockUp]="isThisMockUp[i]"></app-subscription>
 </mat-card>
 <mat-card *ngIf="isDataReady && usersSubs.length===0">
-    <h5>Nie dodałeś jeszcze żadnych przejazdów do obserwacji.</h5>
+    <mat-grid-list cols="1" rows="1" rowHeight="36px" gutterSize="0px">
+        <mat-grid-tile colspan="1" rowspan="1">
+            <h5>Nie dodałeś jeszcze żadnych przejazdów do obserwacji.</h5>
+        </mat-grid-tile>
+    </mat-grid-list>
 </mat-card>
