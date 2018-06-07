@@ -85,17 +85,18 @@ export class SubscriptionComponent implements OnInit {
   }
 
   buttonRemoveSubscription() {
-    /**
-     * TO DO: dodać backendowe usuwanie po id subscrypcji
-     * **/
-    console.log("TO DO: dodać backendowe usuwanie po id subscrypcji");
-    //fake: usuniecie z listy
-    //this.subData.subscriptionId = "idSubskrypcji";
-    if ( this.isThisMockUp !== true ) {
-      this.subService.delete( this.subData.subscriptionId );
-    }
-    this.subData = new RouteSubscription();
-    this.verifyData();
+      /**
+       * TO DO: dodać backendowe usuwanie po id subscrypcji
+       * **/
+      console.log("TO DO: dodać backendowe usuwanie po id subscrypcji");
+      //fake: usuniecie z listy
+      //this.subData.subscriptionId = "idSubskrypcji";
+      this.debugLoggingDelete( true );
+      if( this.isThisMockUp !== true ) {
+          this.subService.delete( this.subData.subscriptionId );
+      }
+      this.subData = new RouteSubscription();
+      this.verifyData();
   }
 
   buttonSearchBasedOnSubscription() {
@@ -139,6 +140,22 @@ export class SubscriptionComponent implements OnInit {
           }, err => {
             this.showSpinner = false;
           });
+  }
+
+  debugLoggingDelete( isLoggingOn: boolean = false ) {
+    /** debug logging **/
+      if (isLoggingOn) {
+          if ( this.isThisMockUp !== true ) {
+            console.log("isThisMockUp===false");
+            console.log("this.subData.subscriptionId = ", this.subData.subscriptionId);
+            console.log("this.subService.delete( this.subData.subscriptionId );");
+          }
+          else {
+            console.log("isThisMockUp===true");
+            console.log("this.subData.subscriptionId = ", this.subData.subscriptionId);
+            console.log("Can't delete mock-up permanently.");
+          }
+      }
   }
 
   debugLoggingSearch( isLoggingOn: boolean = false ) {
