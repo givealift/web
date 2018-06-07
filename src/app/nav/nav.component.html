@@ -12,7 +12,7 @@
     </button>
 
     <mat-menu #notificationMenu="matMenu" yPosition="below" overlapTrigger="false">
-      <app-notification *ngFor="let notification of notifications" [notification]="notification"></app-notification>
+      <app-notification #notification *ngFor="let notification of notifications" [notification]="notification" (removed)="remove(notification)"></app-notification>
     </mat-menu>
 
 

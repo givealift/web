@@ -98,4 +98,11 @@ export class NavComponent implements OnInit {
   resetTitle() {
     this.titleService.setTitle('GiveALift');
   }
+
+  remove(notification: GalNotification) {
+    let index = this.notifications.indexOf(notification);
+
+    if (index >= 0)
+      this.notifications.splice(index, 1);
+  }
 }
