@@ -16,241 +16,175 @@ import { DataProviderService } from "../_services/data-provider.service";
 })
 export class SubscriptionComponent implements OnInit {
 
-  @Input()
-  subData: IRouteSubscription;
-  isDataReady: boolean = false;
-  frontDate: string = null;
-  isAnyDay: boolean = false;
-  showSpinner2: boolean = false;
+    @Input()
+    subData: IRouteSubscription;
 
-  /**Copied from HomeComponent - potrzebne do searchConnections()**/
-  showSpinner: boolean;
-  foundRoutes: Array<Route>;
-  foundNothing: boolean;
-  date: FormControl;
-  //routeService w constructorze
-  /** **/
+    isDataReady: boolean = false;
+    foundRoutes: Array<Route>;
+    foundNothing: boolean;
+    date: FormControl;
+    frontDate: string = null;
+    isAnyDay: boolean = false;
+    showSpinner: boolean;
+    showSpinner2: boolean = false;
 
+    constructor( private subService: SubscriptionService,
+                 private router: Router,
+                 private routeService: RouteService,
+                 private dataTransferService: DataProviderService )
+    {
+        this.isDataReady = false;
+        this.foundRoutes = null;
+        this.foundNothing = false;
+        this.date = null;
+        this.frontDate = null;
+        this.isAnyDay = false;
+        this.showSpinner = false;
+        this.showSpinner2 = false;
+    }
 
-  /**mockup do usuniecie*/
-  @Input()
-  isThisMockUp: boolean;
+    ngOnInit() {
+        this.verifyData();
+        this.debugLogging();
+    }
 
-  constructor( private subService: SubscriptionService,
-               private router: Router,
-               private routeService: RouteService,
-               /** **/
-               private dataTransferService: DataProviderService )
-               /** **/
-  {
-      this.isDataReady = false;
-      this.frontDate = null;
-      this.isAnyDay = false;
-      this.showSpinner2 = false;
-      /**Copied from HomeComponent - potrzebne do searchConnections()**/
-      this.showSpinner = false;
-      this.foundRoutes = null;
-      this.foundNothing = false;
-      this.date = null;
-      /** **/
-  }
+    verifyData() {
+        if ( !isNullOrUndefined(this.subData)
+          && !isNullOrUndefined(this.subData.subscriber)
+          && !isNullOrUndefined(this.subData.from.cityId) && !isNullOrUndefined(this.subData.to.cityId)
+          && !isNullOrUndefined(this.subData.from.name) && !isNullOrUndefined(this.subData.to.name)
+          && this.subData.notificationType === "PUSH"
+          && this.subData.date !== undefined )
+        {
+            if ( this.subData.date === null ) {
+                this.frontDate = moment().format('YYYY-MM-DD');
+                this.isAnyDay = true;
+            }
+            else {
+                this.frontDate = this.subData.date;
+            }
 
-  ngOnInit() {
+            this.isDataReady = true;
+        }
+        else {
+            this.isDataReady = false;
+        }
+    }
 
-    this.setupMockData();
-    this.verifyData();
-    this.debugLogging();
-  }
+    buttonRemoveSubscription() {
+        this.debugLoggingDelete();
+        this.showSpinner2 = true;
+        this.subService.delete( this.subData.subscriptionId ).subscribe(
+            response => {
+                console.log("successful deletion: ", response);
+                this.showSpinner2 = false;
+            },
+            error => {
+                console.log("error during deletion: ", error);
+                this.showSpinner2 = false;
+            }
+        );
+        this.subData = new RouteSubscription();
+        this.verifyData();
+    }
 
-  verifyData() {
-      if ( !isNullOrUndefined(this.subData)
-        && !isNullOrUndefined(this.subData.subscriber)
-        && !isNullOrUndefined(this.subData.from.cityId) && !isNullOrUndefined(this.subData.to.cityId)
-        && !isNullOrUndefined(this.subData.from.name) && !isNullOrUndefined(this.subData.to.name)
-        && this.subData.notificationType === "PUSH"
-        && this.subData.date !== undefined )
-      {
-          if ( this.subData.date === null ) {
-              // new FormControl(moment(), [Validators.required])
-              this.frontDate = moment().format('YYYY-MM-DD');
-              this.isAnyDay = true;
-          }
-          else {
-              this.frontDate = this.subData.date;
-          }
+    buttonSearchBasedOnSubscription() {
+        this.searchConnections();
+    }
 
-          this.isDataReady = true;
-      }
-      else {
-          this.isDataReady = false;
-      }
-  }
+    searchConnections() {
+        let fromCity: string = this.subData.from.name;
+        let toCity: string = this.subData.to.name;
+        if ( this.subData.date === null ) {
+            this.date = new FormControl(moment(), [Validators.required]);
+        }
+        else {
+            this.date = new FormControl(this.subData.date, [Validators.required]);
+        }
 
-  buttonRemoveSubscription() {
-      //fake: usuniecie z listy
-      //this.subData.subscriptionId = "idSubskrypcji";
-      this.debugLoggingDelete();
-      if( this.isThisMockUp !== true ) {
-          this.showSpinner2 = true;
-          this.subService.delete( this.subData.subscriptionId ).subscribe(
-              response => {
-                  console.log("successful deletion: ", response);
-                  this.showSpinner2 = false;
-              },
-              error => {
-                  console.log("error during deletion: ", error);
-                  this.showSpinner2 = false;
-              }
-          );
-      }
-      this.subData = new RouteSubscription();
-      this.verifyData();
-  }
+        this.showSpinner = true;
+        this.foundRoutes = null;
+        this.foundNothing = false;
+        this.routeService
+            .search(fromCity, toCity, this.date.value)
+            .subscribe(routes => {
+                this.foundRoutes = routes;
+                console.log("routes = ", routes);
+                if ( isNullOrUndefined(routes) || routes.length === 0 ) {
+                    this.foundNothing = true;
+                    this.showSpinner = false;
+                    this.debugLoggingSearch();
+                    return;
+                } else {
+                    const dateString = moment(this.date.value).format('YYYY-MM-DD');
+                    const resultsTag = this.dataTransferService.taggedResults(routes[0].from.date.cityId, routes[0].to.date.cityId, dateString);
 
-  buttonSearchBasedOnSubscription() {
-    this.searchConnections();
-  }
+                    this.dataTransferService.storeData(`route-list/${resultsTag}`, routes);
+                    this.router.navigate([`/route-list`], { queryParams: { from: routes[0].from.city.cityId, to: routes[0].to.city.cityId, date: dateString } });
+                    this.showSpinner = false;
+                    this.debugLoggingSearch();
+                }
+            }, err => {
+              this.showSpinner = false;
+            });
+    }
 
-  searchConnections() {
-      /** Copied from HomeComponent **/
-      let fromCity: string = this.subData.from.name;
-      let toCity: string = this.subData.to.name;
-      if ( this.subData.date === null ) {
-          this.date = new FormControl(moment(), [Validators.required]);
-      }
-      else {
-          this.date = new FormControl(this.subData.date, [Validators.required]);
-      }
-      /** koniec podstawianych na twardo parametrów **/
-
-      this.showSpinner = true;
-      this.foundRoutes = null;
-      this.foundNothing = false;
-      this.routeService
-          .search(fromCity, toCity, this.date.value)
-          .subscribe(routes => {
-              this.foundRoutes = routes;
-              console.log("routes = ", routes);
-              if ( isNullOrUndefined(routes) || routes.length === 0 ) {
-                  this.foundNothing = true;
-                  this.showSpinner = false;
-                  this.debugLoggingSearch();
-                  return;
-              } else {
-                  const dateString = moment(this.date.value).format('YYYY-MM-DD');
-                  const resultsTag = this.dataTransferService.taggedResults(routes[0].from.date.cityId, routes[0].to.date.cityId, dateString);
-
-                  this.dataTransferService.storeData(`route-list/${resultsTag}`, routes);
-                  this.router.navigate([`/route-list`], { queryParams: { from: routes[0].from.city.cityId, to: routes[0].to.city.cityId, date: dateString } });
-                  this.showSpinner = false;
-                  this.debugLoggingSearch();
-              }
-          }, err => {
-            this.showSpinner = false;
-          });
-  }
-
-  debugLoggingDelete( isLoggingOn: boolean = false ) {
-    /** debug logging **/
-      if (isLoggingOn) {
-          if ( this.isThisMockUp !== true ) {
-            console.log("isThisMockUp===false");
-            console.log("this.subData.subscriptionId = ", this.subData.subscriptionId);
-            console.log("this.subService.delete( this.subData.subscriptionId );");
-          }
-          else {
-            console.log("isThisMockUp===true");
+    debugLoggingDelete( isLoggingOn: boolean = false ) {
+        /** debug logging **/
+        if (isLoggingOn) {
             console.log("this.subData.subscriptionId = ", this.subData.subscriptionId);
             console.log("Can't delete mock-up permanently.");
-          }
-      }
-  }
+        }
+        /** **/
+    }
 
-  debugLoggingSearch( isLoggingOn: boolean = false ) {
-      /** debug logging **/
-      if( isLoggingOn ) {
-          if ( this.subData.date === null ) {
-            console.log("subData.date === ", this.subData.date, "\n==>\ndate=", this.date);
-          }
-          if( this.foundNothing ) {
-            console.log("foundNoConnections\nfoundRoutes = ", this.foundRoutes);
-          }
-          else {
-            console.log("foundSomeConnections\nfoundRoutes = ", this.foundRoutes);
-          }
-          console.log("dateString = ", moment(this.date.value).format('YYYY-MM-DD') );
-      }
-      /** **/
-  }
+    debugLoggingSearch( isLoggingOn: boolean = false ) {
+        /** debug logging **/
+        if( isLoggingOn ) {
+            if ( this.subData.date === null ) {
+              console.log("subData.date === ", this.subData.date, "\n==>\ndate=", this.date);
+            }
+            if( this.foundNothing ) {
+              console.log("foundNoConnections\nfoundRoutes = ", this.foundRoutes);
+            }
+            else {
+              console.log("foundSomeConnections\nfoundRoutes = ", this.foundRoutes);
+            }
+            console.log("dateString = ", moment(this.date.value).format('YYYY-MM-DD') );
+        }
+        /** **/
+    }
 
-  debugLogging( isLoggingOn: boolean = false ) {
-      /** DEBUG logging **/
-      if (isNullOrUndefined(this.subData)) {
-        console.log("FALSE: subData=undefined/null=", this.subData);
-      }
-      if (isNullOrUndefined(this.subData.subscriber)) {
-        console.log("FALSE: subscriber=undefined/null=", this.subData.subscriber);
-      }
-      if (isNullOrUndefined(this.subData.from.cityId)) {
-        console.log("FALSE: from=undefined/null=", this.subData.from.cityId);
-      }
-      if (isNullOrUndefined(this.subData.from.name)) {
-        console.log("FALSE: from=undefined/null=", this.subData.from.name);
-      }
-      if (isNullOrUndefined(this.subData.to.cityId)) {
-        console.log("FALSE: from=undefined/null=", this.subData.to.cityId);
-      }
-      if (isNullOrUndefined(this.subData.to.name)) {
-        console.log("FALSE: to=undefined/null=", this.subData.to.name);
-      }
-      if (this.subData.notificationType === "PUSH") { /*console.log("notificationType==\"PUSH\"=", this.subData.notificationType);*/
-      }
-      else {
-        console.log("FALSE: notificationType!=\"PUSH\"=", this.subData.notificationType);
-      }
-      if (this.subData.date === undefined ) {
-        console.log("FALSE: date=undefined", this.subData.date);
-      }
-      console.log("isDataReady = ", this.isDataReady);
-      console.log("subData = ", this.subData);
-      /** **/
-  }
-
-  setupMockData() {
-      /** Fake'owe dane
-       * TO DO: zamienic i usunac
-       *
-       * **/
-      if (this.isThisMockUp === true) {
-        if (this.subData.from.cityId === 1) {
-          this.subData.from.name = "Kraków";
+    debugLogging( isLoggingOn: boolean = false ) {
+        /** DEBUG logging **/
+        if (isNullOrUndefined(this.subData)) {
+          console.log("FALSE: subData=undefined/null=", this.subData);
         }
-        if (this.subData.from.cityId === 2) {
-          this.subData.from.name = "Warszawa";
+        if (isNullOrUndefined(this.subData.subscriber)) {
+          console.log("FALSE: subscriber=undefined/null=", this.subData.subscriber);
         }
-        if (this.subData.from.cityId === 3) {
-          this.subData.from.name = "Łódź";
+        if (isNullOrUndefined(this.subData.from.cityId)) {
+          console.log("FALSE: from=undefined/null=", this.subData.from.cityId);
         }
-        if (this.subData.from.cityId === 4) {
-          this.subData.from.name = "Katowice";
+        if (isNullOrUndefined(this.subData.from.name)) {
+          console.log("FALSE: from=undefined/null=", this.subData.from.name);
         }
-
-        if (this.subData.to.cityId === 1) {
-          this.subData.to.name = "Kraków";
+        if (isNullOrUndefined(this.subData.to.cityId)) {
+          console.log("FALSE: from=undefined/null=", this.subData.to.cityId);
         }
-        if (this.subData.to.cityId === 2) {
-          this.subData.to.name = "Warszawa";
+        if (isNullOrUndefined(this.subData.to.name)) {
+          console.log("FALSE: to=undefined/null=", this.subData.to.name);
         }
-        if (this.subData.to.cityId === 3) {
-          this.subData.to.name = "Łódź";
+        if (this.subData.notificationType === "PUSH") { /*console.log("notificationType==\"PUSH\"=", this.subData.notificationType);*/
         }
-        if (this.subData.to.cityId === 4) {
-          this.subData.to.name = "Katowice";
+        else {
+          console.log("FALSE: notificationType!=\"PUSH\"=", this.subData.notificationType);
         }
-
-        if (this.subData !== null && this.subData.subscriber !== undefined) this.subData.subscriber = "id#subskrybenta1";
-      }
-      /** KONIEC MOCKUPu **/
-  }
-
+        if (this.subData.date === undefined ) {
+          console.log("FALSE: date=undefined", this.subData.date);
+        }
+        console.log("isDataReady = ", this.isDataReady);
+        console.log("subData = ", this.subData);
+        /** **/
+    }
 }
