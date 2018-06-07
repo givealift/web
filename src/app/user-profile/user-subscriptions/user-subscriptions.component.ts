@@ -35,7 +35,7 @@ export class UserSubscriptionsComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.setupMockData();
+      //this.setupMockData();
 
       this.user.userId = parseInt( localStorage.getItem("id") );
       setTimeout(() => this.spinnerProvider.open());
