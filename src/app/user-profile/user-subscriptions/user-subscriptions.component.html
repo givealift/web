@@ -1,3 +1,6 @@
-<mat-card>
+<mat-card *ngIf="isDataReady && usersSubs.length!==0">
     <app-subscription *ngFor="let sub of usersSubs; let i = index" [subData]="sub" [isThisMockUp]="isThisMockUp[i]"></app-subscription>
+</mat-card>
+<mat-card *ngIf="isDataReady && usersSubs.length===0">
+    <h5>Nie dodałeś jeszcze żadnych przejazdów do obserwacji.</h5>
 </mat-card>

@@ -3,6 +3,7 @@ import { User } from "../../_models";
 import { SubscriptionService } from "../../_services/subscription.service";
 import { Router } from "@angular/router";
 import { RouteSubscription, IRouteSubscription } from "../../_models/route-subscription";
+import { SpinnerProvider } from '../../_providers/spinner-provider';
 
 @Component({
   selector: 'app-user-subscriptions',
@@ -20,7 +21,8 @@ export class UserSubscriptionsComponent implements OnInit {
   isThisMockUp: Array<boolean>;
 
   constructor( private subService: SubscriptionService,
-               private router: Router
+               private router: Router,
+               private spinnerProvider: SpinnerProvider
   )
   {
       this.user = new User();
@@ -34,7 +36,7 @@ export class UserSubscriptionsComponent implements OnInit {
 
   ngOnInit() {
     this.user.userId = parseInt( localStorage.getItem("id") );
-
+    setTimeout(() => this.spinnerProvider.open());
     this.subService.getUserSubscriptions( this.user.userId.toString() ).subscribe(
          subscriptions => {
            //this.tmpSub = subscription;
@@ -54,9 +56,11 @@ export class UserSubscriptionsComponent implements OnInit {
              this.isThisMockUp.push( false ); /** do usuniecia **/
            }
 
+           this.spinnerProvider.close();
            this.isDataReady = true;
          },
          error => {
+           this.spinnerProvider.close();
            this.router.navigate['user-profile'];
          }
     );

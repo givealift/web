@@ -92,6 +92,9 @@ export class SubscriptionComponent implements OnInit {
     //fake: usuniecie z listy
     //this.subData.subscriptionId = "idSubskrypcji";
     //this.subService.deleteSubscription( this.subData.subscriptionId );
+    if ( this.isThisMockUp !== true ) {
+      this.subService.delete( this.subData.subscriptionId );
+    }
     this.subData = new RouteSubscription();
     this.verifyData();
   }
