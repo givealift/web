@@ -9,7 +9,7 @@
       <mat-grid-tile colspan="4" rowspan="1">
         <strong class="align-left">Dodano nowy przejazd!</strong>
       </mat-grid-tile>
-      <mat-grid-tile colspan="1" rowspan="1">
+      <mat-grid-tile colspan="1" rowspan="2">
         <mat-icon class="small-icon" matTooltip="Usuń powiadomienie" matTooltipPosition="right">delete</mat-icon>
       </mat-grid-tile>
       <mat-grid-tile colspan="4" rowspan="1">
@@ -17,10 +17,10 @@
           {{notification?.newRoute?.from?.name}} -> {{notification?.newRoute?.to?.name}}
         </div>
       </mat-grid-tile>
-      <mat-grid-tile colspan="1" rowspan="1">
+      <!-- <mat-grid-tile colspan="1" rowspan="1">
         <mat-icon class="small-icon" matTooltip="Oznacz jako przeczytane" matTooltipPosition="right">
           check_circle</mat-icon>
-      </mat-grid-tile>
+      </mat-grid-tile> -->
     </mat-grid-list>
 
   </div>
@@ -32,13 +32,13 @@
       <mat-grid-tile colspan="4" rowspan="2">
         <strong class="align-left">Ktoś zarezerwował Twój przejazd!</strong>
       </mat-grid-tile>
-      <mat-grid-tile colspan="1" rowspan="1">
+      <mat-grid-tile colspan="1" rowspan="2">
         <mat-icon class="small-icon" matTooltip="Usuń powiadomienie" matTooltipPosition="right">delete</mat-icon>
       </mat-grid-tile>
-      <mat-grid-tile colspan="1" rowspan="1">
+      <!-- <mat-grid-tile colspan="1" rowspan="1">
         <mat-icon class="small-icon" matTooltip="Oznacz jako przeczytane" matTooltipPosition="right">
           check_circle</mat-icon>
-      </mat-grid-tile>
+      </mat-grid-tile> -->
     </mat-grid-list>
   </div>
 </mat-card>
