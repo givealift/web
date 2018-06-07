@@ -27,8 +27,14 @@
                 </button>
             </div>
         </mat-grid-tile>
-        <mat-grid-tile colspan="28" rowspan="2" *ngIf="foundNothing">
-            <span class="smalltext">
+        <mat-grid-tile colspan="14" rowspan="2">
+            <span class="smalltext" *ngIf="isAnyDay">
+                Kiedykolwiek - Codzienne powiadomienia.
+                <br>
+            </span>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="14" rowspan="2">
+            <span class="smalltext" *ngIf="foundNothing">
                 Nie znaleźliśmy żadnego połączenia.
                 <br>
             </span>

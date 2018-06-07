@@ -20,6 +20,7 @@ export class SubscriptionComponent implements OnInit {
   subData: IRouteSubscription;
   isDataReady: boolean = false;
   frontDate: string = null;
+  isAnyDay: boolean = false;
 
   /**Copied from HomeComponent - potrzebne do searchConnections()**/
   showSpinner: boolean;
@@ -42,6 +43,8 @@ export class SubscriptionComponent implements OnInit {
                /** **/
   {
       this.isDataReady = false;
+      this.frontDate = null;
+      this.isAnyDay = false;
       /**Copied from HomeComponent - potrzebne do searchConnections()**/
       this.showSpinner = false;
       this.foundRoutes = null;
@@ -68,6 +71,7 @@ export class SubscriptionComponent implements OnInit {
           if ( this.subData.date === null ) {
               // new FormControl(moment(), [Validators.required])
               this.frontDate = moment().format('YYYY-MM-DD');
+              this.isAnyDay = true;
           }
           else {
               this.frontDate = this.subData.date;
