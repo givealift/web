@@ -3,7 +3,6 @@ import { User } from "../../_models";
 import { SubscriptionService } from "../../_services/subscription.service";
 import { Router } from "@angular/router";
 import { RouteSubscription, IRouteSubscription } from "../../_models/route-subscription";
-import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-user-subscriptions',

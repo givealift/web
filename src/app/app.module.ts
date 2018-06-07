@@ -39,7 +39,7 @@ import {ChangePasswordComponent} from './change-password/change-password.compone
 import { MessagingService } from './_services/messaging.service';
 import { SubscribeComponent } from './subscribe/subscribe.component';
 import { SubscriptionService } from './_services/subscription.service';
-import { SubscriptionComponent } from './subscription/subscription/subscription.component';
+import { SubscriptionComponent } from './subscription/subscription.component';
 import { UserSubscriptionsComponent } from './user-profile/user-subscriptions/user-subscriptions.component';
 
 registerLocaleData(localePl);

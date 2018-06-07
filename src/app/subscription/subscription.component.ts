@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { RouteSubscription, IRouteSubscription } from "../../_models/route-subscription";
+import { RouteSubscription, IRouteSubscription } from "../_models/route-subscription";
 import { isNullOrUndefined } from "util";
-import { SubscriptionService } from "../../_services/subscription.service";
+import { SubscriptionService } from "../_services/subscription.service";
 import { Router } from "@angular/router";
-import { RouteService } from "../../_services/route.service";
-import { Route } from "../../_models";
+import { RouteService } from "../_services/route.service";
+import { Route } from "../_models/index";
 import * as moment from "moment";
 import { FormControl, Validators } from "@angular/forms";
-import { DataProviderService } from "../../_services/data-provider.service";
+import { DataProviderService } from "../_services/data-provider.service";
 
 @Component({
   selector: 'app-subscription',

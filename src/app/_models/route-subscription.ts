@@ -5,7 +5,7 @@ export interface IRouteSubscriptionRequest {
     subscriber: number;
     fromCityId: number;
     toCityId: number;
-    date: string;
+    date: any;
 }
 
 export interface IRouteSubscription {
@@ -14,7 +14,7 @@ export interface IRouteSubscription {
   email: string;
   from: City;
   to: City;
-  date: string;
+  date: any;
   routeId: string;
 }
 export class RouteSubscription implements IRouteSubscription {
@@ -23,7 +23,7 @@ export class RouteSubscription implements IRouteSubscription {
   email: string;
   from: City;
   to: City;
-  date: string;
+  date: any;
   routeId: string;
 
   constructor() {
