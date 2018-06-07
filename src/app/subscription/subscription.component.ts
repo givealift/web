@@ -91,7 +91,6 @@ export class SubscriptionComponent implements OnInit {
     console.log("TO DO: dodać backendowe usuwanie po id subscrypcji");
     //fake: usuniecie z listy
     //this.subData.subscriptionId = "idSubskrypcji";
-    //this.subService.deleteSubscription( this.subData.subscriptionId );
     if ( this.isThisMockUp !== true ) {
       this.subService.delete( this.subData.subscriptionId );
     }
