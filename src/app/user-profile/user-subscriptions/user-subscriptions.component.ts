@@ -35,45 +35,37 @@ export class UserSubscriptionsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user.userId = parseInt( localStorage.getItem("id") );
-    setTimeout(() => this.spinnerProvider.open());
-    this.subService.getUserSubscriptions( this.user.userId.toString() ).subscribe(
-         subscriptions => {
-           //this.tmpSub = subscription;
+      this.setupMockData();
 
-           //this.usersSubs = new Array<RouteSubscription>();
-           // if ( this.usersSubs.length !== 0 ) {
-           //    this.usersSubs.push( this.tmpSub );
-           // } else {
-           //   this.usersSubs.next( this.tmpSub );
-           // }
+      this.user.userId = parseInt( localStorage.getItem("id") );
+      setTimeout(() => this.spinnerProvider.open());
+      this.subService.getUserSubscriptions( this.user.userId.toString() ).subscribe(
+      subscriptions => {
+          for( let oneSub of subscriptions ) {
+              this.usersSubs.push( oneSub );
+              this.isThisMockUp.push( false ); /** do usuniecia **/
+              console.log("oneSub = ", oneSub);
+          }
+          console.log("userSubs = ", this.usersSubs);
+          this.spinnerProvider.close();
+          this.isDataReady = true;
+          },
+      error => {
+          this.spinnerProvider.close();
+          console.log("getUserSubscriptions error: ", error)
+          this.router.navigate['user-profile'];
+      }
+      );
+  }
 
-           //this.usersSubs.push( this.tmpSub );
-           //this.usersSubs = subscriptions;
-
-           for( let oneSub of subscriptions ) {
-             this.usersSubs.push( oneSub );
-             this.isThisMockUp.push( false ); /** do usuniecia **/
-           }
-
-           this.spinnerProvider.close();
-           this.isDataReady = true;
-         },
-         error => {
-           this.spinnerProvider.close();
-           this.router.navigate['user-profile'];
-         }
-    );
-
-    console.log("userSubs = ", this.usersSubs);
-
-    /** zamockowane nada
-     * TO DO: usunac
-     * **/
+  setupMockData() {
+      /** zamockowane dane
+       * TO DO: usunac
+       * **/
       if( this.usersSubs.length === 0 ) {
           this.usersSubs = new Array<RouteSubscription>();
 
-          this.isThisMockUp = new Array<boolean>(); /** do usuniecia **/
+          this.isThisMockUp = new Array<boolean>();     /** do usuniecia **/
 
           this.tmpSub.date = "2018-06-25T23:30:00.259Z";
           this.tmpSub.email = "user1@gmail.pl";
@@ -133,8 +125,6 @@ export class UserSubscriptionsComponent implements OnInit {
           console.log("userSubs = ", this.usersSubs);
       }
 
-    /** KONIEC MOCKUPu **/
-
+      /** KONIEC MOCKUPu **/
   }
-
 }

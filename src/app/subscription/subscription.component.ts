@@ -21,6 +21,7 @@ export class SubscriptionComponent implements OnInit {
   isDataReady: boolean = false;
   frontDate: string = null;
   isAnyDay: boolean = false;
+  showSpinner2: boolean = false;
 
   /**Copied from HomeComponent - potrzebne do searchConnections()**/
   showSpinner: boolean;
@@ -45,6 +46,7 @@ export class SubscriptionComponent implements OnInit {
       this.isDataReady = false;
       this.frontDate = null;
       this.isAnyDay = false;
+      this.showSpinner2 = false;
       /**Copied from HomeComponent - potrzebne do searchConnections()**/
       this.showSpinner = false;
       this.foundRoutes = null;
@@ -85,15 +87,21 @@ export class SubscriptionComponent implements OnInit {
   }
 
   buttonRemoveSubscription() {
-      /**
-       * TO DO: dodać backendowe usuwanie po id subscrypcji
-       * **/
-      console.log("TO DO: dodać backendowe usuwanie po id subscrypcji");
       //fake: usuniecie z listy
       //this.subData.subscriptionId = "idSubskrypcji";
-      this.debugLoggingDelete( true );
+      this.debugLoggingDelete();
       if( this.isThisMockUp !== true ) {
-          this.subService.delete( this.subData.subscriptionId );
+          this.showSpinner2 = true;
+          this.subService.delete( this.subData.subscriptionId ).subscribe(
+              response => {
+                  console.log("successful deletion: ", response);
+                  this.showSpinner2 = false;
+              },
+              error => {
+                  console.log("error during deletion: ", error);
+                  this.showSpinner2 = false;
+              }
+          );
       }
       this.subData = new RouteSubscription();
       this.verifyData();

@@ -22,9 +22,10 @@
         </mat-grid-tile>
         <mat-grid-tile colspan="2" rowspan="4" class="right-border">
             <div class="align-left" class="show-on-hover">
-                <button mat-icon-button matTooltipShowDelay="100" matTooltip="Anuluj obserwację" matTooltipPosition="right" (click)="buttonRemoveSubscription()">
+                <button *ngIf="!showSpinner2" mat-icon-button matTooltipShowDelay="100" matTooltip="Anuluj obserwację" matTooltipPosition="right" (click)="buttonRemoveSubscription()">
                     <mat-icon class="bigIcon">delete_forever</mat-icon>
                 </button>
+                <mat-spinner class="spinner" [diameter]="28" [style.display]="showSpinner2 ? 'block' : 'none'"></mat-spinner>
             </div>
         </mat-grid-tile>
         <mat-grid-tile colspan="14" rowspan="2">
