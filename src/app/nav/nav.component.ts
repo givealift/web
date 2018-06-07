@@ -38,8 +38,6 @@ export class NavComponent implements OnInit {
     this.messageService.incomingMessenge.asObservable().subscribe(
       message => this.addNotification(message)
     );
-
-    this.addReservationNotification();
   }
 
   logout(): void {
@@ -65,7 +63,6 @@ export class NavComponent implements OnInit {
     else {
       newTitle = '(1) GiveALift';
     }
-
 
     this.titleService.setTitle(newTitle);
     this.notificationSound.load();
