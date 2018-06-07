@@ -10,6 +10,8 @@ import { CityService } from './city.service';
 import { CitiesProvider } from '../_providers/cities-provider';
 import { RouterTestingModule } from '@angular/router/testing';
 
+import * as moment from 'moment';
+
 describe('SubscriptionService', () => {
   let subscriptionService: SubscriptionService;
   let httpMock: HttpTestingController;
@@ -17,7 +19,7 @@ describe('SubscriptionService', () => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
-        RouterTestingModule,        
+        RouterTestingModule,
       ],
 
       providers: [
@@ -62,6 +64,48 @@ describe('SubscriptionService', () => {
         "to": {
           "cityId": 33
         },
+        "date": null,
+        "routeId": null,
+        "notificationType": null
+      },
+      {
+        "subscriber": "101",
+        "email": "101",
+        "from": {
+          "cityId": 1
+        },
+        "to": {
+          "cityId": 33
+        },
+        "date": null,
+        "routeId": null,
+        "notificationType": null
+      }
+    ];
+
+    req.flush(mockedResponse);
+  })
+
+  it('#getAll should filter out outdated subscriptions', () => {
+    subscriptionService.getAll().subscribe(subscriptions => {
+      expect(subscriptions).toEqual(jasmine.any(Array));
+      expect(subscriptions.length).toEqual(1);
+    })
+
+    const req = httpMock.expectOne(
+      req => req.url.includes("subscription")
+    );
+
+    const mockedResponse = [
+      {
+        "subscriber": "101",
+        "email": "101",
+        "from": {
+          "cityId": 1
+        },
+        "to": {
+          "cityId": 33
+        },
         "date": "2018-05-28T00:00:00.000+0000",
         "routeId": null,
         "notificationType": null
@@ -75,7 +119,49 @@ describe('SubscriptionService', () => {
         "to": {
           "cityId": 33
         },
-        "date": "2018-05-28T00:00:00.000+0000",
+        "date": moment().add(1, 'hour'),
+        "routeId": null,
+        "notificationType": null
+      }
+    ];
+
+    req.flush(mockedResponse);
+  })
+
+  it('#getAll should not filter out subscriptions with date = null', () => {
+    subscriptionService.getAll().subscribe(subscriptions => {
+      expect(subscriptions).toEqual(jasmine.any(Array));
+      expect(subscriptions.length).toEqual(2);
+    })
+
+    const req = httpMock.expectOne(
+      req => req.url.includes("subscription")
+    );
+
+    const mockedResponse = [
+      {
+        "subscriber": "101",
+        "email": "101",
+        "from": {
+          "cityId": 1
+        },
+        "to": {
+          "cityId": 33
+        },
+        "date": null,
+        "routeId": null,
+        "notificationType": null
+      },
+      {
+        "subscriber": "101",
+        "email": "101",
+        "from": {
+          "cityId": 1
+        },
+        "to": {
+          "cityId": 33
+        },
+        "date": moment().add(1, 'hour'),
         "routeId": null,
         "notificationType": null
       }
@@ -108,7 +194,7 @@ describe('SubscriptionService', () => {
         "to": {
           "cityId": 33
         },
-        "date": "2018-05-28T00:00:00.000+0000",
+        "date": null,
         "routeId": null,
         "notificationType": null
       },
@@ -121,7 +207,7 @@ describe('SubscriptionService', () => {
         "to": {
           "cityId": 33
         },
-        "date": "2018-05-28T00:00:00.000+0000",
+        "date": null,
         "routeId": null,
         "notificationType": null
       },
@@ -134,7 +220,7 @@ describe('SubscriptionService', () => {
         "to": {
           "cityId": 33
         },
-        "date": "2018-05-28T00:00:00.000+0000",
+        "date": null,
         "routeId": null,
         "notificationType": null
       }

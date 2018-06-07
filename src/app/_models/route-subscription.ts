@@ -9,6 +9,7 @@ export interface IRouteSubscriptionRequest {
 }
 
 export interface IRouteSubscription {
+<<<<<<< HEAD
   notificationType: string;
   subscriber: string;
   email: string;
@@ -36,3 +37,14 @@ export class RouteSubscription implements IRouteSubscription {
       this.routeId = null;
   }
 }
+=======
+    subscriptionId: number;
+    notificationType: string;
+    subscriber: string;
+    email: string;
+    from: City;
+    to: City;
+    date: string;
+    routeId: string;
+}
+>>>>>>> 5d11b3ac44c451a1b893c8b18295868b1fe7295d

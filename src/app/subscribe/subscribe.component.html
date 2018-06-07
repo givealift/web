@@ -3,7 +3,8 @@
     <h3>Niestety nic nie znalazłem.</h3>
     <h4>Chcesz otrzymać powiadomienie kiedy pojawi się przejazd na tej trasie?</h4>
     <div id="sub-btn-wrapper">
-      <button mat-button class="btn-search" color="primary" mat-raised-button (click)="subscribe()">Tak</button>
+      <button mat-button class="btn-search" color="primary" mat-raised-button (click)="subscribeForAll()">Tak</button>
+      <button mat-button class="btn-search-long" color="accent" mat-raised-button (click)="subscribe()">Tylko w tym dniu</button>
       <button mat-button class="btn-search" color="secondary" mat-raised-button (click)="dismiss()">Nie</button>
     </div>
   </div>
