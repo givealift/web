@@ -10,6 +10,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { RouteService } from '../../_services/route.service';
 import { CityService } from '../../_services/city.service';
 import { CitiesProvider } from '../../_providers/cities-provider';
+import { AuthService } from '../../_services/auth.service';
 
 describe('RouteComponent', () => {
   let component: RouteComponent;
@@ -30,7 +31,8 @@ describe('RouteComponent', () => {
         DataProviderService,
         RouteService,
         CityService,
-        CitiesProvider
+        CitiesProvider,
+        AuthService
       ]
     })
       .compileComponents();

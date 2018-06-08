@@ -15,14 +15,14 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="5">
       <div class="show-on-hover">
-        <button *ngIf="userId != routeData.ownerId" mat-icon-button matTooltipShowDelay="100" matTooltip="Skontaktuj się" matTooltipPosition="right">
+        <button *ngIf="userId != currentUser" mat-icon-button matTooltipShowDelay="100" matTooltip="Skontaktuj się" matTooltipPosition="right">
           <mat-icon>phone_iphone</mat-icon>
         </button>
-        <button *ngIf="userId != routeData.ownerId" mat-icon-button matTooltipShowDelay="100" matTooltip="Zarezerwuj" matTooltipPosition="right"
+        <button *ngIf="userId != currentUser && canReserve()" mat-icon-button matTooltipShowDelay="100" matTooltip="Zarezerwuj" matTooltipPosition="right"
           (click)="reserve()">
           <mat-icon>content_paste</mat-icon>
         </button>
-        <button *ngIf="userId != routeData.ownerId" mat-icon-button matTooltip="Dodaj do obserwowanych" matTooltipPosition="right">
+        <button *ngIf="userId != currentUser" mat-icon-button matTooltip="Dodaj do obserwowanych" matTooltipPosition="right">
           <mat-icon>favorite</mat-icon>
         </button>
         <!-- lub usun z obserwowanych-->
