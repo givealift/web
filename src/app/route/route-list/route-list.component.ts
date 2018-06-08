@@ -26,7 +26,7 @@ export class RouteListComponent implements OnInit {
       const to = params['to'];
       const date = params['date'];
 
-      const taggedResults = this.dataTransferService.taggedResults(from, to, date);
+      const taggedResults = this.dataTransferService.tagResults(from, to, date);
 
       let routes = this.dataTransferService.getData(`route-list/${taggedResults}`);
 
