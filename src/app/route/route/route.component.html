@@ -69,14 +69,14 @@
 
     <mat-grid-tile colspan="3" rowspan="1">
       <h6 class="text-primary">
-        Ocena:
+        Ocena kierowcy:
         <strong>{{userData?.rate || 0}}/5.0</strong>
       </h6>
     </mat-grid-tile>
     <mat-grid-tile colspan="3" rowspan="1">
       <h6 class="text-primary text-center">
-        Miejsca:
-        <strong>{{routeData?.numberOfOccupiedSeats}}/{{routeData?.numberOfSeats}}</strong>
+        Wolne miejsca:
+        <strong>{{routeData?.numberOfSeats - routeData?.numberOfOccupiedSeats}}/{{routeData?.numberOfSeats}}</strong>
       </h6>
     </mat-grid-tile>
   </mat-grid-list>
