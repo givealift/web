@@ -13,7 +13,7 @@ mat-grid-tile .align-left {
 }
 
 .show-on-hover button {
-  display: block;
+  display: inline;
 }
 
 @keyframes fadeOut {
@@ -36,7 +36,7 @@ mat-grid-tile .align-left {
 }
 
 mat-card:hover button {
-  display: block;
+  display: inline;
   animation:
       fadeOut 1s 0s 1,
       fadeIn 1s 1s 1;
