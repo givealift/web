@@ -44,7 +44,8 @@ export class MessagingService {
       console.log('Unable to get token.', err);
     }
 
-    if (token && this.tokenSentToServer !== token) {
+    // if (token && this.tokenSentToServer !== token) {
+    if (token) {
       await this.sendTokenToServer(token);
       console.log("Token sent to server");
       this.tokenSentToServer = token;
