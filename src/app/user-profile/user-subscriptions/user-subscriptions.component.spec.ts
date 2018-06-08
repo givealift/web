@@ -57,12 +57,12 @@ describe('UserSubscriptionsComponent', () => {
 });
 
 @NgModule({
-    declarations: [SpinnerComponent],
-    imports: [
-      MaterialModule
-    ],
-    entryComponents: [
-      SpinnerComponent
-    ],
-  })
+  declarations: [SpinnerComponent],
+  imports: [
+    MaterialModule
+  ],
+  entryComponents: [
+    SpinnerComponent
+  ],
+})
 class DialogTestModule { }

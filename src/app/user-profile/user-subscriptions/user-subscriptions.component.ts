@@ -3,7 +3,11 @@ import { User } from "../../_models";
 import { SubscriptionService } from "../../_services/subscription.service";
 import { Router } from "@angular/router";
 import { RouteSubscription, IRouteSubscription } from "../../_models/route-subscription";
+<<<<<<< HEAD
 import { SpinnerProvider } from "../../_providers/spinner-provider";
+=======
+import { SpinnerProvider } from '../../_providers/spinner-provider';
+>>>>>>> 610d13638204bf151d179c8b925e98feb2f23bc2
 
 @Component({
     selector: 'app-user-subscriptions',
