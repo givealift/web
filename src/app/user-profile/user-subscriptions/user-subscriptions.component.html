@@ -1,5 +1,10 @@
 <mat-card *ngIf="isDataReady && usersSubs.length!==0">
-    <app-subscription *ngFor="let sub of usersSubs; let i = index" [subData]="sub"></app-subscription>
+    <app-subscription
+      #subCompOutput
+      [subData]="sub"
+      (toggleAsEmptyOut)="toggleAsEmptyIn(subCompOutput)"
+      *ngFor="let sub of usersSubs">
+    </app-subscription>
 </mat-card>
 <mat-card *ngIf="isDataReady && usersSubs.length===0">
     <mat-grid-list cols="1" rows="1" rowHeight="36px" gutterSize="0px">
