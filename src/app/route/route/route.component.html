@@ -49,11 +49,17 @@
       </h4>
 
     </mat-grid-tile>
-    <mat-grid-tile colspan="3" rowspan="2">
+    <mat-grid-tile colspan="3" rowspan="3">
       <h6 class="text-truncate">
         <mat-icon class="icon-align">pin_drop</mat-icon>
         <strong>{{routeData?.from?.city?.name}}</strong>, ul. {{routeData?.from?.placeOfMeeting}}
         <br/>
+        <div class="stops" *ngIf="routeData?.stops?.length > 0">
+          <span class="stop" *ngFor="let stop of routeData?.stops">
+            <strong>{{stop?.city?.name}}</strong> ~ {{stop?.date | date:'HH:mm':'pl'}}
+            <br/>
+          </span>
+        </div>
         <mat-icon class="icon-align">pin_drop</mat-icon>
         <strong>{{routeData?.to?.city?.name}}</strong>, ul. {{routeData?.to?.placeOfMeeting}}
       </h6>
