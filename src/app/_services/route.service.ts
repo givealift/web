@@ -68,4 +68,11 @@ export class RouteService {
         return this.http.get<Route[]>(this.url + '/list');
     }
 
+    reserve(routeId: number, userId: number) {
+        let body = {
+            "passengerId": userId
+        };
+        return this.http.post(`${this.url}/${routeId}/passenger`, body);
+    }
+
 }

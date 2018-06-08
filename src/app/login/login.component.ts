@@ -1,10 +1,10 @@
-import {Component, ViewChild} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {AuthService} from '../_services/auth.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {User} from "../_models";
-import {UserService} from '../_services/user.service';
-import {MatSnackBar, MatSnackBarConfig} from "@angular/material";
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { AuthService } from '../_services/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { User } from "../_models";
+import { UserService } from '../_services/user.service';
+import { MatSnackBar, MatSnackBarConfig } from "@angular/material";
 
 
 @Component({
@@ -64,15 +64,15 @@ export class LoginComponent {
 
   passReset() {
     if (!this.userModel.email) {
-      this.snackBar.open("Wpisz swój adres email", "", this.config);
+      this.snackBar.open("Podaj adres email.", "", this.config);
     } else {
       this.authService.sendResetEmail(this.userModel.email).subscribe(
-        data => this.snackBar.open('Sprawdż skrzynke email', "", this.config),
+        data => this.snackBar.open('Sprawdź skrzynkę email!', "", this.config),
         error => {
           if (error.status == 401) {
-            this.snackBar.open("Niepoprawny adres email", "", this.config);
+            this.snackBar.open("Niepoprawny adres email.", "", this.config);
           } else
-            this.snackBar.open('OOOOPS coś poszło nie tak', "", this.config);
+            this.snackBar.open('Ups! Coś poszło nie tak.', "", this.config);
         }
       );
     }

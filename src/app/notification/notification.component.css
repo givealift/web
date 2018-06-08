@@ -1,0 +1,32 @@
+mat-card {
+    width: 230px;
+    border-bottom: 1px solid gray;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    height: 50px;
+    padding: 6px 6px 6px 6px;
+    font-size: 12px;
+    box-shadow: none !important;
+}
+
+mat-card:hover{
+    background-color: rgb(233, 229, 229);
+    transition: 0.25s all;
+    cursor: pointer;
+}
+
+mat-grid-tile .align-left {
+    position: absolute;
+    left: 5px;
+}
+
+.small-icon {
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.small-icon:hover {
+    color: gray;
+}

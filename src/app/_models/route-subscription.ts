@@ -17,4 +17,4 @@ export interface IRouteSubscription {
     to: City;
     date: string;
     routeId: string;
-}
+}   

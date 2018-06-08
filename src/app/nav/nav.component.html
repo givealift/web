@@ -6,10 +6,17 @@
 
     <span class="nav-spacer"></span>
 
-    <button mat-icon-button routerLink="" *ngIf="loggedIn">
-      <mat-icon>notifications</mat-icon>
-      <span></span>
+    <button mat-button [matMenuTriggerFor]="notificationMenu" *ngIf="loggedIn" (click)="resetTitle()">
+      <mat-icon class="white-icon">notifications</mat-icon>
+      <span *ngIf="notifications.length> 0" class="badge badge-pill badge-light">{{notifications.length}}</span>
     </button>
+
+    <mat-menu #notificationMenu="matMenu" yPosition="below" overlapTrigger="false">
+      <app-notification #notification *ngFor="let notification of notifications" [notification]="notification" (removed)="remove(notification)"></app-notification>
+    </mat-menu>
+
+
+    <span class="nav-secondary-spacer"></span>
     <button mat-raised-button color="primary" routerLink="/login" *ngIf="!loggedIn">Zaloguj się</button>
     <button mat-raised-button color="primary" routerLink="/register" *ngIf="!loggedIn">Nie masz konta?</button>
     <button mat-raised-button color="primary" routerLink="/new-route" *ngIf="loggedIn">Dodaj przejazd</button>
@@ -27,8 +34,8 @@
         <mat-icon>directions_car</mat-icon>
         <span>Moje przejazdy</span>
       </button>
-      <button mat-menu-item routerLink="" (click)="logout()">
-        <mat-icon svgIcon="logout"></mat-icon>
+      <button mat-menu-item routerLink="/" (click)="logout()">
+        <mat-icon svgIcon="logout "></mat-icon>
         <span>Wyloguj</span>
       </button>
     </mat-menu>
