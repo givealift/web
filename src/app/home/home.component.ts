@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { DataProviderService } from '../_services/data-provider.service';
 import { MessagingService } from '../_services/messaging.service';
 import { Subject } from 'rxjs';
+import {isNullOrUndefined} from "util";
 
 enum Interchange { ENABLED, DISABLED };
 
