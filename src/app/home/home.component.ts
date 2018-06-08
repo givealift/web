@@ -12,6 +12,7 @@ import { MessagingService } from '../_services/messaging.service';
 import { Subject } from 'rxjs';
 import {isNullOrUndefined} from "util";
 
+enum Interchange { ENABLED, DISABLED };
 
 @Component({
   selector: 'app-home',
@@ -33,6 +34,7 @@ export class HomeComponent implements OnInit {
 
   showSpinner = false;
   foundNothing = false;
+  withInterchange = false;
 
   message$: Subject<any>;
 
@@ -62,22 +64,50 @@ export class HomeComponent implements OnInit {
     this.routeService
       .search(fromCity, toCity, this.date.value)
       .subscribe(routes => {
-
-        if ( isNullOrUndefined(routes) || routes.length === 0 ) {
-          this.foundNothing = true;
-          this.showSpinner = false;
-          return;
+        if (routes.length === 0) {
+          if (!this.withInterchange) {
+            this.finishWithNoResults();
+            return;
+          }
+          this.routeService.searchWithInterchange(fromCity, toCity, this.date.value).subscribe(routesWithChange => {
+            if (routesWithChange.length === 0) {
+              this.finishWithNoResults();
+              return;
+            }
+            console.log(routesWithChange);
+            this.redirectToRouteList(routesWithChange, Interchange.ENABLED);
+            return;
+          })
         } else {
-          this.foundRoutes = routes;
-          const dateString = moment(this.date.value).format('YYYY-MM-DD');
-          const resultsTag = this.dataTransferService.taggedResults(routes[0].from.date.cityId, routes[0].to.date.cityId, dateString);
-
-          this.dataTransferService.storeData(`route-list/${resultsTag}`, routes);
-          this.router.navigate([`/route-list`], { queryParams: { from: routes[0].from.city.cityId, to: routes[0].to.city.cityId, date: dateString } });
-          this.showSpinner = false;
+          this.redirectToRouteList(routes, Interchange.DISABLED);
         }
-      }, err => {
+      }, _ => {
         this.showSpinner = false;
       })
+  }
+
+  redirectToRouteList(routes, interchange: Interchange) {
+    this.foundRoutes = routes;
+    const dateString = moment(this.date.value).format('YYYY-MM-DD');
+    const withInterchange = interchange === Interchange.ENABLED ? true : false;
+
+    if (withInterchange) {
+      routes = [].concat(...routes);
+    }
+
+    const tag = this.dataTransferService.tagResults(routes[0].from.city.cityId, routes[0].to.city.cityId, dateString);
+
+    this.dataTransferService.storeData(`route-list/${tag}`, { routes: routes, withInterchange: withInterchange });
+    this.router.navigate([`/route-list`], { queryParams: { from: routes[0].from.city.cityId, to: routes[0].to.city.cityId, date: dateString } });
+    this.showSpinner = false;
+  }
+
+  finishWithNoResults() {
+    this.foundNothing = true;
+    this.showSpinner = false;
+  }
+
+  toggleInterchange() {
+    this.withInterchange = !this.withInterchange;
   }
 }

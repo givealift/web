@@ -22,7 +22,9 @@ describe('HomeComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        HomeComponent, CitySearchComponent, SubscribeComponent
+        HomeComponent,
+        CitySearchComponent,
+        SubscribeComponent
       ],
       imports: [
         HttpClientModule,

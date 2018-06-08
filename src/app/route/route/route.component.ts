@@ -3,6 +3,7 @@ import { Route, User } from '../../_models';
 import { Router } from "@angular/router";
 import { UserService } from "../../_services/user.service";
 import { DomSanitizer } from '@angular/platform-browser';
+import { RouteService } from '../../_services/route.service';
 
 @Component({
   selector: 'app-route',
@@ -19,7 +20,7 @@ export class RouteComponent implements OnInit {
   userData: User;
   userId: number; //for convenience
 
-  constructor(private userService: UserService, private router: Router, private sanitizer: DomSanitizer) {
+  constructor(private userService: UserService, private router: Router, private sanitizer: DomSanitizer, private routeService: RouteService) {
   }
 
   ngOnInit() {
@@ -27,7 +28,6 @@ export class RouteComponent implements OnInit {
       this.userId = this.routeData.ownerId;
       this.userService.getById(this.userId).subscribe(
         data => {
-          console.log(data);
           this.userData = data;
           this.getPhoto();
         });
@@ -56,5 +56,16 @@ export class RouteComponent implements OnInit {
         let urlCreator = window.URL;
         this.sanitizedPhoto = this.sanitizer.bypassSecurityTrustUrl(urlCreator.createObjectURL(photo));
       })
-  }  
+  }
+
+  reserve() {
+    this.routeService.reserve(this.routeData.routeId, this.userId).subscribe(
+      () => {
+        this.redirectToRouteDetails();
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
 }

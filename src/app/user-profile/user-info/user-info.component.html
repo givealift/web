@@ -27,14 +27,19 @@
         {{user?.email}}
       </h5>
     </mat-grid-tile>
-    <mat-grid-tile colspan="2" rowspan="3">
-      <!-- empty -->
+    <mat-grid-tile colspan="2" rowspan="1">
+      <button *ngIf="!isHimself" mat-raised-button (click)="openRateWindow()">
+        Oceń użytkownika
+      </button>
     </mat-grid-tile>
     <mat-grid-tile colspan="6" rowspan="1">
       <h5 class="align-left">
         <mat-icon>phone</mat-icon>
         {{user?.phone}}
       </h5>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2" rowspan="2">
+      <!-- empty -->
     </mat-grid-tile>
     <mat-grid-tile colspan="6" rowspan="1">
       <h5 class="align-left">

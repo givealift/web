@@ -28,3 +28,7 @@ mat-card:hover {
   padding: 10px;
 }
 
+.hoverable-link {
+  cursor: pointer;
+}
+

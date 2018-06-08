@@ -4,6 +4,7 @@ import firebase, { Messaging } from '../_providers/firebase-provider';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
+import { GalNotification } from '../_models/gal-notification';
 @Injectable()
 export class MessagingService {
 
@@ -89,7 +90,6 @@ export class MessagingService {
 
   startReceivingMessages() {
     this.messaging.onMessage(payload => {
-      console.log("Message received. ", payload);
       this.incomingMessenge.next(payload);
     });
   }

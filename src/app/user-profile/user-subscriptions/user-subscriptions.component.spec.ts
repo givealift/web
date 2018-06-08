@@ -11,7 +11,7 @@ import { CityService } from '../../_services/city.service';
 import { CitiesProvider } from '../../_providers/cities-provider';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RouteService } from '../../_services/route.service';
-import { SpinnerProvider } from "../../_providers/spinner-provider";
+import { SpinnerProvider } from '../../_providers/spinner-provider';
 import { SpinnerComponent } from '../../spinner/spinner.component';
 import { NgModule } from '@angular/core';
 
