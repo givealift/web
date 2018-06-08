@@ -19,6 +19,7 @@ import {
     , MatIconRegistry
     , MatRadioModule
     , MatGridListModule
+    , MatCheckboxModule
     , MatExpansionModule,
     MatStepperModule,
     MatChipsModule,
@@ -53,6 +54,7 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
         , MatStepperModule
         , MatChipsModule
         , MatDialogModule
+        , MatCheckboxModule
         , MatProgressSpinnerModule
     ],
     exports: [
@@ -78,6 +80,7 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
         , MatStepperModule
         , MatChipsModule
         , MatDialogModule
+        , MatCheckboxModule
         , MatProgressSpinnerModule
     ],
 })

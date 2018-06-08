@@ -77,6 +77,7 @@ export class HomeComponent implements OnInit {
         }
       }, err => {
         this.showSpinner = false;
-      })
+  toggleInterchange() {
+    this.withInterchange = !this.withInterchange;
   }
 }

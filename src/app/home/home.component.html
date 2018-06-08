@@ -11,9 +11,11 @@
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
-  <button *ngIf="!showSpinner" mat-button class="btn-search" color="accent" mat-raised-button (click)="search(fromCity.selectedCity, toCity.selectedCity)">Szukaj</button>
+  <div class="search-btn-wrapper" *ngIf="!showSpinner">
+    <button mat-button class="btn-search" color="accent" mat-raised-button (click)="search(fromCity.selectedCity, toCity.selectedCity)">Szukaj</button>
+    <mat-checkbox class="search-checkbox" (change)="toggleInterchange()">Może być z przesiadką</mat-checkbox>
+  </div>
   <mat-spinner class="spinner" [diameter]="20" [style.display]="showSpinner ? 'inline' : 'none'"></mat-spinner>
 </div>
-
 
 <app-subscribe *ngIf="foundNothing" [fromCity]="fromCity.selectedCity" [toCity]="toCity.selectedCity" [date]="date.value"></app-subscribe>
