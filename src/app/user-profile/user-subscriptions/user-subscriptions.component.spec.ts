@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { UserSubscriptionsComponent } from './user-subscriptions.component';
 import { SubscriptionComponent } from '../../subscription/subscription.component';
 import { MaterialModule } from '../../_modules/material.module';
@@ -12,6 +11,9 @@ import { CityService } from '../../_services/city.service';
 import { CitiesProvider } from '../../_providers/cities-provider';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RouteService } from '../../_services/route.service';
+import { SpinnerProvider } from "../../_providers/spinner-provider";
+import { SpinnerComponent } from '../../spinner/spinner.component';
+import { NgModule } from '@angular/core';
 
 describe('UserSubscriptionsComponent', () => {
   let component: UserSubscriptionsComponent;
@@ -26,7 +28,8 @@ describe('UserSubscriptionsComponent', () => {
       imports: [
         MaterialModule,
         HttpClientModule,
-        RouterTestingModule
+        RouterTestingModule,
+        DialogTestModule
       ],
       providers: [
         SubscriptionService,
@@ -35,7 +38,8 @@ describe('UserSubscriptionsComponent', () => {
         DataProviderService,
         CityService,
         CitiesProvider,
-        RouteService
+        RouteService,
+        SpinnerProvider
       ]
     })
       .compileComponents();
@@ -51,3 +55,14 @@ describe('UserSubscriptionsComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+@NgModule({
+    declarations: [SpinnerComponent],
+    imports: [
+      MaterialModule
+    ],
+    entryComponents: [
+      SpinnerComponent
+    ],
+  })
+class DialogTestModule { }
