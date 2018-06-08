@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
 import { RouteSubscription, IRouteSubscription } from "../_models/route-subscription";
 import { isNullOrUndefined } from "util";
 import { SubscriptionService } from "../_services/subscription.service";
@@ -16,8 +16,11 @@ import { DataProviderService } from "../_services/data-provider.service";
 })
 export class SubscriptionComponent implements OnInit {
 
-    @Input()
+    @Input('subData')
     subData: IRouteSubscription;
+
+    @Output()
+    toggleAsEmptyOut: EventEmitter<IRouteSubscription> =  new EventEmitter<IRouteSubscription>();
 
     isDataReady: boolean = false;
     foundRoutes: Array<Route>;
@@ -76,14 +79,16 @@ export class SubscriptionComponent implements OnInit {
         this.showSpinner2 = true;
         this.subService.delete( this.subData.subscriptionId ).subscribe(
             response => {
-                console.log("successful deletion: ", response);
+                console.log("Subscription >> buttonRemoveSubscription >> successful deletion: ", response);
                 this.showSpinner2 = false;
             },
             error => {
-                console.log("error during deletion: ", error);
+                console.log("Subscription >> buttonRemoveSubscription >> error during deletion: ", error);
                 this.showSpinner2 = false;
             }
         );
+        this.isDataReady = false;
+        this.toggleAsEmptyOut.emit();
         this.subData = new RouteSubscription();
         this.verifyData();
     }
