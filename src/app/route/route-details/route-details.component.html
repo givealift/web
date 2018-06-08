@@ -72,13 +72,13 @@
         <p class="text-truncate" *ngIf="routeDetails.stops.length == 0">
           <mat-icon class="icon-align" class="smallicon">pin_drop</mat-icon>
           <span class="fontcolor-gray">
-            <strong class="text-info"> {{routeDetails?.to.city.name}} , ul. {{routeDetails?.to.placeOfMeeting}} </strong>
+            <strong class="text-info"> {{routeDetails?.to.city.name}} , {{routeDetails?.to.placeOfMeeting}} </strong>
           </span>
         </p>
         <p class="text-truncate top-border" *ngIf="routeDetails.stops.length != 0">
           <mat-icon class="icon-align" class="smallicon">pin_drop</mat-icon>
           <span class="fontcolor-gray">
-            <strong class="text-info"> {{routeDetails?.to.city.name}} , ul. {{routeDetails?.to.placeOfMeeting}} </strong>
+            <strong class="text-info"> {{routeDetails?.to.city.name}} , {{routeDetails?.to.placeOfMeeting}} </strong>
           </span>
         </p>
       </div>
@@ -123,7 +123,7 @@
         <button mat-icon-button matTooltipShowDelay="100" matTooltip="Skontaktuj się" matTooltipPosition="above">
           <mat-icon>phone_iphone</mat-icon>
         </button>
-        <button mat-icon-button matTooltipShowDelay="100" matTooltip="Zarezerwuj" matTooltipPosition="above">
+        <button *ngIf="!isOwner" mat-icon-button matTooltipShowDelay="100" matTooltip="Zarezerwuj" matTooltipPosition="above">
           <mat-icon>content_paste</mat-icon>
         </button>
         <button mat-icon-button matTooltip="Usuń z obserwowanych" matTooltipPosition="above">

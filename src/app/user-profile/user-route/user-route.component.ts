@@ -25,20 +25,6 @@ export class UserRouteComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private spinnerProvider: SpinnerProvider) {
-
-    /*   let id = +localStorage.getItem("id");
-       this.spinnerProvider.open();
-       this.userService.countUserRides(id)
-         .subscribe(data=>this.routesAmount = data);
-       this.userService.getUserRides(id, this.page).subscribe(
-         data => {
-           this.spinnerProvider.close();
-           this.routes = data;
-         },
-         error => {
-           this.spinnerProvider.close();
-         }
-       );*/
   }
 
   ngOnInit() {

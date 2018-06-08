@@ -19,7 +19,7 @@ export class DataProviderService {
         else return null;
     }
 
-    taggedResults(fromCityId: number | string, toCityId: number | string, date: string) {
+    tagResults(fromCityId: number | string, toCityId: number | string, date: string) {
         return `${fromCityId}:${toCityId}:${date}`
     }
 }

@@ -1,39 +1,25 @@
 <mat-card>
   <form #form1="ngForm">
-    <mat-grid-list cols="3" rowHeight="35px" gutterSize="0px">
+    <mat-grid-list cols="4" rowHeight="35px" gutterSize="0px">
 
       <mat-grid-tile rowspan="4">
-        <img class="img-circle" *ngIf="sanitizedPhoto" [src]="sanitizedPhoto" alt="" width="100px" height="100px"/>
-        <img class="img-circle" *ngIf="!sanitizedPhoto" src="../../../assets/logo-sm.png" width="100px" height="100px"/>
+        <img class="img-circle" *ngIf="sanitizedPhoto" [src]="sanitizedPhoto" alt="" width="100px" height="100px" />
+        <img class="img-circle" *ngIf="!sanitizedPhoto" src="../../../assets/logo-sm.png" width="100px" height="100px" />
       </mat-grid-tile>
 
-      <mat-grid-tile colspan="1" rowspan="2" class="right-border">
+      <mat-grid-tile colspan="2" rowspan="2" class="right-border">
         <h4>Dane osobowe</h4>
       </mat-grid-tile>
 
       <mat-grid-tile colspan="1" rowspan="2">
-        <h4>Zmień Hasło</h4>
-      </mat-grid-tile>
-
-      <mat-grid-tile colspan="1" rowspan="2" class="right-border">
-        <mat-form-field>
-          <input matInput [(ngModel)]="userModel.firstName" name="firstName" required #firstNameRef="ngModel" placeholder="Imię" />
-          <mat-error *ngIf="firstNameRef.invalid">Wpisz poprawne imię!</mat-error>
-        </mat-form-field>
+        <h4>Zmień hasło</h4>
       </mat-grid-tile>
 
       <mat-grid-tile colspan="1" rowspan="2">
         <mat-form-field>
-          <input matInput [(ngModel)]="oldPass" name="oldPass" type="password" placeholder="Stare hasło"/>
-          <mat-error *ngIf="!oldPass">Wpisz poprawne imię!</mat-error>
+          <input matInput [(ngModel)]="userModel.firstName" name="firstName" required #firstNameRef="ngModel" placeholder="Imię" />
+          <mat-error *ngIf="firstNameRef.invalid">Wpisz poprawne imię!</mat-error>
         </mat-form-field>
-      </mat-grid-tile>
-
-      <mat-grid-tile rowspan="2">
-        <input id="file" name="file" type="file" #fileInput placeholder="" class="file-input" (change)="onSelectFile($event)" />
-        <button mat-raised-button type="button">
-          <label class="pointer" for="file">Wybierz obraz</label>
-        </button>
       </mat-grid-tile>
 
       <mat-grid-tile colspan="1" rowspan="2" class="right-border">
@@ -45,22 +31,19 @@
 
       <mat-grid-tile colspan="1" rowspan="2">
         <mat-form-field>
-          <input matInput [(ngModel)]="newPass" name="password" type="password" #passRef="ngModel"
-                 placeholder="Nowe hasło"/>
-          <mat-error *ngIf="!newPass">Wpisz poprawne hasło!</mat-error>
+          <input matInput [(ngModel)]="oldPass" name="oldPass" type="password" placeholder="Stare hasło" />
+          <mat-error *ngIf="!oldPass">Wpisz poprawne hasło!</mat-error>
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile rowspan="2">
-        <button mat-raised-button class="hoverable" type="button" (click)="upload()">
-          Zmień Dane
-        </button>
-        <button mat-raised-button class="hoverable" type="button" (click)="changePassword()">
-          Zmień Hasło
+        <input id="file" name="file" type="file" #fileInput placeholder="" class="file-input" (change)="onSelectFile($event)" />
+        <button mat-raised-button type="button">
+          <label class="pointer" for="file">Wybierz obraz</label>
         </button>
       </mat-grid-tile>
 
-      <mat-grid-tile colspan="1" rowspan="2" class="right-border">
+      <mat-grid-tile colspan="1" rowspan="2">
         <mat-form-field>
           <input matInput name="birthYear" [max]="today" [matDatepicker]="picker" placeholder="Data urodzenia" #dateRef="ngModel" [(ngModel)]="userModel.birthYear">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -69,37 +52,59 @@
         </mat-form-field>
       </mat-grid-tile>
 
+      <mat-grid-tile colspan="1" rowspan="2" class="right-border">
+        <mat-form-field>
+          <input matInput [(ngModel)]="userModel.phone" name="phone" required #phoneRef="ngModel" placeholder="Numer telefonu" pattern="^\+?[1-9]{1}[0-9]{3,14}$"
+          />
+          <mat-error *ngIf="phoneRef.invalid">Wpisz poprawny numer telefonu!</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
       <mat-grid-tile colspan="1" rowspan="2">
         <mat-form-field>
-          <input matInput type="password" [(ngModel)]="passConfirm" name="passConfirm" #passConfirmRef="ngModel"
-                 placeholder="Potwierdź nowe hasło"
-          />
-          <mat-error *ngIf="passConfirm != newPass">Wpisz poprawne hasło!</mat-error>
+          <input matInput [(ngModel)]="newPass" name="password" type="password" #passRef="ngModel" placeholder="Nowe hasło" />
+          <mat-error *ngIf="!newPass">Wpisz poprawne hasło!</mat-error>
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile rowspan="2">
-
+        <button mat-raised-button class="hoverable" type="button" (click)="upload()">
+          Zapisz zdjęcie
+        </button>
       </mat-grid-tile>
 
-      <mat-grid-tile colspan="1" rowspan="2" class="right-border">
+      <mat-grid-tile colspan="1" rowspan="2">
         <mat-form-field>
           <input matInput [(ngModel)]="optionalInfo.car" name="car" #carRef="ngModel" placeholder="Samochód" />
           <mat-error *ngIf="carRef.invalid">Wpisz poprawną nazwę!</mat-error>
         </mat-form-field>
       </mat-grid-tile>
 
-      <mat-grid-tile colspan="1" rowspan="2">
+      <mat-grid-tile colspan="1" rowspan="2" class="right-border">
         <button mat-raised-button [disabled]="!form1.valid" (click)="updateUser()">
-          Zapisz
+          Zapisz dane
         </button>
-        <button mat-raised-button [disabled]="!newPass || !oldPass ||  (passConfirm != newPass)"
-                (click)="changePassword()">
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="2">
+        <mat-form-field>
+          <input matInput type="password" [(ngModel)]="passConfirm" name="passConfirm" #passConfirmRef="ngModel" placeholder="Potwierdź nowe hasło"
+          />
+          <mat-error *ngIf="passConfirm != newPass">Wpisz poprawne hasło!</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="3" rowspan="2" class="right-border">
+
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="2">
+        <button mat-raised-button [disabled]="!newPass || !oldPass ||  (passConfirm != newPass)" (click)="changePassword()">
           Zmień hasło
         </button>
       </mat-grid-tile>
 
-      <mat-grid-tile colspan=" 3 " rowspan="6" class="top-border">
+      <mat-grid-tile colspan="4" rowspan="6" class="top-border">
         <mat-form-field appearance="outline" style="width: 85% !important">
           <textarea name="bio" matInput class=".textarea" [(ngModel)]="optionalInfo.bio" rows="4" placeholder="Coś o sobie "></textarea>
         </mat-form-field>

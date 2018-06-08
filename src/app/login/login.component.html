@@ -21,9 +21,9 @@
         </button>
       </div>
       <div class="row center">
-        <button mat-raised-button class="hoverable" type="button" (click)="passReset()">
-          Zapoomiałeś hasła?
-        </button>
+        <a class="text-primary hoverable-link" (click)="passReset()">
+          Zapomniałeś hasła?
+        </a>
       </div>
       <div class="row center">
         <mat-spinner class="spinner" [diameter]="40" [style.display]="showSpinner ? 'inline' : 'none'"></mat-spinner>

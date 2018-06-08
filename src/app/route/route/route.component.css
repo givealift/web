@@ -58,3 +58,13 @@ button:hover {
 .align-vertically {
     margin-top: 5px;
 }
+
+.stop {
+    margin-left: 30px;
+    color: #007bff;
+    font-size: small;
+}
+
+.stops {
+    margin-top: 5px;
+}
