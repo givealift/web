@@ -91,7 +91,15 @@ export class MessagingService {
 
   startReceivingMessages() {
     this.messaging.onMessage(payload => {
+      console.log("[Incoming message]", payload);
       this.incomingMessenge.next(payload);
+    });
+
+    navigator.serviceWorker.addEventListener('message', event => {
+      if (event.data.fromBackground) {
+        console.log("[Incoming message from background]", event.data.payload);
+        this.incomingMessenge.next(event.data.payload);
+      }
     });
   }
 }
