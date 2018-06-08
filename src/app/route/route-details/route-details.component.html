@@ -8,9 +8,9 @@
 
     <mat-grid-tile colspan="3" rowspan="3" style="text-align: center;">
       <h4>
-        Miejsca:
+        Wolne miejsca:
         <br/>
-        <strong class=" text-primary"> {{routeDetails?.numberOfOccupiedSeats}} / {{routeDetails?.numberOfSeats}} </strong>
+        <strong class=" text-primary"> {{routeDetails?.numberOfSeats - routeDetails?.numberOfOccupiedSeats}} / {{routeDetails?.numberOfSeats}} </strong>
       </h4>
     </mat-grid-tile>
 

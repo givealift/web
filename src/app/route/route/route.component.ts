@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { UserService } from "../../_services/user.service";
 import { DomSanitizer } from '@angular/platform-browser';
 import { RouteService } from '../../_services/route.service';
+import { AuthService } from '../../_services/auth.service';
 
 @Component({
   selector: 'app-route',
@@ -19,8 +20,10 @@ export class RouteComponent implements OnInit {
 
   userData: User;
   userId: number; //for convenience
+  currentUser: number;
 
-  constructor(private userService: UserService, private router: Router, private sanitizer: DomSanitizer, private routeService: RouteService) {
+  constructor(private userService: UserService, private router: Router, private sanitizer: DomSanitizer, private routeService: RouteService, private authService: AuthService) {
+    this.currentUser = +this.authService.getCurrentUserId();
   }
 
   ngOnInit() {
@@ -59,7 +62,7 @@ export class RouteComponent implements OnInit {
   }
 
   reserve() {
-    this.routeService.reserve(this.routeData.routeId, this.userId).subscribe(
+    this.routeService.reserve(this.routeData.routeId, this.currentUser).subscribe(
       () => {
         this.redirectToRouteDetails();
       },
@@ -67,5 +70,10 @@ export class RouteComponent implements OnInit {
         console.log(error);
       }
     )
+  }
+
+  canReserve() {
+    return this.routeData.numberOfSeats - this.routeData.numberOfOccupiedSeats > 0
+      && !this.routeData.passengers.includes(this.currentUser);
   }
 }

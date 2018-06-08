@@ -12,4 +12,6 @@ export class Route {
     from: Location = new Location();
     to: Location = new Location();
     stops: Array<Location>;
+
+    passengers: number[];
 }
