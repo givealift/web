@@ -36,8 +36,6 @@ export class HomeComponent implements OnInit {
   foundNothing = false;
   withInterchange = false;
 
-  message$: Subject<any>;
-
   constructor(
     private authService: AuthService,
     private cityService: CityService,
@@ -49,7 +47,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.authService.loggedInStatus.subscribe(loggedIn => this.loggedIn = loggedIn);
-    this.message$ = this.msgService.incomingMessenge;
   }
 
   onEnter() {
