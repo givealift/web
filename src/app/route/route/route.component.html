@@ -22,7 +22,8 @@
           (click)="reserve()">
           <mat-icon>content_paste</mat-icon>
         </button>
-        <button *ngIf="userId != currentUser" mat-icon-button matTooltip="Dodaj do obserwowanych" matTooltipPosition="right">
+        <button *ngIf="userId != currentUser" mat-icon-button matTooltip="Dodaj do obserwowanych" matTooltipPosition="right"
+          (click)="addToFavourites()">
           <mat-icon>favorite</mat-icon>
         </button>
         <!-- lub usun z obserwowanych-->

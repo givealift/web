@@ -45,7 +45,7 @@
 
       <mat-grid-tile colspan="1" rowspan="2">
         <mat-form-field>
-          <input matInput name="birthYear" [max]="today" [matDatepicker]="picker" placeholder="Data urodzenia" #dateRef="ngModel" [(ngModel)]="userModel.birthYear">
+          <input matInput name="birthYear" [max]="today" [matDatepicker]="picker" placeholder="Data urodzenia" #dateRef="ngModel" [(ngModel)]="userModel.birthDate">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
           <mat-error *ngIf="dateRef.invalid">Wybierz datę!</mat-error>
@@ -75,7 +75,7 @@
 
       <mat-grid-tile colspan="1" rowspan="2">
         <mat-form-field>
-          <input matInput [(ngModel)]="optionalInfo.car" name="car" #carRef="ngModel" placeholder="Samochód" />
+          <input matInput [(ngModel)]="userModel.car" name="car" #carRef="ngModel" placeholder="Samochód" />
           <mat-error *ngIf="carRef.invalid">Wpisz poprawną nazwę!</mat-error>
         </mat-form-field>
       </mat-grid-tile>
@@ -106,7 +106,7 @@
 
       <mat-grid-tile colspan="4" rowspan="6" class="top-border">
         <mat-form-field appearance="outline" style="width: 85% !important">
-          <textarea name="bio" matInput class=".textarea" [(ngModel)]="optionalInfo.bio" rows="4" placeholder="Coś o sobie "></textarea>
+          <textarea name="bio" matInput class=".textarea" [(ngModel)]="userModel.description" rows="4" placeholder="Coś o sobie "></textarea>
         </mat-form-field>
       </mat-grid-tile>
 

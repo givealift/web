@@ -96,6 +96,19 @@ export class UserService {
     return this.http.get(this.ApiPath + '/user/favourites/' + userId);
   }
 
+  addRouteToUsersFavourites(routeId: number) {
+    // /api/user/favourites/add/{routeId}
+    console.log("changed version? v1");
+    let returnValue = this.http.post( this.ApiPath + '/user/favourites/add/' + routeId, {} );
+    if ( (this.ApiPath + '/user/favourites/add/' + routeId).match(/api\/user\/favourites\/add\/\d+/) ) {
+        console.log("url matches");
+    } else {
+        console.log("url DOES NOT match");
+    }
+    console.log("addRouteToUsersFavourites return = ", returnValue);
+    return returnValue;
+  }
+
   changePassword(oldPass: string, newPass: string, ) {
     let params = new HttpParams().set('old-password', oldPass).set('new-password', newPass);
     return this.http.get<Route[]>(this.ApiPath + "/user/change/password", { params: params });

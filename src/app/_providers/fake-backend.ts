@@ -38,6 +38,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 case (request.url.match(/api\/user\/favourites\/\d+/) && request.method === 'GET'):
                     return this.getUserFavourites(request);
 
+                case (request.url.match(/api\/user\/favourites\/add\/\d+/) && request.method === 'POST'): {
+                    console.log("case caught!");
+                    return this.addRouteToUsersFavourites(request);
+                }
+
                 // case (request.url.match(/route\/\d+/) && request.method === 'GET'):
                 //     return this.getById(request);
 
@@ -89,14 +94,35 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     //     return Observable.of(new HttpResponse({ status: 200, body: routeDetails }));
     // }
 
-    private getUserFavourites(request) {
-        let userFavouriteIds = [203, 212];
+    private getUserFavourites(request: HttpRequest<any>) {
+        let userFavouriteIds = this.sampleFavRoutes;
         let favRoutes = this.sampleroutes.filter(
             route => {
                 return userFavouriteIds.indexOf(route.routeId) !== -1;
             }
         );
+        console.log('fakebackend.getUserFavourites: favRoutes = ', favRoutes);
         return Observable.of(new HttpResponse({ status: 200, body: favRoutes }));
+    }
+
+    private addRouteToUsersFavourites(request: HttpRequest<any>) {
+        // /api/user/favourites/add/{routeId}
+        let splitedUrl = request.url.split("\/");
+        let reqLength = 5;
+        console.log("request.url = ", request.url);   /** **/
+        console.log("splitedUrl = ", splitedUrl);     /** **/
+        let addedRoute: number = -404;
+        if ( splitedUrl.length === reqLength ) {
+            addedRoute = parseInt( splitedUrl[ reqLength-1 ] );
+        }
+        else {
+            addedRoute = -404;
+        }
+        this.sampleFavRoutes.push( addedRoute );
+
+        this.getUserFavourites( request );           /** **/
+        console.log('fakebackend.addRouteToUsersFavourites: addedRoute = ', addedRoute);
+        return Observable.of(new HttpResponse({ status: 200, body: addedRoute }));
     }
 
     private createUser(request: HttpRequest<any>) {
@@ -213,6 +239,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return Observable.of(new HttpResponse({ status: 200, body: matching }));
     }
 
+    sampleFavRoutes = [203, 212, 218];
+
     sampleroutes = [
         {
             "routeId": 203,
@@ -252,42 +280,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             "date": moment().format("YYYY-MM-DD hh:mm"),
             "numberOfSeats": 4,
             "numberOfOccupiedSeats": 1,
+            "passengers": [ 1 ],
             "price": 10.0,
             "stops": [
-                {
-                    "buildingNumber": 11,
-                    "city": {
-                        "cityId": "20",
-                        "name": "Częstochowa",
-                        "country": "powiat Katowice",
-                        "province": "śląskie",
-                        "cityInfo": {
-                            "cityInfoId": 20,
-                            "population": 304362,
-                            "citySize": 165
-                        }
-                    },
-                    "date": "2018-05-13T21:35:49+0000",
-                    "localizationId": 201,
-                    "placeOfMeeting": "Krzywa 4"
-                },
-                {
-                    "buildingNumber": 16,
-                    "city": {
-                        "cityId": "23",
-                        "name": "Radomkso",
-                        "country": "powiat Warszawa",
-                        "province": "mazowieckie",
-                        "cityInfo": {
-                            "cityInfoId": 2,
-                            "population": 1724404,
-                            "citySize": 517
-                        }
-                    },
-                    "date": "2018-05-13T21:55:00+0000",
-                    "localizationId": 217,
-                    "placeOfMeeting": "Wyszyńskiego 7"
-                },
                 {
                     "buildingNumber": 16,
                     "city": {
@@ -436,7 +431,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             },
             "date": moment().add(1, "hour").format("YYYY-MM-DD hh:mm"),
             "numberOfSeats": 4,
-            "numberOfOccupiedSeats": 1,
+            "numberOfOccupiedSeats": 3,
+            "passengers": [ 101, 201, 301 ],
             "price": 10.0,
             "stops": null
         },
@@ -477,8 +473,45 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             },
             "date": moment().add(1, "hour").format("YYYY-MM-DD hh:mm"),
             "numberOfSeats": 4,
-            "numberOfOccupiedSeats": 1,
-            "price": 10.0//, "stops": []
+            "numberOfOccupiedSeats": 2,
+            "passengers": [ 102, 103 ],
+            "price": 10.0,
+          "stops": [
+              {
+                "buildingNumber": 11,
+                "city": {
+                  "cityId": "20",
+                  "name": "Częstochowa",
+                  "country": "powiat Katowice",
+                  "province": "śląskie",
+                  "cityInfo": {
+                    "cityInfoId": 20,
+                    "population": 304362,
+                    "citySize": 165
+                  }
+                },
+                "date": "2018-05-13T21:35:49+0000",
+                "localizationId": 201,
+                "placeOfMeeting": "Krzywa 4"
+              },
+              {
+                "buildingNumber": 16,
+                "city": {
+                  "cityId": "23",
+                  "name": "Radomkso",
+                  "country": "powiat Warszawa",
+                  "province": "mazowieckie",
+                  "cityInfo": {
+                    "cityInfoId": 2,
+                    "population": 1724404,
+                    "citySize": 517
+                  }
+                },
+                "date": "2018-05-13T21:55:00+0000",
+                "localizationId": 217,
+                "placeOfMeeting": "Wyszyńskiego 7"
+              }
+          ]
         }
     ];
 }

@@ -5,6 +5,7 @@ import { UserService } from "../../_services/user.service";
 import { DomSanitizer } from '@angular/platform-browser';
 import { RouteService } from '../../_services/route.service';
 import { AuthService } from '../../_services/auth.service';
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-route',
@@ -74,6 +75,11 @@ export class RouteComponent implements OnInit {
 
   canReserve() {
     return this.routeData.numberOfSeats - this.routeData.numberOfOccupiedSeats > 0
-      && !this.routeData.passengers.includes(this.currentUser);
+      && ( !isNullOrUndefined(this.routeData.passengers) && !this.routeData.passengers.includes(this.currentUser) );
+  }
+
+  addToFavourites() {
+      console.log("Add to favourites route.routeId = ", this.routeData.routeId);
+      this.userService.addRouteToUsersFavourites( this.routeData.routeId );
   }
 }
