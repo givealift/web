@@ -49,7 +49,7 @@ describe("UserService", () => {
         })
 
         const req = httpMock.expectOne(
-            req => req.url.includes(`/user/${userId}`)
+            req => req.url.includes(`/user/public/${userId}`)
         );
         req.flush(mockedData);
     })
@@ -60,7 +60,7 @@ describe("UserService", () => {
             expect(user).toEqual(null);
         })
         const req = httpMock.expectOne(
-            req => req.url.includes(`/user/${userId}`)
+            req => req.url.includes(`/user/public/${userId}`)
         );
         req.flush("no content", { status: 204, statusText: "no content" });
     })
