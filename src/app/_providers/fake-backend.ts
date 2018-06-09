@@ -172,30 +172,33 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         if( tmpUserFavouriteIds.length===0 ) {
             console.log('There are no fav routes out of those mocked (fake back end).');
             console.log('fakebackend.getUserFavourites: fake + back favRoutes = ', favRoutes);
-          return Observable.of(new HttpResponse({ status: 200, body: favRoutes }));
+            console.log('RETURN just fake backend.');
+            return Observable.of(new HttpResponse({ status: 200, body: favRoutes }));
         }
         else {
             console.log("Looking for routes on backend.");
-        }
+            let tmpRoute;
+            for ( let routeId of tmpUserFavouriteIds ) {
+                this.routeService.getById( routeId )
+                    .subscribe(
+                        response => {
+                            tmpRoute = response;
+                            console.log("tmpRoute: ", tmpRoute);
+                            console.log("response: ", response);
 
-        let tmpRoute;
-        for ( let routeId of tmpUserFavouriteIds ) {
-            this.routeService.getById( routeId )
-                .subscribe(
-                    response => {
-                        tmpRoute = response;
-                        console.log("response: ", response);
-
-                        if ( !isNullOrUndefined( tmpRoute ) ) {
-                          favRoutes.push( tmpRoute );
+                            if ( !isNullOrUndefined( tmpRoute ) ) {
+                              favRoutes.push( tmpRoute );
+                              console.log("now i'm pushing tmpRoute: ", tmpRoute);
+                              console.log('fakebackend.getUserFavourites: fake + back favRoutes = ', favRoutes);
+                              console.log('RETURN fake backend + legit backend.');
+                              return Observable.of(new HttpResponse({ status: 200, body: favRoutes }));
+                            }
+                        },
+                        error => {
+                            console.log("error: ", error);
                         }
-                        console.log('fakebackend.getUserFavourites: fake + back favRoutes = ', favRoutes);
-                        return Observable.of(new HttpResponse({ status: 200, body: favRoutes }));
-                    },
-                    error => {
-                        console.log("error: ", error);
-                    }
-                );
+                    );
+            }
         }
     }
 
