@@ -7,6 +7,8 @@ export class PublicUser {
     rate: number;
     birthYear: Date;
     userId: number;
+    description: string;
+    car: string;
 }
 
 export class User extends PublicUser {

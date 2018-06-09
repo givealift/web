@@ -23,6 +23,8 @@ export class UserInfoComponent {
 
   isHimself: boolean;
 
+  userAge: number;
+
 
   @ViewChild('form') form: NgForm;
 
@@ -38,6 +40,7 @@ export class UserInfoComponent {
         this.user = user;
         this.user.userId = this.userId;
         this.isHimself = (parseInt(localStorage.getItem('id')) == this.userId);
+        this.userAge = this.calculateAge();
         this.userService.getPhoto(this.userId)
           .subscribe(photo => {
             let urlCreator = window.URL;
@@ -53,6 +56,12 @@ export class UserInfoComponent {
 
   openRateWindow() {
     this.ratingProvider.open(this.sanitizedPhoto, this.user);
+  }
+
+  calculateAge() {
+    let newDate = new Date(this.user.birthYear);
+    let timeDiff = new Date().valueOf() - newDate.valueOf();
+    return Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
   }
 
 }
