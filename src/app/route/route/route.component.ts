@@ -77,4 +77,8 @@ export class RouteComponent implements OnInit {
     return this.routeData.numberOfSeats - this.routeData.numberOfOccupiedSeats > 0
       && ( !isNullOrUndefined(this.routeData.passengers) && !this.routeData.passengers.includes(this.currentUser) );
   }
+
+  addToFavourites() {
+      this.userService.addRouteToUsersFavourites( this.routeData.routeId );
+  }
 }

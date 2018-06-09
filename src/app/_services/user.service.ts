@@ -96,6 +96,11 @@ export class UserService {
     return this.http.get(this.ApiPath + '/user/favourites/' + userId);
   }
 
+  addRouteToUsersFavourites(routeId: number) {
+    // /api/user/favourites/add/{routeId}
+    return this.http.get( this.ApiPath + '/user/favourites/add/' + routeId );
+  }
+
   changePassword(oldPass: string, newPass: string, ) {
     let params = new HttpParams().set('old-password', oldPass).set('new-password', newPass);
     return this.http.get<Route[]>(this.ApiPath + "/user/change/password", { params: params });

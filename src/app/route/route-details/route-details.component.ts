@@ -70,4 +70,7 @@ export class RouteDetailsComponent implements OnInit {
     )
   }
 
+  addToFavourites() {
+    this.userService.addRouteToUsersFavourites( this.routeDetails.routeId );
+  }
 }

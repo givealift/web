@@ -126,10 +126,12 @@
         <button mat-icon-button matTooltipShowDelay="100" matTooltip="Skontaktuj się" matTooltipPosition="above">
           <mat-icon>phone_iphone</mat-icon>
         </button>
-        <button *ngIf="!isOwner" mat-icon-button matTooltipShowDelay="100" matTooltip="Zarezerwuj" matTooltipPosition="above">
+        <button *ngIf="!isOwner" mat-icon-button matTooltipShowDelay="100" matTooltip="Zarezerwuj" matTooltipPosition="above"
+        (click)="reserve()">
           <mat-icon>content_paste</mat-icon>
         </button>
-        <button mat-icon-button matTooltip="Usuń z obserwowanych" matTooltipPosition="above">
+        <button mat-icon-button matTooltip="Usuń z obserwowanych" matTooltipPosition="above"
+        (click)="addToFavourites()">
           <mat-icon>favorite</mat-icon>
         </button>
       </div>

@@ -38,6 +38,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 case (request.url.match(/api\/user\/favourites\/\d+/) && request.method === 'GET'):
                     return this.getUserFavourites(request);
 
+                case (request.url.match(/api\/user\/favourites\/add\/\d+/) && request.method === 'POST'):
+                return this.addRouteToUsersFavourites(request);
+
                 // case (request.url.match(/route\/\d+/) && request.method === 'GET'):
                 //     return this.getById(request);
 
@@ -89,14 +92,35 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     //     return Observable.of(new HttpResponse({ status: 200, body: routeDetails }));
     // }
 
-    private getUserFavourites(request) {
+    private getUserFavourites(request: HttpRequest<any>) {
         let userFavouriteIds = this.sampleFavRoutes;
         let favRoutes = this.sampleroutes.filter(
             route => {
                 return userFavouriteIds.indexOf(route.routeId) !== -1;
             }
         );
+        console.log('fakebackend.getUserFavourites: favRoutes = ', favRoutes);
         return Observable.of(new HttpResponse({ status: 200, body: favRoutes }));
+    }
+
+    private addRouteToUsersFavourites(request: HttpRequest<any>) {
+        // /api/user/favourites/add/{routeId}
+        let splitedUrl = request.url.split("\/");
+        let reqLength = 5;
+        console.log("request.url = ", request.url);   /** **/
+        console.log("splitedUrl = ", splitedUrl);     /** **/
+        let addedRoute: number = -404;
+        if ( splitedUrl.length === reqLength ) {
+            addedRoute = parseInt( splitedUrl[ reqLength-1 ] );
+        }
+        else {
+            addedRoute = -404;
+        }
+        this.sampleFavRoutes.push( addedRoute );
+
+        this.getUserFavourites( request );           /** **/
+        console.log('fakebackend.addRouteToUsersFavourites: addedRoute = ', addedRoute);
+        return Observable.of(new HttpResponse({ status: 200, body: addedRoute }));
     }
 
     private createUser(request: HttpRequest<any>) {
