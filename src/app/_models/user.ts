@@ -9,6 +9,7 @@ export class PublicUser {
     userId: number;
     description: string;
     car: string;
+    address: string;
 }
 
 export class User extends PublicUser {
