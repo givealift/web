@@ -44,6 +44,7 @@ import { SubscriptionService } from './_services/subscription.service';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { RatingComponent } from './rating/rating.component';
 import { RatingProvider } from './_providers/rating-provider';
+import { RouteList2Component } from './route/route-list2/route-list2.component';
 
 registerLocaleData(localePl);
 
@@ -73,6 +74,7 @@ registerLocaleData(localePl);
     SubscribeComponent,
     ChangePasswordComponent,
     RatingComponent,
+    RouteList2Component,
   ],
   imports: [
     FormsModule,
