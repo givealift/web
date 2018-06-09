@@ -53,9 +53,7 @@ export class RouteDetailsComponent implements OnInit {
           })
         this.isDataReady = true;
       },
-      error => {
-        this.router.navigate['user-routes'];
-      }
+      _ => this.router.navigate(['/'])
     );
   }
 
@@ -71,7 +69,7 @@ export class RouteDetailsComponent implements OnInit {
   }
 
   addToFavourites() {
-      console.log("Add to favourites route.routeId = ", this.routeDetails.routeId);
-      this.userService.addRouteToUsersFavourites( this.routeDetails.routeId );
+    console.log("Add to favourites route.routeId = ", this.routeDetails.routeId);
+    this.userService.addRouteToUsersFavourites(this.routeDetails.routeId);
   }
 }
