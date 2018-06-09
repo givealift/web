@@ -79,6 +79,7 @@ export class RouteComponent implements OnInit {
   }
 
   addToFavourites() {
+      console.log("Add to favourites route.routeId = ", this.routeData.routeId);
       this.userService.addRouteToUsersFavourites( this.routeData.routeId );
   }
 }

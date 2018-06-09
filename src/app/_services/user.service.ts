@@ -98,7 +98,14 @@ export class UserService {
 
   addRouteToUsersFavourites(routeId: number) {
     // /api/user/favourites/add/{routeId}
-    return this.http.get( this.ApiPath + '/user/favourites/add/' + routeId );
+    let returnValue = this.http.post( this.ApiPath + '/user/favourites/add/' + routeId, {} );
+    if ( (this.ApiPath + '/user/favourites/add/' + routeId).match(/api\/user\/favourites\/add\/\d+/) ) {
+        console.log("url matches");
+    } else {
+        console.log("url DOES NOT match");
+    }
+    console.log("addRouteToUsersFavourites return = ", returnValue);
+    return returnValue;
   }
 
   changePassword(oldPass: string, newPass: string, ) {
