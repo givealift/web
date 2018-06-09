@@ -106,17 +106,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     private getFavRoutesFromLocalStorage() {
         let userFavouriteIds: Array<number> = [];
         if ( isSupported() ) {
-            if ( isNullOrUndefined( JSON.parse(localStorage.getItem('currentUser')) ) ) {
+            if ( isNullOrUndefined( JSON.parse(localStorage.getItem('lsFavouriteRoutes')) ) ) {
                 userFavouriteIds = this.sampleFavRoutes;
                 localStorage.setItem('lsFavouriteRoutes', JSON.stringify(userFavouriteIds));
             }
             else {
-                if ( JSON.parse(localStorage.getItem('currentUser')).length === 0  ) {
+                if ( JSON.parse(localStorage.getItem('lsFavouriteRoutes')).length === 0  ) {
                     userFavouriteIds = this.sampleFavRoutes;
                     localStorage.setItem('lsFavouriteRoutes', JSON.stringify(userFavouriteIds));
                 }
                 else {
-                    userFavouriteIds = JSON.parse(localStorage.getItem('currentUser'));
+                    userFavouriteIds = JSON.parse(localStorage.getItem('lsFavouriteRoutes'));
                 }
             }
         }
@@ -150,13 +150,15 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         console.log('fakebackend.getUserFavourites: all tmpUserFavouriteIds = ', tmpUserFavouriteIds);
         for ( let i = 0; i < tmpUserFavouriteIds.length; i++ ) {
             for ( let j = 0; j < favRoutes.length; j++ ) {
-                if (  tmpUserFavouriteIds[i] === favRoutes[i].routeId ) {
+                if (  tmpUserFavouriteIds[i] === favRoutes[j].routeId ) {
                     console.log( tmpUserFavouriteIds[i] + " == "+ favRoutes[j].routeId )
                     if ( tmpUserFavouriteIds.length === 1) {
                         tmpUserFavouriteIds = [];
                     } else {
                         tmpUserFavouriteIds.splice( i, 1 );
                     }
+                    i = 0;
+                    j = 0;
                 }
                 else {
                     console.log( tmpUserFavouriteIds[i] + " != "+ favRoutes[j].routeId );
@@ -164,24 +166,30 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
         }
         console.log('fakebackend.getUserFavourites: back tmpUserFavouriteIds = ', tmpUserFavouriteIds);
+        if( tmpUserFavouriteIds.length===0 ) {
+          console.log('fakebackend.getUserFavourites: fake + back favRoutes = ', favRoutes);
+          return Observable.of(new HttpResponse({ status: 200, body: favRoutes }));
+        }
 
         let tmpRoute;
         for ( let routeId of tmpUserFavouriteIds ) {
-            tmpRoute = this.routeService.getById( routeId ).subscribe(
-                response => {
-                    console.log("response: ", response.toString());
-                },
-                error => {
-                    console.log("error: ", error.toString());
-                }
-            ); //.subscribe()
-            if ( !isNullOrUndefined(tmpRoute) ) {
-                favRoutes.push( tmpRoute );
-            }
-        }
+            this.routeService.getById( routeId )
+                .subscribe(
+                    response => {
+                        tmpRoute = response;
+                        console.log("response: ", response);
 
-        console.log('fakebackend.getUserFavourites: fake + back favRoutes = ', favRoutes);
-        return Observable.of(new HttpResponse({ status: 200, body: favRoutes }));
+                        if ( !isNullOrUndefined( tmpRoute ) ) {
+                          favRoutes.push( tmpRoute );
+                        }
+                        console.log('fakebackend.getUserFavourites: fake + back favRoutes = ', favRoutes);
+                        return Observable.of(new HttpResponse({ status: 200, body: favRoutes }));
+                    },
+                    error => {
+                        console.log("error: ", error);
+                    }
+                );
+        }
     }
 
     private addRouteToUsersFavourites(request: HttpRequest<any>) {
@@ -199,10 +207,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         else {
             addedRoute = -404;
         }
-        this.sampleFavRoutes.push( addedRoute );
-        this.setFavRoutesToLocalStorage( this.sampleFavRoutes );
+        userFavouriteIds.push( addedRoute );
+        this.setFavRoutesToLocalStorage( userFavouriteIds );
         console.log("sampleFavRoutes = ", this.getFavRoutesFromLocalStorage());
-        this.getUserFavourites( request );           /** **/
+        // this.getUserFavourites( request );           /** **/
         console.log('fakebackend.addRouteToUsersFavourites: addedRoute = ', addedRoute);
         return Observable.of(new HttpResponse({ status: 200, body: addedRoute }));
     }
