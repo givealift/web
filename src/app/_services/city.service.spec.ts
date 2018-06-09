@@ -2,6 +2,7 @@ import { CityService } from "./city.service";
 import { TestBed } from "@angular/core/testing";
 import { CitiesProvider } from "../_providers/cities-provider";
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { City } from "../_models";
 
 class MockCitiesProvider {
     public getCities() {
@@ -134,5 +135,45 @@ describe("CityService", () => {
         let cities = cityService.getAll();
         expect(cities).toEqual(jasmine.any(Array));
         expect(cities.length).toEqual(3);
+    })
+
+    it("#getAll() should return array with cities", () => {
+        const stubValue = [
+            { name: "Warszawa", cityId: 1 },
+            { name: "Kraków", cityId: 2 },
+            { name: "Wrocław", cityId: 3 },
+        ];
+        citiesProviderSpy.getCities.and.returnValue(stubValue);
+        let cities = cityService.getAll();
+        expect(cities).toEqual(jasmine.any(Array));
+        expect(cities.length).toEqual(3);
+    })
+
+    it("#startsWith('ałć', 'alc') should match with accents chars", () => {
+        let city = new City();
+        city.name = "alc";
+        let results = cityService["startsWith"]("ałć")(city);
+        expect(results).toBe(true);
+    })
+
+    it("#startsWith('ALA', 'AlA') should be case-insensitive", () => {
+        let city = new City();
+        city.name = "AlA";
+        let results = cityService["startsWith"]("ALA")(city);
+        expect(results).toBe(true);
+    })
+
+    it("#startsWith('łŁ', 'Ll') should match with Ł letter", () => {
+        let city = new City();
+        city.name = "łŁ";
+        let results = cityService["startsWith"]("Ll")(city);
+        expect(results).toBe(true);
+    })
+
+    it("#startsWith('ada', 'daa') shouldn't return false", () => {
+        let city = new City();
+        city.name = "daa";
+        let results = cityService["startsWith"]("ada")(city);
+        expect(results).toBe(false);
     })
 })
