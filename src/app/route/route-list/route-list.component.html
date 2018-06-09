@@ -1,11 +1,3 @@
-<mat-card *ngIf="nothingFound">
-    <mat-card-title>Niestety nie ma żadnego przejazdu.</mat-card-title>
-</mat-card>
-
-<div *ngIf="!nothingFound">
-    <mat-card *ngIf="withInterchange">
-        <mat-card-title>Znaleziono przejazd z przesiadkami!</mat-card-title>
-        <mat-card-content>Nie możemy zagwarantować, że kierowcy będą na czas, uwzględnij to przy planowaniu podróży.</mat-card-content>
-    </mat-card>
+<div>
     <app-route *ngFor="let route of routes" [routeData]="route"></app-route>
 </div>
