@@ -168,9 +168,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
         }
         console.log('fakebackend.getUserFavourites: back tmpUserFavouriteIds = ', tmpUserFavouriteIds);
+
         if( tmpUserFavouriteIds.length===0 ) {
-          console.log('fakebackend.getUserFavourites: fake + back favRoutes = ', favRoutes);
+            console.log('There are no fav routes out of those mocked (fake back end).');
+            console.log('fakebackend.getUserFavourites: fake + back favRoutes = ', favRoutes);
           return Observable.of(new HttpResponse({ status: 200, body: favRoutes }));
+        }
+        else {
+            console.log("Looking for routes on backend.");
         }
 
         let tmpRoute;
