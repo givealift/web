@@ -23,6 +23,9 @@ export class FavouriteRoutesComponent implements OnInit {
       routes => {
         console.log('getUserFavourites - worked: ', routes);
         this.favouriteRoutes = routes;
+      },
+      error => {
+        console.log('getUserFavourites- error: ', error);
       }
     );
 

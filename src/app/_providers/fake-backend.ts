@@ -9,13 +9,18 @@ import 'rxjs/add/operator/materialize';
 import 'rxjs/add/operator/dematerialize';
 import { Route, User } from '../_models';
 import * as moment from 'moment';
+import * as firebase from "firebase";
+import isSupported = firebase.messaging.isSupported;
+import { isNull, isNullOrUndefined } from "util";
+import { RouteService } from "../_services/route.service";
+import {forEach} from "@angular/router/src/utils/collection";
 
 let mockUsers: User[] = JSON.parse(localStorage.getItem('mock-users')) || [];
 let mockRoutes: Route[] = JSON.parse(localStorage.getItem('mock-routes')) || [];
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
 
-    constructor() { }
+    constructor( private routeService: RouteService ) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -36,9 +41,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 //     return this.searchRoute(request);
 
                 case (request.url.match(/api\/user\/favourites\/\d+/) && request.method === 'GET'):
+                    console.log("getUserFav case catch");
                     return this.getUserFavourites(request);
 
+                // case (request.url.endsWith('/api/user/favourites/add/128') && request.method === 'POST'): {
                 case (request.url.match(/api\/user\/favourites\/add\/\d+/) && request.method === 'POST'): {
+                    // /api/user/favourites/add/128
+                    // /api/user/favourites/add/{routeId}
                     console.log("case caught!");
                     return this.addRouteToUsersFavourites(request);
                 }
@@ -94,21 +103,93 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     //     return Observable.of(new HttpResponse({ status: 200, body: routeDetails }));
     // }
 
+    private getFavRoutesFromLocalStorage() {
+        let userFavouriteIds: Array<number> = [];
+        if ( isSupported() ) {
+            if ( isNullOrUndefined( JSON.parse(localStorage.getItem('currentUser')) ) ) {
+                userFavouriteIds = this.sampleFavRoutes;
+                localStorage.setItem('lsFavouriteRoutes', JSON.stringify(userFavouriteIds));
+            }
+            else {
+                if ( JSON.parse(localStorage.getItem('currentUser')).length === 0  ) {
+                    userFavouriteIds = this.sampleFavRoutes;
+                    localStorage.setItem('lsFavouriteRoutes', JSON.stringify(userFavouriteIds));
+                }
+                else {
+                    userFavouriteIds = JSON.parse(localStorage.getItem('currentUser'));
+                }
+            }
+        }
+        else {
+            userFavouriteIds = this.sampleFavRoutes;
+        }
+        console.log("userFavouriteIds = ", userFavouriteIds); /** **/
+        return userFavouriteIds;
+    }
+
+    private setFavRoutesToLocalStorage( userFavouriteIds: Array<number> = [] ) {
+        if ( isSupported() ) {
+            localStorage.setItem('lsFavouriteRoutes', JSON.stringify(userFavouriteIds));
+        }
+        else {
+            throw new Error("LOCAL STORAGE IS NOT SUPPORTED");
+        }
+        console.log("userFavouriteIds = ", userFavouriteIds); /** **/
+        return userFavouriteIds;
+    }
+
     private getUserFavourites(request: HttpRequest<any>) {
-        let userFavouriteIds = this.sampleFavRoutes;
+        let userFavouriteIds = this.getFavRoutesFromLocalStorage();
+        let tmpUserFavouriteIds = userFavouriteIds;
         let favRoutes = this.sampleroutes.filter(
             route => {
-                return userFavouriteIds.indexOf(route.routeId) !== -1;
+              return userFavouriteIds.indexOf(route.routeId) !== -1;
             }
-        );
-        console.log('fakebackend.getUserFavourites: favRoutes = ', favRoutes);
+          );
+        console.log('fakebackend.getUserFavourites: fake favRoutes = ', favRoutes);
+        console.log('fakebackend.getUserFavourites: all tmpUserFavouriteIds = ', tmpUserFavouriteIds);
+        for ( let i = 0; i < tmpUserFavouriteIds.length; i++ ) {
+            for ( let j = 0; j < favRoutes.length; j++ ) {
+                if (  tmpUserFavouriteIds[i] === favRoutes[i].routeId ) {
+                    console.log( tmpUserFavouriteIds[i] + " == "+ favRoutes[j].routeId )
+                    if ( tmpUserFavouriteIds.length === 1) {
+                        tmpUserFavouriteIds = [];
+                    } else {
+                        tmpUserFavouriteIds.splice( i, 1 );
+                    }
+                }
+                else {
+                    console.log( tmpUserFavouriteIds[i] + " != "+ favRoutes[j].routeId );
+                }
+            }
+        }
+        console.log('fakebackend.getUserFavourites: back tmpUserFavouriteIds = ', tmpUserFavouriteIds);
+
+        let tmpRoute;
+        for ( let routeId of tmpUserFavouriteIds ) {
+            tmpRoute = this.routeService.getById( routeId ).subscribe(
+                response => {
+                    console.log("response: ", response.toString());
+                },
+                error => {
+                    console.log("error: ", error.toString());
+                }
+            ); //.subscribe()
+            if ( !isNullOrUndefined(tmpRoute) ) {
+                favRoutes.push( tmpRoute );
+            }
+        }
+
+        console.log('fakebackend.getUserFavourites: fake + back favRoutes = ', favRoutes);
         return Observable.of(new HttpResponse({ status: 200, body: favRoutes }));
     }
 
     private addRouteToUsersFavourites(request: HttpRequest<any>) {
+        let userFavouriteIds = this.getFavRoutesFromLocalStorage();
+
         // /api/user/favourites/add/{routeId}
         let splitedUrl = request.url.split("\/");
-        let reqLength = 5;
+        let reqLength = 11;
         console.log("request.url = ", request.url);   /** **/
         console.log("splitedUrl = ", splitedUrl);     /** **/
         let addedRoute: number = -404;
@@ -119,7 +200,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             addedRoute = -404;
         }
         this.sampleFavRoutes.push( addedRoute );
-
+        this.setFavRoutesToLocalStorage( this.sampleFavRoutes );
+        console.log("sampleFavRoutes = ", this.getFavRoutesFromLocalStorage());
         this.getUserFavourites( request );           /** **/
         console.log('fakebackend.addRouteToUsersFavourites: addedRoute = ', addedRoute);
         return Observable.of(new HttpResponse({ status: 200, body: addedRoute }));
@@ -283,57 +365,57 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             "passengers": [ 1 ],
             "price": 10.0,
             "stops": [
-                {
-                    "buildingNumber": 16,
-                    "city": {
-                        "cityId": "23",
-                        "name": "Kamieńsk",
-                        "country": "powiat Warszawa",
-                        "province": "mazowieckie",
-                        "cityInfo": {
-                            "cityInfoId": 2,
-                            "population": 1724404,
-                            "citySize": 517
-                        }
-                    },
-                    "date": "2018-05-13T22:15:00+0000",
-                    "localizationId": 217,
-                    "placeOfMeeting": "Szkolna 17"
-                },
-                {
-                    "buildingNumber": 16,
-                    "city": {
-                        "cityId": "24",
-                        "name": "Pabianice",
-                        "country": "powiat Warszawa",
-                        "province": "mazowieckie",
-                        "cityInfo": {
-                            "cityInfoId": 2,
-                            "population": 1724404,
-                            "citySize": 517
-                        }
-                    },
-                    "date": "2018-05-13T22:35:00+0000",
-                    "localizationId": 218,
-                    "placeOfMeeting": "Orla 19"
-                },
-                {
-                    "buildingNumber": 16,
-                    "city": {
-                        "cityId": "21",
-                        "name": "Piotrków Trybunalski",
-                        "country": "powiat Warszawa",
-                        "province": "mazowieckie",
-                        "cityInfo": {
-                            "cityInfoId": 2,
-                            "population": 1724404,
-                            "citySize": 517
-                        }
-                    },
-                    "date": "2018-05-13T22:55:00+0000",
-                    "localizationId": 219,
-                    "placeOfMeeting": "Skrzywiona 4"
-                },
+                // {
+                //     "buildingNumber": 16,
+                //     "city": {
+                //         "cityId": "23",
+                //         "name": "Kamieńsk",
+                //         "country": "powiat Warszawa",
+                //         "province": "mazowieckie",
+                //         "cityInfo": {
+                //             "cityInfoId": 2,
+                //             "population": 1724404,
+                //             "citySize": 517
+                //         }
+                //     },
+                //     "date": "2018-05-13T22:15:00+0000",
+                //     "localizationId": 217,
+                //     "placeOfMeeting": "Szkolna 17"
+                // },
+                // {
+                //     "buildingNumber": 16,
+                //     "city": {
+                //         "cityId": "24",
+                //         "name": "Pabianice",
+                //         "country": "powiat Warszawa",
+                //         "province": "mazowieckie",
+                //         "cityInfo": {
+                //             "cityInfoId": 2,
+                //             "population": 1724404,
+                //             "citySize": 517
+                //         }
+                //     },
+                //     "date": "2018-05-13T22:35:00+0000",
+                //     "localizationId": 218,
+                //     "placeOfMeeting": "Orla 19"
+                // },
+                // {
+                //     "buildingNumber": 16,
+                //     "city": {
+                //         "cityId": "21",
+                //         "name": "Piotrków Trybunalski",
+                //         "country": "powiat Warszawa",
+                //         "province": "mazowieckie",
+                //         "cityInfo": {
+                //             "cityInfoId": 2,
+                //             "population": 1724404,
+                //             "citySize": 517
+                //         }
+                //     },
+                //     "date": "2018-05-13T22:55:00+0000",
+                //     "localizationId": 219,
+                //     "placeOfMeeting": "Skrzywiona 4"
+                // },
                 {
                     "buildingNumber": 16,
                     "city": {
