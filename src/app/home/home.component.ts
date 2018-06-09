@@ -72,18 +72,18 @@ export class HomeComponent implements OnInit {
               return;
             }
             console.log(routesWithChange);
-            this.redirectToRouteList(routesWithChange, Interchange.ENABLED);
+            this.redirectToResults(routesWithChange, Interchange.ENABLED);
             return;
           })
         } else {
-          this.redirectToRouteList(routes, Interchange.DISABLED);
+          this.redirectToResults(routes, Interchange.DISABLED);
         }
       }, _ => {
         this.showSpinner = false;
       })
   }
 
-  redirectToRouteList(routes, interchange: Interchange) {
+  redirectToResults(routes, interchange: Interchange) {
     this.foundRoutes = routes;
     const dateString = moment(this.date.value).format('YYYY-MM-DD');
     const withInterchange = interchange === Interchange.ENABLED ? true : false;
@@ -94,8 +94,8 @@ export class HomeComponent implements OnInit {
 
     const tag = this.dataTransferService.tagResults(routes[0].from.city.cityId, routes[0].to.city.cityId, dateString);
 
-    this.dataTransferService.storeData(`route-list/${tag}`, { routes: routes, withInterchange: withInterchange });
-    this.router.navigate([`/route-list`], { queryParams: { from: routes[0].from.city.cityId, to: routes[0].to.city.cityId, date: dateString } });
+    this.dataTransferService.storeData(`search/${tag}`, { routes: routes, withInterchange: withInterchange });
+    this.router.navigate([`/search`], { queryParams: { from: routes[0].from.city.cityId, to: routes[0].to.city.cityId, date: dateString } });
     this.showSpinner = false;
   }
 
