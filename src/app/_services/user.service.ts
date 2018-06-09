@@ -98,6 +98,7 @@ export class UserService {
 
   addRouteToUsersFavourites(routeId: number) {
     // /api/user/favourites/add/{routeId}
+    console.log("changed version? v1");
     let returnValue = this.http.post( this.ApiPath + '/user/favourites/add/' + routeId, {} );
     if ( (this.ApiPath + '/user/favourites/add/' + routeId).match(/api\/user\/favourites\/add\/\d+/) ) {
         console.log("url matches");

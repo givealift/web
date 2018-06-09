@@ -38,8 +38,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 case (request.url.match(/api\/user\/favourites\/\d+/) && request.method === 'GET'):
                     return this.getUserFavourites(request);
 
-                case (request.url.match(/api\/user\/favourites\/add\/\d+/) && request.method === 'POST'):
-                return this.addRouteToUsersFavourites(request);
+                case (request.url.match(/api\/user\/favourites\/add\/\d+/) && request.method === 'POST'): {
+                    console.log("case caught!");
+                    return this.addRouteToUsersFavourites(request);
+                }
 
                 // case (request.url.match(/route\/\d+/) && request.method === 'GET'):
                 //     return this.getById(request);
