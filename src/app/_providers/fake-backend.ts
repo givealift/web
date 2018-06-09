@@ -10,7 +10,6 @@ import 'rxjs/add/operator/dematerialize';
 import { Route, User } from '../_models';
 import * as moment from 'moment';
 import * as firebase from "firebase";
-import isSupported = firebase.messaging.isSupported;
 import { isNullOrUndefined } from "util";
 import { RouteService } from "../_services/route.service";
 import { UserService } from "../_services/user.service";
@@ -105,9 +104,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     //     return Observable.of(new HttpResponse({ status: 200, body: routeDetails }));
     // }
 
-    private getFavRoutesFromLocalStorage() {
+    public getFavRoutesFromLocalStorage() {
         let userFavouriteIds: Array<number> = [];
-        if ( isSupported() ) {
+        // if ( true ) {
             if ( isNullOrUndefined( JSON.parse(localStorage.getItem('lsFavouriteRoutes')) ) ) {
                 userFavouriteIds = this.sampleFavRoutes;
                 localStorage.setItem('lsFavouriteRoutes', JSON.stringify(userFavouriteIds));
@@ -121,21 +120,21 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     userFavouriteIds = JSON.parse(localStorage.getItem('lsFavouriteRoutes'));
                 }
             }
-        }
-        else {
-            userFavouriteIds = this.sampleFavRoutes;
-        }
+        // }
+        // else {
+        //     userFavouriteIds = this.sampleFavRoutes;
+        // }
         console.log("userFavouriteIds = ", userFavouriteIds); /** **/
         return userFavouriteIds;
     }
 
     private setFavRoutesToLocalStorage( userFavouriteIds: Array<number> = [] ) {
-        if ( isSupported() ) {
+        // if ( true ) {
             localStorage.setItem('lsFavouriteRoutes', JSON.stringify(userFavouriteIds));
-        }
-        else {
-            throw new Error("LOCAL STORAGE IS NOT SUPPORTED");
-        }
+        // }
+        // else {
+        //     throw new Error("LOCAL STORAGE IS NOT SUPPORTED");
+        // }
         console.log("userFavouriteIds = ", userFavouriteIds); /** **/
         return userFavouriteIds;
     }
@@ -150,56 +149,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           );
         console.log('fakebackend.getUserFavourites: fake favRoutes = ', favRoutes);
         console.log('fakebackend.getUserFavourites: all tmpUserFavouriteIds = ', tmpUserFavouriteIds);
-        for ( let i = 0; i < tmpUserFavouriteIds.length; i++ ) {
-            for ( let j = 0; j < favRoutes.length; j++ ) {
-                if (  tmpUserFavouriteIds[i] === favRoutes[j].routeId ) {
-                    console.log( tmpUserFavouriteIds[i] + " == "+ favRoutes[j].routeId )
-                    if ( tmpUserFavouriteIds.length === 1) {
-                        tmpUserFavouriteIds = [];
-                    } else {
-                        tmpUserFavouriteIds.splice( i, 1 );
-                    }
-                    i = 0;
-                    j = 0;
-                }
-                else {
-                    console.log( tmpUserFavouriteIds[i] + " != "+ favRoutes[j].routeId );
-                }
-            }
-        }
-        console.log('fakebackend.getUserFavourites: back tmpUserFavouriteIds = ', tmpUserFavouriteIds);
-
-        if( tmpUserFavouriteIds.length===0 ) {
-            console.log('There are no fav routes out of those mocked (fake back end).');
-            console.log('fakebackend.getUserFavourites: fake + back favRoutes = ', favRoutes);
-            console.log('RETURN just fake backend.');
-            return Observable.of(new HttpResponse({ status: 200, body: favRoutes }));
-        }
-        else {
-            console.log("Looking for routes on backend.");
-            let tmpRoute;
-            for ( let routeId of tmpUserFavouriteIds ) {
-                this.routeService.getById( routeId )
-                    .subscribe(
-                        response => {
-                            tmpRoute = response;
-                            console.log("tmpRoute: ", tmpRoute);
-                            console.log("response: ", response);
-
-                            if ( !isNullOrUndefined( tmpRoute ) ) {
-                              favRoutes.push( tmpRoute );
-                              console.log("now i'm pushing tmpRoute: ", tmpRoute);
-                              console.log('fakebackend.getUserFavourites: fake + back favRoutes = ', favRoutes);
-                              console.log('RETURN fake backend + legit backend.');
-                              return Observable.of(new HttpResponse({ status: 200, body: favRoutes }));
-                            }
-                        },
-                        error => {
-                            console.log("error: ", error);
-                        }
-                    );
-            }
-        }
+        return Observable.of(new HttpResponse({ status: 200, body: favRoutes }));
     }
 
     private addRouteToUsersFavourites(request: HttpRequest<any>) {
