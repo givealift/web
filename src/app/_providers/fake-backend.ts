@@ -11,16 +11,18 @@ import { Route, User } from '../_models';
 import * as moment from 'moment';
 import * as firebase from "firebase";
 import isSupported = firebase.messaging.isSupported;
-import { isNull, isNullOrUndefined } from "util";
+import { isNullOrUndefined } from "util";
 import { RouteService } from "../_services/route.service";
-import {forEach} from "@angular/router/src/utils/collection";
+import { UserService } from "../_services/user.service";
 
 let mockUsers: User[] = JSON.parse(localStorage.getItem('mock-users')) || [];
 let mockRoutes: Route[] = JSON.parse(localStorage.getItem('mock-routes')) || [];
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
 
-    constructor( private routeService: RouteService ) { }
+    constructor( private routeService: RouteService,
+                 private userService: UserService
+    ) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
