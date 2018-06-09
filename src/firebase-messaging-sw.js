@@ -10,15 +10,15 @@ var config = {
   messagingSenderId: "442298684003"
 };
 
+let url;
+
 firebase.initializeApp(config);
 const messaging = firebase.messaging();
 
 self.addEventListener('notificationclick', function (event) {
   const clickedNotification = event.notification;
   clickedNotification.close();
-  const detailsPage = `https://givealift.herokuapp.com/route/${payload.data.routeId}`;
-
-  const promiseChain = clients.openWindow(detailsPage);
+      const promiseChain = clients.openWindow(url);
   event.waitUntil(promiseChain);
 });
 
@@ -30,6 +30,8 @@ messaging.setBackgroundMessageHandler(async (payload) => {
     body: 'Pojawił się nowy przejazd na trasie którą obserwujesz. \nKliknij po szczegóły.',
     icon: './assets/logo-sm.png'
   };
+
+  url = `https://givealift.herokuapp.com/route/${payload.data.routeId}`
 
   const windowClients = await self.clients.matchAll({
     type: 'window',

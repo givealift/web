@@ -14,4 +14,5 @@ export class Route {
     stops: Array<Location>;
 
     passengers: number[];
+    description: string;
 }
