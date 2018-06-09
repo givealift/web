@@ -70,7 +70,7 @@
           <mat-grid-tile colspan="2" rowspan="2">
             <mat-form-field>
               <input matInput name="date" [max]="today" [matDatepicker]="picker" required placeholder="Data urodzenia" #dateRef="ngModel"
-                [(ngModel)]="userModel.birthYear">
+                [(ngModel)]="userModel.birthDate">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
               <mat-error *ngIf="dateRef.invalid">Wybierz datę!</mat-error>
@@ -123,7 +123,7 @@
 
           <mat-grid-tile colspan="4" rowspan="6">
             <mat-form-field style="width: 100% !important">
-              <textarea name="bio" matInput class=".textarea" [(ngModel)]="userModel.bio" rows="6" placeholder="Coś o sobie"></textarea>
+              <textarea name="bio" matInput class=".textarea" [(ngModel)]="userModel.description" rows="6" placeholder="Coś o sobie"></textarea>
             </mat-form-field>
           </mat-grid-tile>
 

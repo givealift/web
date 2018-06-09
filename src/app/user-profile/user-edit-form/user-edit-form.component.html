@@ -45,7 +45,7 @@
 
       <mat-grid-tile colspan="1" rowspan="2">
         <mat-form-field>
-          <input matInput name="birthYear" [max]="today" [matDatepicker]="picker" placeholder="Data urodzenia" #dateRef="ngModel" [(ngModel)]="userModel.birthYear">
+          <input matInput name="birthYear" [max]="today" [matDatepicker]="picker" placeholder="Data urodzenia" #dateRef="ngModel" [(ngModel)]="userModel.birthDate">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
           <mat-error *ngIf="dateRef.invalid">Wybierz datę!</mat-error>

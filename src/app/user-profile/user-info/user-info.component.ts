@@ -59,9 +59,9 @@ export class UserInfoComponent {
   }
 
   calculateAge() {
-    let newDate = new Date(this.user.birthYear);
+    let newDate = new Date(this.user.birthDate);
     let timeDiff = new Date().valueOf() - newDate.valueOf();
-    return Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
+    return Math.floor((timeDiff / (1000 * 3600  * 24)) / 365);
   }
 
 }
