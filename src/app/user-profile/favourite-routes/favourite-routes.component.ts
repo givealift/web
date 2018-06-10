@@ -3,7 +3,6 @@ import { UserService } from '../../_services/user.service';
 import {isNullOrUndefined} from "util";
 import {HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
-import * as firebase from "firebase";
 import { RouteService } from "../../_services/route.service";
 
 @Component({
@@ -65,7 +64,8 @@ export class FavouriteRoutesComponent implements OnInit {
       console.log('There are no fav routes out of those mocked (fake back end).');
       console.log('fakebackend.getUserFavourites: fake + back favRoutes = ', favRoutes);
       console.log('RETURN just fake backend.');
-      return Observable.of(new HttpResponse({ status: 200, body: favRoutes }));
+      // return Observable.of(new HttpResponse({ status: 200, body: favRoutes }));
+      return this.favouriteRoutes;
     }
     else {
       console.log("Looking for routes on backend.");
@@ -84,7 +84,7 @@ export class FavouriteRoutesComponent implements OnInit {
                 console.log('fakebackend.getUserFavourites: fake + back favRoutes = ', favRoutes);
                 console.log('RETURN fake backend + legit backend.');
                 this.favouriteRoutes = favRoutes;
-                return this.favouriteRoutes
+                return this.favouriteRoutes;
               }
             },
             error => {
@@ -96,27 +96,43 @@ export class FavouriteRoutesComponent implements OnInit {
     /** **/
   }
 
-  public getFavRoutesFromLocalStorage() {
-    let userFavouriteIds: Array<number> = [];
-    // if ( true ) {
-      if ( isNullOrUndefined( JSON.parse(localStorage.getItem('lsFavouriteRoutes')) ) ) {
-        userFavouriteIds = [];// this.sampleFavRoutes;
-        localStorage.setItem('lsFavouriteRoutes', JSON.stringify(userFavouriteIds));
+  getFavRoutesFromLocalStorage() {
+      let userFavouriteIds: Array<number> = [];
+      if ( this.isLocalStorageSupported() ) {
+          if ( isNullOrUndefined( JSON.parse(localStorage.getItem('lsFavouriteRoutes')) ) ) {
+              userFavouriteIds = [];// this.sampleFavRoutes;
+              localStorage.setItem('lsFavouriteRoutes', JSON.stringify(userFavouriteIds));
+          }
+          else {
+              if ( JSON.parse(localStorage.getItem('lsFavouriteRoutes')).length === 0  ) {
+                  userFavouriteIds = []; // this.sampleFavRoutes;
+                  localStorage.setItem('lsFavouriteRoutes', JSON.stringify(userFavouriteIds));
+              }
+              else {
+                  userFavouriteIds = JSON.parse(localStorage.getItem('lsFavouriteRoutes'));
+              }
+          }
       }
       else {
-        if ( JSON.parse(localStorage.getItem('lsFavouriteRoutes')).length === 0  ) {
           userFavouriteIds = []; // this.sampleFavRoutes;
-          localStorage.setItem('lsFavouriteRoutes', JSON.stringify(userFavouriteIds));
-        }
-        else {
-          userFavouriteIds = JSON.parse(localStorage.getItem('lsFavouriteRoutes'));
-        }
       }
-    // }
-    // else {
-    //   userFavouriteIds = []; // this.sampleFavRoutes;
-    // }
-    console.log("userFavouriteIds = ", userFavouriteIds); /** **/
-    return userFavouriteIds;
+      console.log("userFavouriteIds = ", userFavouriteIds); /** **/
+      return userFavouriteIds;
+  }
+
+  isLocalStorageSupported() {
+      try {
+          let itemBackup = localStorage.getItem("");
+          localStorage.removeItem("");
+          localStorage.setItem("", itemBackup);
+          if (itemBackup === null)
+              localStorage.removeItem("");
+          else
+              localStorage.setItem("", itemBackup);
+          return true;
+      }
+      catch (e) {
+          return false;
+      }
   }
 }

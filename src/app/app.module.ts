@@ -45,7 +45,6 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { RatingComponent } from './rating/rating.component';
 import { RatingProvider } from './_providers/rating-provider';
 import { RouteSearchComponent } from './route/route-search/route-search.component';
-import { RouteList2Component } from './route/route-list2/route-list2.component';
 
 registerLocaleData(localePl);
 
@@ -75,8 +74,7 @@ registerLocaleData(localePl);
     SubscribeComponent,
     ChangePasswordComponent,
     RatingComponent,
-    RouteSearchComponent,
-    RouteList2Component
+    RouteSearchComponent
   ],
   imports: [
     FormsModule,

@@ -11,7 +11,6 @@ import { RouteService } from '../../_services/route.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CityService } from '../../_services/city.service';
 import { CitiesProvider } from '../../_providers/cities-provider';
-import { RouteList2Component } from '../../route/route-list2/route-list2.component';
 
 describe('FavouriteRoutesComponent', () => {
   let component: FavouriteRoutesComponent;
@@ -22,8 +21,7 @@ describe('FavouriteRoutesComponent', () => {
       declarations: [
         FavouriteRoutesComponent,
         RouteListComponent,
-        RouteComponent,
-        RouteList2Component
+        RouteComponent
       ],
       imports: [
         RouterTestingModule,

@@ -104,39 +104,55 @@ export class FakeBackendInterceptor implements HttpInterceptor {
   //     return Observable.of(new HttpResponse({ status: 200, body: routeDetails }));
   // }
 
-  public getFavRoutesFromLocalStorage() {
-    let userFavouriteIds: Array<number> = [];
-    // if ( true ) {
-    if ( isNullOrUndefined( JSON.parse(localStorage.getItem('lsFavouriteRoutes')) ) ) {
-      userFavouriteIds = this.sampleFavRoutes;
-      localStorage.setItem('lsFavouriteRoutes', JSON.stringify(userFavouriteIds));
-    }
-    else {
-      if ( JSON.parse(localStorage.getItem('lsFavouriteRoutes')).length === 0  ) {
-        userFavouriteIds = this.sampleFavRoutes;
-        localStorage.setItem('lsFavouriteRoutes', JSON.stringify(userFavouriteIds));
+  private getFavRoutesFromLocalStorage() {
+      let userFavouriteIds: Array<number> = [];
+      if ( this.isLocalStorageSupported() ) {
+          if ( isNullOrUndefined( JSON.parse(localStorage.getItem('lsFavouriteRoutes')) ) ) {
+              userFavouriteIds = this.sampleFavRoutes;
+              localStorage.setItem('lsFavouriteRoutes', JSON.stringify(userFavouriteIds));
+          }
+          else {
+              if ( JSON.parse(localStorage.getItem('lsFavouriteRoutes')).length === 0  ) {
+                userFavouriteIds = this.sampleFavRoutes;
+                localStorage.setItem('lsFavouriteRoutes', JSON.stringify(userFavouriteIds));
+              }
+              else {
+                userFavouriteIds = JSON.parse(localStorage.getItem('lsFavouriteRoutes'));
+              }
+          }
       }
       else {
-        userFavouriteIds = JSON.parse(localStorage.getItem('lsFavouriteRoutes'));
+          userFavouriteIds = this.sampleFavRoutes;
       }
-    }
-    // }
-    // else {
-    //     userFavouriteIds = this.sampleFavRoutes;
-    // }
-    console.log("userFavouriteIds = ", userFavouriteIds); /** **/
-    return userFavouriteIds;
+      console.log("userFavouriteIds = ", userFavouriteIds); /** **/
+      return userFavouriteIds;
+  }
+
+  isLocalStorageSupported() {
+      try {
+          let itemBackup = localStorage.getItem("");
+          localStorage.removeItem("");
+          localStorage.setItem("", itemBackup);
+          if (itemBackup === null)
+              localStorage.removeItem("");
+          else
+              localStorage.setItem("", itemBackup);
+          return true;
+      }
+      catch (e) {
+          return false;
+      }
   }
 
   private setFavRoutesToLocalStorage( userFavouriteIds: Array<number> = [] ) {
-    // if ( true ) {
-    localStorage.setItem('lsFavouriteRoutes', JSON.stringify(userFavouriteIds));
-    // }
-    // else {
-    //     throw new Error("LOCAL STORAGE IS NOT SUPPORTED");
-    // }
-    console.log("userFavouriteIds = ", userFavouriteIds); /** **/
-    return userFavouriteIds;
+      if ( this.isLocalStorageSupported() ) {
+          localStorage.setItem('lsFavouriteRoutes', JSON.stringify(userFavouriteIds));
+      }
+      else {
+          throw new Error("LOCAL STORAGE IS NOT SUPPORTED");
+      }
+      console.log("userFavouriteIds = ", userFavouriteIds); /** **/
+      return userFavouriteIds;
   }
 
   private getUserFavourites(request: HttpRequest<any>) {
@@ -289,14 +305,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     return Observable.of(new HttpResponse({ status: 200, body: matching }));
   }
 
-  sampleFavRoutes = [203, 212, 218];
+  sampleFavRoutes = [203, 218, 215, 212];
 
   sampleroutes = [
     {
+      "description":"My description is... this is a mock 1! ",
       "routeId": 203,
-      "ownerId": 601,
+      "ownerId": 102,
       "from": {
         "localizationId": 201,
+        "date": moment().format("YYYY-MM-DD hh:mm"),
         "city": {
           "cityId": 19,
           "name": "Katowice",
@@ -306,13 +324,15 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             "cityInfoId": 20,
             "population": 304362,
             "citySize": 165
-          }
+          },
         },
         "street": "krzywa",
-        "buildingNumber": 4
+        "buildingNumber": 4,
+        "placeOfMeeting":"Katowicka 16"
       },
       "to": {
         "localizationId": 202,
+        "date": moment().add(3, "hour").format("YYYY-MM-DD hh:mm"),
         "city": {
           "cityId": 1,
           "name": "Warszawa",
@@ -325,65 +345,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           }
         },
         "street": "string",
-        "buildingNumber": 0
+        "buildingNumber": 0,
+        "placeOfMeeting":"Złote Tarasy 7"
       },
-      "date": moment().format("YYYY-MM-DD hh:mm"),
       "numberOfSeats": 4,
       "numberOfOccupiedSeats": 1,
       "passengers": [ 1 ],
       "price": 10.0,
       "stops": [
-        // {
-        //     "buildingNumber": 16,
-        //     "city": {
-        //         "cityId": "23",
-        //         "name": "Kamieńsk",
-        //         "country": "powiat Warszawa",
-        //         "province": "mazowieckie",
-        //         "cityInfo": {
-        //             "cityInfoId": 2,
-        //             "population": 1724404,
-        //             "citySize": 517
-        //         }
-        //     },
-        //     "date": "2018-05-13T22:15:00+0000",
-        //     "localizationId": 217,
-        //     "placeOfMeeting": "Szkolna 17"
-        // },
-        // {
-        //     "buildingNumber": 16,
-        //     "city": {
-        //         "cityId": "24",
-        //         "name": "Pabianice",
-        //         "country": "powiat Warszawa",
-        //         "province": "mazowieckie",
-        //         "cityInfo": {
-        //             "cityInfoId": 2,
-        //             "population": 1724404,
-        //             "citySize": 517
-        //         }
-        //     },
-        //     "date": "2018-05-13T22:35:00+0000",
-        //     "localizationId": 218,
-        //     "placeOfMeeting": "Orla 19"
-        // },
-        // {
-        //     "buildingNumber": 16,
-        //     "city": {
-        //         "cityId": "21",
-        //         "name": "Piotrków Trybunalski",
-        //         "country": "powiat Warszawa",
-        //         "province": "mazowieckie",
-        //         "cityInfo": {
-        //             "cityInfoId": 2,
-        //             "population": 1724404,
-        //             "citySize": 517
-        //         }
-        //     },
-        //     "date": "2018-05-13T22:55:00+0000",
-        //     "localizationId": 219,
-        //     "placeOfMeeting": "Skrzywiona 4"
-        // },
         {
           "buildingNumber": 16,
           "city": {
@@ -401,13 +370,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           "localizationId": 221,
           "placeOfMeeting": "Płynna 14"
         },
-      ]
+      ],
+      "date": moment().format("YYYY-MM-DD hh:mm")
     },
     {
+      "description":"My description is... this is a mock 2! ",
       "routeId": 212,
-      "ownerId": 601,
+      "ownerId": 108,
       "from": {
         "localizationId": 210,
+        "date": moment().add(3, "hour").format("YYYY-MM-DD hh:mm"),
         "city": {
           "cityId": 19,
           "name": "Katowice",
@@ -424,6 +396,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       },
       "to": {
         "localizationId": 211,
+        "date": moment().add(6, "hour").format("YYYY-MM-DD hh:mm"),
         "city": {
           "cityId": 1,
           "name": "Warszawa",
@@ -438,16 +411,18 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         "street": "string",
         "buildingNumber": 0
       },
-      "date": moment().format("YYYY-MM-DD hh:mm"),
+      "date": moment().add(3, "hour").format("YYYY-MM-DD hh:mm"),
       "numberOfSeats": 4,
       "numberOfOccupiedSeats": 1,
       "price": 10.0,
       "stops": []
     },
     {
+      "description":"My description is... this is a mock 3! ",
       "routeId": 215,
-      "ownerId": 601,
+      "ownerId": 107,
       "from": {
+        "date": moment().add(3, "hour").add(30, "m").format("YYYY-MM-DD hh:mm"),
         "localizationId": 213,
         "city": {
           "cityId": 19,
@@ -465,6 +440,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       },
       "to": {
         "localizationId": 214,
+        "date": moment().add(6, "hour").add(45, "m").format("YYYY-MM-DD hh:mm"),
         "city": {
           "cityId": 1,
           "name": "Warszawa",
@@ -479,7 +455,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         "street": "string",
         "buildingNumber": 0
       },
-      "date": moment().add(1, "hour").format("YYYY-MM-DD hh:mm"),
+      "date": moment().add(4, "hour").add(30, "m").format("YYYY-MM-DD hh:mm"),
       "numberOfSeats": 4,
       "numberOfOccupiedSeats": 3,
       "passengers": [ 101, 201, 301 ],
@@ -487,10 +463,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       "stops": null
     },
     {
+      "description":"My description is... this is a mock 4! ",
       "routeId": 218,
-      "ownerId": 601,
+      "ownerId": 101,
       "from": {
         "localizationId": 216,
+        "date": moment().add(3, "hour").add(15, "m").format("YYYY-MM-DD hh:mm"),
         "city": {
           "cityId": 1,
           "name": "Warszawa",
@@ -503,10 +481,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           }
         },
         "street": "krzywa",
-        "buildingNumber": 0
+        "buildingNumber": 0,
+        "placeOfMeeting":"Złote Tarasy 7"
       },
       "to": {
         "localizationId": 217,
+        "date": moment().add(5, "hour").add(45, "m").format("YYYY-MM-DD hh:mm"),
         "city": {
           "cityId": 19,
           "name": "Katowice",
@@ -519,9 +499,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           }
         },
         "street": "string",
-        "buildingNumber": 4
+        "buildingNumber": 4,
+        "placeOfMeeting":"Katowicka 16"
       },
-      "date": moment().add(1, "hour").format("YYYY-MM-DD hh:mm"),
+      "date": moment().add(3, "hour").add(15, "m").format("YYYY-MM-DD hh:mm"),
       "numberOfSeats": 4,
       "numberOfOccupiedSeats": 2,
       "passengers": [ 102, 103 ],
@@ -540,7 +521,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               "citySize": 165
             }
           },
-          "date": "2018-05-13T21:35:49+0000",
+          "date": moment().add(3, "hour").add(55, "m").format("YYYY-MM-DD hh:mm"),
           "localizationId": 201,
           "placeOfMeeting": "Krzywa 4"
         },
@@ -557,7 +538,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               "citySize": 517
             }
           },
-          "date": "2018-05-13T21:55:00+0000",
+          "date": moment().add(4, "hour").add(35, "m").format("YYYY-MM-DD hh:mm"),
           "localizationId": 217,
           "placeOfMeeting": "Wyszyńskiego 7"
         }
