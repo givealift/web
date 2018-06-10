@@ -305,7 +305,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     return Observable.of(new HttpResponse({ status: 200, body: matching }));
   }
 
-  sampleFavRoutes = [203, 218, 215, 212];
+  sampleFavRoutes = [203, 212];
 
   sampleroutes = [
     {
