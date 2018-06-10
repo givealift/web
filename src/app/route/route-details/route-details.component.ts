@@ -53,9 +53,7 @@ export class RouteDetailsComponent implements OnInit {
           })
         this.isDataReady = true;
       },
-      error => {
-        this.router.navigate['user-routes'];
-      }
+      _ => this.router.navigate(['/'])
     );
   }
 

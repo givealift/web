@@ -2,7 +2,7 @@
 
 <mat-dialog-content style="overflow: hidden">
 
-    <img class="img-circle" *ngIf="data.userPhoto" [src]="userPhoto" width="100px" height="100px" />
+    <img class="img-circle" *ngIf="data.userPhoto" [src]="sanitizedPhoto" width="100px" height="100px" />
     <img class="img-circle" *ngIf="!data.userPhoto" src="../../../assets/logo-sm.png" width="100px" height="100px" />
 
     <div>

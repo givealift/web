@@ -41,7 +41,7 @@ export class UserService {
     }
 
     return this.http
-      .get<User>(`${this.ApiPath}/user/${id}`, { observe: 'response' })
+      .get<User>(`${this.ApiPath}/user/public/${id}`, { observe: 'response' })
       .pipe(
         map(res => res.status === 204 ? null : res.body),
         tap(data => {

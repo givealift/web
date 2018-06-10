@@ -2,6 +2,10 @@
 
 This is a web client for GiveALift platform.
 
+## How notifications work?
+When user subscribes for a notifcation in web application, this subscription is saved in Givealift database. When somethings happens (e.g. someone add a new route which matches user subscription), Givealift API sends request to Firebase Cloud Messaging, which broadcasts this notification to all devices. User can receive notifications even if app is closed! 
+
+
 ![givealift architecture](https://i.imgur.com/72Sdo3t.png)
 
 ## Running the app

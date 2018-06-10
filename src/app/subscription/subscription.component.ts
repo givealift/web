@@ -124,8 +124,8 @@ export class SubscriptionComponent implements OnInit {
                     const dateString = moment(this.date.value).format('YYYY-MM-DD');
                     const resultsTag = this.dataTransferService.tagResults(routes[0].from.city.cityId, routes[0].to.city.cityId, dateString);
 
-                    this.dataTransferService.storeData(`route-list/${resultsTag}`, { routes: routes, withInterchange: false });
-                    this.router.navigate([`/route-list`], { queryParams: { from: routes[0].from.city.cityId, to: routes[0].to.city.cityId, date: dateString } });
+                    this.dataTransferService.storeData(`search/${resultsTag}`, { routes: routes, withInterchange: false });
+                    this.router.navigate([`/search`], { queryParams: { from: routes[0].from.city.cityId, to: routes[0].to.city.cityId, date: dateString } });
                     this.showSpinner = false;
                     this.debugLoggingSearch();
                 }

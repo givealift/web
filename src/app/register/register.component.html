@@ -53,14 +53,14 @@
             </mat-radio-group>
           </mat-grid-tile> -->
 
-          <mat-grid-tile colspan="2" rowspan="2">
+          <mat-grid-tile colspan="1" rowspan="2">
             <mat-form-field class="inline-form-field">
               <input matInput [(ngModel)]="userModel.firstName" name="firstname" required #firstRef="ngModel" placeholder="Imię" />
               <mat-error *ngIf="firstRef.invalid ">Wpisz poprawne imię!</mat-error>
             </mat-form-field>
           </mat-grid-tile>
 
-          <mat-grid-tile colspan="2" rowspan="2">
+          <mat-grid-tile colspan="1" rowspan="2">
             <mat-form-field class="inline-form-field">
               <input matInput [(ngModel)]="userModel.lastName" name="lastname" required #lastRef="ngModel" placeholder="Nazwisko" />
               <mat-error *ngIf="lastRef.invalid ">Wpisz poprawne nazwisko!</mat-error>
@@ -70,18 +70,25 @@
           <mat-grid-tile colspan="2" rowspan="2">
             <mat-form-field>
               <input matInput name="date" [max]="today" [matDatepicker]="picker" required placeholder="Data urodzenia" #dateRef="ngModel"
-                [(ngModel)]="userModel.birthYear">
+                [(ngModel)]="userModel.birthDate">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
               <mat-error *ngIf="dateRef.invalid">Wybierz datę!</mat-error>
             </mat-form-field>
           </mat-grid-tile>
 
-          <mat-grid-tile colspan="2" rowspan="2">
+          <mat-grid-tile colspan="1" rowspan="2">
             <mat-form-field>
               <input matInput [(ngModel)]="userModel.phone" name="phone" required #phoneRef="ngModel" placeholder="Numer telefonu" pattern="^\+?[1-9]{1}[0-9]{3,14}$"
               />
               <mat-error *ngIf="phoneRef.invalid">Wpisz poprawny numer telefonu!</mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="1" rowspan="2">
+            <mat-form-field>
+              <input matInput [(ngModel)]="userModel.address" name="address" required #addressRef="ngModel" placeholder="Adres" />
+              <mat-error *ngIf="addressRef.invalid">Wpisz poprawny adres!</mat-error>
             </mat-form-field>
           </mat-grid-tile>
 
@@ -105,7 +112,7 @@
 
           <mat-grid-tile colspan="2" rowspan="2">
             <mat-form-field>
-              <input matInput [(ngModel)]="optionalInfo.car" name="car" #carRef="ngModel" placeholder="Model samochodu" />
+              <input matInput [(ngModel)]="userModel.car" name="car" #carRef="ngModel" placeholder="Model samochodu" />
               <mat-error *ngIf="carRef.invalid">Wpisz poprawną nazwę samochodu!</mat-error>
             </mat-form-field>
           </mat-grid-tile>
@@ -116,7 +123,7 @@
 
           <mat-grid-tile colspan="4" rowspan="6">
             <mat-form-field style="width: 100% !important">
-              <textarea name="bio" matInput class=".textarea" [(ngModel)]="optionalInfo.bio" rows="6" placeholder="Coś o sobie"></textarea>
+              <textarea name="bio" matInput class=".textarea" [(ngModel)]="userModel.description" rows="6" placeholder="Coś o sobie"></textarea>
             </mat-form-field>
           </mat-grid-tile>
 
