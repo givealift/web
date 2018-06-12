@@ -97,13 +97,13 @@ export class UserService {
   }
 
   addRouteToUsersFavourites(routeId: number) {
-    // /api/user/favourites/add/{routeId}
-    console.log("changed version? v1");
-    let returnValue = this.http.post( this.ApiPath + '/user/favourites/add/' + routeId, {} );
-    if ( (this.ApiPath + '/user/favourites/add/' + routeId).match(/api\/user\/favourites\/add\/\d+/) ) {
-        console.log("url matches");
+    // api/user/favourites/add/{routeId}
+    let url = this.ApiPath + '/user/favourites/add/' + routeId;
+    let returnValue = this.http.post( url, {} );
+    if ( (url).match(/api\/user\/favourites\/add\/\d+/) ) {
+        console.log("url matches: ", url);
     } else {
-        console.log("url DOES NOT match");
+        console.log("url DOES NOT match url=\""+url+"\" match_url=\""+"api/user/favourites/add/{id}");
     }
     console.log("addRouteToUsersFavourites return = ", returnValue);
     return returnValue;
