@@ -53,4 +53,15 @@ export class UserProfileComponent implements OnInit {
     );
   }
 
+  //funkcja sprawdzajaca czy sciezka nalezy do /profile/favourites, czy tylko do /profile
+  //obsluzone tylko dla /profile/favourites, bo nie wiem czy chcecie zeby byl wyswietlany komponent user_profile dla
+  // innych sciezek powiazanych z /profile np. +/info
+  // isShowProfile() {
+  //   let response = true;
+
+  //   if (this.router.url === "/profile/favourite-routes") response = false;
+
+  //   return response;
+  // }
+
 }

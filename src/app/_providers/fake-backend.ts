@@ -189,25 +189,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     // this.getUserFavourites( request );           /** **/
     console.log('fakebackend.addRouteToUsersFavourites: addedRoute = ', addedRoute);
     return Observable.of(new HttpResponse({ status: 200, body: addedRoute }));
-  }
-
-  private createUser(request: HttpRequest<any>) {
-
-    //     let newUser = request.body;
-
-    //     // check if username already taken
-    //     let duplicateUser = mockUsers.filter(user => user.login === newUser.login).length;
-    //     if (duplicateUser) {
-    //         return Observable.throw(`login "${newUser.login}" is already taken`);
-    //     }
-
-    //     // save new user
-    //     newUser.id = mockUsers.length + 1;
-    //     mockUsers.push(newUser);
-    //     localStorage.setItem('mock-users', JSON.stringify(mockUsers));
-
-    //     return Observable.of(new HttpResponse({ status: 200 }));
-  }
+  }    
 
   private updateUser(request: HttpRequest<any>) {
 
