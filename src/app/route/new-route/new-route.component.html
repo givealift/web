@@ -160,7 +160,8 @@
             <form #form2="ngForm">
                 <ng-template matStepLabel>Szczegóły przejazdu</ng-template>
 
-                <mat-grid-list cols="2" rows="12" rowHeight="35px">
+                <mat-grid-list cols="6" rows="12" rowHeight="35px">
+                    <mat-grid-tile colspan="2" rowspan="2"> </mat-grid-tile>
                     <mat-grid-tile colspan="2" rowspan="2">
 
                         <mat-form-field>
@@ -171,6 +172,9 @@
 
                     </mat-grid-tile>
 
+                    <mat-grid-tile colspan="2" rowspan="2"> </mat-grid-tile>
+                    <mat-grid-tile colspan="2" rowspan="2"> </mat-grid-tile>
+
                     <mat-grid-tile colspan="2" rowspan="2">
                         <mat-form-field>
                             <input matInput [(ngModel)]="routeModel.numberOfSeats" type="number" name="seats" required #seatsRef="ngModel" placeholder="Liczba miejsc"
@@ -179,7 +183,16 @@
                         </mat-form-field>
                     </mat-grid-tile>
 
-                    <mat-grid-tile colspan="2" rowspan="2">
+                    <mat-grid-tile colspan="2" rowspan="2"> </mat-grid-tile>
+
+                    <mat-grid-tile colspan="6" rowspan="5">
+                        <mat-form-field>
+                            <textarea rows="4" matInput [(ngModel)]="routeModel.description" name="description" #descRef="ngModel"
+                                placeholder="Uwagi od kierowcy"></textarea>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="6" rowspan="2">
                         <button mat-raised-button type="submit" [disabled]="!form2.valid || !form1.valid" (click)="onSubmit() ">
                             Dodaj
                         </button>

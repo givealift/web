@@ -15,23 +15,27 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="5">
       <div class="show-on-hover">
-        <button mat-icon-button matTooltipShowDelay="100" matTooltip="Skontaktuj się" matTooltipPosition="right">
+        <button *ngIf="userId != currentUser" mat-icon-button matTooltipShowDelay="100" matTooltip="Skontaktuj się" matTooltipPosition="right">
           <mat-icon>phone_iphone</mat-icon>
         </button>
-        <button mat-icon-button matTooltipShowDelay="100" matTooltip="Zarezerwuj" matTooltipPosition="right">
+        <button *ngIf="userId != currentUser && canReserve()" mat-icon-button matTooltipShowDelay="100" matTooltip="Zarezerwuj" matTooltipPosition="right"
+          (click)="reserve()">
           <mat-icon>content_paste</mat-icon>
         </button>
-        <button mat-icon-button matTooltip="Dodaj do obserwowanych" matTooltipPosition="right">
+        <button *ngIf="userId != currentUser" mat-icon-button matTooltip="Dodaj do obserwowanych" matTooltipPosition="right"
+          (click)="addToFavourites()">
           <mat-icon>favorite</mat-icon>
         </button>
+        <!-- lub usun z obserwowanych-->
         <button mat-icon-button matTooltip="Szczegóły" matTooltipPosition="right" (click)="redirectToRouteDetails()">
           <mat-icon>info</mat-icon>
         </button>
       </div>
     </mat-grid-tile>
     <mat-grid-tile colspan="3" rowspan="3">
-      <a (click)="goToUserPage()">
-        <img class="media-object profile-hover" src="../../../assets/logo.png" height="100" width="100">
+      <a (click)="goToUserPage()" class="profile-hover">
+        <img class="img-circle" *ngIf="sanitizedPhoto" [src]="sanitizedPhoto" width="90px" height="90px" />
+        <img class="img-circle" *ngIf="!sanitizedPhoto" src="../../../assets/logo-sm.png" width="100px" height="100px" />
       </a>
     </mat-grid-tile>
     <mat-grid-tile colspan="3" rowspan="1">
@@ -48,11 +52,17 @@
       </h4>
 
     </mat-grid-tile>
-    <mat-grid-tile colspan="3" rowspan="2">
+    <mat-grid-tile colspan="3" rowspan="3">
       <h6 class="text-truncate">
         <mat-icon class="icon-align">pin_drop</mat-icon>
         <strong>{{routeData?.from?.city?.name}}</strong>, ul. {{routeData?.from?.placeOfMeeting}}
         <br/>
+        <div class="stops" *ngIf="routeData?.stops?.length > 0">
+          <span class="stop" *ngFor="let stop of routeData?.stops">
+            <strong>{{stop?.city?.name}}</strong> ~ {{stop?.date | date:'HH:mm':'pl'}}
+            <br/>
+          </span>
+        </div>
         <mat-icon class="icon-align">pin_drop</mat-icon>
         <strong>{{routeData?.to?.city?.name}}</strong>, ul. {{routeData?.to?.placeOfMeeting}}
       </h6>
@@ -60,14 +70,14 @@
 
     <mat-grid-tile colspan="3" rowspan="1">
       <h6 class="text-primary">
-        Ocena:
+        Ocena kierowcy:
         <strong>{{userData?.rate || 0}}/5.0</strong>
       </h6>
     </mat-grid-tile>
     <mat-grid-tile colspan="3" rowspan="1">
       <h6 class="text-primary text-center">
-        Miejsca:
-        <strong>{{routeData?.numberOfOccupiedSeats}}/{{routeData?.numberOfSeats}}</strong>
+        Wolne miejsca:
+        <strong>{{routeData?.numberOfSeats - routeData?.numberOfOccupiedSeats}}/{{routeData?.numberOfSeats}}</strong>
       </h6>
     </mat-grid-tile>
   </mat-grid-list>

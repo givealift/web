@@ -1,0 +1,89 @@
+
+.profile-hover:hover {
+  cursor: pointer;
+}
+
+mat-card {
+  min-width: 750px;
+  min-height: 36px;
+  border-radius: 5px;
+  margin-top: 5px;
+  opacity: 1;
+  background: #efefef;
+  color: black;
+}
+
+.align-left {
+  position: absolute;
+  text-align: left;
+}
+
+.show-on-hover button {
+  display: none;
+  size: 36px;
+  font-size: 36px;
+  height: 36px;
+  width: 36px
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+mat-card:hover button {
+  display: block;
+  animation: fadeIn 0.25s;
+}
+
+mat-card:hover {
+  box-shadow: 0px 5px 20px -5px black;
+  transform: scale(1.025);
+  transition: all 0.25s;
+}
+
+mat-card.elevationTransition {
+    @include mat-elevation(10);
+    @include mat-elevation-transition;
+    &:active {
+        @include mat-elevation(8);
+    }
+}
+
+button {
+  transition: all 0.5s;
+}
+
+button:hover {
+  color: white;
+}
+
+.border-bottom {
+  border-bottom: dashed gray 1px;
+}
+
+.icon-align {
+  position: relative;
+  top: 3px;
+}
+
+.spinner-align {
+  position: relative;
+  top: 8px;
+}
+
+.align-vertically {
+  margin-top: 5px;
+}
+
+.mat-icon.bigIcon {
+  font-size: 28px;
+  height: 28px;
+  width: 28px;
+}
+
+.smalltext {
+  font-size: 9px;
+  height: 9px;
+  color: #495057;
+}

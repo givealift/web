@@ -5,10 +5,13 @@ export class PublicUser {
     phone: string;
     gender: string;
     rate: number;
-    birthYear: Date
+    birthDate: Date;
+    userId: number;
+    description: string;
+    car: string;
+    address: string;
 }
 
 export class User extends PublicUser {
-    id?: number;
     password?: string;
 }

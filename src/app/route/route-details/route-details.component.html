@@ -2,14 +2,15 @@
   <mat-grid-list cols="7" rowHeight="35px" gutterSize="0px">
 
     <mat-grid-tile colspan="2" rowspan="4" class="right-border">
-      <img class="media-object" src="../../../assets/logo.png" height="100" width="100">
+      <img class="img-circle" *ngIf="sanitizedPhoto" [src]="sanitizedPhoto" width="100px" height="100px" />
+      <img class="img-circle" *ngIf="!sanitizedPhoto" src="../../../assets/logo-sm.png" width="100px" height="100px" />
     </mat-grid-tile>
 
     <mat-grid-tile colspan="3" rowspan="3" style="text-align: center;">
       <h4>
-        Miejsca:
+        Wolne miejsca:
         <br/>
-        <strong class=" text-primary"> {{routeDetails?.numberOfOccupiedSeats}} / {{routeDetails?.numberOfSeats}} </strong>
+        <strong class=" text-primary"> {{routeDetails?.numberOfSeats - routeDetails?.numberOfOccupiedSeats}} / {{routeDetails?.numberOfSeats}} </strong>
       </h4>
     </mat-grid-tile>
 
@@ -71,62 +72,69 @@
         <p class="text-truncate" *ngIf="routeDetails.stops.length == 0">
           <mat-icon class="icon-align" class="smallicon">pin_drop</mat-icon>
           <span class="fontcolor-gray">
-            <strong class="text-info"> {{routeDetails?.to.city.name}} , ul. {{routeDetails?.to.placeOfMeeting}} </strong>
+            <strong class="text-info"> {{routeDetails?.to.city.name}} , {{routeDetails?.to.placeOfMeeting}} </strong>
           </span>
         </p>
         <p class="text-truncate top-border" *ngIf="routeDetails.stops.length != 0">
           <mat-icon class="icon-align" class="smallicon">pin_drop</mat-icon>
           <span class="fontcolor-gray">
-            <strong class="text-info"> {{routeDetails?.to.city.name}} , ul. {{routeDetails?.to.placeOfMeeting}} </strong>
+            <strong class="text-info"> {{routeDetails?.to.city.name}} , {{routeDetails?.to.placeOfMeeting}} </strong>
           </span>
         </p>
       </div>
     </mat-grid-tile>
 
-    <mat-grid-tile colspan="2" rowspan="3" style="text-align: center" class="right-border">
-      <h5>
+    <mat-grid-tile colspan="2" rowspan="3" style="text-align: center" class="right-border bottom-border">
+      <h4>
         {{userData?.firstName}} {{userData?.lastName}}
-      </h5>
+      </h4>
     </mat-grid-tile>
 
 
 
     <mat-grid-tile colspan="2" rowspan="2" class="right-border">
-      <h5>
+      <h5 class="align-left">
         <mat-icon class="icon-align">stars</mat-icon>
         <strong>{{userData?.rate || 0}}/5.0</strong>
       </h5>
     </mat-grid-tile>
 
     <mat-grid-tile colspan="2" rowspan="2" class="right-border">
-      <h6>
+      <h6 class="align-left">
         <mat-icon class="icon-align" class="smallicon">email</mat-icon> {{userData?.email}}
       </h6>
     </mat-grid-tile>
 
     <mat-grid-tile colspan="5" rowspan="2" class="top-border">
-      <h4>Uwagi od kierowcy:</h4>
+      <div class="align-vertically">
+        <h4>Uwagi od kierowcy</h4>
+        <p class="text-info"> {{routeDetails?.description}}</p>
+      </div>
     </mat-grid-tile>
 
     <mat-grid-tile colspan="2" rowspan="2" class="right-border">
-      <h6 *ngIf="userData?.phone ">
+      <h5 class="align-left">
         <mat-icon class="icon-align " class="smallicon ">phone</mat-icon> {{userData?.phone}}
-      </h6>
+      </h5>
     </mat-grid-tile>
 
     <mat-grid-tile colspan="5" rowspan="4">
     </mat-grid-tile>
 
     <mat-grid-tile colspan="2" rowspan="3" class="right-border">
-      <button mat-icon-button matTooltipShowDelay="100" matTooltip="Skontaktuj się" matTooltipPosition="above">
-        <mat-icon>phone_iphone</mat-icon>
-      </button>
-      <button mat-icon-button matTooltipShowDelay="100" matTooltip="Zarezerwuj" matTooltipPosition="above">
-        <mat-icon>content_paste</mat-icon>
-      </button>
-      <button mat-icon-button matTooltip="Dodaj do obserwowanych" matTooltipPosition="above">
-        <mat-icon>favorite</mat-icon>
-      </button>
+      <div class="align-left" class="show-on-hover">
+        <button mat-icon-button matTooltipShowDelay="100" matTooltip="Skontaktuj się" matTooltipPosition="above">
+          <mat-icon>phone_iphone</mat-icon>
+        </button>
+        <button *ngIf="!isOwner" mat-icon-button matTooltipShowDelay="100" matTooltip="Zarezerwuj" matTooltipPosition="above"
+        (click)="reserve()">
+          <mat-icon>content_paste</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Usuń z obserwowanych" matTooltipPosition="above"
+        (click)="addToFavourites()">
+          <mat-icon>favorite</mat-icon>
+        </button>
+      </div>
     </mat-grid-tile>
 
   </mat-grid-list>

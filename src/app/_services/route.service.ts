@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import { environment } from "../../environments/environment";
 import { City, Route, User } from "../_models/";
 
+type InterchangeRoute = Route[];
 
 @Injectable()
 export class RouteService {
@@ -18,36 +19,52 @@ export class RouteService {
     constructor(private http: HttpClient, private cityService: CityService) {
     }
 
-    search(from: City, to: City, date: Moment): Observable<Route[]> {
+    private _search<T>(from: string, to: string, date: Moment, withInterchange: boolean = false): Observable<T> {
 
-        // passed argument may not be a city object but string
-        const [fromStream, toStream] = [from, to]
-            .map(maybeCity => maybeCity.hasOwnProperty("cityId") ? Observable.of(maybeCity) : this.lookForCity(maybeCity));
+        const url = `${this.url}/${withInterchange ? "searchInterchanges" : "search"}`;
+        const [fromStream, toStream] = [from, to].map(this.lookForCity);
 
         return combineLatest(fromStream, toStream)
-            .flatMap(([fromCity, toCity]) => {
+            .flatMap<any, any>(([fromCity, toCity]) => {
                 if (fromCity && toCity) {
                     const params = new HttpParams()
                         .set("from", fromCity.cityId.toString())
                         .set("to", toCity.cityId.toString())
                         .set("date", moment(date).format("YYYY-MM-DD"));
 
-                    return this.http.get<Route[]>(`${this.url}/search`, { params: params });
+                    return this.http.get<T>(url, { params: params });
                 }
                 return of([]);
             });
     }
 
-    searchWithIds(from: number, to: number, date: Moment | string): Observable<Route[]> {
+    search(from: string, to: string, date: Moment): Observable<Route[]> {
+        return this._search<Route[]>(from, to, date, false);
+    }
+
+    searchWithInterchange(from: string, to: string, date: Moment): Observable<InterchangeRoute[]> {
+        return this._search<InterchangeRoute[]>(from, to, date, true);
+    }
+
+    _searchWithIds<T>(from: number, to: number, date: Moment | string, withInterchange: boolean = false): Observable<T> {
+        const url = `${this.url}/${withInterchange ? "searchInterchanges" : "search"}`;
         const params = new HttpParams()
             .set("from", from.toString())
             .set("to", to.toString())
             .set("date", moment(date).format("YYYY-MM-DD"));
 
-        return this.http.get<Route[]>(`${this.url}/search`, { params: params });
+        return this.http.get<T>(url, { params: params });
     }
 
-    private lookForCity = (city: City): Observable<City | null> => this.cityService.searchCity(city.toString());
+    searchByIds(from: number, to: number, date: Moment | string): Observable<Route[]> {
+        return this._searchWithIds<Route[]>(from, to, date, false);
+    }
+
+    searchByIdsWithInterchange(from: number, to: number, date: Moment | string): Observable<InterchangeRoute[]> {
+        return this._searchWithIds<InterchangeRoute[]>(from, to, date, true);
+    }
+
+    private lookForCity = (city: string): Observable<City | null> => this.cityService.searchCity(city);
 
     update(route: Route) {
         return this.http.put<Route>(this.url + route.routeId, route);
@@ -68,6 +85,13 @@ export class RouteService {
 
     getAll() {
         return this.http.get<Route[]>(this.url + '/list');
+    }
+
+    reserve(routeId: number, userId: number) {
+        let body = {
+            "passengerId": userId
+        };
+        return this.http.post(`${this.url}/${routeId}/passenger`, body);
     }
 
 }

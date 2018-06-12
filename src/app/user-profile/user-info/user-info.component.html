@@ -1,8 +1,8 @@
-<mat-card>
+<mat-card *ngIf="isDataReady">
   <mat-grid-list cols="8" rows="11" rowHeight="40px">
     <mat-grid-tile colspan="2" rowspan="3">
-      <!-- <app-profile-photo></app-profile-photo> -->
-      <img src="../../../assets/logo.png" width="100px" height="100px">
+      <img class="img-circle" *ngIf="sanitizedPhoto" [src]="sanitizedPhoto" width="100px" height="100px" />
+      <img class="img-circle" *ngIf="!sanitizedPhoto" src="../../../assets/logo-sm.png" width="100px" height="100px" />
     </mat-grid-tile>
     <mat-grid-tile colspan="6" rowspan="2">
       <h1>
@@ -12,13 +12,13 @@
     <mat-grid-tile colspan="6" rowspan="1">
       <h5 class="align-left">
         <mat-icon>person</mat-icon>
-        22 lat/a
+        {{userAge}} lat/a
       </h5>
     </mat-grid-tile>
     <mat-grid-tile colspan="2" rowspan="1">
       <h5 class="text-primary">
         Ocena:
-        <strong>4.5/5</strong>
+        <strong>{{user?.rate}}/5</strong>
       </h5>
     </mat-grid-tile>
     <mat-grid-tile colspan="6" rowspan="1">
@@ -27,8 +27,10 @@
         {{user?.email}}
       </h5>
     </mat-grid-tile>
-    <mat-grid-tile colspan="2" rowspan="3">
-      <!-- empty -->
+    <mat-grid-tile colspan="2" rowspan="1">
+      <button *ngIf="!isHimself" mat-raised-button (click)="openRateWindow()">
+        Oceń użytkownika
+      </button>
     </mat-grid-tile>
     <mat-grid-tile colspan="6" rowspan="1">
       <h5 class="align-left">
@@ -36,16 +38,19 @@
         {{user?.phone}}
       </h5>
     </mat-grid-tile>
+    <mat-grid-tile colspan="2" rowspan="2">
+      <!-- empty -->
+    </mat-grid-tile>
     <mat-grid-tile colspan="6" rowspan="1">
       <h5 class="align-left">
         <mat-icon>gps_fixed</mat-icon>
-        Brody 184, Kalwaria Zebrzydowska
+        {{user?.address}}
       </h5>
     </mat-grid-tile>
     <mat-grid-tile colspan="6" rowspan="1">
       <h5 class="align-left">
         <mat-icon>directions_car</mat-icon>
-        Fiat Multipla
+        {{user?.car}}
       </h5>
     </mat-grid-tile>
 
@@ -53,11 +58,7 @@
       <h4 class="align-vertically"> O sobie: </h4>
     </mat-grid-tile>
     <mat-grid-tile colspan="8" rowspan="3">
-      <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis justo tellus. Sed leo erat, bibendum id turpis
-        vel, placerat dignissim justo. Morbi volutpat justo sit amet elit scelerisque, et faucibus lorem faucibus. Etiam
-        ac tellus euismod eros ultrices malesuada quis non nibh. Aenean placerat dui at enim mattis, in luctus lacus placerat.
-        Vivamus consectetur enim orci, sit amet ultrices nunc vehicula sed. Proin varius justo orci, eu mollis orci luctus
-        non. Quisque varius augue sit amet sagittis porttitor.</h6>
+      <h6>{{user?.description}}</h6>
     </mat-grid-tile>
   </mat-grid-list>
 </mat-card>

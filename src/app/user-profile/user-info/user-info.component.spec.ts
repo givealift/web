@@ -12,6 +12,7 @@ import { AuthService } from '../../_services/auth.service';
 import { UserService } from '../../_services/user.service';
 import { UserInfoComponent } from './user-info.component';
 import { DataProviderService } from '../../_services/data-provider.service';
+import { RatingProvider } from '../../_providers/rating-provider';
 
 
 describe('UserInfoComponent', () => {
@@ -31,7 +32,8 @@ describe('UserInfoComponent', () => {
             ],
             providers: [
                 UserService,
-                DataProviderService
+                DataProviderService,
+                RatingProvider
             ]
         })
             .compileComponents();

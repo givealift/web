@@ -1,0 +1,18 @@
+div {
+  margin-top: 40px;
+  margin-left: 20%;
+  margin-right: 20%;
+  border: black 2px;
+  min-height: 350px;
+  min-width: 700px;
+}
+
+mat-card {
+  min-width: 800px;
+  min-height: 36px;
+  border-radius: 25px;;
+  background: white;
+  margin-top: 5px;
+  opacity: 1;
+  color: black;
+}

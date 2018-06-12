@@ -1,27 +1,29 @@
-# GiveALift
+# GiveALift Web application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
+This is a web client for GiveALift platform.
 
-## Development server
+## How notifications work?
+When user subscribes for a notifcation in web application, this subscription is saved in Givealift database. When somethings happens (e.g. someone add a new route which matches user subscription), Givealift API sends request to Firebase Cloud Messaging, which broadcasts this notification to all devices. User can receive notifications even if app is closed! 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+![givealift architecture](https://i.imgur.com/72Sdo3t.png)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Running the app
 
-## Build
+It couldn't be easier than that! Just navigate to [https://givealift.herokuapp.com](https://givealift.herokuapp.com).
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+To run locally, you'll have to:
+1. Ensure you have latest LTS Node.js installed
+2. Clone the repository
+3. `npm install` to install everything that's needed
+4. `ng serve` to run dev server
+5. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Or, to speed up things a little bit:
+1. `npm i -g protractor` to install protractor globally 
+2. `webdriver-manager update` to download and/or update browser drivers
+3. Run tests with `protractor ./protractor.conf.js`

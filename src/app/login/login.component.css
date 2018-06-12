@@ -4,7 +4,7 @@
   align-items: center;
 }
 
-.spinner { 
+.spinner {
     margin-top: 20px;
     display: flex;
 }
@@ -20,5 +20,15 @@ mat-card {
 
 mat-card:hover {
   box-shadow: 0 10px 6px -6px black;
+}
+
+::ng-deep .gal-snack .mat-simple-snackbar {
+  color: deeppink;
+  font-size: 20px;
+  padding: 10px;
+}
+
+.hoverable-link {
+  cursor: pointer;
 }
 

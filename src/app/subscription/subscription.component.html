@@ -1,0 +1,44 @@
+<mat-card *ngIf="isDataReady" [class.mat-elevation-z10]>
+    <mat-grid-list cols="28" rowHeight="9px" gutterSize="0px">
+        <mat-grid-tile colspan="12" rowspan="4" class="border-bottom">
+          <div class="align-vertically">
+            <mat-icon class="icon-align">directions_car</mat-icon>
+            <strong>{{subData?.from?.name}}</strong> &#10145; <strong>{{subData?.to?.name}}</strong>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="12" rowspan="4" class="border-bottom">
+            <h6>
+                <mat-icon class="icon-align">alarm</mat-icon>
+                <strong>{{frontDate | date:'EEEE, d MMMM':'':'pl'}}</strong>
+            </h6>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2" rowspan="4">
+          <div class="align-left" class="show-on-hover">
+            <button *ngIf="!showSpinner" mat-icon-button matTooltipShowDelay="100" matTooltip="Sprawdź trasy" matTooltipPosition="right" (click)="buttonSearchBasedOnSubscription()">
+              <mat-icon class="bigIcon">youtube_searched_for</mat-icon>
+            </button>
+            <mat-spinner class="spinner" [diameter]="28" [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2" rowspan="4" class="right-border">
+            <div class="align-left" class="show-on-hover">
+                <button *ngIf="!showSpinner2" mat-icon-button matTooltipShowDelay="100" matTooltip="Anuluj obserwację" matTooltipPosition="right" (click)="buttonRemoveSubscription()">
+                    <mat-icon class="bigIcon">delete_forever</mat-icon>
+                </button>
+                <mat-spinner class="spinner" [diameter]="28" [style.display]="showSpinner2 ? 'block' : 'none'"></mat-spinner>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="14" rowspan="2">
+            <span class="smalltext" *ngIf="isAnyDay">
+                Kiedykolwiek - Codzienne powiadomienia.
+                <br>
+            </span>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="14" rowspan="2">
+            <span class="smalltext" *ngIf="foundNothing">
+                Nie znaleźliśmy żadnego połączenia.
+                <br>
+            </span>
+        </mat-grid-tile>
+    </mat-grid-list>
+</mat-card>

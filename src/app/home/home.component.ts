@@ -8,7 +8,11 @@ import { Observable } from 'rxjs/Observable';
 import { City, Route } from '../_models';
 import { Router } from '@angular/router';
 import { DataProviderService } from '../_services/data-provider.service';
+import { MessagingService } from '../_services/messaging.service';
+import { Subject } from 'rxjs';
+import {isNullOrUndefined} from "util";
 
+enum Interchange { ENABLED, DISABLED };
 
 @Component({
   selector: 'app-home',
@@ -30,13 +34,16 @@ export class HomeComponent implements OnInit {
 
   showSpinner = false;
   foundNothing = false;
+  withInterchange = false;
 
   constructor(
     private authService: AuthService,
     private cityService: CityService,
     private routeService: RouteService,
+
     private router: Router,
-    private dataTransferService: DataProviderService) { }
+    private dataTransferService: DataProviderService,
+    private msgService: MessagingService) { }
 
   ngOnInit() {
     this.authService.loggedInStatus.subscribe(loggedIn => this.loggedIn = loggedIn);
@@ -47,28 +54,59 @@ export class HomeComponent implements OnInit {
     button.click();
   }
 
-  search(fromCity: City, toCity: City) {
+  search(fromCity: string, toCity: string) {
     this.showSpinner = true;
     this.foundRoutes = null;
+    this.foundNothing = false;
     this.routeService
       .search(fromCity, toCity, this.date.value)
       .subscribe(routes => {
-
         if (routes.length === 0) {
-          this.foundNothing = true;
-          this.showSpinner = false;
-          return;
+          if (!this.withInterchange) {
+            this.finishWithNoResults();
+            return;
+          }
+          this.routeService.searchWithInterchange(fromCity, toCity, this.date.value).subscribe(routesWithChange => {
+            if (routesWithChange.length === 0) {
+              this.finishWithNoResults();
+              return;
+            }
+            console.log(routesWithChange);
+            this.redirectToResults(routesWithChange, Interchange.ENABLED);
+            return;
+          })
         } else {
-          this.foundRoutes = routes;
-          const dateString = moment(this.date.value).format('YYYY-MM-DD');
-          const resultsTag = this.dataTransferService.taggedResults(fromCity.cityId, toCity.cityId, dateString);
-
-          this.dataTransferService.storeData(`route-list/${resultsTag}`, routes);
-          this.router.navigate([`/route-list`], { queryParams: { from: routes[0].from.city.cityId, to: routes[0].to.city.cityId, date: dateString } });
-          this.showSpinner = false;
+          this.redirectToResults(routes, Interchange.DISABLED);
         }
-      }, err => {
+      }, _ => {
         this.showSpinner = false;
       })
+  }
+
+  redirectToResults(routes, interchange: Interchange) {
+    this.foundRoutes = routes;
+    const dateString = moment(this.date.value).format('YYYY-MM-DD');
+    const withInterchange = interchange === Interchange.ENABLED ? true : false;
+
+    if (withInterchange) {
+      routes = [].concat(...routes);
+    }
+
+    const from = routes[0].from.city.cityId;
+    const to = withInterchange ? routes[1].to.city.cityId : routes[0].to.city.cityId;
+    const tag = this.dataTransferService.tagResults(from, to, dateString);
+    
+    this.dataTransferService.storeData(`search/${tag}`, { routes: routes, withInterchange: withInterchange });
+    this.router.navigate([`/search`], { queryParams: { from: from, to: to, date: dateString } });
+    this.showSpinner = false;
+  }
+
+  finishWithNoResults() {
+    this.foundNothing = true;
+    this.showSpinner = false;
+  }
+
+  toggleInterchange() {
+    this.withInterchange = !this.withInterchange;
   }
 }

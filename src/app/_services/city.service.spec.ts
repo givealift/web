@@ -3,17 +3,28 @@ import { TestBed } from "@angular/core/testing";
 import { CitiesProvider } from "../_providers/cities-provider";
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
+class MockCitiesProvider {
+    public getCities() {
+        return [
+            { name: "Warszawa", cityId: 1 },
+            { name: "Kraków", cityId: 2 },
+            { name: "Wrocław", cityId: 3 },
+        ]
+    }
+}
 
 describe("CityService", () => {
 
     let cityService: CityService;
     let httpMock: HttpTestingController;
+    let citiesProviderSpy: jasmine.SpyObj<CitiesProvider>;
 
     beforeEach(() => {
+        const spy = jasmine.createSpyObj('CitiesProvider', ['getCities']);
         TestBed.configureTestingModule({
             providers: [
                 CityService,
-                CitiesProvider
+                { provide: CitiesProvider, useValue: spy }
             ],
             imports: [
                 HttpClientTestingModule
@@ -22,6 +33,8 @@ describe("CityService", () => {
 
         httpMock = TestBed.get(HttpTestingController);
         cityService = TestBed.get(CityService);
+        citiesProviderSpy = TestBed.get(CitiesProvider);
+        citiesProviderSpy.getCities.and.returnValue([]);
     })
 
     afterEach(() => {
@@ -87,5 +100,39 @@ describe("CityService", () => {
 
         const mockedResponse = [];
         req.flush(mockedResponse);
+    })
+
+    it("#getCity(1) should return one result", () => {
+        const stubValue = [
+            { name: "Warszawa", cityId: 1 },
+            { name: "Kraków", cityId: 2 },
+            { name: "Wrocław", cityId: 3 },
+        ];
+        citiesProviderSpy.getCities.and.returnValue(stubValue);
+        let city = cityService.get(3);
+        expect(city).not.toBe(null);
+        expect(city.cityId).toEqual(3);
+        expect(city.name).toEqual("Wrocław");
+    })
+
+    it("#getCity(-1) should return null", () => {
+        const stubValue = [
+            { name: "Warszawa", cityId: 1 },
+        ];
+        citiesProviderSpy.getCities.and.returnValue(stubValue);
+        let city = cityService.get(-1);
+        expect(city).toBe(null);
+    })
+
+    it("#getAll() should return array with cities", () => {
+        const stubValue = [
+            { name: "Warszawa", cityId: 1 },
+            { name: "Kraków", cityId: 2 },
+            { name: "Wrocław", cityId: 3 },
+        ];
+        citiesProviderSpy.getCities.and.returnValue(stubValue);
+        let cities = cityService.getAll();
+        expect(cities).toEqual(jasmine.any(Array));
+        expect(cities.length).toEqual(3);
     })
 })
