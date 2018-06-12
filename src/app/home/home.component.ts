@@ -92,10 +92,12 @@ export class HomeComponent implements OnInit {
       routes = [].concat(...routes);
     }
 
-    const tag = this.dataTransferService.tagResults(routes[0].from.city.cityId, routes[0].to.city.cityId, dateString);
-
+    const from = routes[0].from.city.cityId;
+    const to = withInterchange ? routes[1].to.city.cityId : routes[0].to.city.cityId;
+    const tag = this.dataTransferService.tagResults(from, to, dateString);
+    
     this.dataTransferService.storeData(`search/${tag}`, { routes: routes, withInterchange: withInterchange });
-    this.router.navigate([`/search`], { queryParams: { from: routes[0].from.city.cityId, to: routes[0].to.city.cityId, date: dateString } });
+    this.router.navigate([`/search`], { queryParams: { from: from, to: to, date: dateString } });
     this.showSpinner = false;
   }
 
