@@ -189,7 +189,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     // this.getUserFavourites( request );           /** **/
     console.log('fakebackend.addRouteToUsersFavourites: addedRoute = ', addedRoute);
     return Observable.of(new HttpResponse({ status: 200, body: addedRoute }));
-  }    
+  }
 
   private updateUser(request: HttpRequest<any>) {
 
@@ -220,7 +220,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
       mockUsers.splice(index, 1);
       localStorage.setItem('mock-users', JSON.stringify(mockUsers));
-
       // respond 200 OK
       return Observable.of(new HttpResponse({ status: 200 }));
     } else {
@@ -286,9 +285,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     return Observable.of(new HttpResponse({ status: 200, body: matching }));
   }
-
   sampleFavRoutes = [];
-
   sampleroutes = [];
 }
 
