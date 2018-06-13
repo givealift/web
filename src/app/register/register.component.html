@@ -53,14 +53,14 @@
             </mat-radio-group>
           </mat-grid-tile> -->
 
-          <mat-grid-tile colspan="1" rowspan="2">
+          <mat-grid-tile colspan="2" rowspan="2">
             <mat-form-field class="inline-form-field">
               <input matInput [(ngModel)]="userModel.firstName" name="firstname" required #firstRef="ngModel" placeholder="Imię" />
               <mat-error *ngIf="firstRef.invalid ">Wpisz poprawne imię!</mat-error>
             </mat-form-field>
           </mat-grid-tile>
 
-          <mat-grid-tile colspan="1" rowspan="2">
+          <mat-grid-tile colspan="2" rowspan="2">
             <mat-form-field class="inline-form-field">
               <input matInput [(ngModel)]="userModel.lastName" name="lastname" required #lastRef="ngModel" placeholder="Nazwisko" />
               <mat-error *ngIf="lastRef.invalid ">Wpisz poprawne nazwisko!</mat-error>
