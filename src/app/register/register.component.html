@@ -77,25 +77,12 @@
             </mat-form-field>
           </mat-grid-tile>
 
-          <mat-grid-tile colspan="1" rowspan="2">
+          <mat-grid-tile colspan="2" rowspan="2">
             <mat-form-field>
               <input matInput [(ngModel)]="userModel.phone" name="phone" required #phoneRef="ngModel" placeholder="Numer telefonu" pattern="^\+?[1-9]{1}[0-9]{3,14}$"
               />
               <mat-error *ngIf="phoneRef.invalid">Wpisz poprawny numer telefonu!</mat-error>
             </mat-form-field>
-          </mat-grid-tile>
-
-          <mat-grid-tile colspan="1" rowspan="2">
-            <mat-form-field>
-              <input matInput [(ngModel)]="userModel.address" name="address" required #addressRef="ngModel" placeholder="Adres" />
-              <mat-error *ngIf="addressRef.invalid">Wpisz poprawny adres!</mat-error>
-            </mat-form-field>
-          </mat-grid-tile>
-
-          <mat-grid-tile colspan="2" rowspan="2">
-            <button mat-raised-button type="submit" [disabled]="!form2.valid" matStepperNext>
-              Dalej
-            </button>
           </mat-grid-tile>
 
         </mat-grid-list>
