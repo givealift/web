@@ -13,7 +13,6 @@ import { RouteService } from "../../_services/route.service";
 export class FavouriteRoutesComponent implements OnInit {
 
   userId: number;
-  isEmptyOrNull: boolean;
 
   constructor(
     private userService: UserService,
@@ -24,19 +23,15 @@ export class FavouriteRoutesComponent implements OnInit {
 
   ngOnInit() {
     this.userId = parseInt(localStorage.getItem("id"));
-    this.favouriteRoutes = null;
-    this.validateFavRoutes();
 
     this.userService.getUserFavourites(this.userId).subscribe(
       routes => {
         console.log('getUserFavourites - worked: ', routes);
         this.favouriteRoutes = routes;
         this.favouriteRoutes = this.getFromBackEnd();
-        this.validateFavRoutes();
       },
       error => {
         console.log('getUserFavourites- error: ', error);
-        this.validateFavRoutes();
       }
     );
   }
@@ -138,15 +133,6 @@ export class FavouriteRoutesComponent implements OnInit {
       }
       catch (e) {
           return false;
-      }
-  }
-
-  validateFavRoutes() {
-      if ( isNullOrUndefined(this.favouriteRoutes) === true || this.favouriteRoutes.length === 0 ) {
-          this.isEmptyOrNull = true;
-      }
-      else {
-          this.isEmptyOrNull = false;
       }
   }
 }
