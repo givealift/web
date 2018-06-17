@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 @Injectable()
 export class SubscriptionService {
 
-  private readonly url = `${environment.apiUrl}/subscription`;
+  private readonly url = `${environment.notificationsUrl}/subscription`;
 
 
   constructor(

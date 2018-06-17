@@ -67,8 +67,7 @@ export class MessagingService {
 
   async sendTokenToServer(token) {
     console.log("sending token to server...", token);
-    // TODO: sent token to server with user id
-    const url = `${environment.apiUrl}/notification`;
+    const url = `${environment.notificationsUrl}/notification`;
     const body = {
       deviceType: "WEB",
       pushToken: token,
