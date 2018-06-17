@@ -37,8 +37,8 @@ export class SubscriptionService {
           const body: IRouteSubscriptionRequest = {
             notificationType: "PUSH",
             subscriber: +this.authService.getCurrentUserId(),
-            fromCityId: fromCity.cityId,
-            toCityId: toCity.cityId,
+            fromId: fromCity.cityId,
+            toId: toCity.cityId,
             date: date ? date.format("YYYY-MM-DD") : null
           }
           return this.httpClient.post(this.url, body);

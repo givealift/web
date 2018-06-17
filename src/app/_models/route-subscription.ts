@@ -3,8 +3,8 @@ import { City } from "./city";
 export interface IRouteSubscriptionRequest {
     notificationType: string;
     subscriber: number;
-    fromCityId: number;
-    toCityId: number;
+    fromId: number;
+    toId: number;
     date: any;
 }
 
